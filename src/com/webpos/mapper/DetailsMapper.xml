@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webpos.dao.DetailsMapper">
+	<resultMap id="BaseResultMap" type="com.webpos.entity.Details">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="user_id" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+		<result column="result" property="result" jdbcType="VARCHAR" />
+		<result column="parent_id" property="parent_id" jdbcType="VARCHAR" />
+		<result column="short_id" property="short_id" jdbcType="VARCHAR" />
+		
+		<result column="balance" property="balance" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id,user_id,type,remark,ctime,result,balance,parent_id,short_id
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from detail
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<insert id="insert" parameterType="com.webpos.entity.Details"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into detail (user_id,type,remark,ctime,result,balance,parent_id,short_id)
+
+		values ( #{user_id,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{ctime,jdbcType=TIMESTAMP},#{result,jdbcType=VARCHAR},#{balance,jdbcType=VARCHAR},
+		#{parent_id,jdbcType=VARCHAR},#{short_id,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<select id="countByExample" parameterType="com.webpos.entity.DetailExample" resultType="java.lang.Integer" >
+    select count(*) from detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+	<select id="selectByExampleWithBLOBs" resultMap="BaseResultMap"
+		parameterType="com.webpos.entity.DetailExample" >
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from detail
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExampleWithBLOBsAndPage" resultMap="BaseResultMap"
+		parameterType="com.webpos.entity.DetailExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from detail
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="startRow != null">
+			limit #{startRow},#{pageSize}
+		</if>
+	</select>
+	
+	
+	<select id="summaryPlay" resultType="com.api.vo.contans.SummaryPlay"
+		parameterType="com.api.vo.contans.PlayQuery">
+		select
+		sum(result) as amount_sum 
+		from
+		detail
+		where 1 = 1 
+		<if test="user_id != null and user_id != ''">
+			and user_id = #{user_id} 
+		</if>
+		
+		<if test="type != null and type != ''">
+			and type = #{type} 
+		</if>
+		<if test="startDate != null and startDate != ''">
+		    and ctime >= #{startDate} 
+		</if>
+		<if test="endDate != null and endDate != ''">
+			<![CDATA[  
+				 and ctime <= #{endDate} 
+			 ]]>
+		</if>
+		
+		
+	</select>
+	
+	<select id="summarySharePlay" resultType="com.api.vo.contans.SummarySharePlay"
+		parameterType="com.api.vo.contans.SharePlayQuery">
+		select
+		sum(result) as amount 
+		from
+		detail
+		where 1 = 1 
+		<if test="user_id != null and user_id != ''">
+			and parent_id = #{user_id} 
+		</if>
+		
+		<if test="type != null and type != ''">
+			and type = #{type} 
+		</if>
+		
+	</select>
+	
+	<select id="summarySelfPlay" resultType="com.api.vo.contans.SummarySelfPlay"
+		parameterType="com.api.vo.contans.SelfPlayQuery">
+		select
+		count(*) as numcount,
+		sum(result) as amount 
+		from
+		detail
+		where 1 = 1 
+		<if test="user_id != null and user_id != ''">
+			and user_id = #{user_id} 
+		</if>
+		
+		<if test="type != null and type != ''">
+			and type = #{type} 
+		</if>
+		
+	</select>
+	
+</mapper>

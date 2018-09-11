@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webpos.dao.AccountMapper">
+	<resultMap id="BaseResultMap" type="com.webpos.entity.Account">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="user_id" jdbcType="VARCHAR" />
+		<result column="amount" property="amount" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="all_eth" property="all_eth" jdbcType="VARCHAR" />
+		<result column="play_sum" property="play_sum" jdbcType="VARCHAR" />
+		<result column="recharge_sum" property="recharge_sum" jdbcType="VARCHAR" />
+		<result column="withdraw_sum" property="withdraw_sum" jdbcType="VARCHAR" />
+		<result column="child_sum" property="child_sum" jdbcType="INTEGER" />
+		<result column="balance" property="balance" jdbcType="VARCHAR" />
+		<result column="is_machine" property="is_machine" jdbcType="INTEGER" />
+		
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id,user_id,amount,type,ctime,status,all_eth,play_sum,recharge_sum,withdraw_sum,child_sum,balance,is_machine
+	</sql>
+	
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from account
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	
+ <select id="countByExample" parameterType="com.webpos.entity.AccountExample" resultType="java.lang.Integer" >
+    select count(*) from account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+	<select id="selectByExampleWithBLOBs" resultMap="BaseResultMap"
+		parameterType="com.webpos.entity.AccountExample" >
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from account
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExampleWithBLOBsAndPage" resultMap="BaseResultMap"
+		parameterType="com.webpos.entity.AccountExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from account 
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="startRow != null">
+			limit #{startRow},#{pageSize}
+		</if>
+	</select>
+
+	<insert id="insert" parameterType="com.webpos.entity.Account"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into account (user_id,amount,type,ctime,status,all_eth,play_sum,recharge_sum,withdraw_sum,child_sum,balance,is_machine)
+
+		values ( #{user_id,jdbcType=VARCHAR},
+		#{amount,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},
+		#{ctime,jdbcType=TIMESTAMP},#{status,jdbcType=VARCHAR},#{all_eth,jdbcType=VARCHAR},
+		#{play_sum,jdbcType=VARCHAR},#{recharge_sum,jdbcType=VARCHAR},#{withdraw_sum,jdbcType=VARCHAR},#{child_sum,jdbcType=INTEGER}
+		,#{balance,jdbcType=VARCHAR},#{is_machine,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	
+	<update id="updateByPrimaryKeySelective" parameterType="com.webpos.entity.Account">
+		update account
+		<set>
+			<if test="status != null">
+				status = #{status,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	
+	<select id="summaryWithdraw" resultType="com.api.vo.contans.SummaryWithdraw"
+		parameterType="com.api.vo.contans.WithdrawQuery">
+		select
+		count(1) as user_sum,
+		sum(amount) as amount_sum 
+		from
+		account
+		where 1 = 1 
+		<if test="user_id != null and user_id != ''">
+			and user_id = #{user_id} 
+		</if>
+		<if test="status != null and status != ''">
+			and status = #{status} 
+		</if>
+		<if test="type != null and type != ''">
+			and type = #{type} 
+		</if>
+		<if test="startDate != null and startDate != ''">
+		    and ctime >= #{startDate} 
+		</if>
+		<if test="endDate != null and endDate != ''">
+			<![CDATA[  
+				 and ctime <= #{endDate} 
+			 ]]>
+		</if>
+		
+		
+	</select>
+</mapper>

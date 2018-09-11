@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- uploadDate时间要是唯一的、要是yyyy-mm-dd hh24:mi格式； url中last后面的路径是文件所在的本地目录； 如果有URL但是没有实际的文件，那么本地的文件会被损坏-->
+<root>
+	<version value="V1.4" uploadDate = "2016-05-30 15:11"  isbeta="false">
+		<file name="pay.exe" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.4/last/pay.exe" />
+	</version>
+	<version value="V1.5" uploadDate = "2016-06-06 16:11"  isbeta="false">
+		<file name="pay.exe" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.5/last/pay.exe" />
+		<file name="pccloudpay.exe" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.5/last/pccloudpay.exe" />
+	</version>
+	<version value="V1.6" uploadDate = "2016-06-14 09:34"  isbeta="false">
+		<file name="pay.exe" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.6/last/pay.exe"/>
+		<file name="pccloudpay.exe" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.6/last/pccloudpay.exe"/>
+		<file name="AspriseOCR.dll" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.6/last/AspriseOCR.dll"/>
+		<file name="DevIL.dll" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.6/last/DevIL.dll"/>
+		<file name="ILU.dll" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.6/last/ILU.dll"/>
+		<file name="aspriseOCR.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.6/last/lib/aspriseOCR.jar"/>
+		<file name="aspriseTIFF.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.6/last/lib/aspriseTIFF.jar"/>
+		<file name="httpinvoker.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.6/last/lib/httpinvoker.jar"/>
+		<file name="jid.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.6/last/lib/jid.jar"/>
+		<file name="JTwain.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.6/last/lib/JTwain.jar"/>
+		<file name="pccloudpay.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.6/last/lib/pccloudpay.jar"/>
+		<file name="updateSystem.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.6/last/lib/updateSystem.jar"/>
+	</version>
+	<version value="V1.7" uploadDate = "2016-06-22 17:34"  isbeta="false">
+		<file name="system.xml" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.7/last/system.xml"/>
+		<file name="command.xml" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.7/last/command.xml"/>
+		<file name="pccloudpay.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.7/last/lib/pccloudpay.jar"/>
+		<file name="updateSystem.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.7/last/lib/updateSystem.jar"/>
+		<file name="httpinvoker.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.7/last/lib/httpinvoker.jar"/>
+		<file name="power-yun-pay.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.7/last/lib/power-yun-pay.jar"/>
+	</version>
+	<version value="V1.8" uploadDate = "2016-07-04 16:34"  isbeta="false">
+		<file name="command.xml" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.8/last/command.xml"/>
+		<file name="pccloudpay.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.8/last/lib/pccloudpay.jar"/>
+		<file name="httpinvoker.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.8/last/lib/httpinvoker.jar"/>
+		<file name="power-yun-pay.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.8/last/lib/power-yun-pay.jar"/>
+		<file name="updateSystem.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.8/last/lib/updateSystem.jar"/>
+		<beta-store></beta-store>
+		<about></about>	
+	</version>
+	<version value="V1.9" uploadDate = "2016-08-17 17:34"  isbeta="false">
+		<file name="pccloudpay.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.9/last/lib/pccloudpay.jar"/>
+		<file name="power-yun-pay.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.9/last/lib/power-yun-pay.jar"/>
+		<file name="updateSystem.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.9/last/lib/updateSystem.jar"/>
+		<file name="httpinvoker.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.9/last/lib/httpinvoker.jar"/>
+		<file name="j4locr.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.9/last/lib/lib/j4locr.jar"/>
+		<file name="eng.traineddata" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.9/last/tessdata/eng.traineddata"/>
+		<file name="leptonlib.dll" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.9/last/leptonlib.dll"/>
+		<file name="tess3Wrapper.dll" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V1.9/last/tess3Wrapper.dll"/>
+	</version>
+	<version value="V2.0" uploadDate = "2016-09-01 11:34"  isbeta="true">
+		<file name="pccloudpay.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V2.0/last/lib/pccloudpay.jar"/>
+		<file name="power-yun-pay.jar" url="http://liuliangjia.liulianginn.com:9001/terminal/PC/version-no/V2.0/last/lib/power-yun-pay.jar"/>
+		<beta-store>
+			<store>10000000010001</store>
+			
+		</beta-store>
+		<about>
+			<![CDATA[
+			1、截图识别金额功能上线\n2、完善大金额扫码支付\n3、优化系统功能
+			]]>
+		</about>
+	</version>
+	<version value="V2.1" uploadDate = "2017-01-20 11:34"  isbeta="true">
+		<file name="pccloudpay.jar" url="http://pay.ease-pay.cn:8010/terminal-update/PC/version-no/V2.1/last/lib/pccloudpay.jar"/>
+		<beta-store>
+			<store>10000001500001</store>
+		</beta-store>
+		<about>
+			<![CDATA[
+			1、测试更新
+			]]>
+		</about>
+	</version>
+	<version value="V2.3" uploadDate = "2017-05-15 11:34"  isbeta="false">
+		<file name="pccloudpay.jar" url="http://pay.ease-pay.cn:8010/terminal-update/PC/version-no/V2.3/last/lib/pccloudpay.jar"/>
+		<about>
+			<![CDATA[
+			1、支付成功隐藏窗口
+			]]>
+		</about>
+	</version>
+	<version value="V2.4" uploadDate = "2017-05-15 14:34"  isbeta="false">
+		<file name="pccloudpay.jar" url="http://pay.ease-pay.cn:8010/terminal-update/PC/version-no/V2.4/last/lib/pccloudpay.jar"/>
+		<about>
+			<![CDATA[
+			1、结算打印优化
+			]]>
+		</about>
+	</version>
+</root>

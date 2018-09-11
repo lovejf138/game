@@ -1,0 +1,376 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,legend,input,button,textarea,p{margin:0;padding:0;outline:none;}
+/*html5 新标签*/
+article,section,header,nav,aside,hgroup,figure,figcaption,footer,dialog{margin:0;padding:0;}
+
+*{box-sizing:border-box; -moz-box-sizing:border-box; /* Firefox */ -webkit-box-sizing:border-box;/* Safari */}
+
+body{font-size:14px;line-height:14px;font-family:Microsoft Yahei,Arial,Helvetica,sans-serif; color:#333; width: 100%; margin: auto; background: #fff;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+table{border-collapse:collapse;border-spacing:0}
+input,button,textarea,select,optgroup,option{border:1px solid #e3e3e3;}
+
+li{list-style:none}
+em,i{font-style:normal;}
+img,fieldset,iframe{border:0}
+input,button,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%}
+input,select,img{vertical-align:middle;}
+.clearfix:before,.clearfix:after {content: " "; display: table;}
+.clearfix:after {clear: both;}
+.fl{float:left;}
+.fr{float:right;}
+a{text-decoration:none;color:#333;outline:none;}
+.red{color: #d2232a;}
+.hide{display: none;}
+
+
+*{padding:0;margin:0;}
+
+.bordered.white {
+    background-color: #FFFFFF;
+}
+.first-block {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 1.64rem 1rem 1.2rem;
+}
+.order {
+    margin-bottom: 4.063rem;
+}
+.circles {
+    justify-content: center;
+}
+.bordered {
+    background-repeat: no-repeat;
+    background-position: 0.625rem 1.25rem;
+    padding: 1.25rem 0.625rem;
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+    min-width: 18.75rem;
+    box-shadow: 0.875rem 0.875rem 1.875rem rgba(0, 0, 0, 0.2);
+    border-radius: 1.875rem;
+    z-index: 2;
+}
+.main-block .circles-blocks .circle {
+    width: 49%;
+    min-width: 210px;
+    display: inline-block;
+    margin-bottom: 1.75rem;
+}
+.circles .c-circle.step9 {
+    background-position: 48% 50%;
+    background-image: url(../img/step9.png);
+}
+.circles .c-circle.levels {
+    background-image: url(../img/levels.png);
+}
+.circles .c-circle.red {
+    background-color: #EB5757;
+}
+.first-block .c-circle {
+    float: left;
+    margin-left: 0;
+    margin-right: 0.75rem;
+    margin-bottom: 0;
+    font-size: 1.325rem;
+}
+.circles .c-circle {
+    display: inline-block;
+    width: calc(6.25rem - 0.75rem);
+    height: calc(6.25rem - 0.75rem);
+    font-weight: 600;
+    line-height: calc(6.25rem - 1.5rem);
+    font-size: 1.625rem;
+    color: #FFFFFF;
+    border-radius: 50%;
+    margin: 0 1.25rem 1.25rem;
+    border: 0.375rem solid #fff;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: 60% auto;
+    background-size: 60% auto;
+    text-align: center;
+}
+
+.first-block .v-center {
+    height: calc(6.25rem - 0.75rem);
+}
+.v-center {
+    text-align: left;
+    vertical-align: middle;
+    display: table;
+    height: calc(6.25rem + 0.75rem);
+}
+
+.input-address{
+background-color: #EBEBEB;
+    border-radius: 0.438rem;
+    font-size: 1.125rem;
+    color: #4F4F4F;
+    padding: 0.813rem 1.25rem;
+    outline: none;
+    border: 0.063rem solid transparent;
+    width: 100%;
+    max-width: 52%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.input-login{
+	float: right;
+    font-weight: 600;
+    line-height: normal;
+    font-size: 1.25rem;
+    line-height: 1;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #21a769;
+    border-radius: 1.563rem;
+    text-transform: uppercase;
+    outline: none;
+    border: none;
+    padding: 0.813rem 1.25rem;
+    cursor: pointer;
+    margin: 0 1.25rem;
+    width: 100%;
+    max-width: 36%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.css-3d-btn{
+            position: relative;
+            color: rgba(255, 255, 255, 1);
+            text-decoration: none;
+           /* background-color: rgba(219, 87, 51, 1);*/
+            font-family: "Microsoft YaHei", 微软雅黑, 宋体;
+            font-weight: 700;
+            font-size: 3em;
+            display: block;
+            padding: 4px;
+            border-radius: 8px;
+            /* let's use box shadows to make the button look more 3-dimensional */
+            /*box-shadow: 0px 9px 0px rgba(219, 31, 5, 1), 0px 9px 25px rgba(0, 0, 0, .7);*/
+            margin: 10px auto;
+            width: 160px;
+            text-align: center;
+            -webkit-transition: all .1s ease;
+            -moz-transition: all .1s ease;
+            transition: all .1s ease;
+        }
+
+
+.css-3d-btn:active{
+    /* box-shadow: 0px 3px 0px rgba(219, 31, 5, 1), 0px 3px 6px rgba(0, 0, 0, .9);*/
+     position: relative;
+     top: 6px;
+ }
+
+.box1{
+	position:relative;
+	max-width:750px;
+	margin:0 auto;
+}
+.box1 .img01{
+	width:100%;
+}
+.box1 .drawBtn2{
+	position:absolute;
+	width:10rem;
+	height:auto;
+	left:75%;
+	margin-left:-5rem;
+}
+
+.btn_in{
+	width: 60px;
+	height:50px;
+   
+	line-height: 1;
+    text-align: center;
+    font-size: 15px;
+    color: #FFFFFF;
+    background-color: #FFD74B;
+    border-radius: 1.563rem;
+    text-transform: uppercase;
+    background-image: url(../img/back_btn.png);
+    background-repeat: no-repeat;
+    outline: none;
+    text-decoration: none;color: #FFFFFF;float: right;margin-right: 5px;border-radius: 1.563rem;
+}
+.btn_out{
+	  width: 60px;
+	height:50px;
+   
+	line-height: 1;
+    text-align: center;
+    font-size: 15px;
+    color: #FFFFFF;
+    background-color: #FFD74B;
+    border-radius: 1.563rem;
+    text-transform: uppercase;
+   background-image: url(../img/back_btn.png);
+    background-repeat: no-repeat;
+    outline: none;
+    text-decoration: none;color: #FFFFFF;float: right;margin-right: 5px;border-radius: 1.563rem;
+}
+.btn_exit{
+	    width: 100px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+	line-height: 1;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #000000;
+    border-radius: 1.563rem;
+    text-transform: uppercase;
+   
+    outline: none;
+    text-decoration: none;color: #FFFFFF;float: right;margin-right: 5px;border-radius: 1.563rem;
+}
+
+
+.bubbly-button {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 1em;
+  padding: 1em 2em;
+  -webkit-appearance: none;
+  appearance: none;
+  /*background-color: #ff0081;*/
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+ /* box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);*/
+}
+.bubbly-button:focus {
+  outline: 0;
+}
+.bubbly-button:before, .bubbly-button:after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 140%;
+  height: 100%;
+  left: -20%;
+  z-index: -1000;
+  transition: all ease-in-out 0.5s;
+  background-repeat: no-repeat;
+}
+.bubbly-button:before {
+  display: none;
+  top: -75%;
+  background-image: radial-gradient(circle, #fff 20%, transparent 20%), radial-gradient(circle, transparent 20%, #fff 20%, transparent 30%), radial-gradient(circle, #fff 20%, transparent 20%), radial-gradient(circle, #fff 20%, transparent 20%), radial-gradient(circle, transparent 10%, #fff 15%, transparent 20%), radial-gradient(circle, #fff 20%, transparent 20%), radial-gradient(circle, #fff 20%, transparent 20%), radial-gradient(circle, #fff 20%, transparent 20%), radial-gradient(circle, #fff 20%, transparent 20%);
+  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+}
+.bubbly-button:after {
+  display: none;
+  bottom: -75%;
+  background-image: radial-gradient(circle, #fff 20%, transparent 20%), radial-gradient(circle, #fff 20%, transparent 20%), radial-gradient(circle, transparent 10%, #fff 15%, transparent 20%), radial-gradient(circle, #fff 20%, transparent 20%), radial-gradient(circle, #fff 20%, transparent 20%), radial-gradient(circle, #fff 20%, transparent 20%), radial-gradient(circle, #fff 20%, transparent 20%);
+  background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+}
+.bubbly-button:active {
+  transform: scale(0.9);
+  /*background-color: #e60074;
+  box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);*/
+}
+.bubbly-button.animate:before {
+  display: block;
+  animation: topBubbles ease-in-out 0.8s forwards;
+}
+.bubbly-button.animate:after {
+  display: block;
+  animation: bottomBubbles ease-in-out 0.8s forwards;
+}
+
+@keyframes topBubbles {
+  0%{
+    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
+  }
+  50%{
+    background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;
+  }
+  100% {
+    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
+    background-size: 0% 0%, 0% 0%,  0% 0%,  0% 0%,  0% 0%,  0% 0%;
+  }
+}
+@keyframes bottomBubbles {
+  0% {
+    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
+  }
+  50% {
+    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
+  }
+  100% {
+    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+    background-size: 0% 0%, 0% 0%,  0% 0%,  0% 0%,  0% 0%,  0% 0%;
+  }
+  
+  
+.progress{
+    height: 30px;
+    line-height: 35px;
+    background: #809495;
+    box-shadow: none;
+    padding: 6px;
+    margin-top:20px;
+    overflow: visible;
+    border-radius:10px;
+}
+.progress:after{
+    content: "";
+    display: block;
+    border-top: 4px dashed #fff;
+    margin-top:8px;
+}
+.progressbar-title{
+    color:#d8dedc;
+    font-size:15px;
+    margin:5px 0;
+    font-weight: bold;
+}
+.progress .progress-bar{
+    position: relative;
+    border-radius: 10px 0 0 10px;
+    animation: animate-positive 2s;
+}
+.progress .progress-bar span{
+    position: absolute;
+    top: -50px;
+    right: -40px;
+    color: #fff;
+    display: block;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 5px 7px;
+    background: #333;
+    border-radius: 0 0 5px 5px;
+}
+.progress .progress-bar span:before{
+    content: "";
+    position: absolute;
+    bottom: -14px;
+    left: 18px;
+    border: 7px solid transparent;
+    border-top: 7px solid #333;
+}
+.progress .progress-bar span:after{
+    content: "\f072";
+    font-family: fontawesome;
+    font-size: 48px;
+    color: #333;
+    position: absolute;
+    top: 51px;
+    right: 6px;
+    transform: rotateZ(48deg);
+}
+@-webkit-keyframes animate-positive {
+    0% { width: 0%;}
+}
+@keyframes animate-positive {
+    0% { width:0%; }
+}

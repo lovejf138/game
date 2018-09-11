@@ -1,0 +1,98 @@
+*{
+   -webkit-user-select:none;
+   -moz-user-select:none;
+   -ms-user-select:none;
+   user-select:none;	
+}
+
+p,#eth_address,#amount,#eth_withdraw,#spread-text{-webkit-user-select:auto;}
+
+
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div{margin:0;padding:0;border:0;}
+body{color:#333; font-size:12px;font-family:"Microsoft YaHei"}
+ul,ol{list-style-type:none;}
+select,input,img,select{vertical-align:middle;}
+input{ font-size:12px;}
+a{ text-decoration:none; color:#000;}
+a:hover{color:#c00; text-decoration:none;}
+.clear{clear:both;}
+
+/* 大转盘样式 */
+.banner{display:block;width:65%;margin-left:auto;margin-right:auto;margin-bottom: 20px;}
+.banner .turnplate{display:block;width:100%;position:relative;}
+.banner .turnplate canvas.item{width:100%;}
+.banner .turnplate img.pointer{    position: absolute;
+    width: 33%;
+    ght: 42.5%;
+    left: 31.6%;
+    top: 30%;
+    }
+
+
+a.active {
+    color: #F2C94C;
+}
+
+.lang {
+	color:#fff;
+    position: relative;
+    border-radius: 1.563rem;
+    cursor: pointer;
+   /* border: 0.125rem solid #FFFFFF;
+    padding: 0.313rem 1.875rem 0.313rem 1.563rem;*/
+    background-image: url(../img/lang.png);
+    background-repeat: no-repeat;
+    background-position: calc(100% - 0.625rem) center;
+}
+  
+.lan_list>li{
+	margin-top:15px
+}
+.zh_img{
+	 background-image: url(../img/cn.png);
+}
+.jp_img{
+	 background-image: url(../img/jp.png);
+}
+.ko_img{
+	 background-image: url(../img/ko.png);
+}
+.al_img{
+	 background-image: url(../img/al.png);
+}
+.en_img{
+	 background-image: url(../img/en.png);
+}
+.ru_img{
+	 background-image: url(../img/ru.png);
+}
+
+.lang .flag {
+    background-repeat: no-repeat;
+    background-position: left center;
+    -webkit-background-size: auto 1.125rem;
+    background-size: auto 1.125rem;
+    padding-left: 2rem;
+    display: inline-block;
+} 
+
+.dispaly_class{
+	display: none;
+}
+
+.lan_list {
+	font-size: 15px;
+    position: absolute;
+    background-color: #2D9CDB;
+    background: #4F4F4F;
+    border: 2px solid #FFFFFF;
+    right: -0.125rem;
+    left: auto;
+    top: 100%;
+    min-width: calc(100% + 0.25rem);
+    padding-left: 1.563rem;
+    padding-bottom: 0.313rem;
+    padding-top: 0.313rem;
+    z-index: 4;
+}    
+    

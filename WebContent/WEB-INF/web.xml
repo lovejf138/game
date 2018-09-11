@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:javaee="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_4.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	id="GAME_ID" version="2.4">
+	
+	
+	
+	<display-name>game</display-name>
+	<welcome-file-list>
+		<welcome-file>webpos/pos/login.html</welcome-file>
+		<welcome-file>pos/login.html</welcome-file>
+	</welcome-file-list>
+
+  
+    <context-param>  
+        <param-name>log4jConfigLocation</param-name>  
+        <param-value>classpath:log4j.properties</param-value>  
+    </context-param>  
+    
+    <context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>game</param-value>
+	</context-param>
+      
+    <context-param>  
+        <param-name>log4jRefreshInterval</param-name>  
+        <param-value>1</param-value>  
+    </context-param>  
+    <listener>  
+        <listener-class>  
+            org.springframework.web.util.Log4jConfigListener  
+        </listener-class>  
+    </listener>  
+    
+	<!-- spring的监听器 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:application-context.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- 中文过滤器 -->
+	<filter>
+		<filter-name>encoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<!--强制转换编码(request和response均适用) -->
+			<param-name>ForceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- spring session 过滤器 -->
+	<filter>
+	    <filter-name>springSessionRepositoryFilter</filter-name>
+	    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+	    <filter-name>springSessionRepositoryFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	        <dispatcher>REQUEST</dispatcher>
+	        <dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+	
+	<!-- springmvc 配置 -->
+	<servlet>
+		<servlet-name>webpos</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:springmvc-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>webpos</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<!-- druid 监控配置 -->
+	<servlet>
+      <servlet-name>DruidStatView</servlet-name>
+      <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+        <init-param>
+            <!-- 用户名 -->
+            <param-name>loginUsername</param-name>
+            <param-value>admin</param-value>
+        </init-param>
+        <init-param>
+            <!-- 密码 -->
+            <param-name>loginPassword</param-name>
+            <param-value>ytrx2901</param-value>
+        </init-param>
+  	</servlet>
+	<servlet-mapping>
+	   <servlet-name>DruidStatView</servlet-name>
+	      <url-pattern>/druid/*</url-pattern>
+	</servlet-mapping>
+	
+	<error-page>  
+    	<error-code>404</error-code>  
+    <location>/errorPage/404.jsp</location>  
+	</error-page>  
+	  
+	<error-page>  
+	    <error-code>500</error-code>  
+	    <location>/errorPage/500.jsp</location>  
+	</error-page>  
+</web-app>
