@@ -10,7 +10,7 @@
 		<result column="id_md5" property="id_md5" jdbcType="VARCHAR" />
 		<result column="id_short" property="id_short" jdbcType="VARCHAR" />
 		<result column="all_eth" property="all_eth" jdbcType="VARCHAR" />
-		<result column="win_rate" property="win_rate" jdbcType="INTEGER" />
+		<result column="pass" property="pass" jdbcType="VARCHAR" />
 		<result column="play_sum" property="play_sum" jdbcType="VARCHAR" />
 		<result column="recharge_sum" property="recharge_sum" jdbcType="VARCHAR" />
 		<result column="withdraw_sum" property="withdraw_sum" jdbcType="VARCHAR" />
@@ -84,14 +84,14 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id,user_id,parent,balance,ctime,id_md5,id_short,all_eth,win_rate,play_sum,recharge_sum,withdraw_sum,child_sum,is_machine
+		id,user_id,parent,balance,ctime,id_md5,id_short,all_eth,pass,play_sum,recharge_sum,withdraw_sum,child_sum,is_machine
 	</sql>
 
 	<select id="selectByUserId" resultMap="BaseResultMap"
 		parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
-		from user
+		from _user
 		where user_id = #{user_id,jdbcType=VARCHAR}
 	</select>
 	
@@ -99,24 +99,24 @@
 		parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
-		from user
+		from _user
 		where id_md5 = #{parent,jdbcType=VARCHAR}
 	</select>
 
 	<insert id="insert" parameterType="com.webpos.entity.User"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into user (user_id,parent,balance,ctime,id_md5,id_short,all_eth,play_sum,recharge_sum,withdraw_sum,child_sum,is_machine)
+		insert into _user (user_id,parent,balance,ctime,id_md5,id_short,all_eth,play_sum,recharge_sum,withdraw_sum,child_sum,is_machine,pass)
 
 		values ( #{user_id,jdbcType=VARCHAR},
 		#{parent,jdbcType=VARCHAR},
 		#{balance,jdbcType=VARCHAR},
 		#{ctime,jdbcType=TIMESTAMP},#{id_md5,jdbcType=VARCHAR},#{id_short,jdbcType=VARCHAR},#{all_eth,jdbcType=VARCHAR},
-		#{play_sum,jdbcType=VARCHAR},#{recharge_sum,jdbcType=VARCHAR},#{withdraw_sum,jdbcType=VARCHAR},#{child_sum,jdbcType=INTEGER},0
+		#{play_sum,jdbcType=VARCHAR},#{recharge_sum,jdbcType=VARCHAR},#{withdraw_sum,jdbcType=VARCHAR},#{child_sum,jdbcType=INTEGER},0,#{pass,jdbcType=VARCHAR}
 		)
 	</insert>
 	
 	<update id="updateByPrimaryKeySelective" parameterType="com.webpos.entity.User">
-		update user
+		update _user
 		<set>
 			<if test="balance != null">
 				balance = #{balance,jdbcType=VARCHAR},
@@ -124,9 +124,7 @@
 			<if test="balance != null">
 				all_eth = #{all_eth,jdbcType=VARCHAR},
 			</if>
-			<if test="win_rate != null">
-				win_rate = #{win_rate,jdbcType=VARCHAR},
-			</if>
+		
 			<if test="play_sum != null">
 				play_sum = #{play_sum,jdbcType=VARCHAR},
 			</if>
@@ -155,7 +153,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from user
+		from _user
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -170,7 +168,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from user
+		from _user
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -185,7 +183,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from user
+		from _user
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -203,7 +201,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from user
+		from _user
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -217,7 +215,7 @@
 	
 	<select id="countByExample" parameterType="com.webpos.entity.UserExample"
 		resultType="java.lang.Integer">
-		select count(*) from user
+		select count(*) from _user
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -233,7 +231,7 @@
 		sum(child_sum) as share_sum,
 		sum(play_sum) as play_sum 
 		from
-		user
+		_user
 		where 1 = 1 
 		<if test="user_id != null and user_id != ''">
 			and user_id = #{user_id} 

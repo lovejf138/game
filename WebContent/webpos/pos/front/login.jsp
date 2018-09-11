@@ -16,7 +16,7 @@
 	
 </head>
 <body>
-
+	<input id="error_time" value="${localtime}" style="display:none"/>
 	<div class='login'>
 	  <div class='login_title'>
 	    <span>天注定</span>
@@ -26,6 +26,11 @@
 	      <div class='icon'>
 	        <img src='<%=request.getContextPath()%>/webpos/pos/front/img/login/user_icon_copy.png'>
 	      </div>
+	       <input style="display:none" name="parent" id="parent" value="${parent}">
+                 <input style="display:none" name="remark" id="remark" value="">
+                 <input style="display:none" name="geetest_challenge" id="geetest_challenge" value="">
+                 <input style="display:none" name="geetest_validate" id="geetest_validate" value="">
+                 <input style="display:none" name="geetest_seccode" id="geetest_seccode" value="">
 	      <input placeholder='请输入以太坊地址' id="address" type='text'>
 	        <div class='validation'>
 	          <img src='<%=request.getContextPath()%>/webpos/pos/front/img/login/tick.png'>
@@ -57,13 +62,16 @@
 	</div>
 	<div class='authent'>
 	  <img src='<%=request.getContextPath()%>/webpos/pos/front/img/login/puff.svg'>
-	  <p>认证中...</p>
+	  <p>正在请求登录...</p>
 	</div>
 	
 	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/js/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/index_123.js"></script>
+	<script src="<%=request.getContextPath()%>/webpos/pos/js/gt.js"></script>
+	<script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/js/cryptographic.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/index_123.js?t=15"></script>
 
 </body>
 </html>

@@ -86,13 +86,13 @@
 		parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />
-		from detail
+		from _detail
 		where id = #{id,jdbcType=BIGINT}
 	</select>
 
 	<insert id="insert" parameterType="com.webpos.entity.Details"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into detail (user_id,type,remark,ctime,result,balance,parent_id,short_id)
+		insert into _detail (user_id,type,remark,ctime,result,balance,parent_id,short_id)
 
 		values ( #{user_id,jdbcType=VARCHAR},
 		#{type,jdbcType=VARCHAR},
@@ -103,7 +103,7 @@
 	</insert>
 	
 	<select id="countByExample" parameterType="com.webpos.entity.DetailExample" resultType="java.lang.Integer" >
-    select count(*) from detail
+    select count(*) from _detail
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -115,7 +115,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from detail
+		from _detail
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -130,7 +130,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from detail
+		from _detail
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -148,7 +148,7 @@
 		select
 		sum(result) as amount_sum 
 		from
-		detail
+		_detail
 		where 1 = 1 
 		<if test="user_id != null and user_id != ''">
 			and user_id = #{user_id} 
@@ -174,7 +174,7 @@
 		select
 		sum(result) as amount 
 		from
-		detail
+		_detail
 		where 1 = 1 
 		<if test="user_id != null and user_id != ''">
 			and parent_id = #{user_id} 
@@ -192,7 +192,7 @@
 		count(*) as numcount,
 		sum(result) as amount 
 		from
-		detail
+		_detail
 		where 1 = 1 
 		<if test="user_id != null and user_id != ''">
 			and user_id = #{user_id} 

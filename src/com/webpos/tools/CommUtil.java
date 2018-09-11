@@ -77,9 +77,6 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGEncodeParam;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import com.webpos.entity.User;
 
 import net.sf.json.JSONArray;
@@ -666,8 +663,8 @@ public class CommUtil {
 
 			g.dispose();
 			FileOutputStream out = new FileOutputStream(targetImg);
-			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-			encoder.encode(image);
+//			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+//			encoder.encode(image);
 			out.close();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -738,10 +735,10 @@ public class CommUtil {
 		g.dispose();
 		try {
 			FileOutputStream out = new FileOutputStream(outPath);
-			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-			JPEGEncodeParam param = encoder.getDefaultJPEGEncodeParam(bimage);
-			param.setQuality(qualNum, true);
-			encoder.encode(bimage, param);
+//			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+//			JPEGEncodeParam param = encoder.getDefaultJPEGEncodeParam(bimage);
+//			param.setQuality(qualNum, true);
+//			encoder.encode(bimage, param);
 			out.close();
 		} catch (Exception e) {
 			return false;

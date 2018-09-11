@@ -242,7 +242,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Transactional
-	public User register(String loginname, String parent, String remark) {
+	public User register(String loginname,String pass, String parent, String remark) {
 		User new_user = new User();
 		try {
 			String rp = "";
@@ -259,7 +259,7 @@ public class UserServiceImpl implements UserService {
 			new_user.setChild_sum(Integer.valueOf(0));
 			new_user.setRecharge_sum(Double.valueOf(0.0D));
 			new_user.setWithdraw_sum(Double.valueOf(0.0D));
-
+			new_user.setPass(pass);
 			new_user.setCtime(new Date());
 			new_user.setId_md5(Md5Encrypt.md5(loginname));
 			new_user.setId_short(loginname.substring(0, 8) + "*****"
