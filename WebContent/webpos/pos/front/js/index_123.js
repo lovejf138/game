@@ -1,40 +1,45 @@
+function showWait(){
+	$('.login').addClass('test');
+    setTimeout(function () {
+        $('.login').addClass('testtwo');
+    }, 300);
+    setTimeout(function () {
+        $('.authent').show().animate({ right: -320 }, {
+            easing: 'easeOutQuint',
+            duration: 600,
+            queue: false
+        });
+        $('.authent').animate({ opacity: 1 }, {
+            duration: 200,
+            queue: false
+        }).addClass('visible');
+    }, 500);
+    setTimeout(function () {
+        $('.authent').show().animate({ right: 90 }, {
+            easing: 'easeOutQuint',
+            duration: 600,
+            queue: false
+        });
+        $('.authent').animate({ opacity: 0 }, {
+            duration: 200,
+            queue: false
+        }).addClass('visible');
+        $('.login').removeClass('testtwo');
+    }, 2500);
+    setTimeout(function () {
+        $('.login').removeClass('test');
+        $('.login div').fadeOut(123);
+    }, 2800);
+    setTimeout(function () {
+        $('.success').fadeIn();
+    }, 3200);
+}
 
-$('#btn_login').click(function () {
-	    $('.login').addClass('test');
-	    setTimeout(function () {
-	        $('.login').addClass('testtwo');
-	    }, 300);
-	    setTimeout(function () {
-	        $('.authent').show().animate({ right: -320 }, {
-	            easing: 'easeOutQuint',
-	            duration: 600,
-	            queue: false
-	        });
-	        $('.authent').animate({ opacity: 1 }, {
-	            duration: 200,
-	            queue: false
-	        }).addClass('visible');
-	    }, 500);
-	    setTimeout(function () {
-	        $('.authent').show().animate({ right: 90 }, {
-	            easing: 'easeOutQuint',
-	            duration: 600,
-	            queue: false
-	        });
-	        $('.authent').animate({ opacity: 0 }, {
-	            duration: 200,
-	            queue: false
-	        }).addClass('visible');
-	        $('.login').removeClass('testtwo');
-	    }, 2500);
-	    setTimeout(function () {
-	        $('.login').removeClass('test');
-	        $('.login div').fadeOut(123);
-	    }, 2800);
-	    setTimeout(function () {
-	        $('.success').fadeIn();
-	    }, 3200);
-	});
+function closeWait(){
+	
+}
+
+
 	$('input[type="text"],input[type="password"]').focus(function () {
 	    $(this).prev().animate({ 'opacity': '1' }, 200);
 	});
@@ -65,10 +70,8 @@ $('#btn_login').click(function () {
 	var number_remark="";
 	$("#btn_login").click(function(event){
 		
-		
-		
-		var eth_address=$("#eth_address").val();
-		
+		$("#error_msg").html("");
+		var eth_address=$("#address").val();
 		var el = eth_address.trim().length;
 		
 		if(eth_address.toString().indexOf("VIP")>=0||eth_address.toString().indexOf("vip")>=0){
@@ -77,9 +80,8 @@ $('#btn_login').click(function () {
 			 return;
 		}
 		if(el<=30) {
-			alert($("#please_input_address").val());
-			$("#eth_address").val("");
-			
+			$("#error_msg").html("请输入正确的以太坊地址");
+			$("#address").val("");
 			return;
 		}
 		$("#btn_wait_show").click();

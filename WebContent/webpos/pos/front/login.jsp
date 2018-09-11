@@ -26,7 +26,7 @@
 	      <div class='icon'>
 	        <img src='<%=request.getContextPath()%>/webpos/pos/front/img/login/user_icon_copy.png'>
 	      </div>
-	      <input placeholder='请输入以太坊地址' type='text'>
+	      <input placeholder='请输入以太坊地址' id="address" type='text'>
 	        <div class='validation'>
 	          <img src='<%=request.getContextPath()%>/webpos/pos/front/img/login/tick.png'>
 	        </div>
@@ -36,12 +36,14 @@
 	      <div class='icon'>
 	        <img src='<%=request.getContextPath()%>/webpos/pos/front/img/login/lock_icon_copy.png'>
 	      </div>
-	      <input placeholder='密码' type='password'>
+	      <input placeholder='密码' id="pass" type='password'>
 	      <div class='validation'>
 	        <img src='<%=request.getContextPath()%>/webpos/pos/front/img/login/tick.png'>
 	      </div>
 	    </div>
-	    <div class='login_fields__submit'>
+	    
+	    <a id="error_msg" style="    margin-left: 36px;color: red;"></a>
+	    <div class='login_fields__submit' style="    top: 15px;width: 40%;">
 	      <input type='submit' id="btn_login" value='登录'>
 	    </div>
 	  </div>
