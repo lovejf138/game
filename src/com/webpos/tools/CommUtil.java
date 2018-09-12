@@ -103,29 +103,28 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
  */
 public class CommUtil {
 	private static Logger logger = Logger.getLogger(CommUtil.class);
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat(
-			"yyyy-MM-dd");
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	
+	private static final SimpleDateFormat dateFullFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	static int totalFolder;
 	static int totalFile;
 
 	public static final String yyyyMMdd = "yyyy-MM-dd";
 	public static final String yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss";
-	
-	
-	public static boolean ifClose()
-	{
-	    int starttime = 1;
-	    int endtime = 8;
-	    
-	    Calendar cal = Calendar.getInstance();
-	    int hour = cal.get(11);
-	    if ((hour >= starttime) && (hour <= endtime)) {
-	      return true;
-	    }
-	    return false;
+
+	public static boolean ifClose() {
+		int starttime = 1;
+		int endtime = 8;
+
+		Calendar cal = Calendar.getInstance();
+		int hour = cal.get(11);
+		if ((hour >= starttime) && (hour <= endtime)) {
+			return true;
+		}
+		return false;
 	}
-	
+
 	/**
 	 * 
 	 * <p>
@@ -135,8 +134,7 @@ public class CommUtil {
 	 * Description: 将传入的字符串 第一个字符转换成小写
 	 * </p>
 	 * 
-	 * @param str
-	 *            传入的字符串
+	 * @param str 传入的字符串
 	 * @return String 第一个字符小写的字符串
 	 */
 	public static String first2low(String str) {
@@ -154,8 +152,7 @@ public class CommUtil {
 	 * Description: 将传入的字符串 第一个字符转换成大写
 	 * </p>
 	 * 
-	 * @param str
-	 *            传入的字符串
+	 * @param str 传入的字符串
 	 * @return String 第一个字符大写的字符串
 	 */
 	public static String first2upper(String str) {
@@ -173,8 +170,7 @@ public class CommUtil {
 	 * Description: 将传入的字符串 转换为list存储
 	 * </p>
 	 * 
-	 * @param str
-	 *            传入的字符串
+	 * @param str 传入的字符串
 	 * @return String 存储字符串的list集合
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -190,13 +186,14 @@ public class CommUtil {
 		}
 		return list;
 	}
-	
+
 	/**
-	 * yyyyMMddHHmmss 字符串转为  yyyy-MM-dd HH:mm:ss
+	 * yyyyMMddHHmmss 字符串转为 yyyy-MM-dd HH:mm:ss
+	 * 
 	 * @param time
 	 * @return
 	 */
-	private static String formatDateString(String time){
+	private static String formatDateString(String time) {
 		Date date = null;
 		try {
 			date = new SimpleDateFormat("yyyyMMddHHmmss").parse(time);
@@ -206,6 +203,7 @@ public class CommUtil {
 		}
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
 	}
+
 	/**
 	 * 
 	 * <p>
@@ -215,8 +213,7 @@ public class CommUtil {
 	 * Description: 将传入的字符串转换为日期类型
 	 * </p>
 	 * 
-	 * @param s
-	 *            传入日期格式的字符串
+	 * @param s 传入日期格式的字符串
 	 * @return Date 格式化后的日期
 	 */
 	public static Date formatDate(String s) {
@@ -239,10 +236,8 @@ public class CommUtil {
 	 * Description: 将传入的字符串，按照传入的指定格式 格式化，转换为日期类型
 	 * </p>
 	 * 
-	 * @param s
-	 *            日期格式的字符串
-	 * @param format
-	 *            指定的日期格式
+	 * @param s      日期格式的字符串
+	 * @param format 指定的日期格式
 	 * @return date 格式化后的日期
 	 */
 	public static Date formatDate(String s, String format) {
@@ -265,10 +260,8 @@ public class CommUtil {
 	 * Description: 将传入的object类型，按照传入的指定格式 格式化，转换为String类型
 	 * </p>
 	 * 
-	 * @param format
-	 *            指定的格式
-	 * @param v
-	 *            object
+	 * @param format 指定的格式
+	 * @param v      object
 	 * @return String 转换后的字符串
 	 */
 	public static String formatTime(String format, Object v) {
@@ -289,8 +282,7 @@ public class CommUtil {
 	 * Description: 将传入的object类型，按照 yyyy-MM-dd HH:mm:ss 格式 格式化，转换为String类型
 	 * </p>
 	 * 
-	 * @param v
-	 *            object
+	 * @param v object
 	 * @return String 转换后的字符串
 	 */
 	public static String formatLongDate(Object v) {
@@ -330,8 +322,7 @@ public class CommUtil {
 	 * Description: 将传入的object类型，按照 yyyy-MM-dd 格式 格式化，转换为String类型
 	 * </p>
 	 * 
-	 * @param v
-	 *            object
+	 * @param v object
 	 * @return String 转换后的字符串
 	 */
 	public static String formatShortDate(Object v) {
@@ -357,8 +348,7 @@ public class CommUtil {
 	 * Description: 使用UTF-8编码类型对 传入的路径 解码
 	 * </p>
 	 * 
-	 * @param s
-	 *            传入的路径
+	 * @param s 传入的路径
 	 * @return String 解码后的 路径
 	 */
 	public static String decode(String s) {
@@ -381,8 +371,7 @@ public class CommUtil {
 	 * Description: 使用UTF-8编码类型对 传入的路径 编码
 	 * </p>
 	 * 
-	 * @param s
-	 *            传入的路径
+	 * @param s 传入的路径
 	 * @return String 编码后的 路径
 	 */
 	public static String encode(String s) {
@@ -446,14 +435,12 @@ public class CommUtil {
 	 * Title: convert
 	 * </p>
 	 * <p>
-	 * Description: 先将传入的 str按ISO-8859-1编码，转换为字节数组 再通过使用指定的 coding 解码指定的
-	 * 此数组，构造一个新的 String。
+	 * Description: 先将传入的 str按ISO-8859-1编码，转换为字节数组 再通过使用指定的 coding 解码指定的 此数组，构造一个新的
+	 * String。
 	 * </p>
 	 * 
-	 * @param str
-	 *            传入的字符串
-	 * @param coding
-	 *            指定的编码格式
+	 * @param str    传入的字符串
+	 * @param coding 指定的编码格式
 	 * @return String 转换化的字符串
 	 */
 	public static String convert(String str, String coding) {
@@ -478,30 +465,24 @@ public class CommUtil {
 	 * </p>
 	 * 
 	 * @param request
-	 * @param filePath
-	 *            文件路径
-	 * @param addFilePathName
-	 *            保存文件路径名称
-	 * @param addFileName
-	 *            保存文件名称
+	 * @param filePath        文件路径
+	 * @param addFilePathName 保存文件路径名称
+	 * @param addFileName     保存文件名称
 	 * @param extendes
 	 * @return map 存储了文件上传过程中所有的参数
 	 * @throws IOException
 	 */
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static Map saveFileToServer(HttpServletRequest request,
-			String filePath, String addFilePathName, String addFileName,
-			String[] extendes) throws IOException {
+	public static Map saveFileToServer(HttpServletRequest request, String filePath, String addFilePathName,
+			String addFileName, String[] extendes) throws IOException {
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		CommonsMultipartFile file = (CommonsMultipartFile) multipartRequest
-				.getFile(filePath);
+		CommonsMultipartFile file = (CommonsMultipartFile) multipartRequest.getFile(filePath);
 		Map map = new HashMap();
 		if ((file != null) && (!file.isEmpty())) {
 			String extend = file.getOriginalFilename()
 					// 后缀名
-					.substring(file.getOriginalFilename().lastIndexOf(".") + 1)
-					.toLowerCase();
+					.substring(file.getOriginalFilename().lastIndexOf(".") + 1).toLowerCase();
 			if ((addFileName == null) || (addFileName.trim().equals(""))) {
 				addFileName = UUID.randomUUID().toString() + "." + extend; // 文件名
 			}
@@ -523,8 +504,7 @@ public class CommUtil {
 					path.mkdir();
 				}
 				DataOutputStream out = new DataOutputStream(
-						new FileOutputStream(addFilePathName + File.separator
-								+ addFileName));
+						new FileOutputStream(addFilePathName + File.separator + addFileName));
 				InputStream is = null;
 				try {
 					is = file.getInputStream();
@@ -544,8 +524,7 @@ public class CommUtil {
 					}
 				}
 				if (isImg(extend)) {
-					File img = new File(addFilePathName + File.separator
-							+ addFileName);
+					File img = new File(addFilePathName + File.separator + addFileName);
 					try {
 						BufferedImage bis = ImageIO.read(img);
 						int w = bis.getWidth();
@@ -556,8 +535,7 @@ public class CommUtil {
 						logger.error(localException.getMessage(), localException);
 					}
 				}
-				String fileName = addFileName.substring(0,
-						addFileName.indexOf("."));
+				String fileName = addFileName.substring(0, addFileName.indexOf("."));
 				map.put("mime", extend);
 				map.put("noExtFileName", fileName);
 				map.put("fileName", addFileName);
@@ -587,8 +565,7 @@ public class CommUtil {
 	 * Description: 判断是否是图片
 	 * </p>
 	 * 
-	 * @param extend
-	 *            文件的后缀名
+	 * @param extend 文件的后缀名
 	 * @return boolean
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -608,8 +585,7 @@ public class CommUtil {
 		return ret;
 	}
 
-	public static final void waterMarkWithImage(String pressImg,
-			String targetImg, int pos, float alpha) {
+	public static final void waterMarkWithImage(String pressImg, String targetImg, int pos, float alpha) {
 		try {
 			File _file = new File(targetImg);
 			Image src = ImageIO.read(_file);
@@ -673,9 +649,8 @@ public class CommUtil {
 	}
 
 	@SuppressWarnings("serial")
-	public static boolean waterMarkWithText(String filePath, String outPath,
-			String text, String markContentColor, Font font, int pos,
-			float qualNum) {
+	public static boolean waterMarkWithText(String filePath, String outPath, String text, String markContentColor,
+			Font font, int pos, float qualNum) {
 		ImageIcon imgIcon = new ImageIcon(filePath);
 		Image theImg = imgIcon.getImage();
 		int width = theImg.getWidth(null);
@@ -894,23 +869,18 @@ public class CommUtil {
 	 * Description: 静态分页处理
 	 * </p>
 	 * 
-	 * @param url
-	 *            路径
-	 * @param currentPage
-	 *            当前页码
-	 * @param pages
-	 *            总页码数
+	 * @param url         路径
+	 * @param currentPage 当前页码
+	 * @param pages       总页码数
 	 * @return String 点击页码后的路径
 	 */
-	public static String showPageStaticHtml(String url, int currentPage,
-			int pages) {
+	public static String showPageStaticHtml(String url, int currentPage, int pages) {
 		String s = "";
 		if (pages > 0) {
 			if (currentPage >= 1) {
 				s = s + "<a href='" + url + "_1.htm' class='_home_page'>首页</a> ";
 				if (currentPage > 1) {
-					s = s + "<a href='" + url + "_" + (currentPage - 1)
-							+ ".htm' class='_font_page'>上一页</a> ";
+					s = s + "<a href='" + url + "_" + (currentPage - 1) + ".htm' class='_font_page'>上一页</a> ";
 				}
 			}
 			int beginPage = currentPage - 3 < 1 ? 1 : currentPage - 3;
@@ -919,11 +889,9 @@ public class CommUtil {
 				int i = beginPage;
 				for (int j = 0; (i <= pages) && (j < 6); j++) {
 					if (i == currentPage)
-						s = s + "<a class='this' href='" + url + "_" + i
-								+ ".htm'>" + i + "</a> ";
+						s = s + "<a class='this' href='" + url + "_" + i + ".htm'>" + i + "</a> ";
 					else
-						s = s + "<a href='" + url + "_" + i + ".htm'>" + i
-								+ "</a> ";
+						s = s + "<a href='" + url + "_" + i + ".htm'>" + i + "</a> ";
 					i++;
 				}
 
@@ -931,8 +899,7 @@ public class CommUtil {
 			}
 			if (currentPage <= pages) {
 				if (currentPage < pages) {
-					s = s + "<a href='" + url + "_" + (currentPage + 1)
-							+ ".htm' class='_next_page'>下一页</a> ";
+					s = s + "<a href='" + url + "_" + (currentPage + 1) + ".htm' class='_next_page'>下一页</a> ";
 				}
 				s = s + "<a href='" + url + "_" + pages + ".htm' class='_last_page'>末页</a> ";
 			}
@@ -949,26 +916,20 @@ public class CommUtil {
 	 * Description: 分页处理
 	 * </p>
 	 * 
-	 * @param url
-	 *            路径
-	 * @param params
-	 *            参数
-	 * @param currentPage
-	 *            当前页码数
-	 * @param pages
-	 *            总页码数
+	 * @param url         路径
+	 * @param params      参数
+	 * @param currentPage 当前页码数
+	 * @param pages       总页码数
 	 * @return String 点击页码后的路径
 	 */
-	public static String showPageHtml(String url, String params,
-			int currentPage, int pages) {
+	public static String showPageHtml(String url, String params, int currentPage, int pages) {
 		String s = "";
 		if (pages > 0) {
 			if (currentPage >= 1) {
-				s = s + "<a href='" + url + "?currentPage=1" + params
-						+ "' class='_home_page'>首页</a> ";
+				s = s + "<a href='" + url + "?currentPage=1" + params + "' class='_home_page'>首页</a> ";
 				if (currentPage > 1) {
-					s = s + "<a class='_font_page' href='" + url + "?currentPage="
-							+ (currentPage - 1) + params + "'>上一页</a> ";
+					s = s + "<a class='_font_page' href='" + url + "?currentPage=" + (currentPage - 1) + params
+							+ "'>上一页</a> ";
 				}
 			}
 			int beginPage = currentPage - 3 < 1 ? 1 : currentPage - 3;
@@ -977,12 +938,9 @@ public class CommUtil {
 				int i = beginPage;
 				for (int j = 0; (i <= pages) && (j < 6); j++) {
 					if (i == currentPage)
-						s = s + "<a class='this' href='" + url
-								+ "?currentPage=" + i + params + "'>" + i
-								+ "</a> ";
+						s = s + "<a class='this' href='" + url + "?currentPage=" + i + params + "'>" + i + "</a> ";
 					else
-						s = s + "<a href='" + url + "?currentPage=" + i
-								+ params + "'>" + i + "</a> ";
+						s = s + "<a href='" + url + "?currentPage=" + i + params + "'>" + i + "</a> ";
 					i++;
 				}
 
@@ -990,11 +948,10 @@ public class CommUtil {
 			}
 			if (currentPage <= pages) {
 				if (currentPage < pages) {
-					s = s + "<a href='" + url + "?currentPage="
-							+ (currentPage + 1) + params + "' class='_next_page'>下一页</a> ";
+					s = s + "<a href='" + url + "?currentPage=" + (currentPage + 1) + params
+							+ "' class='_next_page'>下一页</a> ";
 				}
-				s = s + "<a href='" + url + "?currentPage=" + pages + params
-						+ "' class='_last_page'>末页</a> ";
+				s = s + "<a href='" + url + "?currentPage=" + pages + params + "' class='_last_page'>末页</a> ";
 			}
 		}
 
@@ -1010,21 +967,17 @@ public class CommUtil {
 	 * Description: 表单页码处理
 	 * </p>
 	 * 
-	 * @param currentPage
-	 *            当前页
-	 * @param pages
-	 *            总页码数
+	 * @param currentPage 当前页
+	 * @param pages       总页码数
 	 * @return String 点击页码后的路径
 	 */
 	public static String showPageFormHtml(int currentPage, int pages) {
 		String s = "";
 		if (pages > 0) {
 			if (currentPage >= 1) {
-				s = s
-						+ "<a href='javascript:void(0);' onclick='return gotoPage(1)' class='_home_page'>首页</a> ";
+				s = s + "<a href='javascript:void(0);' onclick='return gotoPage(1)' class='_home_page'>首页</a> ";
 				if (currentPage > 1) {
-					s = s
-							+ "<a class='_font_page' href='javascript:void(0);' onclick='return gotoPage("
+					s = s + "<a class='_font_page' href='javascript:void(0);' onclick='return gotoPage("
 							+ (currentPage - 1) + ")'>上一页</a> ";
 				}
 			}
@@ -1034,13 +987,10 @@ public class CommUtil {
 				int i = beginPage;
 				for (int j = 0; (i <= pages) && (j < 6); j++) {
 					if (i == currentPage)
-						s = s
-								+ "<a class='this' href='javascript:void(0);' onclick='return gotoPage("
-								+ i + ")'>" + i + "</a> ";
+						s = s + "<a class='this' href='javascript:void(0);' onclick='return gotoPage(" + i + ")'>" + i
+								+ "</a> ";
 					else
-						s = s
-								+ "<a href='javascript:void(0);' onclick='return gotoPage("
-								+ i + ")'>" + i + "</a> ";
+						s = s + "<a href='javascript:void(0);' onclick='return gotoPage(" + i + ")'>" + i + "</a> ";
 					i++;
 				}
 
@@ -1048,13 +998,11 @@ public class CommUtil {
 			}
 			if (currentPage <= pages) {
 				if (currentPage < pages) {
-					s = s
-							+ "<a href='javascript:void(0);' onclick='return gotoPage("
-							+ (currentPage + 1) + ")' class='_next_page'>下一页</a> ";
+					s = s + "<a href='javascript:void(0);' onclick='return gotoPage(" + (currentPage + 1)
+							+ ")' class='_next_page'>下一页</a> ";
 				}
-				s = s
-						+ "<a id='lastPageNo' href='javascript:void(0);' onclick='return gotoPage("
-						+ pages + ")' class='_last_page'>末页</a> ";
+				s = s + "<a id='lastPageNo' href='javascript:void(0);' onclick='return gotoPage(" + pages
+						+ ")' class='_last_page'>末页</a> ";
 			}
 		}
 
@@ -1065,11 +1013,9 @@ public class CommUtil {
 		String s = "";
 		if (pages > 0) {
 			if (currentPage >= 1) {
-				s = s
-						+ "<a href='javascript:void(0);' onclick='return gotoPage(1)' class='_home_page'>首页</a> ";
+				s = s + "<a href='javascript:void(0);' onclick='return gotoPage(1)' class='_home_page'>首页</a> ";
 				if (currentPage > 1) {
-					s = s
-							+ "<a class='_font_page' href='javascript:void(0);' onclick='return gotoPage("
+					s = s + "<a class='_font_page' href='javascript:void(0);' onclick='return gotoPage("
 							+ (currentPage - 1) + ")'>上一页</a> ";
 				}
 			}
@@ -1079,13 +1025,10 @@ public class CommUtil {
 				int i = beginPage;
 				for (int j = 0; (i <= pages) && (j < 6); j++) {
 					if (i == currentPage)
-						s = s
-								+ "<a class='this' href='javascript:void(0);' onclick='return gotoPage("
-								+ i + ")'>" + i + "</a> ";
+						s = s + "<a class='this' href='javascript:void(0);' onclick='return gotoPage(" + i + ")'>" + i
+								+ "</a> ";
 					else
-						s = s
-								+ "<a href='javascript:void(0);' onclick='return gotoPage("
-								+ i + ")'>" + i + "</a> ";
+						s = s + "<a href='javascript:void(0);' onclick='return gotoPage(" + i + ")'>" + i + "</a> ";
 					i++;
 				}
 
@@ -1093,13 +1036,11 @@ public class CommUtil {
 			}
 			if (currentPage <= pages) {
 				if (currentPage < pages) {
-					s = s
-							+ "<a href='javascript:void(0);' onclick='return gotoPage("
-							+ (currentPage + 1) + ")' class='_next_page'>下一页</a> ";
+					s = s + "<a href='javascript:void(0);' onclick='return gotoPage(" + (currentPage + 1)
+							+ ")' class='_next_page'>下一页</a> ";
 				}
-				s = s
-						+ "<a href='javascript:void(0);' onclick='return gotoPage("
-						+ pages + ")' class='_last_page'>末页</a> ";
+				s = s + "<a href='javascript:void(0);' onclick='return gotoPage(" + pages
+						+ ")' class='_last_page'>末页</a> ";
 			}
 		}
 
@@ -1115,29 +1056,21 @@ public class CommUtil {
 	 * Description: 异步分页处理
 	 * </p>
 	 * 
-	 * @param url
-	 *            路径
-	 * @param params
-	 *            参数
-	 * @param currentPage
-	 *            当前页码数
-	 * @param pages
-	 *            总页码数
+	 * @param url         路径
+	 * @param params      参数
+	 * @param currentPage 当前页码数
+	 * @param pages       总页码数
 	 * @return String 点击页码后的路径
 	 */
-	public static String showPageAjaxHtml(String url, String params,
-			int currentPage, int pages) {
+	public static String showPageAjaxHtml(String url, String params, int currentPage, int pages) {
 		String s = "";
 		if (pages > 0) {
 			String address = url + "?1=1" + params;
 			if (currentPage >= 1) {
-				s = s
-						+ "<a href='javascript:void(0);' onclick='return ajaxPage(\""
-						+ address + "\",1,this)' class='_home_page'>首页</a> ";
-				s = s
-						+ "<a class='_font_page' href='javascript:void(0);' onclick='return ajaxPage(\""
-						+ address + "\"," + (currentPage - 1)
-						+ ",this)'>上一页</a> ";
+				s = s + "<a href='javascript:void(0);' onclick='return ajaxPage(\"" + address
+						+ "\",1,this)' class='_home_page'>首页</a> ";
+				s = s + "<a class='_font_page' href='javascript:void(0);' onclick='return ajaxPage(\"" + address + "\","
+						+ (currentPage - 1) + ",this)'>上一页</a> ";
 			}
 
 			int beginPage = currentPage - 3 < 1 ? 1 : currentPage - 3;
@@ -1146,47 +1079,36 @@ public class CommUtil {
 				int i = beginPage;
 				for (int j = 0; (i <= pages) && (j < 6); j++) {
 					if (i == currentPage)
-						s = s
-								+ "<a class='this' href='javascript:void(0);' onclick='return ajaxPage(\""
-								+ address + "\"," + i + ",this)'>" + i
-								+ "</a> ";
+						s = s + "<a class='this' href='javascript:void(0);' onclick='return ajaxPage(\"" + address
+								+ "\"," + i + ",this)'>" + i + "</a> ";
 					else
-						s = s
-								+ "<a href='javascript:void(0);' onclick='return ajaxPage(\""
-								+ address + "\"," + i + ",this)'>" + i
-								+ "</a> ";
+						s = s + "<a href='javascript:void(0);' onclick='return ajaxPage(\"" + address + "\"," + i
+								+ ",this)'>" + i + "</a> ";
 					i++;
 				}
 
 				s = s + "<a class='_page'>页</a>　";
 			}
 			if (currentPage <= pages) {
-				s = s
-						+ "<a href='javascript:void(0);' onclick='return ajaxPage(\""
-						+ address + "\"," + (currentPage + 1)
-						+ ",this)' class='_next_page'>下一页</a> ";
-				s = s
-						+ "<a href='javascript:void(0);' onclick='return ajaxPage(\""
-						+ address + "\"," + pages + ",this)' class='_last_page'>末页</a> ";
+				s = s + "<a href='javascript:void(0);' onclick='return ajaxPage(\"" + address + "\","
+						+ (currentPage + 1) + ",this)' class='_next_page'>下一页</a> ";
+				s = s + "<a href='javascript:void(0);' onclick='return ajaxPage(\"" + address + "\"," + pages
+						+ ",this)' class='_last_page'>末页</a> ";
 			}
 		}
 
 		return s;
 	}
 
-	public static String showPageAjaxHtml1(String url, String params,
-			int currentPage, int pages) {
+	public static String showPageAjaxHtml1(String url, String params, int currentPage, int pages) {
 		String s = "";
 		if (pages > 0) {
 			String address = url + "?1=1" + params;
 			if (currentPage >= 1) {
-				s = s
-						+ "<a href='javascript:void(0);' onclick='return ajaxPage1(\""
-						+ address + "\",1,this)' class='_home_page'>首页</a> ";
-				s = s
-						+ "<a class='_font_page' href='javascript:void(0);' onclick='return ajaxPage1(\""
-						+ address + "\"," + (currentPage - 1)
-						+ ",this)'>上一页</a> ";
+				s = s + "<a href='javascript:void(0);' onclick='return ajaxPage1(\"" + address
+						+ "\",1,this)' class='_home_page'>首页</a> ";
+				s = s + "<a class='_font_page' href='javascript:void(0);' onclick='return ajaxPage1(\"" + address
+						+ "\"," + (currentPage - 1) + ",this)'>上一页</a> ";
 			}
 
 			int beginPage = currentPage - 3 < 1 ? 1 : currentPage - 3;
@@ -1195,47 +1117,36 @@ public class CommUtil {
 				int i = beginPage;
 				for (int j = 0; (i <= pages) && (j < 6); j++) {
 					if (i == currentPage)
-						s = s
-								+ "<a class='this' href='javascript:void(0);' onclick='return ajaxPage1(\""
-								+ address + "\"," + i + ",this)'>" + i
-								+ "</a> ";
+						s = s + "<a class='this' href='javascript:void(0);' onclick='return ajaxPage1(\"" + address
+								+ "\"," + i + ",this)'>" + i + "</a> ";
 					else
-						s = s
-								+ "<a href='javascript:void(0);' onclick='return ajaxPage1(\""
-								+ address + "\"," + i + ",this)'>" + i
-								+ "</a> ";
+						s = s + "<a href='javascript:void(0);' onclick='return ajaxPage1(\"" + address + "\"," + i
+								+ ",this)'>" + i + "</a> ";
 					i++;
 				}
 
 				s = s + "<a class='_page'>页</a>　";
 			}
 			if (currentPage <= pages) {
-				s = s
-						+ "<a href='javascript:void(0);' onclick='return ajaxPage1(\""
-						+ address + "\"," + (currentPage + 1)
-						+ ",this)' class='_next_page'>下一页</a> ";
-				s = s
-						+ "<a href='javascript:void(0);' onclick='return ajaxPage1(\""
-						+ address + "\"," + pages + ",this)' class='_last_page'>末页</a> ";
+				s = s + "<a href='javascript:void(0);' onclick='return ajaxPage1(\"" + address + "\","
+						+ (currentPage + 1) + ",this)' class='_next_page'>下一页</a> ";
+				s = s + "<a href='javascript:void(0);' onclick='return ajaxPage1(\"" + address + "\"," + pages
+						+ ",this)' class='_last_page'>末页</a> ";
 			}
 		}
 
 		return s;
 	}
 
-	public static String showPageAjaxHtml2(String url, String params,
-			int currentPage, int pages) {
+	public static String showPageAjaxHtml2(String url, String params, int currentPage, int pages) {
 		String s = "";
 		if (pages > 0) {
 			String address = url + "?1=1" + params;
 			if (currentPage >= 1) {
-				s = s
-						+ "<a href='javascript:void(0);' onclick='return ajaxPage2(\""
-						+ address + "\",1,this)' class='_home_page'>首页</a> ";
-				s = s
-						+ "<a class='_font_page' href='javascript:void(0);' onclick='return ajaxPage2(\""
-						+ address + "\"," + (currentPage - 1)
-						+ ",this)'>上一页</a> ";
+				s = s + "<a href='javascript:void(0);' onclick='return ajaxPage2(\"" + address
+						+ "\",1,this)' class='_home_page'>首页</a> ";
+				s = s + "<a class='_font_page' href='javascript:void(0);' onclick='return ajaxPage2(\"" + address
+						+ "\"," + (currentPage - 1) + ",this)'>上一页</a> ";
 			}
 
 			int beginPage = currentPage - 3 < 1 ? 1 : currentPage - 3;
@@ -1244,114 +1155,73 @@ public class CommUtil {
 				int i = beginPage;
 				for (int j = 0; (i <= pages) && (j < 6); j++) {
 					if (i == currentPage)
-						s = s
-								+ "<a class='this' href='javascript:void(0);' onclick='return ajaxPage2(\""
-								+ address + "\"," + i + ",this)'>" + i
-								+ "</a> ";
+						s = s + "<a class='this' href='javascript:void(0);' onclick='return ajaxPage2(\"" + address
+								+ "\"," + i + ",this)'>" + i + "</a> ";
 					else
-						s = s
-								+ "<a href='javascript:void(0);' onclick='return ajaxPage2(\""
-								+ address + "\"," + i + ",this)'>" + i
-								+ "</a> ";
+						s = s + "<a href='javascript:void(0);' onclick='return ajaxPage2(\"" + address + "\"," + i
+								+ ",this)'>" + i + "</a> ";
 					i++;
 				}
 
 				s = s + "<a class='_page'>页</a>　";
 			}
 			if (currentPage <= pages) {
-				s = s
-						+ "<a href='javascript:void(0);' onclick='return ajaxPage2(\""
-						+ address + "\"," + (currentPage + 1)
-						+ ",this)' class='_next_page'>下一页</a> ";
-				s = s
-						+ "<a href='javascript:void(0);' onclick='return ajaxPage2(\""
-						+ address + "\"," + pages + ",this)' class='_last_page'>末页</a> ";
+				s = s + "<a href='javascript:void(0);' onclick='return ajaxPage2(\"" + address + "\","
+						+ (currentPage + 1) + ",this)' class='_next_page'>下一页</a> ";
+				s = s + "<a href='javascript:void(0);' onclick='return ajaxPage2(\"" + address + "\"," + pages
+						+ ",this)' class='_last_page'>末页</a> ";
 			}
 		}
 
 		return s;
 	}
 
-	public static void addIPageList2ModelAndView(String url, String staticURL,
-			String params, Pagination pList, ModelAndView mv) {
+	public static void addIPageList2ModelAndView(String url, String staticURL, String params, Pagination pList,
+			ModelAndView mv) {
 		if (pList != null) {
-			
+
 			mv.addObject("objs", pList.getList());
 			mv.addObject("totalPage", Pagination.cpn(pList.getTotalPage()));
 			mv.addObject("pageSize", Pagination.cpn(pList.getPageSize()));
 			mv.addObject("rows", Pagination.cpn(pList.getPageSize()));
 			mv.addObject("currentPage", Pagination.cpn(pList.getPageNo()));
-			mv.addObject(
-					"gotoPageHTML",
-					showPageHtml(url, params,
-							Pagination.cpn(pList.getPageNo()),
-							Pagination.cpn(pList.getTotalPage())));
-			mv.addObject(
-					"gotoPageFormHTML",
-					showPageFormHtml(Pagination.cpn(pList.getPageNo()),
-							Pagination.cpn(pList.getTotalPage())));
-			mv.addObject(
-					"gotoPageStaticHTML",
-					showPageStaticHtml(staticURL,
-							Pagination.cpn(pList.getPageNo()),
-							Pagination.cpn(pList.getTotalPage())));
-			mv.addObject(
-					"gotoPageAjaxHTML",
-					showPageAjaxHtml(url, params,
-							Pagination.cpn(pList.getPageNo()),
-							Pagination.cpn(pList.getTotalPage())));
+			mv.addObject("gotoPageHTML",
+					showPageHtml(url, params, Pagination.cpn(pList.getPageNo()), Pagination.cpn(pList.getTotalPage())));
+			mv.addObject("gotoPageFormHTML",
+					showPageFormHtml(Pagination.cpn(pList.getPageNo()), Pagination.cpn(pList.getTotalPage())));
+			mv.addObject("gotoPageStaticHTML", showPageStaticHtml(staticURL, Pagination.cpn(pList.getPageNo()),
+					Pagination.cpn(pList.getTotalPage())));
+			mv.addObject("gotoPageAjaxHTML", showPageAjaxHtml(url, params, Pagination.cpn(pList.getPageNo()),
+					Pagination.cpn(pList.getTotalPage())));
 			// 在同一个页面中如果有两个以上分页的话点击事件的方法会冲突，所以加了以下的方法
-			mv.addObject(
-					"gotoPageAjaxHTML1",
-					showPageAjaxHtml1(url, params,
-							Pagination.cpn(pList.getPageNo()),
-							Pagination.cpn(pList.getTotalPage())));
-			mv.addObject(
-					"gotoPageAjaxHTML2",
-					showPageAjaxHtml2(url, params,
-							Pagination.cpn(pList.getPageNo()),
-							Pagination.cpn(pList.getTotalPage())));
+			mv.addObject("gotoPageAjaxHTML1", showPageAjaxHtml1(url, params, Pagination.cpn(pList.getPageNo()),
+					Pagination.cpn(pList.getTotalPage())));
+			mv.addObject("gotoPageAjaxHTML2", showPageAjaxHtml2(url, params, Pagination.cpn(pList.getPageNo()),
+					Pagination.cpn(pList.getTotalPage())));
 		}
 	}
 
-	public static void addIPageList2ModelAndView1(String url, String staticURL,
-			String params, Pagination pList, ModelAndView mv) {
+	public static void addIPageList2ModelAndView1(String url, String staticURL, String params, Pagination pList,
+			ModelAndView mv) {
 		if (pList != null) {
 			mv.addObject("objs", pList.getList());
 			mv.addObject("totalPage", Pagination.cpn(pList.getTotalPage()));
 			mv.addObject("pageSize", Pagination.cpn(pList.getPageSize()));
 			mv.addObject("rows", Pagination.cpn(pList.getPageSize()));
 			mv.addObject("currentPage", Pagination.cpn(pList.getPageNo()));
-			mv.addObject(
-					"gotoPageHTML",
-					showPageHtml(url, params,
-							Pagination.cpn(pList.getPageNo()),
-							Pagination.cpn(pList.getTotalPage())));
-			mv.addObject(
-					"gotoPageFormHTML1",
-					showPageFormHtml(Pagination.cpn(pList.getPageNo()),
-							Pagination.cpn(pList.getTotalPage())));
-			mv.addObject(
-					"gotoPageStaticHTML",
-					showPageStaticHtml(staticURL,
-							Pagination.cpn(pList.getPageNo()),
-							Pagination.cpn(pList.getTotalPage())));
-			mv.addObject(
-					"gotoPageAjaxHTML",
-					showPageAjaxHtml(url, params,
-							Pagination.cpn(pList.getPageNo()),
-							Pagination.cpn(pList.getTotalPage())));
+			mv.addObject("gotoPageHTML",
+					showPageHtml(url, params, Pagination.cpn(pList.getPageNo()), Pagination.cpn(pList.getTotalPage())));
+			mv.addObject("gotoPageFormHTML1",
+					showPageFormHtml(Pagination.cpn(pList.getPageNo()), Pagination.cpn(pList.getTotalPage())));
+			mv.addObject("gotoPageStaticHTML", showPageStaticHtml(staticURL, Pagination.cpn(pList.getPageNo()),
+					Pagination.cpn(pList.getTotalPage())));
+			mv.addObject("gotoPageAjaxHTML", showPageAjaxHtml(url, params, Pagination.cpn(pList.getPageNo()),
+					Pagination.cpn(pList.getTotalPage())));
 			// 在同一个页面中如果有两个以上分页的话点击事件的方法会冲突，所以加了以下的方法
-			mv.addObject(
-					"gotoPageAjaxHTML1",
-					showPageAjaxHtml1(url, params,
-							Pagination.cpn(pList.getPageNo()),
-							Pagination.cpn(pList.getTotalPage())));
-			mv.addObject(
-					"gotoPageAjaxHTML2",
-					showPageAjaxHtml2(url, params,
-							Pagination.cpn(pList.getPageNo()),
-							Pagination.cpn(pList.getTotalPage())));
+			mv.addObject("gotoPageAjaxHTML1", showPageAjaxHtml1(url, params, Pagination.cpn(pList.getPageNo()),
+					Pagination.cpn(pList.getTotalPage())));
+			mv.addObject("gotoPageAjaxHTML2", showPageAjaxHtml2(url, params, Pagination.cpn(pList.getPageNo()),
+					Pagination.cpn(pList.getTotalPage())));
 		}
 	}
 
@@ -1367,11 +1237,9 @@ public class CommUtil {
 	 * @return char 单个字母
 	 */
 	public static char randomChar() {
-		char[] chars = { 'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f',
-				'F', 'g', 'G', 'h', 'H', 'i', 'I', 'j', 'J', 'k', 'K', 'l',
-				'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r',
-				'R', 's', 'S', 't', 'T', 'u', 'U', 'v', 'V', 'w', 'W', 'x',
-				'X', 'y', 'Y', 'z', 'Z' };
+		char[] chars = { 'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H', 'i', 'I', 'j',
+				'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T',
+				'u', 'U', 'v', 'V', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z' };
 		int index = (int) (Math.random() * 52.0D) - 1;
 		if (index < 0) {
 			index = 0;
@@ -1407,8 +1275,7 @@ public class CommUtil {
 	 * </p>
 	 * 
 	 * @param request
-	 * @param param
-	 *            参数名称
+	 * @param param   参数名称
 	 * @return object 参数
 	 */
 	public static Object requestByParam(HttpServletRequest request, String param) {
@@ -1462,8 +1329,7 @@ public class CommUtil {
 	/**
 	 * 判断是否为null，不是就直接返回，是就转换为int类型 默认是1
 	 * 
-	 * @param object
-	 *            类型
+	 * @param object 类型
 	 * @return int类型
 	 */
 	public static int null2Int(Object s) {
@@ -1479,8 +1345,7 @@ public class CommUtil {
 	/**
 	 * 判断是否为null，不是就直接返回，是就转换为float类型 默认是 0.0F
 	 * 
-	 * @param object
-	 *            类型
+	 * @param object 类型
 	 * @return float类型
 	 */
 	public static float null2Float(Object s) {
@@ -1496,8 +1361,7 @@ public class CommUtil {
 	/**
 	 * 判断是否为null，不是就直接返回，是就转换为double类型 默认是0.0D
 	 * 
-	 * @param object
-	 *            类型
+	 * @param object 类型
 	 * @return double类型
 	 */
 	public static double null2Double(Object s) {
@@ -1523,8 +1387,7 @@ public class CommUtil {
 	/**
 	 * 判断是否为null，不是就直接返回，是就转换为boolean类型 默认是false
 	 * 
-	 * @param object
-	 *            类型
+	 * @param object 类型
 	 * @return boolean类型
 	 */
 	public static boolean null2Boolean(Object s) {
@@ -1540,8 +1403,7 @@ public class CommUtil {
 	/**
 	 * 判断是否为null，是就转换为"" ,不是就去掉空格转换为String类型
 	 * 
-	 * @param object
-	 *            类型
+	 * @param object 类型
 	 * @return String类型
 	 */
 	public static String null2String(Object s) {
@@ -1567,8 +1429,7 @@ public class CommUtil {
 	/**
 	 * 将传入的值 转换为具体的描述 xx小时xx分钟xx秒
 	 * 
-	 * @param time
-	 *            long类型
+	 * @param time long类型
 	 * @return String xx小时xx分钟xx秒
 	 */
 	public static String getTimeInfo(long time) {
@@ -1613,8 +1474,7 @@ public class CommUtil {
 	 * 获得字符串去掉前后空白之后的长度
 	 * 
 	 * @param s
-	 * @param sub
-	 *            实际传入的字符串内容
+	 * @param sub 实际传入的字符串内容
 	 * @return int 字符串的实际长度
 	 */
 	public static int indexOf(String s, String sub) {
@@ -1635,8 +1495,7 @@ public class CommUtil {
 		long day = l / 86400000L;
 		long hour = l / 3600000L - day * 24L;
 		long min = l / 60000L - day * 24L * 60L - hour * 60L;
-		long second = l / 1000L - day * 24L * 60L * 60L - hour * 60L * 60L
-				- min * 60L;
+		long second = l / 1000L - day * 24L * 60L * 60L - hour * 60L * 60L - min * 60L;
 		Map map = new HashMap();
 		map.put("day", Long.valueOf(day));
 		map.put("hour", Long.valueOf(hour));
@@ -1648,8 +1507,7 @@ public class CommUtil {
 	/**
 	 * 根据传入的长度返回，长度个随机字母和数字组成的字符串
 	 * 
-	 * @param length
-	 *            长度
+	 * @param length 长度
 	 * @return String 字母和数字组成的字符串
 	 */
 	public static final String randomString(int length) {
@@ -1669,8 +1527,7 @@ public class CommUtil {
 	/**
 	 * 根据传入的长度返回随机数字组成的字符串
 	 * 
-	 * @param length
-	 *            长度
+	 * @param length 长度
 	 * @return String 字母和数字组成的字符串
 	 */
 	public static final String randomNumberString(int length) {
@@ -1689,8 +1546,7 @@ public class CommUtil {
 	/**
 	 * 根据传入的长度返回，长度个 数字组成的字符串
 	 * 
-	 * @param length
-	 *            长度
+	 * @param length 长度
 	 * @return String 数字组成的字符串
 	 */
 	public static final String randomInt(int length) {
@@ -1710,10 +1566,8 @@ public class CommUtil {
 	/**
 	 * 根据传入的两个毫秒值，得出两个时间之间 相差的天数
 	 * 
-	 * @param time1
-	 *            后一个时间
-	 * @param time2
-	 *            前一个时间
+	 * @param time1 后一个时间
+	 * @param time2 前一个时间
 	 * @return long 两个时间之间相差的天数
 	 */
 	public static long getDateDistance(String time1, String time2) {
@@ -1794,8 +1648,7 @@ public class CommUtil {
 	/**
 	 * 将传入的 兆 转化为字节 M--KB--B
 	 * 
-	 * @param m
-	 *            传入的兆大小
+	 * @param m 传入的兆大小
 	 * @return int 字节大小
 	 */
 	public static int M2byte(float m) {
@@ -1820,17 +1673,14 @@ public class CommUtil {
 	 * @return String url
 	 */
 	public static String getURL(HttpServletRequest request) {
-		
+
 		// 获得相对路径
-		
-		String contextPath = request.getContextPath().equals("/") ? ""
-				: request.getContextPath();
+
+		String contextPath = request.getContextPath().equals("/") ? "" : request.getContextPath();
 		// 拼接url
 		String url = "http://" + request.getServerName();
 		if (null2Int(Integer.valueOf(request.getServerPort())) != 80)
-			url = url + ":"
-					+ null2Int(Integer.valueOf(request.getServerPort()))
-					+ contextPath;
+			url = url + ":" + null2Int(Integer.valueOf(request.getServerPort())) + contextPath;
 		else {
 			url = url + contextPath;
 		}
@@ -1840,10 +1690,8 @@ public class CommUtil {
 	/**
 	 * 根据窜入的类型和日期得到具体的日期数字
 	 * 
-	 * @param type
-	 *            String类型的日期描述 y/M/d/H/m/s
-	 * @param date
-	 *            日期
+	 * @param type String类型的日期描述 y/M/d/H/m/s
+	 * @param date 日期
 	 * @return int 具体的日期时间
 	 */
 	public static int parseDate(String type, Date date) {
@@ -1873,8 +1721,7 @@ public class CommUtil {
 	/**
 	 * 获取图片的宽和高
 	 * 
-	 * @param imgurl
-	 *            图片路径
+	 * @param imgurl 图片路径
 	 * @return int 数组 长度为2 获取成功时 第一个为宽，第二个为高，获取失败值为空
 	 */
 	public static int[] readImgWH(String imgurl) {
@@ -1886,8 +1733,7 @@ public class CommUtil {
 
 			byte[] bytes = new byte[100];
 
-			OutputStream bos = new FileOutputStream(new File(
-					"C:\\thetempimg.gif"));
+			OutputStream bos = new FileOutputStream(new File("C:\\thetempimg.gif"));
 			int len;
 			while ((len = bis.read(bytes)) > 0) {
 				bos.write(bytes, 0, len);
@@ -2038,8 +1884,7 @@ public class CommUtil {
 	 */
 	public static String get_all_url(HttpServletRequest request) {
 		String query_url = request.getRequestURI();
-		if ((request.getQueryString() != null)
-				&& (!request.getQueryString().equals(""))) {
+		if ((request.getQueryString() != null) && (!request.getQueryString().equals(""))) {
 			query_url = query_url + "?" + request.getQueryString();
 		}
 		return query_url;
@@ -2108,8 +1953,7 @@ public class CommUtil {
 	 * Description: 判断是否是中文
 	 * </p>
 	 * 
-	 * @param c
-	 *            char
+	 * @param c char
 	 * @return 是就返回true
 	 */
 	public static boolean isChinese(char c) {
@@ -2186,9 +2030,7 @@ public class CommUtil {
 		IP = trimSpaces(IP);
 		if (IP.matches("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}")) {
 			String[] s = IP.split("\\.");
-			if ((Integer.parseInt(s[0]) < 255)
-					&& (Integer.parseInt(s[1]) < 255)
-					&& (Integer.parseInt(s[2]) < 255)
+			if ((Integer.parseInt(s[0]) < 255) && (Integer.parseInt(s[1]) < 255) && (Integer.parseInt(s[2]) < 255)
 					&& (Integer.parseInt(s[3]) < 255))
 				b = true;
 		}
@@ -2269,9 +2111,7 @@ public class CommUtil {
 	public static boolean isSameDay(String oldDate, String newDate) {
 		Date old = new Date(Long.valueOf(oldDate));
 		Date newD = new Date(Long.valueOf(newDate));
-		if (old.getYear() == newD.getYear()
-				&& old.getMonth() == newD.getMonth()
-				&& old.getDay() == newD.getDay()) {
+		if (old.getYear() == newD.getYear() && old.getMonth() == newD.getMonth() && old.getDay() == newD.getDay()) {
 			return true;
 		}
 
@@ -2288,8 +2128,7 @@ public class CommUtil {
 	 * @author tangxiang
 	 * @date 2015年8月8日 上午11:40:40
 	 */
-	public static void updateCookie(Cookie cookie, int seconds,
-			HttpServletResponse response) {
+	public static void updateCookie(Cookie cookie, int seconds, HttpServletResponse response) {
 		cookie.setMaxAge(seconds);
 		cookie.setPath("/");
 		response.addCookie(cookie);
@@ -2306,8 +2145,7 @@ public class CommUtil {
 	 * @author tangxiang
 	 * @date 2015年8月8日 上午10:57:33
 	 */
-	public static void addCookie(String key, String value, int seconds,
-			HttpServletResponse response) {
+	public static void addCookie(String key, String value, int seconds, HttpServletResponse response) {
 		Cookie cookie = new Cookie(key.trim(), value.trim());
 		cookie.setMaxAge(seconds);
 		cookie.setPath("/");
@@ -2323,8 +2161,7 @@ public class CommUtil {
 	 * @author tangxiang
 	 * @date 2015年8月8日 上午10:39:14
 	 */
-	public static void removeCookie(String name, Cookie cookie,
-			HttpServletResponse response) {
+	public static void removeCookie(String name, Cookie cookie, HttpServletResponse response) {
 		cookie.setMaxAge(0);// 设置0立即删除
 		cookie.setPath("/");
 		response.addCookie(cookie);
@@ -2339,8 +2176,7 @@ public class CommUtil {
 	 * @author tangxiang
 	 * @date 2015年8月8日 上午10:39:14
 	 */
-	public static void removeCookie(String name, HttpServletResponse response,
-			Cookie[] cookies) {
+	public static void removeCookie(String name, HttpServletResponse response, Cookie[] cookies) {
 		Cookie cookie = getCookieValue(name, cookies);
 		cookie.setMaxAge(0);// 设置0立即删除
 		cookie.setPath("/");
@@ -2427,10 +2263,8 @@ public class CommUtil {
 		try {
 			allNetInterfaces = NetworkInterface.getNetworkInterfaces();
 			while (allNetInterfaces.hasMoreElements()) {
-				NetworkInterface netInterface = (NetworkInterface) allNetInterfaces
-						.nextElement();
-				List<InterfaceAddress> InterfaceAddress = netInterface
-						.getInterfaceAddresses();
+				NetworkInterface netInterface = (NetworkInterface) allNetInterfaces.nextElement();
+				List<InterfaceAddress> InterfaceAddress = netInterface.getInterfaceAddresses();
 				for (InterfaceAddress add : InterfaceAddress) {
 					InetAddress Ip = add.getAddress();
 					if (Ip != null && Ip instanceof Inet4Address) {
@@ -2445,7 +2279,6 @@ public class CommUtil {
 		return ip;
 	}
 
-	
 	/**
 	 * 生成二维码图片 不存储 直接以流的形式输出到页面
 	 * 
@@ -2454,57 +2287,46 @@ public class CommUtil {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static Image encodeQrcodeImage(String content) {
-		Image image  = null;
+		Image image = null;
 		MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 		Map hints = new HashMap();
 		hints.put(EncodeHintType.CHARACTER_SET, "UTF-8"); // 设置字符集编码类型
 		BitMatrix bitMatrix = null;
 		try {
-			bitMatrix = multiFormatWriter.encode(content,
-					BarcodeFormat.QR_CODE, 300, 300, hints);
+			bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 300, 300, hints);
 			image = toBufferedImage(bitMatrix);
-			
+
 		} catch (WriterException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		return image;
 	}
-	
+
 	/**
 	 * 生成二维码图片 不存储 直接以流的形式输出到页面
 	 * 
 	 * @param content
 	 * @param response
-	 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static void encodeQrcode(String content, HttpServletResponse response) {
-		if (!StringUtils.hasLength(content))
-			return;
-		MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-		Map hints = new HashMap();
-		hints.put(EncodeHintType.CHARACTER_SET, "UTF-8"); // 设置字符集编码类型
-		BitMatrix bitMatrix = null;
-	
-		try {
-			bitMatrix = multiFormatWriter.encode(content,
-					BarcodeFormat.QR_CODE, 300, 300, hints);
-			BufferedImage image = toBufferedImage(bitMatrix);
-			// 输出二维码图片流
-			try {
-				ImageIO.write(image, "png", response.getOutputStream());
-				response.reset();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (WriterException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	}
-*/
-	
+	 * 
+	 * 				@SuppressWarnings({ "unchecked", "rawtypes" }) public static
+	 *                 void encodeQrcode(String content, HttpServletResponse
+	 *                 response) { if (!StringUtils.hasLength(content)) return;
+	 *                 MultiFormatWriter multiFormatWriter = new
+	 *                 MultiFormatWriter(); Map hints = new HashMap();
+	 *                 hints.put(EncodeHintType.CHARACTER_SET, "UTF-8"); //
+	 *                 设置字符集编码类型 BitMatrix bitMatrix = null;
+	 * 
+	 *                 try { bitMatrix = multiFormatWriter.encode(content,
+	 *                 BarcodeFormat.QR_CODE, 300, 300, hints); BufferedImage image
+	 *                 = toBufferedImage(bitMatrix); // 输出二维码图片流 try {
+	 *                 ImageIO.write(image, "png", response.getOutputStream());
+	 *                 response.reset(); } catch (IOException e) { // TODO
+	 *                 Auto-generated catch block e.printStackTrace(); } } catch
+	 *                 (WriterException e1) { // TODO Auto-generated catch block
+	 *                 e1.printStackTrace(); } }
+	 */
+
 	/**
 	 * 生成二维码300*300图片 保存到本地
 	 * 
@@ -2519,12 +2341,11 @@ public class CommUtil {
 		Map hints = new HashMap();
 		hints.put(EncodeHintType.CHARACTER_SET, "UTF-8"); // 设置字符集编码类型
 		BitMatrix bitMatrix = null;
-		
+
 		try {
-			bitMatrix = multiFormatWriter.encode(content,
-					BarcodeFormat.QR_CODE, 300, 350, hints);
+			bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 300, 350, hints);
 			BufferedImage image = toBufferedImage(bitMatrix);
-			
+
 			OutputStream os = new FileOutputStream(fullPath);
 			// 输出二维码图片流
 			try {
@@ -2542,7 +2363,7 @@ public class CommUtil {
 			e1.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 生成二维码图片 保存到本地
 	 * 
@@ -2550,17 +2371,16 @@ public class CommUtil {
 	 * @param response
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static void encodeQrcode(String content, String fullPath,int height,int width) {
+	public static void encodeQrcode(String content, String fullPath, int height, int width) {
 		if (!StringUtils.hasLength(content))
 			return;
 		MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 		Map hints = new HashMap();
 		hints.put(EncodeHintType.CHARACTER_SET, "UTF-8"); // 设置字符集编码类型
 		BitMatrix bitMatrix = null;
-		
+
 		try {
-			bitMatrix = multiFormatWriter.encode(content,
-					BarcodeFormat.QR_CODE, height, width, hints);
+			bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, height, width, hints);
 			BufferedImage image = toBufferedImage(bitMatrix);
 			OutputStream os = new FileOutputStream(fullPath);
 			// 输出二维码图片流
@@ -2579,7 +2399,7 @@ public class CommUtil {
 			e1.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 生成二维码图片(为图片添加文字)
 	 * 
@@ -2587,21 +2407,21 @@ public class CommUtil {
 	 * @param fullPath
 	 * @param height
 	 * @param width
-	 * @param word 
+	 * @param word
 	 * @param response
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static void encodeQrcode(String content, String fullPath,int height,int width,String word) {
+	public static void encodeQrcode(String content, String fullPath, int height, int width, String word) {
 		if (!StringUtils.hasLength(content))
 			return;
-		
+
 		MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 		Map hints = new HashMap();
 		hints.put(EncodeHintType.CHARACTER_SET, "UTF-8"); // 设置字符集编码类型
 		BitMatrix bitMatrix = null;
-		
+
 		try {
-			bitMatrix = multiFormatWriter.encode(content,BarcodeFormat.QR_CODE, width, height+50, hints);
+			bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, width, height + 50, hints);
 			BufferedImage image = toBufferedImage(bitMatrix);
 			OutputStream os = new FileOutputStream(fullPath);
 			// 输出二维码图片流
@@ -2611,8 +2431,8 @@ public class CommUtil {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			//在二维码下方添加文字（文字居中）
-            pressText(word, fullPath, fullPath, 1, Color.BLACK, 22,  width,  height+50) ;
+			// 在二维码下方添加文字（文字居中）
+			pressText(word, fullPath, fullPath, 1, Color.BLACK, 22, width, height + 50);
 		} catch (WriterException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -2621,55 +2441,57 @@ public class CommUtil {
 			e1.printStackTrace();
 		}
 	}
+
 	/**
-     * @为图片添加文字
-     * @param pressText 文字
-     * @param newImg    带文字的图片
-     * @param targetImg 需要添加文字的图片
-     * @param fontStyle 
-     * @param color
-     * @param fontSize
-     * @param width
-     * @param heigh
-     */
-    public static void pressText(String pressText, String newImg, String targetImg, int fontStyle, Color color, int fontSize, int width, int height) {
-        
-        try {
-            File file = new File(targetImg);
-            Image src = ImageIO.read(file);
-            int imageW = src.getWidth(null);
-            int imageH = src.getHeight(null);
-            BufferedImage image = new BufferedImage(imageW, imageH, BufferedImage.TYPE_INT_RGB);
-            Graphics g = image.createGraphics();
-            
-            g.drawImage(src, 0, 0, imageW, imageH, null);
-            g.setColor(color);
-            g.setFont(new Font("宋体", fontStyle, fontSize));
-            
-            //得到当前的font metrics
-            FontMetrics fm = g.getFontMetrics();
-            //计算文字开始的位置
-            int stringWidth = fm.stringWidth(pressText);
-            //x开始的位置：
-            int startX = (width-stringWidth)/2;
-            //y开始的位置：图片高度-（图片高度-图片宽度）/2
-            int startY = height-(height-width)/2; 
-            
-            g.drawString(pressText, startX, startY);
-            g.dispose();
-            
-            FileOutputStream out = new FileOutputStream(newImg);
-            ImageIO.write(image, "JPEG", out);
-            out.close();
-        } catch (Exception e) {
-        	e.printStackTrace();
-        }
-    }
+	 * @为图片添加文字
+	 * @param pressText 文字
+	 * @param newImg    带文字的图片
+	 * @param targetImg 需要添加文字的图片
+	 * @param fontStyle
+	 * @param color
+	 * @param fontSize
+	 * @param width
+	 * @param heigh
+	 */
+	public static void pressText(String pressText, String newImg, String targetImg, int fontStyle, Color color,
+			int fontSize, int width, int height) {
+
+		try {
+			File file = new File(targetImg);
+			Image src = ImageIO.read(file);
+			int imageW = src.getWidth(null);
+			int imageH = src.getHeight(null);
+			BufferedImage image = new BufferedImage(imageW, imageH, BufferedImage.TYPE_INT_RGB);
+			Graphics g = image.createGraphics();
+
+			g.drawImage(src, 0, 0, imageW, imageH, null);
+			g.setColor(color);
+			g.setFont(new Font("宋体", fontStyle, fontSize));
+
+			// 得到当前的font metrics
+			FontMetrics fm = g.getFontMetrics();
+			// 计算文字开始的位置
+			int stringWidth = fm.stringWidth(pressText);
+			// x开始的位置：
+			int startX = (width - stringWidth) / 2;
+			// y开始的位置：图片高度-（图片高度-图片宽度）/2
+			int startY = height - (height - width) / 2;
+
+			g.drawString(pressText, startX, startY);
+			g.dispose();
+
+			FileOutputStream out = new FileOutputStream(newImg);
+			ImageIO.write(image, "JPEG", out);
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	private static BufferedImage toBufferedImage(BitMatrix matrix) {
 		int width = matrix.getWidth();
 		int height = matrix.getHeight();
-		BufferedImage image = new BufferedImage(width, height,
-				BufferedImage.TYPE_INT_RGB);
+		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 				image.setRGB(x, y, matrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
@@ -2685,33 +2507,29 @@ public class CommUtil {
 	 * @return
 	 * @return String
 	 * @author tangxiang
-	 * @date 2015年8月8日 下午3:10:45 
+	 * @date 2015年8月8日 下午3:10:45
 	 */
-	public static String beanListToJsonStr(List<? extends Object> list)
-	{
+	public static String beanListToJsonStr(List<? extends Object> list) {
 		JSONArray array = new JSONArray();
-		for(Object obj:list)
-		{
+		for (Object obj : list) {
 			array.add(obj);
 		}
-		
+
 		return array.toString();
 	}
-	
-	
-	
+
 	/**
 	 * 检查文件是否存在
+	 * 
 	 * @param fullName
 	 * @return
 	 * @date 2016年1月8日 下午1:34:58
 	 */
-	public static boolean checkFileIsExist(String fullName){
+	public static boolean checkFileIsExist(String fullName) {
 		File file = new File(fullName);
 		return file.exists();
 	}
-	
-	
+
 	/**
 	 * description: 解析微信通知xml
 	 * 
@@ -2743,61 +2561,61 @@ public class CommUtil {
 		}
 		return retMap;
 	}
-	
+
 	/**
 	 * 请求Map转换ＸＭＬ
+	 * 
 	 * @param parameters
 	 * @return
 	 * @date 2016年1月12日 下午6:10:33
 	 */
-	public static String getRequestXml(SortedMap<String,String> parameters){
-        StringBuffer sb = new StringBuffer();
-        sb.append("<xml>");
-        Set es = parameters.entrySet();
-        Iterator it = es.iterator();
-        while(it.hasNext()) {
-            Map.Entry entry = (Map.Entry)it.next();
-            String k = (String)entry.getKey();
-            String v = (String)entry.getValue();
-            if ("attach".equalsIgnoreCase(k)||"body".equalsIgnoreCase(k)||"sign".equalsIgnoreCase(k)) {
-                sb.append("<"+k+">"+"<![CDATA["+v+"]]></"+k+">");
-            }else {
-                sb.append("<"+k+">"+v+"</"+k+">");
-            }
-        }
-        sb.append("</xml>");
-        return sb.toString();
+	public static String getRequestXml(SortedMap<String, String> parameters) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<xml>");
+		Set es = parameters.entrySet();
+		Iterator it = es.iterator();
+		while (it.hasNext()) {
+			Map.Entry entry = (Map.Entry) it.next();
+			String k = (String) entry.getKey();
+			String v = (String) entry.getValue();
+			if ("attach".equalsIgnoreCase(k) || "body".equalsIgnoreCase(k) || "sign".equalsIgnoreCase(k)) {
+				sb.append("<" + k + ">" + "<![CDATA[" + v + "]]></" + k + ">");
+			} else {
+				sb.append("<" + k + ">" + v + "</" + k + ">");
+			}
+		}
+		sb.append("</xml>");
+		return sb.toString();
 	}
-	
-	public static String generateOrderNo(Long mid){
+
+	public static String generateOrderNo(Long mid) {
 //		Date now = new Date();
 //		SimpleDateFormat outFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 //		String s = outFormat.format(now);
-		
-		//String strTime = s.substring(0, 8);// 8位日期
+
+		// String strTime = s.substring(0, 8);// 8位日期
 		final int ORDER_NO_LENGTH = 20;
 		String orderNo = "";
 		String random = "";
 		String mNo = "";
-		String nowTime = String.valueOf(System.nanoTime());//当前时间纳秒
-		//System.out.println("nowTime:"+nowTime);
-		if (mid == null){
+		String nowTime = String.valueOf(System.nanoTime());// 当前时间纳秒
+		// System.out.println("nowTime:"+nowTime);
+		if (mid == null) {
 			random = randomInt(ORDER_NO_LENGTH - nowTime.length());
 		} else {
 			mNo = mid + "";
 			random = randomInt(ORDER_NO_LENGTH - nowTime.length() - mNo.length());
 		}
-		
+
 		orderNo = mNo + nowTime + random;
-		if (orderNo.length() > ORDER_NO_LENGTH){
+		if (orderNo.length() > ORDER_NO_LENGTH) {
 			orderNo = orderNo.substring(0, 19);
 			CommUtil.logger.error("CommUtil.generateOrderNo 注意：》》》》订单号超过20位了", null);
 		}
-		
+
 		return orderNo;
 	}
-	
-	
+
 	/**
 	 * 元转换成分
 	 * 
@@ -2817,227 +2635,376 @@ public class CommUtil {
 		if (index == -1) {
 			amLong = Long.valueOf(currency + "00");
 		} else if (length - index >= 3) {
-			amLong = Long.valueOf((currency.substring(0, index + 3)).replace(
-					".", ""));
+			amLong = Long.valueOf((currency.substring(0, index + 3)).replace(".", ""));
 		} else if (length - index == 2) {
-			amLong = Long.valueOf((currency.substring(0, index + 2)).replace(
-					".", "") + 0);
+			amLong = Long.valueOf((currency.substring(0, index + 2)).replace(".", "") + 0);
 		} else {
-			amLong = Long.valueOf((currency.substring(0, index + 1)).replace(
-					".", "") + "00");
+			amLong = Long.valueOf((currency.substring(0, index + 1)).replace(".", "") + "00");
 		}
 		return amLong.toString();
 	}
-	
-	
-	  /**
-     * 获取一定长度的随机字符串
-     * @param length 指定字符串长度
-     * @return 一定长度的字符串
-     */
-    public static String getRandomStringByLength(int length) {
-        String base = "abcdefghijklmnopqrstuvwxyz0123456789";
-        Random random = new Random();
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < length; i++) {
-            int number = random.nextInt(base.length());
-            sb.append(base.charAt(number));
-        }
-        return sb.toString();
-    }
-    
-    /**
+
+	/**
+	 * 获取一定长度的随机字符串
+	 * 
+	 * @param length 指定字符串长度
+	 * @return 一定长度的字符串
+	 */
+	public static String getRandomStringByLength(int length) {
+		String base = "abcdefghijklmnopqrstuvwxyz0123456789";
+		Random random = new Random();
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < length; i++) {
+			int number = random.nextInt(base.length());
+			sb.append(base.charAt(number));
+		}
+		return sb.toString();
+	}
+
+	/**
 	 * （人民币单位转换）元转分
 	 */
-	public static String yuanChangeFen(String amount){
+	public static String yuanChangeFen(String amount) {
 		BigDecimal money = new BigDecimal("0.0000");
 		money = money.add(new BigDecimal(amount));
 		Double doubleMoney = money.doubleValue();
 		Integer integerMoney = (int) (doubleMoney * 100);
 		return integerMoney.toString();
 	}
-	
+
 	/**
 	 * 请求中的map重写tostring方法
 	 */
-	public static String getMapToString(Map<String, String[]> map){
-		
-		if (null == map || map.size() == 0){
+	public static String getMapToString(Map<String, String[]> map) {
+
+		if (null == map || map.size() == 0) {
 			return "";
 		}
-		
+
 		StringBuffer params = new StringBuffer();
-		
+
 		params.append("mapToString: ");
 		Set<Entry<String, String[]>> entrySet = map.entrySet();
 		Iterator<Entry<String, String[]>> iterator = entrySet.iterator();
-		while (iterator.hasNext()){
+		while (iterator.hasNext()) {
 			Entry<String, String[]> entry = iterator.next();
-			
+
 			String key = entry.getKey();
-			String value = ( entry.getValue()!=null?entry.getValue()[0]:null );
-			
+			String value = (entry.getValue() != null ? entry.getValue()[0] : null);
+
 			params.append(key).append("=").append(value).append("&");
 		}
-		
+
 		return params.substring(0, params.length() - 1);
 	}
-	
+
 	/**
 	 * 请求中的map转为普通map
 	 */
-	public static Map<String, String> getRequestMapToMap(Map<String, String[]> map){
-		
-		if (null == map || map.size() == 0){
+	public static Map<String, String> getRequestMapToMap(Map<String, String[]> map) {
+
+		if (null == map || map.size() == 0) {
 			return null;
 		}
-		
+
 		Map<String, String> result = new HashMap<String, String>();
-		
+
 		Set<Entry<String, String[]>> entrySet = map.entrySet();
 		Iterator<Entry<String, String[]>> iterator = entrySet.iterator();
-		while (iterator.hasNext()){
+		while (iterator.hasNext()) {
 			Entry<String, String[]> entry = iterator.next();
-			
+
 			String key = entry.getKey();
-			String value = ( entry.getValue() != null ? entry.getValue()[0] : null );
-			
+			String value = (entry.getValue() != null ? entry.getValue()[0] : null);
+
 			result.put(key, value);
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * 请求中的字符map转为对象map
 	 */
-	public static Map<String, Object> getStrMapToObjMap(Map<String, String> map){
-		
-		if (null == map || map.size() == 0){
+	public static Map<String, Object> getStrMapToObjMap(Map<String, String> map) {
+
+		if (null == map || map.size() == 0) {
 			return null;
 		}
-		
+
 		Map<String, Object> result = new HashMap<>();
-		
+
 		Set<Entry<String, String>> entrySet = map.entrySet();
 		Iterator<Entry<String, String>> iterator = entrySet.iterator();
-		while (iterator.hasNext()){
+		while (iterator.hasNext()) {
 			Entry<String, String> entry = iterator.next();
-			
+
 			String key = entry.getKey();
-			String value = ( entry.getValue() != null ? entry.getValue() : null );
-			
+			String value = (entry.getValue() != null ? entry.getValue() : null);
+
 			result.put(key, value);
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * map对象封装为class对象
 	 */
 	public static Object convertMap(Class<?> type, Map<String, String> map)
-            throws IntrospectionException, IllegalAccessException,
-            InstantiationException, InvocationTargetException {
-		
-        BeanInfo beanInfo = Introspector.getBeanInfo(type); // 获取类属性
-        Object obj = type.newInstance(); // 创建 JavaBean 对象
+			throws IntrospectionException, IllegalAccessException, InstantiationException, InvocationTargetException {
 
-        // 给 JavaBean 对象的属性赋值
-        PropertyDescriptor[] propertyDescriptors =  beanInfo.getPropertyDescriptors();
-        for (int i = 0; i< propertyDescriptors.length; i++) {
-            PropertyDescriptor descriptor = propertyDescriptors[i];
-            String propertyName = descriptor.getName();
+		BeanInfo beanInfo = Introspector.getBeanInfo(type); // 获取类属性
+		Object obj = type.newInstance(); // 创建 JavaBean 对象
 
-            if (map.containsKey(propertyName)) {
-                // 下面一句可以 try 起来，这样当一个属性赋值失败的时候就不会影响其他属性赋值。
-            	Object value = map.get(propertyName);
-                
-                Object[] args = new Object[1];
-                args[0] = value;
+		// 给 JavaBean 对象的属性赋值
+		PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+		for (int i = 0; i < propertyDescriptors.length; i++) {
+			PropertyDescriptor descriptor = propertyDescriptors[i];
+			String propertyName = descriptor.getName();
 
-                try {
-                	descriptor.getWriteMethod().invoke(obj, args);
-            	} catch (Exception e) {
-            		
-            	}
-            }
-        }
-        return obj;
-    }
-	
+			if (map.containsKey(propertyName)) {
+				// 下面一句可以 try 起来，这样当一个属性赋值失败的时候就不会影响其他属性赋值。
+				Object value = map.get(propertyName);
+
+				Object[] args = new Object[1];
+				args[0] = value;
+
+				try {
+					descriptor.getWriteMethod().invoke(obj, args);
+				} catch (Exception e) {
+
+				}
+			}
+		}
+		return obj;
+	}
+
 	/**
 	 * 处理double字符串四舍五入保留两位小数
 	 */
-	public static String formatDoubleString (String strAmount){
-		
+	public static String formatDoubleString(String strAmount) {
+
 		try {
 			Double douAmount = Double.parseDouble(strAmount);
-			DecimalFormat df = new DecimalFormat("0.0000"); 
+			DecimalFormat df = new DecimalFormat("0.0000");
 			return df.format(douAmount);
 		} catch (Exception e) {
 			logger.error("转换金额格式失败");
 			logger.error(e.getMessage());
 			return null;
 		}
-		
+
 	}
-	
+
 	/**
 	 * 比较两个BigDecimal类型的数据， 如果相等返回true
 	 */
-	public static Boolean compareToBigDecimal(BigDecimal bigDecimal1, BigDecimal bigDecimal2){
-		
-		if (null == bigDecimal1 && null == bigDecimal2){
+	public static Boolean compareToBigDecimal(BigDecimal bigDecimal1, BigDecimal bigDecimal2) {
+
+		if (null == bigDecimal1 && null == bigDecimal2) {
 			return true;
 		}
-		
-		if (null != bigDecimal1 && null != bigDecimal2){
+
+		if (null != bigDecimal1 && null != bigDecimal2) {
 			return bigDecimal1.compareTo(bigDecimal2) == 0 ? true : false;
 		}
-		
+
 		return false;
 	}
-	
+
 	/**
 	 * 获取汉字首位大写字母
 	 */
 	public static String getPinYinHeadChar(String str) throws BadHanyuPinyinOutputFormatCombination {
 
-        String convert = "";
-        for (int j = 0; j < str.length(); j++) {
-            char word = str.charAt(j);
-            HanyuPinyinOutputFormat out = new HanyuPinyinOutputFormat();
-            out.setCaseType(HanyuPinyinCaseType.UPPERCASE);
-            String[] pinyinArray = PinyinHelper.toHanyuPinyinStringArray(word, out);
-            if (pinyinArray != null) {
-                convert += pinyinArray[0].charAt(0);
-            } else {
-                convert += word;
-            }
-        }
-        return convert.toUpperCase();
-    }
-	
+		String convert = "";
+		for (int j = 0; j < str.length(); j++) {
+			char word = str.charAt(j);
+			HanyuPinyinOutputFormat out = new HanyuPinyinOutputFormat();
+			out.setCaseType(HanyuPinyinCaseType.UPPERCASE);
+			String[] pinyinArray = PinyinHelper.toHanyuPinyinStringArray(word, out);
+			if (pinyinArray != null) {
+				convert += pinyinArray[0].charAt(0);
+			} else {
+				convert += word;
+			}
+		}
+		return convert.toUpperCase();
+	}
+
 	/**
 	 * 判断字符串是否为数字
 	 */
-	public static boolean isNumeric(String str){ 
-		   Pattern pattern = Pattern.compile("[0-9]*"); 
-		   Matcher isNum = pattern.matcher(str);
-		   if( !isNum.matches() ){
-		       return false; 
-		   } 
-		   return true; 
+	public static boolean isNumeric(String str) {
+		Pattern pattern = Pattern.compile("[0-9]*");
+		Matcher isNum = pattern.matcher(str);
+		if (!isNum.matches()) {
+			return false;
 		}
-	
+		return true;
+	}
+
 	/**
 	 * 获取区间内随机数[min,max]
 	 */
-	public static int getRandom(int min,int max){ 
-		max=max+1;
+	public static int getRandom(int min, int max) {
+		max = max + 1;
 
-		int s = new Random().nextInt(max-min) + min;
+		int s = new Random().nextInt(max - min) + min;
 		return s;
 	}
+
+	/**
+	 * 通过期数获取相对应的开奖时间,调用前判断是否合法18090348
+	 */
+	public static String getTimeFromQishu(String qi) {
+		String r = "20";
+		r = r + qi.substring(0, 2) + "-" + qi.substring(2, 4) + "-" + qi.substring(4, 6);// 2018-09-03
+
+		String shu = qi.substring(6, 8);
+		int int_shu = Integer.parseInt(shu);
+		r = r + " " + getHourFromShu(int_shu) + ":" + getMimuFromShu(int_shu) + ":00";
+		return r;
+	}
+
+	/**
+	 * 通过期数返回开奖的小时
+	 * 
+	 * @param shu
+	 * @return
+	 */
+	public static String getHourFromShu(int shu) {
+		if (shu >= 0 && shu <= 5) {
+			return "09";
+		} else if (shu >= 6 && shu <= 11) {
+			return "10";
+		} else if (shu >= 12 && shu <= 17) {
+			return "11";
+		} else if (shu >= 18 && shu <= 23) {
+			return "12";
+		} else if (shu >= 24 && shu <= 29) {
+			return "13";
+		} else if (shu >= 30 && shu <= 35) {
+			return "14";
+		} else if (shu >= 36 && shu <= 41) {
+			return "15";
+		} else if (shu >= 42 && shu <= 47) {
+			return "16";
+		} else if (shu >= 48 && shu <= 53) {
+			return "17";
+		} else if (shu >= 54 && shu <= 59) {
+			return "18";
+		} else if (shu >= 60 && shu <= 65) {
+			return "19";
+		} else if (shu >= 66 && shu <= 71) {
+			return "20";
+		} else if (shu >= 72 && shu <= 77) {
+			return "21";
+		} else if (shu >= 78 && shu <= 83) {
+			return "22";
+		} else {
+			return "23";
+		}
+	}
+
+	/**
+	 * 通过期数返回开奖的分钟数
+	 * 
+	 * @param shu
+	 * @return
+	 */
+	public static String getMimuFromShu(int shu) {
+		if (shu % 6 == 0)
+			return "00";
+		else if (shu % 6 == 1)
+			return "10";
+		else if (shu % 6 == 2)
+			return "20";
+		else if (shu % 6 == 3)
+			return "30";
+		else if (shu % 6 == 4)
+			return "40";
+		else if (shu % 6 == 5)
+			return "50";
+		return "00";
+	}
+
+	/**
+	 * 根据开奖的5位数获得所有11位数 第6位至11位开奖规则：
+	 * 
+	 * @param no1
+	 * @param no2
+	 * @param no3
+	 * @param no4
+	 * @param no5
+	 * @return
+	 */
+	public static int[] getFinalNumberFrom5(int no1, int no2, int no3, int no4, int no5) {
+		int[] f = new int[] { no1, no2, no3, no4, no5, 0, 0, 0, 0, 0, 0 };
+		for (int i = 5; i < 11; i++) {
+
+			int sum = 0;
+			for (int j = 0; j < i; j++) {
+				sum += f[j];
+			}
+			//System.out.println("sum:"+sum+",");
+			sum = sum % 12;
+			//System.out.println("sum:"+sum+",");
+			if (sum == 0)
+				sum = 1;
+			for (int k = 0; k < 12; k++) {
+				sum += 1;
+				if (sum > 11)
+					sum = sum - 11;
+				boolean isexist = false;
+				for (int l = 0; l < i; l++) {
+					if (f[l] == sum) {
+						isexist = true;
+						break;
+					}
+				}
+				if (!isexist) {
+					f[i] = sum;
+					break;
+				}
+			}
+		}
+		return f;
+	}
+
+//	public static void main(String[] args) {
+//		
+//		
+//		for(int s=0;s<100;s++) {
+//			
+//			int[] numbers = new int[] {1,2,3,4,5,6,7,8,9,10,11};
+//			int[] results = new int[5];
+//			 int n=11;
+//			 
+//			for (int i = 0; i < results.length; i++) {
+//	 
+//				// 取出一个随机数
+//				int r = (int) (Math.random() * n);
+//	 
+//				results[i] = numbers[r];
+//	 
+//				// 排除已经取过的值
+//				numbers[r] = numbers[ n - 1];
+//	 
+//				n--;
+//			}
+//			
+//			
+//			int[] r = getFinalNumberFrom5(results[0],results[1],results[2],results[3],results[4]);
+//			for (int i : r) {
+//				System.out.print(i + " ");
+//			}
+//			System.out.println();
+//		}
+// 
+// 
+//
+//	}
+
 }

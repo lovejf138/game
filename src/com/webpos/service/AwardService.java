@@ -1,0 +1,1 @@
+package com.webpos.service;import java.util.List;import com.webpos.entity.Award;public abstract interface AwardService{  public abstract Award getByName(String name);    public abstract int insert(Award paramAccount);    public abstract Award getLast();    public abstract List<Award> getLastList();    }
