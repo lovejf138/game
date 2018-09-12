@@ -1738,7 +1738,7 @@ public class CommUtil {
 			if (null2Double(f) > 0.0D)
 				ret = e.divide(f, 3, 1).doubleValue();
 		}
-		DecimalFormat df = new DecimalFormat("0.00");
+		DecimalFormat df = new DecimalFormat("0.0000");
 		return Double.valueOf(df.format(ret)).doubleValue();
 	}
 
@@ -1758,7 +1758,7 @@ public class CommUtil {
 		BigDecimal e = new BigDecimal(null2Double(a));
 		BigDecimal f = new BigDecimal(null2Double(b));
 		ret = e.subtract(f).doubleValue();
-		DecimalFormat df = new DecimalFormat("0.00");
+		DecimalFormat df = new DecimalFormat("0.0000");
 		return Double.valueOf(df.format(ret)).doubleValue();
 	}
 
@@ -1767,7 +1767,7 @@ public class CommUtil {
 		BigDecimal e = new BigDecimal(null2Double(a));
 		BigDecimal f = new BigDecimal(null2Double(b));
 		ret = e.add(f).doubleValue();
-		DecimalFormat df = new DecimalFormat("0.00");
+		DecimalFormat df = new DecimalFormat("0.0000");
 		return Double.valueOf(df.format(ret)).doubleValue();
 	}
 
@@ -1782,12 +1782,12 @@ public class CommUtil {
 		BigDecimal e = new BigDecimal(null2Double(a));
 		BigDecimal f = new BigDecimal(null2Double(b));
 		double ret = e.multiply(f).doubleValue();
-		DecimalFormat df = new DecimalFormat("0.00");
+		DecimalFormat df = new DecimalFormat("0.0000");
 		return Double.valueOf(df.format(ret)).doubleValue();
 	}
 
 	public static double formatMoney(Object money) {
-		DecimalFormat df = new DecimalFormat("0.00");
+		DecimalFormat df = new DecimalFormat("0.0000");
 		return Double.valueOf(df.format(money)).doubleValue();
 	}
 
@@ -2850,7 +2850,7 @@ public class CommUtil {
 	 * （人民币单位转换）元转分
 	 */
 	public static String yuanChangeFen(String amount){
-		BigDecimal money = new BigDecimal("0.00");
+		BigDecimal money = new BigDecimal("0.0000");
 		money = money.add(new BigDecimal(amount));
 		Double doubleMoney = money.doubleValue();
 		Integer integerMoney = (int) (doubleMoney * 100);
@@ -2973,7 +2973,7 @@ public class CommUtil {
 		
 		try {
 			Double douAmount = Double.parseDouble(strAmount);
-			DecimalFormat df = new DecimalFormat("0.00"); 
+			DecimalFormat df = new DecimalFormat("0.0000"); 
 			return df.format(douAmount);
 		} catch (Exception e) {
 			logger.error("转换金额格式失败");

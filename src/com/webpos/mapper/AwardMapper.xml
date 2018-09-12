@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webpos.dao.AwardMapper">
+	<resultMap id="BaseResultMap" type="com.webpos.entity.Award">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="_name" property="name" jdbcType="VARCHAR" />
+		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+		<result column="no1" property="no1" jdbcType="INTEGER" />
+		<result column="no2" property="no2" jdbcType="INTEGER" />
+		<result column="no3" property="no3" jdbcType="INTEGER" />
+		<result column="no4" property="no4" jdbcType="INTEGER" />
+		<result column="no5" property="no5" jdbcType="INTEGER" />
+		<result column="no6" property="no6" jdbcType="INTEGER" />
+		<result column="no7" property="no7" jdbcType="INTEGER" />
+		<result column="no8" property="no8" jdbcType="INTEGER" />
+		<result column="no9" property="no9" jdbcType="INTEGER" />
+		<result column="no10" property="no10" jdbcType="INTEGER" />
+		<result column="no11" property="no11" jdbcType="INTEGER" />
+		
+		
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id,_name,ctime,no1,no2,no3,no4,no5,no6,no7,no8,no9,no10,no11
+	</sql>
+	
+	<select id="getLast" resultMap="BaseResultMap"
+		>
+		select
+		<include refid="Base_Column_List" />
+		from award
+		order by ctime desc limit 1
+	</select>
+	
+	<select id="getLastList" resultMap="BaseResultMap"
+		>
+		select
+		<include refid="Base_Column_List" />
+		from award
+		order by ctime desc limit 30
+	</select>
+	
+ 
+	<insert id="insert" parameterType="com.webpos.entity.Award"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into award (_name,ctime,no1,no2,no3,no4,no5,no6,no7,no8,no9,no10,no11)
+
+		values ( #{name,jdbcType=VARCHAR},
+		#{ctime,jdbcType=TIMESTAMP},#{no1,jdbcType=INTEGER},#{no2,jdbcType=INTEGER},#{no3,jdbcType=INTEGER},
+		#{no4,jdbcType=INTEGER},#{no5,jdbcType=INTEGER},#{no6,jdbcType=INTEGER},
+		#{no7,jdbcType=INTEGER},#{no8,jdbcType=INTEGER},#{no9,jdbcType=INTEGER},
+		#{no10,jdbcType=INTEGER},#{no11,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	
+	
+</mapper>
