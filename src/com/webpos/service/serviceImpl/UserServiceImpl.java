@@ -254,7 +254,7 @@ public class UserServiceImpl implements UserService {
 					this.userDao.updateByPrimaryKeySelective(u_p);
 				}
 			}
-			new_user.setBalance("0.01");
+			new_user.setBalance("0.00");
 			new_user.setPlay_sum(Double.valueOf(0.0D));
 			new_user.setChild_sum(Integer.valueOf(0));
 			new_user.setRecharge_sum(Double.valueOf(0.0D));
@@ -271,13 +271,13 @@ public class UserServiceImpl implements UserService {
 			}
 			this.userDao.insert(new_user);
 
-			Details d = new Details();
-			d.setCtime(new Date());
-			d.setRemark("new user");
-			d.setResult("0.01");
-			d.setUser_id(loginname);
-			d.setType("gift");
-			this.detailsDao.insert(d);
+//			Details d = new Details();
+//			d.setCtime(new Date());
+//			d.setRemark("new user");
+//			d.setResult("0.01");
+//			d.setUser_id(loginname);
+//			d.setType("gift");
+//			this.detailsDao.insert(d);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return null;

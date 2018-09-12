@@ -101,6 +101,7 @@
 							
 				  <!--  <a class="am-btn  am-btn-sm am-btn-primary am-fr" onclick="sys()">系统设置</a>	-->
 				  <a class="am-btn  am-btn-sm am-btn-success am-fr" href="<%=request.getContextPath()%>/play_list.do">转盘列表</a>	
+				  <a class="am-btn  am-btn-sm am-btn-fail am-fr" href="<%=request.getContextPath()%>/messages.do">消息列表</a>	
 				  <a class="am-btn  am-btn-sm am-btn-danger am-fr" href="<%=request.getContextPath()%>/withdraw_list.do?status=request">资金出入列表</a>				 
 					<button class="am-btn  am-btn-sm am-btn-primary am-fr _query">查询</button>
 				 </form>		
@@ -120,7 +121,7 @@
 							<th class="_contact" >轮盘总额</th>
 							
 							<th class="_contact" >imtoken</th>
-							<th class="_status">胜率</th>
+							
 							<th class="_endtime" >创建时间</th>
 							<th class="_operation" >操作</th>
 						</tr>
@@ -139,13 +140,13 @@
 								<td>${user.play_sum }</td>
 								
 								<td>${user.all_eth }</td>
-								<td>${user.win_rate}%</td>
+								
 								<td><fmt:formatDate value="${user.ctime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								
 								<td class="merchant-m">
 									
 									<a class="operate _detail" id="_in" onclick="cz('${user.user_id}')">充值</a>	|					
-									<a class="operate _interface" id="_winrate" onclick="et('${user.user_id}','${user.win_rate}','${user.all_eth}')">胜率修改</a>
+									<a class="operate _interface" id="_winrate" onclick="et('${user.user_id}','0','${user.all_eth}')">胜率修改</a>
 									<c:if test="${user.is_machine==0}" >
 									|					
 									<a class="operate _interface" id="_winrate" onclick="bj('${user.user_id}',1)">标记机器人</a>
