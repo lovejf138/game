@@ -2931,8 +2931,67 @@ public class CommUtil {
 	}
 
 	/**
+	 * 距离当前时间距离下一期结束时间
+	 * @param nextqi
+	 * @return
+	 */
+	public static int getSecondFromQi(String nextqi) {
+		int second=0;//如果
+		
+		Date nextdate = formatDate(getTimeFromQishu(nextqi), "yyyy-MM-dd HH:mm:ss");
+		Date now = new Date();
+		second = (int)((nextdate.getTime() - now.getTime()) / 1000);
+//		if(nextdate.after(now)) {//未开奖
+//			
+//		}else {//等待开奖
+//			second = (int)((nextdate.getTime() - now.getTime()) / 1000);
+//		}
+		return second;
+	}
+	
+	/**
+	 * 获取下一期
+	 * @param qi
+	 * @return
+	 */
+	public static String getNextQi(String qi) {
+		//String nextqi="";
+		String s_shu="";
+		String r = "20";
+		r = r + qi.substring(0, 2) + "-" + qi.substring(2, 4) + "-" + qi.substring(4, 6);// 2018-09-03
+		
+		String shu = qi.substring(6, 8);
+		qi = qi.substring(0, 6);
+		int int_shu = Integer.parseInt(shu);
+		if(int_shu>83) {//时间加一天
+			int_shu=1;
+			Date d = formatDate(r, "yyyy-MM-dd");
+			Calendar cal = Calendar.getInstance();
+
+			cal.setTime(d);
+
+			cal.add(Calendar.DATE,1);
+
+			d =cal.getTime();
+
+			qi = (new SimpleDateFormat("yyMMdd")).format(d);
+		}else
+		{
+			int_shu=int_shu+1;
+		}
+		
+		if(int_shu<10) s_shu = "0"+int_shu;
+		else s_shu=""+int_shu;
+		
+		return qi+s_shu;
+	}
+	
+	/**
 	 * 根据开奖的5位数获得所有11位数 第6位至11位开奖规则：
-	 * 
+	 * 1、计算前面n位的开奖数字的和x
+	 * 2、将x取余x ＝ x％12；
+	 * 3、判断x是否在前面n位数出现过，若没出现过，即第n位的开奖数字，接下来转到第1步计算n＋1位开奖数字。若出现过，转到第4步
+	 * 4、先另x=x+1, 若x>12,则x=x-11.将得到的x返回第3步判断
 	 * @param no1
 	 * @param no2
 	 * @param no3

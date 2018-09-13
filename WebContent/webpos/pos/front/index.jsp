@@ -19,6 +19,8 @@
 </head>
 <body>
 
+<input id="nextname" value="${nextname}" style="display:none">
+<input id="nextsecond" value="${nextsecond}" style="display:none">
 <div class="gg-z">
 	<div class="gg-z-f">
 		<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/gonggao.png">
@@ -30,41 +32,41 @@
 	</div>
 </div>
 <div class="gg-zhong" style="background: linear-gradient(135deg, #EA5C54 0%, #bb6dec 100%);">
-	<p>第20170926期</p>
+	<p>第${award.name}期</p>
 	<div class="gg-shu">
 		<ul>
 			<li>
-				<p class="red-ball">8</p>
+				<p class="red-ball">${award.no1}</p>
 			</li>
 			<li>
-				<p class="red-ball">5</p>
+				<p class="red-ball">${award.no2}</p>
 			</li>
 			<li>
-				<p class="red-ball">3</p>
+				<p class="red-ball">${award.no3}</p>
 			</li>
 			<li>
-				<p class="red-ball">1</p>
+				<p class="red-ball">${award.no4}</p>
 			</li>
 			<li>
-				<p class="red-ball">4</p>
+				<p class="red-ball">${award.no5}</p>
 			</li>
 			<li>
-				<p class="blue-ball">7</p>
+				<p class="blue-ball">${award.no6}</p>
 			</li>
 			<li>
-				<p class="blue-ball">9</p>
+				<p class="blue-ball">${award.no7}</p>
 			</li>
 			<li>
-				<p class="blue-ball">10</p>
+				<p class="blue-ball">${award.no8}</p>
 			</li>
 			<li>
-				<p class="blue-ball">2</p>
+				<p class="blue-ball">${award.no9}</p>
 			</li>
 			<li>
-				<p class="blue-ball">6</p>
+				<p class="blue-ball">${award.no10}</p>
 			</li>
 			<li>
-				<p class="blue-ball">4</p>
+				<p class="blue-ball">${award.no11}</p>
 			</li>
 		</ul>
 	</div>
@@ -73,7 +75,7 @@
 	<div class="kj-zh-nei">
 		<div class="kj-zh-nei1">
 			<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/k6.png">
-			<p>离<span>20170925</span>期结束：</p>
+			<p id="p_time_show">离${nextname}期结束：</p>
 		</div>
 		<div class="time-item">
 			<strong id="hour_show">0时</strong>
@@ -304,7 +306,16 @@ $('#tit2 span').click(function() {
 		$(this).addClass('select2').siblings().removeClass('select2');
 		$('.login2').eq(i).show().siblings().hide();
 	});
-var intDiff = parseInt(120);//倒计时总秒数量
+var intDiff = parseInt($("#nextsecond").val());
+var wait=false;//等待开奖
+if(intDiff<0){
+	intDiff = intDiff*-1;
+	wait=true;
+	$("#p_time_show").html("待"+$("#nextname").val()+"期开奖：");
+}else{
+	$("#p_time_show").html("离"+$("#nextname").val()+"期结束：");
+}
+/* var intDiff = parseInt(120);//倒计时总秒数量 */
 function timer(intDiff){
 	window.setInterval(function(){
 	var day=0,
@@ -327,7 +338,12 @@ function timer(intDiff){
 	$('#hour_show5').html('<s id="h"></s>'+hour+'时');
 	$('#minute_show5').html('<s></s>'+minute+'分');
 	$('#second_show5').html('<s></s>'+second+'秒');
-	intDiff--;
+	if(wait){
+		intDiff++;
+	}else{
+		intDiff--;
+	}
+	
 	}, 1000);
 }
 $(function(){
