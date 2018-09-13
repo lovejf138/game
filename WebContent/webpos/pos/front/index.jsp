@@ -277,19 +277,19 @@
 			</a>
 		</li>
 		<li>
-			<a href="kaijiang.html">
+			<a href="kj.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s4.png">
 				<p>开奖</p>
 			</a>
 		</li>
 		<li>
-			<a href="paihang.html">
+			<a href="paihang.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s6.png">
 				<p>排行</p>
 			</a>
 		</li>
 		<li>
-			<a href="gerenzhongxin.html">
+			<a href="gerenzhongxin.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s8.png">
 				<p class="yanse">我的</p>
 			</a>
