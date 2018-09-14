@@ -88,6 +88,14 @@
 		id,_name,ctime,no1,no2,no3,no4,no5,no6,no7,no8,no9,no10,no11
 	</sql>
 	
+	<select id="getByName" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from award
+		where _name = #{name,jdbcType=VARCHAR}
+	</select>
+	
 	<select id="getLast" resultMap="BaseResultMap"
 		>
 		select
