@@ -63,7 +63,7 @@
 	</bean>
 	<!-- 开启事务注解 -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
-
+	
 	<!-- spring bean 工具类 -->
 	<bean id="SpringContextUtil" class="com.api.utils.SpringBeanUtil" />
 

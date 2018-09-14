@@ -1,5 +1,12 @@
 package com.webpos.service.serviceImpl;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.api.vo.contans.PlayQuery;
 import com.api.vo.contans.SelfPlayQuery;
 import com.api.vo.contans.SharePlayQuery;
@@ -9,12 +16,9 @@ import com.api.vo.contans.SummarySharePlay;
 import com.webpos.dao.DetailsMapper;
 import com.webpos.entity.DetailExample;
 import com.webpos.entity.Details;
+import com.webpos.entity.DetailsExample;
 import com.webpos.service.DetailsService;
 import com.webpos.tools.Pagination;
-import java.util.List;
-import javax.annotation.Resource;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DetailsServiceImpl
@@ -34,7 +38,7 @@ public class DetailsServiceImpl
   }
   
   @Transactional(readOnly=true)
-  public Pagination getObjectListWithPage(DetailExample example)
+  public Pagination getObjectListWithPage(DetailsExample example)
   {
     Pagination p = new Pagination(example.getPageNo(), example.getPageSize(), this.detailsDao.countByExample(example));
     p.setList(this.detailsDao.selectByExampleWithBLOBsAndPage(example));
@@ -42,28 +46,28 @@ public class DetailsServiceImpl
   }
   
   @Transactional(readOnly=true)
-  public List<Details> getObjectList(DetailExample example)
+  public List<Details> getObjectList(DetailsExample example)
   {
     return this.detailsDao.selectByExampleWithBLOBs(example);
   }
   
   @Transactional(readOnly=true)
-  public Integer getObjectListCount(DetailExample example)
+  public Integer getObjectListCount(DetailsExample example)
   {
     return Integer.valueOf(this.detailsDao.countByExample(example));
   }
   
-  public Pagination getObjectListWithPageAdmin(DetailExample example)
+  public Pagination getObjectListWithPageAdmin(DetailsExample example)
   {
     return null;
   }
   
-  public int countByExample(DetailExample example)
+  public int countByExample(DetailsExample example)
   {
     return this.detailsDao.countByExample(example);
   }
   
-  public List<Details> selectByExample(DetailExample example)
+  public List<Details> selectByExample(DetailsExample example)
   {
     return null;
   }

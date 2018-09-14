@@ -8,6 +8,8 @@ import com.api.vo.contans.SummarySelfPlay;
 import com.api.vo.contans.SummarySharePlay;
 import com.webpos.entity.DetailExample;
 import com.webpos.entity.Details;
+import com.webpos.entity.DetailsExample;
+
 import java.util.List;
 
 public abstract interface DetailsMapper
@@ -16,11 +18,11 @@ public abstract interface DetailsMapper
   
   public abstract int insert(Details paramDetails);
   
-  public abstract int countByExample(DetailExample paramDetailExample);
+  public abstract int countByExample(DetailsExample paramDetailExample);
   
-  public abstract List<Details> selectByExampleWithBLOBs(DetailExample paramDetailExample);
+  public abstract List<Details> selectByExampleWithBLOBs(DetailsExample paramDetailExample);
   
-  public abstract List<Details> selectByExampleWithBLOBsAndPage(DetailExample paramDetailExample);
+  public abstract List<Details> selectByExampleWithBLOBsAndPage(DetailsExample paramDetailExample);
   
   public abstract SummaryPlay summaryPlay(PlayQuery paramPlayQuery);
   
