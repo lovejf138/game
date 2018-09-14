@@ -50,6 +50,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -77,6 +78,7 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.webpos.entity.Detail;
 import com.webpos.entity.User;
 
 import net.sf.json.JSONArray;
@@ -115,7 +117,7 @@ public class CommUtil {
 
 	public static boolean ifClose() {
 		int starttime = 1;
-		int endtime = 8;
+		int endtime = 6;
 
 		Calendar cal = Calendar.getInstance();
 		int hour = cal.get(11);
@@ -3033,6 +3035,33 @@ public class CommUtil {
 		return f;
 	}
 
+	/**
+	 * 根据房间号拆分Detail
+	 * @param list
+	 * @return
+	 */
+	public static List<List<Detail>> getListByRoomid(List<Detail> list) {
+        List<List<Detail>> result = new ArrayList<List<Detail>>();
+        Map<Long, List<Detail>> map = new TreeMap<Long, List<Detail>>();
+ 
+        for (Detail bean : list) {
+            if (map.containsKey(bean.getRoomid())) {
+                List<Detail> t = map.get(bean.getRoomid());
+                t.add(new Detail(bean));
+                new ArrayList<Detail>().add(new Detail(bean));
+                map.put(bean.getRoomid(), t);
+            } else {
+                List<Detail> t = new ArrayList<Detail>();
+                t.add(new Detail(bean));
+                map.put(bean.getRoomid(), t);
+            }
+        }
+        for (Entry<Long, List<Detail>> entry : map.entrySet()) {
+            result.add(entry.getValue());
+        }
+        return result;
+    }
+	
 //	public static void main(String[] args) {
 //		
 //		

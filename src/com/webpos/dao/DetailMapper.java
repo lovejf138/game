@@ -17,4 +17,20 @@ public abstract interface DetailMapper
   
   public abstract List<Detail> selectByExampleWithBLOBsAndPage(DetailExample paramDetailExample);
   
+  /**
+   * 通过期号取出所有记录
+   * @param name
+   * @return
+   */
+  public abstract List<Detail> selectByQiname(String name);
+  
+  /**
+   * 将详情设置为已结算
+   * @param name
+   * @return
+   */
+  public abstract int finishByname(Detail paramDetails);
+  
+  public abstract int updateByPrimaryKeySelective(Detail paramUser);
+  
 }

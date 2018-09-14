@@ -78,6 +78,13 @@
 		id,_name,progress,amount,ctime
 	</sql>
 	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from room
+		where id = #{id,jdbcType=BIGINT}
+	</select>
 	
  <select id="countByExample" parameterType="com.webpos.entity.RoomExample" resultType="java.lang.Integer" >
     select count(*) from room
@@ -130,6 +137,10 @@
 			</if>
 		</set>
 		where id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<update id="initRoom" parameterType="com.webpos.entity.Room">
+		update room	set	amount = 0.0,progress =0
 	</update>
 
 	

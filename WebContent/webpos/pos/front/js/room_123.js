@@ -196,7 +196,50 @@ $(".c-fatan")[0].onclick = function(){//发弹幕
 	
 }
 
-
+var is_op = false;
+var waitdialog=null;
+$("#btn_ok").click(function(event){
+	if(is_op)return;
+	var _amount=0;
+	try{
+		_amount = parseFloat($("#input_amount").val());
+	}catch(e) {
+		_amount = 0;
+	}
+	if(_amount<0.005){
+		alert("最少参与数量0.005");
+		return ;
+	}
+	
+	var x = $("#input_amount").val()+$("#error_time").val()+"!#@#Qsaswe@#./1!";
+	var _sign = hex_md5(x);
+	
+	is_op = true;
+	waitdialog = new TipBox({type:'load',str:'正在提交',hasBtn:false});
+	$.ajax({
+		async:true,
+		type:'post',
+		url:'join.do',
+		data:{amount:""+$("#input_amount").val(),sign:""+_sign,roomid:""+$("#roomid").val()},
+		dataType:'json',
+		success:function(result,textStatus){
+			
+			waitdialog.destroy();
+			is_op = false;
+			if(result.result=="SUCCESS"){
+				alert("参与成功，请刷新页面查看最新状态");
+			}else{
+				alert(result.desc);
+				
+			}
+		},
+		error:function (XMLHttpRequest, textStatus, errorThrown) {
+			is_op = false;
+			waitdialog.destroy();
+			alert("网络错误");
+		}
+	});
+});
 
 var websocket=null;
 var _top=80;

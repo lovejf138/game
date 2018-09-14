@@ -11,6 +11,7 @@
 		<title></title>
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/room_reset.css">
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/room.css?t=1">
+		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/mdialog.css?t=1">
 		
 		<style>
 			@media all and (max-width:500px){
@@ -32,8 +33,8 @@
 	<body style="background: linear-gradient(135deg, #EA5C54 0%, #bb6dec 100%);">
 		<div id="wrap">	
 			<input id="baseurl" value="<%=request.getContextPath()%>" style="display:none"/>
-			<input id="localtime" value="${localtime}" style="display:none"/>
-			<input id="roomid" value="${roomid}" style="display:none"/>
+			<input id="error_time" value="${localtime}" style="display:none"/>
+			<input id="roomid" value="${room.id}" style="display:none"/>
 			<input id="userid" value="${userid}" style="display:none"/>		
 			<nav class="navbox">
 				<div class="navContent">
@@ -56,6 +57,12 @@
 				</div>
 			</nav>		
 		
+		<div style="color: #fff;margin-top: 100px;font-size: 20px;">
+		${room.id},${userid},${nextname},${nextsecond}
+		<input placeholder="输入参与数量" id="input_amount"／>
+		<button id="btn_ok">提交</button>
+		</div>
+		
 			<div class="send">
 				<div class="s_fiter">
 					
@@ -68,8 +75,11 @@
 		</div>
 		
 		
+		
 		<script src="<%=request.getContextPath()%>/webpos/pos/js/jquery-1.8.2.min.js"></script>
 		<script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
-		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/room_123.js?t=2'></script>	
+		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/zepto.min.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
+		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/room_123.js?t=3'></script>	
 	</body>
 </html>

@@ -12,6 +12,7 @@
 		<result column="award" property="award" jdbcType="VARCHAR" />
 		<result column="number" property="number" jdbcType="INTEGER" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="kjnumber" property="kjnumber" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Example_Where_Clause">
 		<where>
@@ -79,7 +80,7 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id,userid,roomid,status,ctime,shortid,qiname,award,amount,number
+		id,userid,roomid,status,ctime,shortid,qiname,award,amount,number,kjnumber
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
@@ -89,6 +90,19 @@
 		from _detail
 		where id = #{id,jdbcType=BIGINT}
 	</select>
+	
+	<update id="finishByname" parameterType="com.webpos.entity.Detail">
+		update _detail	set	status = #{status,jdbcType=VARCHAR},kjnumber=#{kjnumber,jdbcType=VARCHAR}
+		 where qiname = #{qiname,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="selectByQiname" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from _detail
+		where qiname = #{qiname,jdbcType=VARCHAR}
+	</select>
 
 	<insert id="insert" parameterType="com.webpos.entity.Detail"
 		useGeneratedKeys="true" keyProperty="id">
@@ -97,7 +111,7 @@
 		values ( #{userid,jdbcType=VARCHAR},#{roomid,jdbcType=INTEGER},
 		#{status,jdbcType=VARCHAR},
 		#{shortid,jdbcType=VARCHAR},
-		#{ctime,jdbcType=TIMESTAMP},#{qiname,jdbcType=VARCHAR},#{award,jdbcType=VARCHAR},
+		#{ctime,jdbcType=TIMESTAMP},#{qiname,jdbcType=VARCHAR},0.0,
 		#{amount,jdbcType=VARCHAR},#{number,jdbcType=INTEGER}
 		)
 	</insert>
@@ -141,5 +155,15 @@
 			limit #{startRow},#{pageSize}
 		</if>
 	</select>
+	
+	<update id="updateByPrimaryKeySelective" parameterType="com.webpos.entity.Detail">
+		update _detail
+		<set>
+			<if test="award != null">
+				award = #{award,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
 	
 </mapper>

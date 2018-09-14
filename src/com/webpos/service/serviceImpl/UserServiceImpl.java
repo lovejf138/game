@@ -12,10 +12,14 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import com.api.vo.contans.SummaryUsers;
 import com.api.vo.contans.UserQuery;
 import com.webpos.dao.AccountMapper;
+import com.webpos.dao.DetailMapper;
 import com.webpos.dao.DetailsMapper;
+import com.webpos.dao.RoomMapper;
 import com.webpos.dao.UserMapper;
 import com.webpos.entity.Account;
+import com.webpos.entity.Detail;
 import com.webpos.entity.Details;
+import com.webpos.entity.Room;
 import com.webpos.entity.User;
 import com.webpos.entity.UserExample;
 import com.webpos.service.UserService;
@@ -31,6 +35,10 @@ public class UserServiceImpl implements UserService {
 	private DetailsMapper detailsDao;
 	@Resource
 	private AccountMapper accountDao;
+	@Resource
+	private RoomMapper roomDao;
+	@Resource
+	private DetailMapper detailDao;
 
 	public int insert(User record) {
 		return this.userDao.insert(record);
@@ -283,5 +291,45 @@ public class UserServiceImpl implements UserService {
 			return null;
 		}
 		return new_user;
+	}
+
+	@Override
+	@Transactional
+	public String join(Long roomid, String userid, String shortid, String qiname, double amount) {
+		String r = "SUCCESS";
+		try {
+			Room room = roomDao.selectByPrimaryKey(roomid);
+			if(room.getProgress()>=11) {
+				return "抱歉！当前房间下注已满11人，请等下一期或前往其他房间";
+			}
+			int progress = room.getProgress()+1;
+			room.setProgress(progress);
+			room.setAmount(CommUtil.add(room.getAmount(), amount));
+			roomDao.updateByPrimaryKeySelective(room);
+			
+			Detail d = new Detail();
+			d.setAmount(amount);
+			d.setAward(0.0);
+			d.setCtime(new Date());
+			d.setNumber(progress);
+			d.setQiname(qiname);
+			d.setRoomid(roomid);
+			d.setUserid(userid);
+			d.setShortid(shortid);
+			d.setStatus("wait");
+			detailDao.insert(d);
+			
+			User u = selectByUserId(userid);
+			double final_amount = CommUtil.subtract(u.getBalance(), amount);
+
+			double sum_play = CommUtil.add(u.getPlay_sum(), amount);
+			u.setPlay_sum(Double.valueOf(sum_play));
+			u.setBalance("" + final_amount);
+			this.userDao.updateByPrimaryKeySelective(u);
+		}catch(Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return "未知错误:"+e.getMessage().toString();
+		}
+		return r;
 	}
 }
