@@ -7,8 +7,6 @@ import com.webpos.entity.Award;
 public abstract interface AwardMapper {
 	
 	public abstract Award getLast();
-	
-	public abstract Award getByName(String name);
 
 	public abstract List<Award> getLastList();
 

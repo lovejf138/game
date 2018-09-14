@@ -2664,7 +2664,7 @@ public class CommUtil {
 	/**
 	 * （人民币单位转换）元转分
 	 */
-	public static String yuanChangeFen(String amount) {
+	public static String yuanChangeFen(String amount){
 		BigDecimal money = new BigDecimal("0.0000");
 		money = money.add(new BigDecimal(amount));
 		Double doubleMoney = money.doubleValue();
@@ -2787,6 +2787,7 @@ public class CommUtil {
 
 		try {
 			Double douAmount = Double.parseDouble(strAmount);
+
 			DecimalFormat df = new DecimalFormat("0.0000");
 			return df.format(douAmount);
 		} catch (Exception e) {
