@@ -12,6 +12,7 @@
 		<result column="all_eth" property="all_eth" jdbcType="VARCHAR" />
 		<result column="pass" property="pass" jdbcType="VARCHAR" />
 		<result column="play_sum" property="play_sum" jdbcType="VARCHAR" />
+		<result column="award_sum" property="award_sum" jdbcType="VARCHAR" />
 		<result column="recharge_sum" property="recharge_sum" jdbcType="VARCHAR" />
 		<result column="withdraw_sum" property="withdraw_sum" jdbcType="VARCHAR" />
 		<result column="child_sum" property="child_sum" jdbcType="INTEGER" />
@@ -84,7 +85,7 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id,user_id,parent,balance,ctime,id_md5,id_short,all_eth,pass,play_sum,recharge_sum,withdraw_sum,child_sum,is_machine
+		id,user_id,parent,balance,ctime,id_md5,id_short,all_eth,pass,play_sum,recharge_sum,withdraw_sum,child_sum,is_machine,award_sum
 	</sql>
 
 	<select id="selectByUserId" resultMap="BaseResultMap"
@@ -105,13 +106,13 @@
 
 	<insert id="insert" parameterType="com.webpos.entity.User"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into _user (user_id,parent,balance,ctime,id_md5,id_short,all_eth,play_sum,recharge_sum,withdraw_sum,child_sum,is_machine,pass)
+		insert into _user (user_id,parent,balance,ctime,id_md5,id_short,all_eth,play_sum,recharge_sum,withdraw_sum,child_sum,is_machine,pass,award_sum)
 
 		values ( #{user_id,jdbcType=VARCHAR},
 		#{parent,jdbcType=VARCHAR},
 		#{balance,jdbcType=VARCHAR},
 		#{ctime,jdbcType=TIMESTAMP},#{id_md5,jdbcType=VARCHAR},#{id_short,jdbcType=VARCHAR},#{all_eth,jdbcType=VARCHAR},
-		#{play_sum,jdbcType=VARCHAR},#{recharge_sum,jdbcType=VARCHAR},#{withdraw_sum,jdbcType=VARCHAR},#{child_sum,jdbcType=INTEGER},0,#{pass,jdbcType=VARCHAR}
+		#{play_sum,jdbcType=VARCHAR},#{recharge_sum,jdbcType=VARCHAR},#{withdraw_sum,jdbcType=VARCHAR},#{child_sum,jdbcType=INTEGER},0,#{pass,jdbcType=VARCHAR},0.0
 		)
 	</insert>
 	
@@ -121,7 +122,7 @@
 			<if test="balance != null">
 				balance = #{balance,jdbcType=VARCHAR},
 			</if>
-			<if test="balance != null">
+			<if test="all_eth != null">
 				all_eth = #{all_eth,jdbcType=VARCHAR},
 			</if>
 		
@@ -129,11 +130,14 @@
 				play_sum = #{play_sum,jdbcType=VARCHAR},
 			</if>
 			
-			<if test="play_sum != null">
+			<if test="recharge_sum != null">
 				recharge_sum = #{recharge_sum,jdbcType=VARCHAR},
 			</if>
-			<if test="play_sum != null">
+			<if test="withdraw_sum != null">
 				withdraw_sum = #{withdraw_sum,jdbcType=VARCHAR},
+			</if>
+			<if test="award_sum != null">
+				award_sum = #{award_sum,jdbcType=VARCHAR},
 			</if>
 			<if test="child_sum != null">
 				child_sum = #{child_sum,jdbcType=INTEGER},

@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title class="txt_merchant_manager">转盘列表</title>
+<title class="txt_merchant_manager">下注列表</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/css/public.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/css/font/iconfont.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/css/main.css?v=1">
@@ -33,7 +33,7 @@
 	    
 		<div class="am-panel am-panel-default">
 			<div class="am-panel-hd">
-				<div class="am-cf _div_tilte">转盘列表</div>
+				<div class="am-cf _div_tilte">下注列表</div>
 			</div>		
 		   		
 			<div class="am-panel-hd " style="background-color: #fff;">	
@@ -44,7 +44,21 @@
 		 			 <label class="am-text-sm _merchant_short" style="margin-bottom: 0px;font-size: 1.5rem;">地址</label>:
 		 		  </div>
 		 		   <div class="am-form-group">			
-				      <input type="text" value="${jc }" name="jc"id="jc" class="am-input-sm" style="width:180px ;height: 30px"/> 
+				      <input type="text" value="${jc }" name="jc" id="jc" class="am-input-sm" style="width:180px ;height: 30px"/> 
+				  </div>	
+				  
+				  <div class="am-form-group">			
+		 			 <label class="am-text-sm _merchant_short" style="margin-bottom: 0px;font-size: 1.5rem;">期号</label>:
+		 		  </div>
+		 		   <div class="am-form-group">			
+				      <input type="text" value="${qiname }" name="qiname" id="qiname" class="am-input-sm" style="width:100px ;height: 30px"/> 
+				  </div>	
+				  
+				  <div class="am-form-group">			
+		 			 <label class="am-text-sm _merchant_short" style="margin-bottom: 0px;font-size: 1.5rem;">房间</label>:
+		 		  </div>
+		 		   <div class="am-form-group">			
+				      <input type="text" value="${roomid }" name="roomid" id="roomid" class="am-input-sm" style="width:50px ;height: 30px"/> 
 				  </div>	
 				
 				 <div class="am-form-group">
@@ -67,35 +81,32 @@
 				<table  class="am-table am-table-bordered am-table-centered am-text-sm">
 					<thead style="background-color: #f5f5f5;">
 						<tr >
-							<th class="_merchant_short">地址</th>
-							
-							<th class="_contact" width="130px">类型</th>
-							<th class="_endtime" width="120px">金额</th>
-							<th class="_endtime" width="120px">备注</th>
+							<th class="_merchant_short">用户</th>
+							<th class="_contact" width="130px">期号</th>
+							<th class="_contact" width="130px">房间</th>
+			
+							<th class="_endtime" width="120px">下注金额</th>
+							<th class="_endtime" width="120px">奖金</th>
 							
 							<th class="_endtime" width="120px">创建时间</th>
-							<th class="_operation" width="210px">余额</th>
+							<th class="_operation" width="20px">号码</th>
+							<th class="_operation" width="20px">状态</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${objs }" var="user">
-							<tr <c:if test="${user.remark >1.0}">style="background-color: #ffe7e7;" </c:if>>
-								<td>${user.user_id }</td>
+							<tr>
+								<td>${user.userid }</td>
 								<td>
-								<c:if test="${user.type eq 'join'}">
-								下注
-								</c:if>
-								<c:if test="${user.type eq 'win'}">
-								下注赢钱
-								</c:if>
-								
+								${user.qiname }
 								</td>
-								<td>${user.result }</td>
-								<td>${user.remark }</td>
+								<td>${user.roomid }</td>
+								<td>${user.amount }</td>
+								<td>${user.award }</td>
 								<td><fmt:formatDate value="${user.ctime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								
+								<td>${user.number }</td>
 								<td>
-									${user.balance}
+									${user.status}
 								</td>									
 							</tr>
 						</c:forEach>
@@ -189,7 +200,9 @@ function summaryDetails(){
 			type : "join",
 			startDate : $("#time1").val(),
 			endDate : $("#time2").val(),
-		    jc : $("#jc").val()
+		    jc : $("#jc").val(),
+		    roomid:$("#roomid").val(),
+		    qiname:$("#qiname").val()
 	};
 	
 	$.ajax({
@@ -200,31 +213,11 @@ function summaryDetails(){
         traditional:true,
         success:function(data){
         	if(data.result == "SUCCESS"){
-        		$("#p_tongji").html("下注总数:"+data.amount_sum);
+        		$("#p_tongji").html("下注总数:"+data.amount_sum+",奖金总数："+data.award_sum);
         	}
         }
     }); 
 	
-	
-	var params2 = {
-			type : "win",
-			startDate : $("#time1").val(),
-			endDate : $("#time2").val(),
-		    jc : $("#jc").val()
-	};
-	
-	$.ajax({
-		url:'<%=request.getContextPath()%>/summary_play.do',
-        data:params2,
-        type:'post',
-        dataType:'json',
-        traditional:true,
-        success:function(data){
-        	if(data.result == "SUCCESS"){
-        		$("#p_tongji2").html("下注赢钱总数:"+data.amount_sum);
-        	}
-        }
-    }); 
 }
 
 function deal(id,amount,user_id){

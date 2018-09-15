@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.api.vo.contans.PlayQuery;
+import com.api.vo.contans.SummaryPlay;
 import com.webpos.dao.DetailMapper;
 import com.webpos.entity.Detail;
 import com.webpos.entity.DetailExample;
@@ -54,6 +56,11 @@ public class DetailServiceImpl implements DetailService {
 
 	public List<Detail> selectByExample(DetailExample example) {
 		return null;
+	}
+
+	@Override
+	public SummaryPlay summaryPlay(PlayQuery paramPlayQuery) {
+		 return this.detailsDao.summaryPlay(paramPlayQuery);
 	}
 
 }

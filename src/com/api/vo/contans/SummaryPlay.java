@@ -4,8 +4,17 @@ public class SummaryPlay
 {
   private String result;
   private String amount_sum;
+  private String award_sum;
   
-  public String getResult()
+  public String getAward_sum() {
+	return award_sum;
+}
+
+public void setAward_sum(String award_sum) {
+	this.award_sum = award_sum;
+}
+
+public String getResult()
   {
     return this.result;
   }

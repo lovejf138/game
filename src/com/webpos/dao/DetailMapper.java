@@ -2,6 +2,8 @@ package com.webpos.dao;
 
 import java.util.List;
 
+import com.api.vo.contans.PlayQuery;
+import com.api.vo.contans.SummaryPlay;
 import com.webpos.entity.Detail;
 import com.webpos.entity.DetailExample;
 
@@ -32,5 +34,7 @@ public abstract interface DetailMapper
   public abstract int finishByname(Detail paramDetails);
   
   public abstract int updateByPrimaryKeySelective(Detail paramUser);
+  
+  public abstract SummaryPlay summaryPlay(PlayQuery paramPlayQuery);
   
 }

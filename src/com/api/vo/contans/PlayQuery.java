@@ -7,7 +7,27 @@ public class PlayQuery
   private String startDate;
   private String endDate;
   
-  public String getUser_id()
+  private Long roomid;
+  private String qiname;
+  
+  
+  public Long getRoomid() {
+	return roomid;
+}
+
+public void setRoomid(Long roomid) {
+	this.roomid = roomid;
+}
+
+public String getQiname() {
+	return qiname;
+}
+
+public void setQiname(String qiname) {
+	this.qiname = qiname;
+}
+
+public String getUser_id()
   {
     return this.user_id;
   }

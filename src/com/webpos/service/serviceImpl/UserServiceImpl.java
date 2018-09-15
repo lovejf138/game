@@ -320,11 +320,8 @@ public class UserServiceImpl implements UserService {
 			detailDao.insert(d);
 			
 			User u = selectByUserId(userid);
-			double final_amount = CommUtil.subtract(u.getBalance(), amount);
-
-			double sum_play = CommUtil.add(u.getPlay_sum(), amount);
-			u.setPlay_sum(Double.valueOf(sum_play));
-			u.setBalance("" + final_amount);
+			u.setPlay_sum(CommUtil.add(u.getPlay_sum(), amount));
+			u.setBalance("" + CommUtil.subtract(u.getBalance(), amount));
 			this.userDao.updateByPrimaryKeySelective(u);
 		}catch(Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

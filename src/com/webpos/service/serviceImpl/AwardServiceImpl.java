@@ -113,6 +113,7 @@ public class AwardServiceImpl implements AwardService {
 									Double f_award = CommUtil.mul(sum_amount,0.99);//0.99倍
 									User u = userDao.selectByUserId(award_detail.getUserid());
 									u.setBalance(""+CommUtil.add(u.getBalance(),f_award));
+									u.setAward_sum(CommUtil.add(u.getAward_sum(),sum_amount));
 									userDao.updateByPrimaryKeySelective(u);
 									
 									award_detail.setAward(sum_amount);
@@ -124,6 +125,7 @@ public class AwardServiceImpl implements AwardService {
 									
 									User u = userDao.selectByUserId(award_detail.getUserid());
 									u.setBalance(""+CommUtil.add(u.getBalance(),f_award));
+									u.setAward_sum(CommUtil.add(u.getAward_sum(),award2));
 									userDao.updateByPrimaryKeySelective(u);
 									
 									award_detail.setAward(award2);

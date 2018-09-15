@@ -166,4 +166,35 @@
 		where id = #{id,jdbcType=BIGINT}
 	</update>
 	
+	<select id="summaryPlay" resultType="com.api.vo.contans.SummaryPlay"
+		parameterType="com.api.vo.contans.PlayQuery">
+		select
+		sum(amount) as amount_sum ,
+		sum(award) as award_sum 
+		from
+		_detail
+		where 1 = 1 
+		<if test="user_id != null and user_id != ''">
+			and userid = #{user_id} 
+		</if>
+		
+		<if test="qiname != null and qiname != ''">
+			and qiname = #{qiname} 
+		</if>
+		<if test="roomid != null and roomid != ''">
+			and roomid = #{roomid} 
+		</if>
+		
+		<if test="startDate != null and startDate != ''">
+		    and ctime >= #{startDate} 
+		</if>
+		<if test="endDate != null and endDate != ''">
+			<![CDATA[  
+				 and ctime <= #{endDate} 
+			 ]]>
+		</if>
+		
+		
+	</select>
+	
 </mapper>
