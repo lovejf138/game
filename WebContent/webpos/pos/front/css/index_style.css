@@ -57,8 +57,8 @@ body{max-width: 750px; margin:0 auto;}
 .daohang li img{width: 25%;}
 .daohang li p{font-size: .24rem; color: #333;}
 #wrap {width:100%; overflow: hidden;}
-#tit { width:60%; margin:0 auto; overflow: hidden;}
-#tit span {float: left; height:1rem; line-height: 1rem; width:18%; font-size: .36rem; text-align: center; color: #666;background:#fff; margin-left:.6rem;}
+#tit { width:90%; margin:0 auto; overflow: hidden;}
+#tit span {float: left; height:1rem; line-height: 1rem; width:40%; font-size: .36rem; text-align: center; color: #666;background:#fff; margin-left:.6rem;}
 #tit span.select { color: #e01222; border-bottom: 3px solid #e01222;}
 .login {width: 100%; margin-top: .1rem; display: none;}
 .show{display: block;}

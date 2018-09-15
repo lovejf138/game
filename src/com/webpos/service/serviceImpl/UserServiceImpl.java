@@ -329,4 +329,16 @@ public class UserServiceImpl implements UserService {
 		}
 		return r;
 	}
+
+	@Override
+	public List<User> getPaihangplay() {
+		// TODO Auto-generated method stub
+		return userDao.getPaihangplay();
+	}
+
+	@Override
+	public List<User> getPaihangaward() {
+		// TODO Auto-generated method stub
+		return userDao.getPaihangaward();
+	}
 }

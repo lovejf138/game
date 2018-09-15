@@ -12,6 +12,10 @@ public abstract interface UserMapper
   
   public abstract User selectByParent(String paramString);
   
+  public abstract List<User> getPaihangplay();//参与排行榜
+  
+  public abstract List<User> getPaihangaward();//奖金排行榜
+  
   public abstract int insert(User paramUser);
   
   public abstract int updateByPrimaryKeySelective(User paramUser);
