@@ -104,14 +104,14 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 			</a>
 		</li>
 		<li>
-			<a href="tixianmingxi.html">
+			<a href="tixianmingxi.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/ge2.png">
 				<p>提现记录</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
 			</a>
 		</li>
 		<li>
-			<a href="duihuanjilu.html">
+			<a href="chongzhimingxi.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/ge3.png">
 				<p>充值记录</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">

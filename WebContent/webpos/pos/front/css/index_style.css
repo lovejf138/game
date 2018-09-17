@@ -305,8 +305,8 @@ input.check:checked{background:url(../img/index/icon_radio4.png) no-repeat cente
 .bj{background-color: #f5f5f5;}
 .hj-z{width: 100%; overflow: hidden; margin-top: 1rem;}
 .hj-z li{width: 100%; overflow: hidden; margin-top: .4rem;}
-.hj-z1{height: 1rem; line-height: 1rem; width: 100%; padding: 0 .2rem; background-color: #fff;}
-.hj-z1 p{font-size: .34rem; color: #333;}
+.hj-z1{height: 1rem; line-height: 1rem; width: 100%; padding: 0 .2rem; }
+.hj-z1 p{font-size: .34rem; color: #fff;}
 .hj-z1 p span{font-size: .34rem; float: right;}
 .yanse1{color: #0000ff;}
 .yanse2{color: #666;}
@@ -315,9 +315,9 @@ input.check:checked{background:url(../img/index/icon_radio4.png) no-repeat cente
 .hj-z3{width: 25%; padding: .1rem; background-color: #fff; overflow: hidden; float: left;}
 .hj-z3 img{width: 100%;}
 .hj-z4{width: 73%; float: right; overflow: hidden;}
-.hj-z4 h3{font-size: .30rem; color: #333;}
-.hj-z4 p{width: 50%; float: left; font-size: .34rem; color: #999; margin-top: .4rem;}
-.hj-z4 p span{font-size: .30rem; color: #333;}
+.hj-z4 h3{font-size: .30rem; color: #fff;}
+.hj-z4 p{width: 50%; float: left; font-size: .34rem; color: #fff; margin-top: .4rem;}
+.hj-z4 p span{font-size: .30rem; color: #fff;}
 .hj-z5{height: 1rem; line-height: 1rem; width: 100%; padding: 0 .2rem; background-color: #fff; text-align: right;}
 .hj-z5 p{font-size: .34rem; color: #999;}
 .hj-z5 p span{font-size: .34rem; color: #999;}
