@@ -267,7 +267,7 @@ input.check:checked{background:url(../img/index/icon_radio4.png) no-repeat cente
 .shou-b{width: 100%; overflow: hidden;}
 .shou-b img{width: 100%;}
 .shou-shp{width: 96%; margin:0 auto; overflow: hidden;}
-.shou-shp li{width: 46%; overflow: hidden; float: left; margin-left:.2rem; margin-bottom: .5rem;}
+.shou-shp li{width: 46%; overflow: hidden; float: left; }
 .shou-shp li a{display: block;}
 .shou-shp1{width: 100%; overflow: hidden;}
 .shou-shp1 img{width: 100%;}
@@ -487,4 +487,55 @@ input.check:checked{background:url(../img/index/icon_radio4.png) no-repeat cente
 }
 @keyframes animate-positive{
 	0% { width: 0; }
+}
+
+
+.credit-loan-list {
+
+  height: 9.16rem;
+  margin: 0 auto;
+  margin-top: 0.16rem;
+}
+.credit-loan-list li {
+ 
+  height: 130px;
+  float: left;
+  background-color: #fff;
+  margin-bottom: 0.4rem;
+}
+.credit-loan-list li img {
+  width: 2.4rem;
+  height: 2.4rem;
+  float: left;
+  padding-top: 0.2rem;
+}
+.credit-loan-list li div {
+  float: right;
+}
+.credit-loan-list li div p {
+  width: 3rem;
+  color: #666666;
+  font-size: 20px;
+  margin-right: 0.6rem;
+}
+.credit-loan-list li div span {
+  color: #ff7400;
+  line-height: 30px;
+}
+.credit-loan-list li div span:nth-of-type(2) {
+  color: #999999;
+  font-size: 20px;
+}
+.credit-loan-list li .p1 {
+  text-align: center;
+  line-height: 45px;
+  color: #fff;
+  font-size: 20px;
+}
+/* .credit-loan-list li {
+  margin-right: 0.44rem;
+} */
+.credit-loan-list li .p1 {
+  background: #d9593d;
+  background-size: cover;
 }

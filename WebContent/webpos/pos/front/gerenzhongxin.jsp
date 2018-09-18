@@ -143,7 +143,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 		</li>
 		
 		<li>
-			<a href="duihuanjilu.html">
+			<a href="guize.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/question.png">
 				<p>中奖及玩法说明</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">

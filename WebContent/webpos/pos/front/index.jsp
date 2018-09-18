@@ -15,8 +15,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=6">
-
+	href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=12">
 
 </head>
 <body>
@@ -92,27 +91,65 @@
 	</div>
 
 	<div class="shou-zhong">
-		<a href="xiangxishuoming.html">开奖及玩法说明</a>
+		<a href="guize.do">开奖及玩法说明</a>
 	</div>
 
 	<div class="fenge"></div>
 	<div class="shou-shp" style="margin-bottom: 1.2rem;">
-		<ul>
-
+	
+			<ul id="creditLoan" class="credit-loan-list credit clearfix" style="list-style: none;">
 			<c:forEach items="${rooms }" var="room">
-				<li><a>
+						<li  onclick="javascript:document.getElementById('aroom_${room.id}').click();"
+						<c:if test="${room.id%2!=0}">
+						style="margin-right: 0.44rem;margin-bottom: 20px;height:150px;background:#fdfdfd"
+						</c:if>
+						<c:if test="${room.id%2==0}">
+						style="margin-bottom: 20px;height:150px;background:#fdfdfd"
+						</c:if>
+						>
+						<a  id="aroom_${room.id}" style="display:none" href="room.do?roomid=${room.id}"></a>
+							<p class="p1" style="margin:0px">房间${room.name}</p>
+							<!-- <img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/room.png" style="width: 30%;height: 40%;"/> -->
+							<div >
+								<p style="margin:0px;height: 20px;line-height: 20px;font-size:12px;    margin-top: 10px;">
+									<span style="color: #999999;font-size:20px">进度：</span>
+									<span class="monthly" style="color:#ff7400;font-size:20px">${room.progress}/11</span>
+								</p>
+								
+								<p style="margin:0px;height: 20px;line-height: 20px;font-size:12px;    margin-top: 10px;">
+									<span style="color: #999999;font-size:20px">币池：</span>
+									<span class="monthly" style="color:#ff7400;font-size:20px">${room.amount}ETH</span>
+								</p>
+								
+							</div>
+						</li>
+			</c:forEach>
+					</ul>
+					
+		
+
+			<!--<ul><c:forEach items="${rooms }" var="room">
+				<li style="background-color: #fff;">
+				<p class="p1" style="background: #d9593d;text-align: center;line-height: 1.1rem;color: #fff;font-size: 0.44rem;">房间${room.name}</p>
+				
 						<div class="shou-shp1">
 
+							
+							<p>进度:${room.progress}/11</p>
+							<p>
+							 币池：${room.amount}ETH
+							</p>
+							
 							<a class="progress-title" style="position: relative;" href="room.do?roomid=${room.id}">
-												房间${room.name}<br>
+												 房间${room.name}<br> 
 												进度:${room.progress}/11<br>
 												币池：${room.amount}ETH
 												</a>
 												
 						</div>
-				</a></li>
-			</c:forEach>
-		</ul>
+				</li>
+			</c:forEach></ul>-->
+		
 	</div>
 
 	<div class="daohang">
