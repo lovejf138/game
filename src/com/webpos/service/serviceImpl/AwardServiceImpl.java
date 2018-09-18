@@ -111,24 +111,39 @@ public class AwardServiceImpl implements AwardService {
 									//奖金池少于该得奖金
 									//用户获得剩下奖金池
 									Double f_award = CommUtil.mul(sum_amount,0.99);//0.99倍
+									Double p_award = CommUtil.mul(sum_amount,0.002);
 									User u = userDao.selectByUserId(award_detail.getUserid());
 									u.setBalance(""+CommUtil.add(u.getBalance(),f_award));
 									u.setAward_sum(CommUtil.add(u.getAward_sum(),sum_amount));
 									userDao.updateByPrimaryKeySelective(u);
 									
+									if(u.getParent()!=null&&!u.getParent().equals("")) {
+										User up = userDao.selectByUserId(u.getParent());
+										up.setBalance(""+CommUtil.add(up.getBalance(),p_award));
+										userDao.updateByPrimaryKeySelective(up);
+									}
+									
 									award_detail.setAward(sum_amount);
+									award_detail.setParentaward(p_award);
 									detailDao.updateByPrimaryKeySelective(award_detail);
 									
 									sum_amount=0.0;
 								}else {
 									Double f_award = CommUtil.mul(award2,0.99);//0.99倍
-									
+									Double p_award = CommUtil.mul(award2,0.002);
 									User u = userDao.selectByUserId(award_detail.getUserid());
 									u.setBalance(""+CommUtil.add(u.getBalance(),f_award));
 									u.setAward_sum(CommUtil.add(u.getAward_sum(),award2));
 									userDao.updateByPrimaryKeySelective(u);
 									
+									if(u.getParent()!=null&&!u.getParent().equals("")) {
+										User up = userDao.selectByUserId(u.getParent());
+										up.setBalance(""+CommUtil.add(up.getBalance(),p_award));
+										userDao.updateByPrimaryKeySelective(up);
+									}
+									
 									award_detail.setAward(award2);
+									award_detail.setParentaward(p_award);
 									detailDao.updateByPrimaryKeySelective(award_detail);
 									
 									sum_amount=CommUtil.subtract(sum_amount, award2);

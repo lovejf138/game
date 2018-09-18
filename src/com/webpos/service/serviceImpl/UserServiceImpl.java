@@ -295,7 +295,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public String join(Long roomid, String userid, String shortid, String qiname, double amount) {
+	public String join(Long roomid, String userid, String parentid,String shortid, String qiname, double amount) {
 		String r = "SUCCESS";
 		try {
 			Room room = roomDao.selectByPrimaryKey(roomid);
@@ -316,6 +316,7 @@ public class UserServiceImpl implements UserService {
 			d.setRoomid(roomid);
 			d.setUserid(userid);
 			d.setShortid(shortid);
+			d.setParentid(parentid);
 			d.setStatus("wait");
 			detailDao.insert(d);
 			

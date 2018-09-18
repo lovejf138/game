@@ -4,12 +4,14 @@
 	<resultMap id="BaseResultMap" type="com.webpos.entity.Detail">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="userid" property="userid" jdbcType="VARCHAR" />
+		<result column="parentid" property="parentid" jdbcType="VARCHAR" />
 		<result column="roomid" property="roomid" jdbcType="INTEGER" />
 		<result column="shortid" property="shortid" jdbcType="VARCHAR" />
 		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
 		<result column="qiname" property="qiname" jdbcType="VARCHAR" />
 		<result column="amount" property="amount" jdbcType="VARCHAR" />
 		<result column="award" property="award" jdbcType="VARCHAR" />
+		<result column="parentaward" property="parentaward" jdbcType="VARCHAR" />
 		<result column="number" property="number" jdbcType="INTEGER" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
 		<result column="kjnumber" property="kjnumber" jdbcType="VARCHAR" />
@@ -80,7 +82,7 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id,userid,roomid,status,ctime,shortid,qiname,award,amount,number,kjnumber
+		id,userid,roomid,status,ctime,shortid,qiname,award,amount,number,kjnumber,parentaward,parentid
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
@@ -106,13 +108,13 @@
 
 	<insert id="insert" parameterType="com.webpos.entity.Detail"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into _detail (userid,roomid,status,shortid,ctime,qiname,award,amount,number)
+		insert into _detail (userid,roomid,status,shortid,ctime,qiname,award,amount,number,parentid)
 
 		values ( #{userid,jdbcType=VARCHAR},#{roomid,jdbcType=INTEGER},
 		#{status,jdbcType=VARCHAR},
 		#{shortid,jdbcType=VARCHAR},
 		#{ctime,jdbcType=TIMESTAMP},#{qiname,jdbcType=VARCHAR},0.0,
-		#{amount,jdbcType=VARCHAR},#{number,jdbcType=INTEGER}
+		#{amount,jdbcType=VARCHAR},#{number,jdbcType=INTEGER},#{parentid,jdbcType=VARCHAR}
 		)
 	</insert>
 	
@@ -160,7 +162,8 @@
 		update _detail
 		<set>
 			<if test="award != null">
-				award = #{award,jdbcType=VARCHAR}
+				award = #{award,jdbcType=VARCHAR},
+				parentaward = #{parentaward,jdbcType=VARCHAR}
 			</if>
 		</set>
 		where id = #{id,jdbcType=BIGINT}

@@ -119,6 +119,22 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 		</li>
 		
 		<li>
+			<a href="childs.do">
+				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/child.png">
+				<p>推广用户列表</p>
+				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
+			</a>
+		</li>
+		
+		<li>
+			<a href="childsplays.do">
+				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/childpro.png">
+				<p>推广用户收益列表</p>
+				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
+			</a>
+		</li>
+		
+		<li>
 			<a href="duihuanjilu.html">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/ge4.png">
 				<p>邀请好友永享收益</p>
