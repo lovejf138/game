@@ -1,3 +1,4 @@
+
 var baseurl=$("#baseurl").val();
 var onoff1 = true;//这是导航状态
 var tanonoff = true;//弹幕的状态
@@ -6,6 +7,40 @@ var viewOnoff = true;//全景状态
 $(".pothook").click(function(){
 	showNav();//显示或隐藏导航
 });
+
+
+var intDiff = parseInt($("#nextsecond").val());
+var wait = false;//等待开奖
+if (intDiff < 0) {
+	intDiff = intDiff * -1;
+	wait = true;
+	$("#name_wait1").html("待" + $("#nextname").val() + "期开奖：");
+} else {
+	$("#name_wait1").html("离" + $("#nextname").val() + "期结束：");
+}
+/* var intDiff = parseInt(120);//倒计时总秒数量 */
+function timer(intDiff) {
+	window.setInterval(function() {
+		var second = 0;//时间默认值
+		if (intDiff > 0) {
+			second = intDiff;
+		}
+	
+		if (second <= 9)
+			second = '0' + second;
+		$('#name_wait2').html(''+second );
+		if (wait) {
+			intDiff++;
+		} else {
+			intDiff--;
+		}
+
+	}, 1000);
+}
+$(function() {
+	timer(intDiff);
+});
+
 
 function showNav(){//导航栏
 	$(".navContent").slideToggle(500);
@@ -227,7 +262,9 @@ $("#btn_ok").click(function(event){
 			waitdialog.destroy();
 			is_op = false;
 			if(result.result=="SUCCESS"){
-				alert("参与成功，请刷新页面查看最新状态");
+				window.location.reload();
+				alert("参与成功，正在刷新页面...");
+				 
 			}else{
 				alert(result.desc);
 				

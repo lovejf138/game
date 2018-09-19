@@ -110,6 +110,10 @@ iframe{
     background: url(../img/room/icotanmu.png) no-repeat;
     background-size: 100% 100%;
 }
+.navContent .navIco-fanhui{
+    background: url(../img/room/return.png) no-repeat;
+    background-size: 100% 100%;
+}
 .navContent .navIco-fatan{
     background: url(../img/room/icofadan.png) no-repeat;
     background-size: 100% 100%;
@@ -151,7 +155,7 @@ iframe{
     left:50%;
     bottom:-60px;
     opacity: 0.5;
-    font: 36px/40px "微软雅黑"; s
+    font: 36px/40px "微软雅黑";
     text-align:center;
 }
 /*弹幕*/
@@ -168,8 +172,8 @@ iframe{
     position:absolute;
     height:34px;
     border-radius:45px;
-    background:#fff;
-    color:#333;
+    background:pink;
+    color:#fff;
     left:0;
     top:0;
     font-size:16px;

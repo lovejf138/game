@@ -6,7 +6,6 @@
 		<result column="userid" property="userid" jdbcType="VARCHAR" />
 		<result column="parentid" property="parentid" jdbcType="VARCHAR" />
 		<result column="roomid" property="roomid" jdbcType="INTEGER" />
-		<result column="shortid" property="shortid" jdbcType="VARCHAR" />
 		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
 		<result column="qiname" property="qiname" jdbcType="VARCHAR" />
 		<result column="amount" property="amount" jdbcType="VARCHAR" />
@@ -82,7 +81,7 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id,userid,roomid,status,ctime,shortid,qiname,award,amount,number,kjnumber,parentaward,parentid
+		id,userid,roomid,status,ctime,qiname,award,amount,number,kjnumber,parentaward,parentid
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
@@ -108,11 +107,11 @@
 
 	<insert id="insert" parameterType="com.webpos.entity.Detail"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into _detail (userid,roomid,status,shortid,ctime,qiname,award,amount,number,parentid)
+		insert into _detail (userid,roomid,status,ctime,qiname,award,amount,number,parentid)
 
 		values ( #{userid,jdbcType=VARCHAR},#{roomid,jdbcType=INTEGER},
 		#{status,jdbcType=VARCHAR},
-		#{shortid,jdbcType=VARCHAR},
+		
 		#{ctime,jdbcType=TIMESTAMP},#{qiname,jdbcType=VARCHAR},0.0,
 		#{amount,jdbcType=VARCHAR},#{number,jdbcType=INTEGER},#{parentid,jdbcType=VARCHAR}
 		)
