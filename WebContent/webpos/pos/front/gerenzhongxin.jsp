@@ -97,7 +97,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 <div class="gr-xia">
 	<ul>
 		<li>
-			<a href="wodedingdan.html">
+			<a href="canyu.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/ge1.png">
 				<p>我的参与记录</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
