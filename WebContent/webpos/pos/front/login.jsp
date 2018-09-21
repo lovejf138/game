@@ -71,7 +71,7 @@
 	<script src="<%=request.getContextPath()%>/webpos/pos/js/gt.js"></script>
 	<script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/js/cryptographic.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/login_123.js?t=15"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/m/login_123.js?t=15"></script>
 
 </body>
 </html>

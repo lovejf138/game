@@ -246,6 +246,6 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 <script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/index_fontsize.js"></script>
 <script src="<%=request.getContextPath()%>/webpos/pos/assets/js/amazeui.min.js"></script>
 <script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/geren_123.js?t=2"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/m/geren_123.js?t=2"></script>
 
 </html>

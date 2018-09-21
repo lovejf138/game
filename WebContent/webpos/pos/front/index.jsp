@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=12">
+	href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=1">
 
 </head>
 <body>
@@ -90,23 +90,67 @@
 		</div>
 	</div>
 
-	<div class="shou-zhong">
-		<a href="guize.do">开奖及玩法说明</a>
+	<div class="shou-zhong" style="height:60px">
+		<a href="guize.do" style="padding-top: 25px; color: #868686; float: left; font-size: 15px;">开奖及玩法说明</a>
+		
+			<svg viewBox="0 0 0 0" style="position: absolute; z-index: -1; opacity: 0;">
+			  <defs>
+			    <linearGradient id="boxGradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="25" y2="25">
+			      <stop offset="0%"   stop-color="#27FDC7"/>
+			      <stop offset="100%" stop-color="#0FC0F5"/>
+			    </linearGradient>
+			
+			    <linearGradient id="lineGradient">
+			      <stop offset="0%"    stop-color="#0FC0F5"/>
+			      <stop offset="100%"  stop-color="#27FDC7"/>
+			    </linearGradient>
+			
+			    <path id="todo__line" stroke="url(#lineGradient)" d="M21 12.3h168v0.1z"></path>
+			    <path id="todo__box" stroke="url(#boxGradient)" d="M21 12.7v5c0 1.3-1 2.3-2.3 2.3H8.3C7 20 6 19 6 17.7V7.3C6 6 7 5 8.3 5h10.4C20 5 21 6 21 7.3v5.4"></path>
+			    <path id="todo__check" stroke="url(#boxGradient)" d="M10 13l2 2 5-5"></path>
+			    <circle id="todo__circle" cx="13.5" cy="12.5" r="10"></circle>
+			  </defs>
+			</svg>
+			
+			
+			<div class="todo-list" onClick="window.location.href='index.do?hide_room=yes'" 
+				style="width: 220px;height:100px;float:right">
+			  <label class="todo">
+			    <input class="todo__state" type="checkbox" 
+			    	<c:if test="${if_hide_room =='_true'}">
+			    	checked="checked"
+			    	</c:if>
+			 	  /> 
+			
+			    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 25" class="todo__icon">
+			      <use xlink:href="#todo__line" class="todo__line"></use>
+			      <use xlink:href="#todo__box" class="todo__box"></use>
+			      <use xlink:href="#todo__check" class="todo__check"></use>
+			      <use xlink:href="#todo__circle" class="todo__circle"></use>
+			    </svg>
+			
+			    <div class="todo__text" id="hide_room">隐藏不可参与房间</div>
+			
+			  </label>
+			
+			</div>
 	</div>
 
 	<div class="fenge"></div>
 	<div class="shou-shp" style="margin-bottom: 1.2rem;">
 	
 			<ul id="creditLoan" class="credit-loan-list credit clearfix" style="list-style: none;">
+			<c:set var="_number" value="1"/>
 			<c:forEach items="${rooms }" var="room">
 						<li  onclick="javascript:document.getElementById('aroom_${room.id}').click();"
-						<c:if test="${room.id%2!=0}">
+						<c:if test="${_number%2!=0}">
 						style="margin-right: 0.44rem;margin-bottom: 20px;height:150px;background:#fdfdfd"
 						</c:if>
-						<c:if test="${room.id%2==0}">
+						<c:if test="${_number%2==0}">
 						style="margin-bottom: 20px;height:150px;background:#fdfdfd"
 						</c:if>
 						>
+						<c:set var="_number" value="${_number+1}"/>
 						<a  id="aroom_${room.id}" style="display:none" href="room.do?roomid=${room.id}"></a>
 							<p class="p1" style="margin:0px">房间${room.name}</p>
 							<!-- <img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/room.png" style="width: 30%;height: 40%;"/> -->
@@ -178,6 +222,7 @@
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/webpos/pos/front/js/index_fontsize.js"></script>
 	<script type="text/javascript">
+	
 		$('#tit2 span').click(function() {
 			var i = $(this).index();//下标第一种写法
 			$(this).addClass('select2').siblings().removeClass('select2');

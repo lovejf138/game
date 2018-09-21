@@ -222,7 +222,7 @@
 		<script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/zepto.min.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
-		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/room_123.js?t=8'></script>
+		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/m/room_123.js?t=8'></script>
 		
 	</body>
 </html>
