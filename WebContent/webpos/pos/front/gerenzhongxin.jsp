@@ -127,7 +127,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 		</li>
 		
 		<li>
-			<a href="childsplays.do">
+			<a href="childcanyu.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/childpro.png">
 				<p>推广用户收益列表</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
