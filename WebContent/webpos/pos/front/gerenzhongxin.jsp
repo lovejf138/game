@@ -69,6 +69,8 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 </div>
 <input id="error_time" value="${localtime}" style="display:none"/>
 <input id="balance" value="${user.balance}" style="display:none" type="text">
+<button id="div_btn_gift" style="display:none"  data-am-modal="{target: '#doc-modal-spread', closeViaDimmer: 0, width: 400, height: 225}"></button>
+
 <div class="gr-zh">
 	<div class="gr-zh-zuo">
 		<p><span>${user.balance}</span></p>
@@ -134,8 +136,8 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 			</a>
 		</li>
 		
-		<li>
-			<a href="duihuanjilu.html">
+		<li id="div_gift">
+			<a>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/ge4.png">
 				<p>邀请好友永享收益</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
@@ -203,6 +205,20 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
   </div>
 </div>
 
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-spread" style="top:auto;">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd" style="line-height: 20px;font-size: 20px;">分享给好友，永享好友奖金的0.2%收益
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    
+    <div class="am-modal-bd" style="margin-top: 10px;" id="spread_inpiut">
+      <a id="spread-text">http://eth-game.club/index.do?parent=${user.id_md5}</a>
+    </div>
+    <div id="qrcode-spread" style="text-align: center;margin: auto;">
+    </div>
+  </div>
+</div>
+
 <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2" style="top:auto;">
   <div class="am-modal-dialog">
     <div class="am-modal-hd" style="line-height:20px;font-size: 20px;">提现
@@ -230,6 +246,6 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 <script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/index_fontsize.js"></script>
 <script src="<%=request.getContextPath()%>/webpos/pos/assets/js/amazeui.min.js"></script>
 <script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/geren_123.js?t=1"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/geren_123.js?t=2"></script>
 
 </html>

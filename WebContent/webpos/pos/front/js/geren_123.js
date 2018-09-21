@@ -1,3 +1,14 @@
+$("#qrcode-spread").qrcode({ 
+	    render: "canvas", //table方式 
+	    width: 100, //宽度 
+	    height:100, //高度 
+	    text: $("#spread-text").html() //任意内容 
+});
+
+$("#div_gift").click(function(event){
+	$("#div_btn_gift").click();
+});
+
 var tixian=false;
 
 	$("#btn_withdraw").click(function(event){
