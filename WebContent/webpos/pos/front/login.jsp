@@ -41,10 +41,20 @@
 	      <div class='icon'>
 	        <img src='<%=request.getContextPath()%>/webpos/pos/front/img/login/lock_icon_copy.png'>
 	      </div>
-	      <input placeholder='密码' id="pass" type='password'>
+	      <input placeholder='输入密码' id="pass" type='password' onclick="searchuser()">
 	      <div class='validation'>
 	        <img src='<%=request.getContextPath()%>/webpos/pos/front/img/login/tick.png'>
+	      </div>   
+	    </div>
+	    
+	    <div id="login_fields__repassword" class='login_fields__password' style="display:none">
+	      <div class='icon'>
+	        <img src='<%=request.getContextPath()%>/webpos/pos/front/img/login/lock_icon_copy.png'>
 	      </div>
+	      <input placeholder='请重复初始密码' id="repass" type='password'>
+	      <div class='validation'>
+	        <img src='<%=request.getContextPath()%>/webpos/pos/front/img/login/tick.png'>
+	      </div>   
 	    </div>
 	    
 	    <a id="error_msg" style="    margin-left: 36px;color: red;"></a>
@@ -71,7 +81,7 @@
 	<script src="<%=request.getContextPath()%>/webpos/pos/js/gt.js"></script>
 	<script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/js/cryptographic.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/m/login_123.js?t=15"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/m/login_123.js?t=19"></script>
 
 </body>
 </html>

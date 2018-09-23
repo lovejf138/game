@@ -1,3 +1,45 @@
+var userexist = "true";
+function searchuser(){
+	$("#error_msg").html("");
+	var eth_address = $("#address").val();
+	var el = eth_address.trim().length;
+
+	if (eth_address.toString().indexOf("VIP") >= 0
+			|| eth_address.toString().indexOf("vip") >= 0) {
+	}else if (el <= 30) {
+		$("#error_msg").html("请输入正确的以太坊地址");
+		return;
+	}
+	
+	$.ajax({
+
+		url : "searchuser.do",// ?eth_address="
+						// +$("#eth_address").val()+"&parent="+$("#parent").val()+"&remark="+$("#remark").val(),//+"&geetest_challenge="+$("#geetest_challenge").val()+"&geetest_validate="+$("#geetest_validate").val()+"&geetest_seccode="+$("#geetest_seccode").val()
+		type : "post",
+		data : {
+			eth_address : $("#address").val()
+		},
+		dataType : "json",
+		success : function(data) {
+
+			if (data == "false") {
+				userexist = "false";
+				//显示确认密码
+				$("#login_fields__repassword").attr("style","display: block");
+				
+			} else if (data == "true") {
+				userexist = "true";
+				$("#login_fields__repassword").attr("style","display: none");
+			} else {
+				$("#error_msg").html(""+data);
+			}
+
+		}
+	});
+	
+	
+}
+
 function showWait() {
 	$('.login').addClass('test');
 	setTimeout(function() {
@@ -104,6 +146,16 @@ $("#btn_login").click(
 				$("#error_msg").html("请输入正确的以太坊地址");
 				$("#address").val("");
 				return;
+			}
+			
+			if(userexist=="false"){
+				var pass = $("#pass").val();
+				var repass = $("#repass").val();
+				if(pass!=repass){
+					$("#error_msg").html("两次密码不一致");
+					return;
+				}
+				
 			}
 			
 			gotoLogin();

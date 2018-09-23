@@ -212,7 +212,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
     </div>
     
     <div class="am-modal-bd" style="margin-top: 10px;" id="spread_inpiut">
-      <a id="spread-text">http://eth-game.club/index.do?parent=${user.id_md5}</a>
+      <a id="spread-text">http://eth-game.club/login.do?parent=${user.id_md5}</a>
     </div>
     <div id="qrcode-spread" style="text-align: center;margin: auto;">
     </div>
