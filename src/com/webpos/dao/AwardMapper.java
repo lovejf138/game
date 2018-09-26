@@ -10,7 +10,7 @@ public abstract interface AwardMapper {
 	
 	public abstract Award getByName(String name);
 
-	public abstract List<Award> getLastList();
+	public abstract List<Award> getLastList(int _size);
 
 	public abstract int insert(Award param);
 

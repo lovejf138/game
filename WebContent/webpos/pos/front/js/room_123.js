@@ -43,16 +43,23 @@ $(function() {
 
 
 function showNav(){//导航栏
+	$(".navContent1").slideToggle(500);
 	$(".navContent").slideToggle(500);
+	
 	 if (onoff1) {
+		 
         $(".pothook").animate({ top: 0 }, 500)
         $(".pothook")[0].style.background = "url("+baseurl+"/webpos/pos/front/img/room/navdown2.gif) no-repeat";
         $(".pothook")[0].style.backgroundSize = "100% 80%";
+       // $(".in-body").attr("style","margin-top:40px");
+        $(".in-body").animate({ "margin-top": "40px" }, 500);
 
     } else {
-        $(".pothook").animate({ top: "60px" }, 500)
+        $(".pothook").animate({ top: "200px" }, 500)
         $(".pothook")[0].style.background = "url("+baseurl+"/webpos/pos/front/img/room/navup2.gif) no-repeat";
         $(".pothook")[0].style.backgroundSize = "100% 80%";
+        $(".in-body").animate({ "margin-top": "240px" }, 500);
+       // $(".in-body").attr("style","margin-top:240px");
     }
 	onoff1 = !onoff1;
 }

@@ -105,11 +105,12 @@
 	</select>
 	
 	<select id="getLastList" resultMap="BaseResultMap"
+	  parameterType="java.lang.Integer"
 		>
 		select
 		<include refid="Base_Column_List" />
 		from award
-		order by ctime desc limit 30
+		order by ctime desc limit #{_size,jdbcType=INTEGER}
 	</select>
 	
  

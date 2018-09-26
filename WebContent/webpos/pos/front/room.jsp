@@ -12,68 +12,15 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<title>参与</title>
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=5">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_base1.css?t=3">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_home1.css">
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/room_reset.css">
-		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/room.css?t=5">
+		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/room.css?t=1">
+
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/mdialog.css?t=1">
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_style.css?t=2">
 		
-		<style>
-		.input-login {
-			 height: 30px;
-   			 line-height: 30px;
-   			 width: 80px;
-		    float: right;
-		    font-weight: 600;
-		    line-height: normal;
-		    font-size: 1.25rem;
-		    line-height: 1;
-		    text-align: center;
-		    color: #FFFFFF;
-		    background-color: #000603;
-		    border-radius: 1.563rem;
-		    text-transform: uppercase;
-		    outline: none;
-		    border: none;
-		   
-		    cursor: pointer;
-		    margin: 0 1.25rem;
-		    width: 100%;
-		    max-width: 36%;
-		    -moz-box-sizing: border-box;
-		    -webkit-box-sizing: border-box;
-		    box-sizing: border-box;
-		}
-		.input-address{
-		    margin-left: 1rem;
-  			height: 30px;
-		    background-color: #fff;
-		    border-radius: 0.438rem;
-		    font-size: 12px;
-		    color: #4F4F4F;
-		    padding: 0.813rem 1.25rem;
-		    outline: none;
-		    border: 0.063rem solid transparent;
-		    width: 100%;
-		    max-width: 52%;
-		    -moz-box-sizing: border-box;
-		    -webkit-box-sizing: border-box;
-		    box-sizing: border-box;
-		    }
-			@media all and (max-width:500px){
-    			initScreen{
-					position: absolute;
-					left:20%;
-					top:20%;
-					width: 60%;
-					height:320px;
-					z-index: 1000;
-					background:#fff;
-					color:#000;
-					border-radius: 30px;
-				}
-			}
-		</style>
 		
 	</head>
 	<body style="background: linear-gradient(135deg, #EA5C54 0%, #bb6dec 100%);">
@@ -85,9 +32,26 @@
 			<input id="nextname" value="${nextname}" style="display: none">
 			<input id="nextsecond" value="${nextsecond}" style="display: none">
 		
-			<nav class="navbox">
+			<nav class="navbox navbox_class2">
+				<div class="navContent1">
+					<c:forEach items="${awards }" var="aw">
+					<p class="qi_name_class">${aw.name}期</p>
+						<div class="kj-p5 qi_name_div">
+						<p class="red-ball2 qi_ball" >${aw.no1}</p>
+						<p class="red-ball2 qi_ball" >${aw.no2}</p>
+						<p class="red-ball2 qi_ball" >${aw.no3}</p>
+						<p class="red-ball2 qi_ball" >${aw.no4}</p>
+						<p class="red-ball2 qi_ball" >${aw.no5}</p>
+						<p class="blue-ball2 qi_ball">${aw.no6}</p>
+						<p class="blue-ball2 qi_ball">${aw.no7}</p>
+						<p class="blue-ball2 qi_ball">${aw.no8}</p>
+						<p class="blue-ball2 qi_ball">${aw.no9}</p>
+						<p class="blue-ball2 qi_ball">${aw.no10}</p>
+						<p class="blue-ball2 qi_ball">${aw.no11}</p>
+					</div>
+					</c:forEach>
+				</div>
 				<div class="navContent">
-					
 					<div class="navList c" onClick="window.location.href='index.do'">
 						
 						<i class="navIco-fanhui navico"></i>
@@ -115,7 +79,7 @@
 			</nav>		
 		
 	
-		<div class="in-body" style="margin-top: 100px;">
+		<div class="in-body" style="margin-top: 240px;">
 
 	<!-- content begin -->
 	<section id="content" >
@@ -222,7 +186,7 @@
 		<script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/zepto.min.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
-		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/room_123.js?t=11'></script>
+		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/room_123.js?t=5'></script>
 		
 	</body>
 </html>

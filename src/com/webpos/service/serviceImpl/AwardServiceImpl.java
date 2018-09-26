@@ -34,8 +34,8 @@ public class AwardServiceImpl implements AwardService {
 		return this.awardDao.insert(record);
 	}
 
-	public List<Award> getLastList() {
-		return this.awardDao.getLastList();
+	public List<Award> getLastList(int size) {
+		return this.awardDao.getLastList(size);
 	}
 
 	public Award getLast() {
