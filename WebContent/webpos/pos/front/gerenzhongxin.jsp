@@ -144,19 +144,19 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 			</a>
 		</li>
 		
-		<li>
+		<%-- <li>
 			<a href="guize.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/question.png">
 				<p>中奖及玩法说明</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
 			</a>
-		</li>
-		<li>
+		</li> --%>
+		<%-- <li>
 			<a>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/kefu.png">
 				<p>客服QQ：1092888743</p>
 			</a>
-		</li>
+		</li> --%>
 		
 		<li>
 			<a style="text-align: center;font-size: 20px;">

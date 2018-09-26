@@ -285,7 +285,7 @@ var index=0;
 var host=window.location.host;
 //判断当前浏览器是否支持WebSocket
 if('WebSocket' in window){
-	websocket=new WebSocket("ws://eth-game.club/websocket");/*("ws://"+host+"/Danmu/websocket");*/
+	websocket=new WebSocket("ws://128.14.153.174:8010/websocket");/*("ws://"+host+"/Danmu/websocket");*/
 }
 else{
 	alert("当前浏览器不支持发送弹幕!");

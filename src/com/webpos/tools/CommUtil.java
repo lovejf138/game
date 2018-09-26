@@ -3004,16 +3004,39 @@ public class CommUtil {
 	 */
 	public static int[] getFinalNumberFrom5(int no1, int no2, int no3, int no4, int no5) {
 		int[] f = new int[] { no1, no2, no3, no4, no5, 0, 0, 0, 0, 0, 0 };
+//		for (int i = 5; i < 11; i++) {
+//
+//			int sum = 0;
+//			for (int j = 0; j < i; j++) {
+//				sum += f[j];
+//			}
+//			//System.out.println("sum:"+sum+",");
+//			sum = sum % 12;
+//			//System.out.println("sum:"+sum+",");
+//			if (sum == 0)
+//				sum = 1;
+//			for (int k = 0; k < 12; k++) {
+//				sum += 1;
+//				if (sum > 11)
+//					sum = sum - 11;
+//				boolean isexist = false;
+//				for (int l = 0; l < i; l++) {
+//					if (f[l] == sum) {
+//						isexist = true;
+//						break;
+//					}
+//				}
+//				if (!isexist) {
+//					f[i] = sum;
+//					break;
+//				}
+//			}
+//		}
 		for (int i = 5; i < 11; i++) {
 
-			int sum = 0;
-			for (int j = 0; j < i; j++) {
-				sum += f[j];
-			}
+			int sum = f[i-5];
 			//System.out.println("sum:"+sum+",");
-			sum = sum % 12;
-			//System.out.println("sum:"+sum+",");
-			if (sum == 0)
+			if (sum == 12)
 				sum = 1;
 			for (int k = 0; k < 12; k++) {
 				sum += 1;
@@ -3062,9 +3085,14 @@ public class CommUtil {
         return result;
     }
 	
-//	public static void main(String[] args) {
-//		
-//		
+	public static void main(String[] args) {
+		
+		int[] r = getFinalNumberFrom5(9,4,11,8,5);
+		for (int i : r) {
+			System.out.print(i + " ");
+		}
+		System.out.println();
+		
 //		for(int s=0;s<100;s++) {
 //			
 //			int[] numbers = new int[] {1,2,3,4,5,6,7,8,9,10,11};
@@ -3091,9 +3119,9 @@ public class CommUtil {
 //			}
 //			System.out.println();
 //		}
-// 
-// 
-//
-//	}
+ 
+ 
+
+	}
 
 }

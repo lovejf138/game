@@ -299,11 +299,11 @@ public class UserServiceImpl implements UserService {
 		String r = "SUCCESS";
 		try {
 			Room room = roomDao.selectByPrimaryKey(roomid);
-			if(room.getProgress()>=11) {
-				return "抱歉！当前房间下注已满11人，请等下一期或前往其他房间";
-			}
-			int progress = room.getProgress()+1;
-			room.setProgress(progress);
+//			if(room.getProgress()>=11) {
+//				return "抱歉！当前房间下注已满11人，请等下一期或前往其他房间";
+//			}
+//			int progress = room.getProgress()+1;
+			//room.setProgress(progress);
 			room.setAmount(CommUtil.add(room.getAmount(), amount));
 			roomDao.updateByPrimaryKeySelective(room);
 			
@@ -311,7 +311,7 @@ public class UserServiceImpl implements UserService {
 			d.setAmount(amount);
 			d.setAward(0.0);
 			d.setCtime(new Date());
-			d.setNumber(progress);
+			//d.setNumber(progress);
 			d.setQiname(qiname);
 			d.setRoomid(roomid);
 			d.setUserid(userid);
