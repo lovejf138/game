@@ -81,7 +81,7 @@
 	position: absolute;
 	top: 39px;
 	right: 15px;
-	z-index: 100;
+	z-index: 1;
 }
 
 .in-line-right img {

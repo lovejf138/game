@@ -295,30 +295,36 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public String join(Long roomid, String userid, String parentid,String shortid, String qiname, double amount) {
+	public String join(Long roomid, String userid, String parentid,String shortid, String qiname, double amount,int number) {
 		String r = "SUCCESS";
 		try {
-			Room room = roomDao.selectByPrimaryKey(roomid);
-//			if(room.getProgress()>=11) {
-//				return "抱歉！当前房间下注已满11人，请等下一期或前往其他房间";
-//			}
-//			int progress = room.getProgress()+1;
-			//room.setProgress(progress);
-			room.setAmount(CommUtil.add(room.getAmount(), amount));
-			roomDao.updateByPrimaryKeySelective(room);
+//			Room room = roomDao.selectByPrimaryKey(roomid);
+////			if(room.getProgress()>=11) {
+////				return "抱歉！当前房间下注已满11人，请等下一期或前往其他房间";
+////			}
+////			int progress = room.getProgress()+1;
+//			//room.setProgress(progress);
+//			room.setAmount(CommUtil.add(room.getAmount(), amount));
+//			roomDao.updateByPrimaryKeySelective(room);
 			
-			Detail d = new Detail();
-			d.setAmount(amount);
-			d.setAward(0.0);
-			d.setCtime(new Date());
-			//d.setNumber(progress);
-			d.setQiname(qiname);
-			d.setRoomid(roomid);
-			d.setUserid(userid);
-			d.setShortid(shortid);
-			d.setParentid(parentid);
-			d.setStatus("wait");
-			detailDao.insert(d);
+			Detail old_d = detailDao.selectByNameAndUserAndNumber(userid, qiname,""+number);
+			if(old_d==null) {
+				Detail d = new Detail();
+				d.setAmount(amount);
+				d.setAward(0.0);
+				d.setCtime(new Date());
+				d.setNumber(number);
+				d.setQiname(qiname);
+				d.setRoomid(roomid);
+				d.setUserid(userid);
+				d.setShortid(shortid);
+				d.setParentid(parentid);
+				d.setStatus("wait");
+				detailDao.insert(d);
+			}else {
+				old_d.setAmount(CommUtil.add(old_d.getAmount(), amount));
+				detailDao.updateByPrimaryKeySelective(old_d);
+			}
 			
 			User u = selectByUserId(userid);
 			u.setPlay_sum(CommUtil.add(u.getPlay_sum(), amount));

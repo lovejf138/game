@@ -137,10 +137,12 @@ $(function(){//点击发送弹幕
 	   		sendoff = false;
 	   		return;
 	    }
+	  
+	    setMessageInnerHTML(text);
 	    
 	    var x = $("#roomid").val() + "@" + $("#userid").val() + "!#@#Qsaswe@#./1!"+"@"+text;
 	    var _sign = hex_md5(x);
-	    text = $("#roomid").val()+"&&__"+$("#userid").val()+"&&__"+text+"&&__"+_sign;
+	    text = $("#roomid").val()+"&&__"+$("#userid").val()+"&&__1&&__"+text+"&&__"+_sign;
 	   
 	  //  var img =baseurl+"/webpos/pos/front/img/room/tanmuhead.jpg";
 	   
@@ -150,6 +152,7 @@ $(function(){//点击发送弹幕
 	    $(".send").hide();
 	    sendoff = false;
 	    send(text);
+	   
 	    
 //	    timer1 = setTimeout(function(){
 //	   		initScreen();//初始化屏幕
@@ -238,6 +241,19 @@ $(".c-fatan")[0].onclick = function(){//发弹幕
 	
 }
 
+var select_number=1;
+$(".xuan_ball").click(function(){
+	$(".xuan_ball").each(function(){
+		$(this).attr("style","background-color: rgb(29, 12, 12);");	  
+    });
+	
+	 var selfball = $(this);
+	 select_number = selfball.html();
+	 $("#select_number").html("已选号码："+selfball.html());
+	 $(this).attr("style","background-color: rgb(255, 3, 3);");
+	
+});
+
 var is_op = false;
 var waitdialog=null;
 $("#btn_ok").click(function(event){
@@ -262,7 +278,7 @@ $("#btn_ok").click(function(event){
 		async:true,
 		type:'post',
 		url:'join.do',
-		data:{amount:""+$("#input_amount").val(),sign:""+_sign,roomid:""+$("#roomid").val()},
+		data:{amount:""+$("#input_amount").val(),sign:""+_sign,roomid:""+$("#roomid").val(),number:""+select_number},
 		dataType:'json',
 		success:function(result,textStatus){
 			
@@ -292,7 +308,8 @@ var index=0;
 var host=window.location.host;
 //判断当前浏览器是否支持WebSocket
 if('WebSocket' in window){
-	websocket=new WebSocket("ws://128.14.153.174:8010/websocket");/*("ws://"+host+"/Danmu/websocket");*/
+	websocket=new WebSocket("ws://localhost:8080/_game/websocket");/*("ws://"+host+"/Danmu/websocket");*/
+	//websocket=new WebSocket("ws://128.14.153.174:8010/websocket");/*("ws://"+host+"/Danmu/websocket");*/
 }
 else{
 	alert("当前浏览器不支持发送弹幕!");
@@ -311,9 +328,20 @@ websocket.onopen = function(){
 
 //接收到消息的回调方法
 websocket.onmessage = function(event){
-	if(tanonoff){
-		setMessageInnerHTML(event.data);
+	
+	var data_str = event.data;
+
+	var ss = data_str.split("&&__");
+	if(ss[0]=="1"){//聊天信息
+		if(tanonoff){
+			setMessageInnerHTML(ss[1]);
+		}
 	}
+	else if(ss[0]=="2"){
+		$("#online_number").html(""+ss[1]);
+	}
+	
+	
 }
 
 //连接关闭的回调方法

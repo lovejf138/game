@@ -14,12 +14,12 @@
 		<title>参与</title>
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=5">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_base1.css?t=3">
-		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_home1.css">
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_home1.css?t=2">
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/room_reset.css">
-		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/room.css?t=1">
+		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/room.css?t=3">
 
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/mdialog.css?t=1">
-		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_style.css?t=2">
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_style.css?t=3">
 		
 		
 	</head>
@@ -28,7 +28,7 @@
 			<input id="baseurl" value="<%=request.getContextPath()%>" style="display:none"/>
 			<input id="error_time" value="${localtime}" style="display:none"/>
 			<input id="roomid" value="${room.id}" style="display:none"/>
-			<input id="userid" value="${userid}" style="display:none"/>		
+			<input id="userid" value="${user.user_id}" style="display:none"/>		
 			<input id="nextname" value="${nextname}" style="display: none">
 			<input id="nextsecond" value="${nextsecond}" style="display: none">
 		
@@ -83,7 +83,7 @@
 
 	<!-- content begin -->
 	<section id="content" >
-		<div class="in-content">
+		<div class="in-content" style="background: linear-gradient(135deg, #EA5C54 0%, #bb6dec 100%);padding-bottom: 20px;">
 			<div class="in-content-line"></div>
 			<div class="in-content-box">
 				<div class="in-content-title">
@@ -98,34 +98,58 @@
 					</div>
 				</div>
 				<div class="in-content-links" style="display:block;text-align: center;font-weight: bold;padding: 14px 0;font-size: 16px;">
-					<div style="text-align:center">
-						房间${room.name}
-						&nbsp&nbsp参与进度：
-						<font style="color:#ff7400;font-size: 20px;">${room.progress}/11</font>
+					  <div style="text-align:center">
+						在线人数
+						<font style="color:#ff7400;font-size: 20px;" id="online_number">0</font>
 						</div>
-						<div style="text-align:center;margin-top:15px">
+						
+						 <div style="text-align:center;margin-top:3px">
+						我的余额：
+						<font style="font-size: 18px;" id="my_balance">${user.balance}</font>ETH
+						</div>
+						
+						<div style="text-align:center;margin-top:3px">
 						币池：
-						<font style="color:#ff7400;font-size: 20px;">${room.amount}</font>ETH</div>
-					</a>
+						<font style="color:#ff7400;font-size: 20px;">${sumamount}</font>ETH
+						</div>
 					
 					
-					<div class="in-line-left" style="top: 75px;">
+					
+					<div class="in-line-left" style="top: 90px;">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
 					</div>
-					<div class="in-line-right" style="top: 75px;">
+					<div class="in-line-right" style="top: 90px;">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
 					</div>
 				</div>
-				<div class="in-content-links" style="background: #96ff96;">
-					<input type="text" class="input-address" id="input_amount" maxlength="12" placeholder="输入参与数量"/>
+				<div class="in-content-links" style="background: #96ff96;display: block;">
+				
+					<div class="kj-p5 qi_name_div" style="height: 190px; line-height: 190px;">
+						<p class="red-ball2 xuan_ball" style="background-color: rgb(255, 3, 3);" id="select_ball1">1</p>
+						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball2">2</p>
+						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball3">3</p>
+						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball4" >4</p>
+						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball5" >5</p>
+						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball6">6</p>
+						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball7">7</p>
+						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball8">8</p>
+						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball9">9</p>
+						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball10">10</p>
+						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball11">11</p>
+						<p style="line-height: 40px;float: left;margin-top: 15px;margin-left: 15px;color: #f10909;width: 150px; font-size: 15px; font-weight: 900;" id="select_number">已选号码：1</p>
+						
+					</div>
+						
+					<div style="line-height: 30px; height: 30px;">
+						<input type="text" class="input-address" id="input_amount" maxlength="12" placeholder="输入参与数量"/>
 					
-          			 <input id="btn_ok" value="提交" type="button" class="input-login"/>
-               
+          				<input id="btn_ok" value="提交" type="button" class="input-login" style="width:60px"/>
+               		</div>
 					
-					<div class="in-line-left in-content-left" style="top: 40px;">
+					<div class="in-line-left in-content-left" style="top: 230px;">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
 					</div>
-					<div class="in-line-right in-content-right" style="top: 40px;">
+					<div class="in-line-right in-content-right" style="top: 230px;">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
 					</div>
 					
@@ -133,33 +157,33 @@
 				
 				 
 				<div class="in-content-fellow" style="background: #111;">
-				
-					<div class="in-fellow-well">
-						
-						<div class="in-content-bd red">
-							<p style="color:#fff;font-size: 15px;">号码 &nbsp&nbsp用户</p>
-						</div>
-						<div class="in-content-ft">
-							<p style="color:#fff;font-size: 15px;">
-								参与数量
-							</p>
-						</div>
+				 <div class="in-fellow-well">
+					<table class="am-table">
+   					 <thead>
+     				   <tr style="color:white">
+            			<th>号码</th>
+            			<th>人数</th>
+           				<th>总数量(ETH)</th>
+           				<th>最大数量(ETH)</th>
+           				<th>我的(ETH)</th>
+           			   </tr>
+   					 </thead>
+   					 <tbody>
+   					    <c:forEach items="${details }" var="sd">
+					        <tr style="height: 30px;line-height: 30px;">
+					            <td class="td_font" style="font-size:15px;font-weight:800">${sd.number}</td>
+					            <td class="td_font">${sd.count}</td>
+					            <td class="td_font">${sd.sumamount}</td>
+					            <td class="td_font">${sd.maxamount}</td>
+					            <td class="td_font" style="color: #ff7400;">${sd.myamount}</td>
+					        </tr>
+					     </c:forEach>
+					       
+   					 </tbody>
+					</table>
 					</div>
 					
-					<div style="height: 200px;overflow: auto;">
-					<c:forEach items="${details }" var="detail">
-					<div class="in-fellow-well">
-						
-						<div class="in-content-bd red">
-							<p>${detail.number}. &nbsp${detail.shortid} </p>
-						</div>
-						<div class="in-content-ft">
-							<p style="color:#fff;">
-								<em style="color:#ff7400;font-size: 15px;font-weight: 500;">${detail.amount}</em>ETH
-							</p>
-						</div>
-					</div>
-					</c:forEach>
+					
 					</div>
 				</div>
 				
@@ -186,7 +210,7 @@
 		<script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/zepto.min.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
-		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/room_123.js?t=5'></script>
+		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/room_123.js?t=<%=System.currentTimeMillis()%>'></script>
 		
 	</body>
 </html>

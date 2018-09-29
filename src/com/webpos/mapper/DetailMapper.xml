@@ -92,6 +92,14 @@
 		where id = #{id,jdbcType=BIGINT}
 	</select>
 	
+	<select id="selectByNameAndUserAndNumber" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from _detail
+		where userid = #{0} and qiname=#{1} and number=#{2} limit 1
+	</select>
+	
 	<update id="finishByname" parameterType="com.webpos.entity.Detail">
 		update _detail	set	status = #{status,jdbcType=VARCHAR},kjnumber=#{kjnumber,jdbcType=VARCHAR}
 		 where qiname = #{qiname,jdbcType=VARCHAR}
@@ -160,7 +168,11 @@
 	<update id="updateByPrimaryKeySelective" parameterType="com.webpos.entity.Detail">
 		update _detail
 		<set>
+			<if test="amount != null">
+			    amount = #{amount,jdbcType=VARCHAR},
+			</if>
 			<if test="award != null">
+			   
 				award = #{award,jdbcType=VARCHAR},
 				parentaward = #{parentaward,jdbcType=VARCHAR}
 			</if>

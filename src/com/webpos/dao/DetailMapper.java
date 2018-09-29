@@ -11,6 +11,8 @@ public abstract interface DetailMapper
 {
   public abstract Detail selectByPrimaryKey(Long paramLong);
   
+  public abstract Detail selectByNameAndUserAndNumber(String userid,String qiname,String number);
+  
   public abstract int insert(Detail paramDetails);
   
   public abstract int countByExample(DetailExample paramDetailExample);

@@ -24,6 +24,7 @@ public class MyWebsocket {
 	private static CopyOnWriteArraySet<MyWebsocket> websocketPools = new CopyOnWriteArraySet<MyWebsocket>();
 
 	private Session session;
+	//type;1、聊天信息 2、登录信息  3、下注   4、开奖
 
 	@Autowired
 	private MessageService messageService;
@@ -38,6 +39,8 @@ public class MyWebsocket {
 	public void onOpen(Session session) throws Exception {
 		this.session = session;
 		websocketPools.add(this);
+		
+		send("2&&__"+websocketPools.size(),session,true);
 		// index = true;
 		// onMessage("&&open&&", this.session);
 	}
@@ -61,40 +64,55 @@ public class MyWebsocket {
 
 		String ms[] = message.split("&&__");
 
-		if (ms.length != 4) {
+		if (ms.length != 5) {
 			return;
 		}
 		String userid = ms[1];
 		String roomid = ms[0];
-		String msg = ms[2];
-		String sign = ms[3];
+		String msg = ms[3];
+		String type = ms[2];
+		String sign = ms[4];
 
 		String self_sign = Md5Encrypt.md5(roomid + "@" + userid + "!#@#Qsaswe@#./1!" + "@" + msg);
 		if (!sign.equals(self_sign)) {
 			return;
 		}
 
-		for (MyWebsocket item : websocketPools) {
+		if(type.equals("1")) {
+			send("1&&__"+msg,session,false);
+			
 			try {
-				item.send(msg);
-			} catch (IOException e) {
+				Message m = new Message();
+				m.setCtime(new Date());
+				m.setMessage(msg);
+				if (roomid != null) {
+					m.setRoomid(Integer.parseInt(roomid));
+				}
+				m.setUserid(userid);
+				messageService.insert(m);
+			} catch (Exception e) {
 			}
 		}
-		try {
-			Message m = new Message();
-			m.setCtime(new Date());
-			m.setMessage(msg);
-			if (roomid != null) {
-				m.setRoomid(Integer.parseInt(roomid));
-			}
-			m.setUserid(userid);
-			messageService.insert(m);
-		} catch (Exception e) {
-		}
+		
 	}
 
-	private void send(String message) throws IOException {
-		this.session.getAsyncRemote().sendText(message);
+	private void send(String message,Session mysession,boolean ifconcludemy)  {
+		
+		for (MyWebsocket item : websocketPools) {
+			if(!ifconcludemy) {
+				if(item.session==mysession)
+				{
+					continue;
+				}
+			}
+			try {
+				item.session.getAsyncRemote().sendText(message);
+				//item.send(msg);
+			} catch (Exception e) {
+			}
+		}
+		
+		//this.session.getAsyncRemote().sendText(message);
 		// this.session.getBasicRemote().sendText(message);
 
 	}
@@ -110,5 +128,4 @@ public class MyWebsocket {
 		// System.out.println("发生错误");
 		// error.printStackTrace();
 	}
-
 }

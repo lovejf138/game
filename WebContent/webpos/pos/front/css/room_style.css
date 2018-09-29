@@ -69,3 +69,21 @@
 .qi_ball{
 	font-size:13px;margin-top: 5px;margin-left: 2px;font-weight:800;float:left
 }
+
+.xuan_ball{
+	height: 40px;
+    width: 40px;
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 40px;
+    float: left;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.td_font{
+	text-align: center;
+	color: #f33345;
+	margin-top:5px;
+}
