@@ -70,7 +70,7 @@ var arrdata = [
 	{"headimg":baseurl+"/webpos/pos/front/img/room/tanmuhead.jpg","message":"很好666很好很好很好","vote":2,"id":13,"state":1}
 ]
 
-var locaScreen = [120,160,200,240,280];//弹幕位置
+var locaScreen = [50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,20,260,270,280,290,300];//弹幕位置
 //初始化
 var init = {
 	"navdown":baseurl+"/webpos/pos/front/img/room/navdown2.gif",
@@ -256,6 +256,7 @@ $(".xuan_ball").click(function(){
 
 var is_op = false;
 var waitdialog=null;
+var is_first_join=1;
 $("#btn_ok").click(function(event){
 	if(is_op)return;
 	var _amount=0;
@@ -265,9 +266,11 @@ $("#btn_ok").click(function(event){
 		_amount = 0;
 	}
 	if(_amount<0.005){
-		alert("最少参与数量0.005");
+		new TipBox({type:'error',str:'最少参与数量0.005',hasBtn:true});
 		return ;
 	}
+	
+	is_first_join=1;
 	
 	var x = $("#input_amount").val()+$("#error_time").val()+"!#@#Qsaswe@#./1!";
 	var _sign = hex_md5(x);
@@ -285,18 +288,55 @@ $("#btn_ok").click(function(event){
 			waitdialog.destroy();
 			is_op = false;
 			if(result.result=="SUCCESS"){
-				window.location.reload();
-				alert("参与成功，正在刷新页面...");
-				 
+				new TipBox({type:'success',str:'操作成功',hasBtn:true});
+			    
+				//更新相关数据
+				$("#my_balance").html(""+result.desc);
+				var sumamount = parseFloat($("#sumamount").html());
+				sumamount = sumamount+_amount;
+				sumamount = sumamount.toFixed(4);
+				$("#sumamount").html(""+sumamount);
+				
+				var _count=parseInt($("#_count"+select_number).html());
+				var _sumamount=parseFloat($("#_sumamount"+select_number).html());
+				var _maxamount=parseFloat($("#_maxamount"+select_number).html());
+				var _myamount=parseFloat($("#_myamount"+select_number).html());
+				
+				if(_myamount<=0){//不是加注
+					is_first_join=1;
+					_count = _count+1;
+					$("#_count"+select_number).html(""+_count);
+				}else{
+					is_first_join=0;
+				}
+				_myamount = _myamount+_amount;
+				$("#_myamount"+select_number).html(""+_myamount.toFixed(4));
+				
+				_sumamount = _sumamount+_amount;
+				$("#_sumamount"+select_number).html(""+_sumamount.toFixed(4));
+				
+				
+				if(_myamount>_maxamount){
+					_maxamount = _myamount;
+				}
+				$("#_maxamount"+select_number).html(""+_maxamount.toFixed(4));
+				
+				//通知其他伙伴
+				var text=is_first_join+"****"+_amount+"****"+select_number+"****"+_maxamount;
+				var x = $("#roomid").val() + "@" + $("#userid").val() + "!#@#Qsaswe@#./1!"+"@"+text;
+			    var _sign = hex_md5(x);
+			    text = $("#roomid").val()+"&&__"+$("#userid").val()+"&&__3&&__"+text+"&&__"+_sign;
+			    send(text);
 			}else{
-				alert(result.desc);
+				new TipBox({type:'error',str:''+result.desc,hasBtn:true});
 				
 			}
 		},
 		error:function (XMLHttpRequest, textStatus, errorThrown) {
 			is_op = false;
 			waitdialog.destroy();
-			alert("网络错误");
+			new TipBox({type:'error',str:'网络错误',hasBtn:true});
+			
 		}
 	});
 });
@@ -337,8 +377,35 @@ websocket.onmessage = function(event){
 			setMessageInnerHTML(ss[1]);
 		}
 	}
-	else if(ss[0]=="2"){
+	else if(ss[0]=="2"){//有人登录
 		$("#online_number").html(""+ss[1]);
+	}else if(ss[0]=="3"){//有人下注
+		var msg = ss[1].split("****");
+	
+		var is_first_join = parseInt(msg[0]);
+		var _amount = parseFloat(msg[1]);
+		var select_number = parseInt(msg[2]);
+		var _maxamount = parseFloat(msg[3]);
+		
+		//更新相关数据
+		var sumamount = parseFloat($("#sumamount").html());
+		sumamount = sumamount+_amount;
+		$("#sumamount").html(""+sumamount.toFixed(4));
+		
+		var _count=parseInt($("#_count"+select_number).html());
+		var _sumamount=parseFloat($("#_sumamount"+select_number).html());
+		//var _maxamount=parseFloat($("#_maxamount"+select_number).html());
+		//var _myamount=parseFloat($("#_myamount"+select_number).html());
+		
+		if(is_first_join==1){//不是加注
+			_count = _count+1;
+			$("#_count"+select_number).html(""+_count);
+		}
+		
+		_sumamount = _sumamount+_amount;
+		$("#_sumamount"+select_number).html(""+_sumamount.toFixed(4));
+	    $("#_maxamount"+select_number).html(""+_maxamount.toFixed(4));
+		
 	}
 	
 	

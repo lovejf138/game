@@ -18,7 +18,7 @@
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/room_reset.css">
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/room.css?t=3">
 
-		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/mdialog.css?t=1">
+		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/mdialog.css?t=3">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_style.css?t=3">
 		
 		
@@ -110,7 +110,7 @@
 						
 						<div style="text-align:center;margin-top:3px">
 						币池：
-						<font style="color:#ff7400;font-size: 20px;">${sumamount}</font>ETH
+						<font style="color:#ff7400;font-size: 20px;" id="sumamount">${sumamount}</font>ETH
 						</div>
 					
 					
@@ -172,10 +172,10 @@
    					    <c:forEach items="${details }" var="sd">
 					        <tr style="height: 30px;line-height: 30px;">
 					            <td class="td_font" style="font-size:15px;font-weight:800">${sd.number}</td>
-					            <td class="td_font">${sd.count}</td>
-					            <td class="td_font">${sd.sumamount}</td>
-					            <td class="td_font">${sd.maxamount}</td>
-					            <td class="td_font" style="color: #ff7400;">${sd.myamount}</td>
+					            <td class="td_font" id="_count${sd.number}">${sd.count}</td>
+					            <td class="td_font" id="_sumamount${sd.number}">${sd.sumamount}</td>
+					            <td class="td_font" id="_maxamount${sd.number}">${sd.maxamount}</td>
+					            <td class="td_font" id="_myamount${sd.number}" style="color: #ff7400;">${sd.myamount}</td>
 					        </tr>
 					     </c:forEach>
 					       

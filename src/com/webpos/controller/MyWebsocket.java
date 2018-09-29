@@ -78,7 +78,7 @@ public class MyWebsocket {
 			return;
 		}
 
-		if(type.equals("1")) {
+		if(type.equals("1")) {//聊天信息
 			send("1&&__"+msg,session,false);
 			
 			try {
@@ -92,6 +92,8 @@ public class MyWebsocket {
 				messageService.insert(m);
 			} catch (Exception e) {
 			}
+		}else if(type.equals("3")) {//有人下注
+			send("3&&__"+msg,session,false);
 		}
 		
 	}
