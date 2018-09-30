@@ -23,6 +23,8 @@ body, button, input, select, textarea {
 }
 </style>
 <link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/webpos/pos/front/css/index_lizi_style.css?t=8">
+<link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=1">
 
 </head>
@@ -98,7 +100,7 @@ body, button, input, select, textarea {
 		</div>
 	</div>
 
-   <div class="shou-zhong" style="height:60px">
+   <div class="shou-zhong" style="height: 1rem;">
 		  <a  id="how_to_play" style="padding-top: 25px; color: #868686; float: left; font-size: 15px;">怎么玩？</a>
 		  <a  id="how_to_create"  style="padding-top: 25px; color: #868686; float: right; font-size: 15px;">号码怎么产生？</a>
    </div>
@@ -533,8 +535,11 @@ body, button, input, select, textarea {
 	
 	<div class="fenge"></div>
 	<div class="shou-shp" style="margin-bottom: 1.2rem;">
-	
-			<ul id="creditLoan" class="credit-loan-list credit clearfix" style="list-style: none;">
+			<button id="room_button" onclick="window.location.href='room.do'">参与竞技</button>
+
+			<canvas id="room_myCanvas" width="100%" height="100%"></canvas>
+			
+			<%--<ul id="creditLoan" class="credit-loan-list credit clearfix" style="list-style: none;">
 			
 						<li  onclick="javascript:document.getElementById('aroom_${room.id}').click();"
 						>
@@ -542,10 +547,10 @@ body, button, input, select, textarea {
 							<p class="p1" style="margin:0px">房间${room.name}</p>
 							<!-- <img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/room.png" style="width: 30%;height: 40%;"/> -->
 							<div >
-								<%-- <p style="margin:0px;height: 20px;line-height: 20px;font-size:12px;    margin-top: 10px;">
+								 <p style="margin:0px;height: 20px;line-height: 20px;font-size:12px;    margin-top: 10px;">
 									<span style="color: #999999;font-size:20px">进度：</span>
 									<span class="monthly" style="color:#ff7400;font-size:20px">${room.progress}/11</span>
-								</p> --%>
+								</p>
 								
 								<p style="margin:0px;height: 20px;line-height: 20px;font-size:12px;    margin-top: 10px;">
 									<span style="color: #999999;font-size:20px">币池：</span>
@@ -555,7 +560,7 @@ body, button, input, select, textarea {
 							</div>
 						</li>
 			
-					</ul>
+					</ul> --%>
 
 		
 	</div>
@@ -588,6 +593,10 @@ body, button, input, select, textarea {
     <script src="<%=request.getContextPath()%>/webpos/pos/assets/js/amazeui.min.js"></script>
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/webpos/pos/front/js/index_fontsize.js"></script>
+		<script type="text/javascript"
+		src="<%=request.getContextPath()%>/webpos/pos/front/js/prefixfree.min.js"></script>
+		<script type="text/javascript"
+		src="<%=request.getContextPath()%>/webpos/pos/front/js/index_lizi.js"></script>
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/webpos/pos/front/js/index_123.js"></script>
 <script>
