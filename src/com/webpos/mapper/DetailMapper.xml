@@ -10,6 +10,7 @@
 		<result column="qiname" property="qiname" jdbcType="VARCHAR" />
 		<result column="amount" property="amount" jdbcType="VARCHAR" />
 		<result column="award" property="award" jdbcType="VARCHAR" />
+		<result column="finalaward" property="finalaward" jdbcType="VARCHAR" />
 		<result column="parentaward" property="parentaward" jdbcType="VARCHAR" />
 		<result column="number" property="number" jdbcType="INTEGER" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
@@ -81,7 +82,7 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id,userid,roomid,status,ctime,qiname,award,amount,number,kjnumber,parentaward,parentid
+		id,userid,roomid,status,ctime,qiname,award,finalaward,amount,number,kjnumber,parentaward,parentid
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
@@ -110,17 +111,18 @@
 		select
 		<include refid="Base_Column_List" />
 		from _detail
-		where qiname = #{qiname,jdbcType=VARCHAR}
+		where qiname = #{qiname,jdbcType=VARCHAR} 
+		order by number asc,amount desc,ctime desc;
 	</select>
 
 	<insert id="insert" parameterType="com.webpos.entity.Detail"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into _detail (userid,roomid,status,ctime,qiname,award,amount,number,parentid)
+		insert into _detail (userid,roomid,status,ctime,qiname,award,finalaward,parentaward,amount,number,parentid)
 
 		values ( #{userid,jdbcType=VARCHAR},#{roomid,jdbcType=INTEGER},
 		#{status,jdbcType=VARCHAR},
 		
-		#{ctime,jdbcType=TIMESTAMP},#{qiname,jdbcType=VARCHAR},0.0,
+		#{ctime,jdbcType=TIMESTAMP},#{qiname,jdbcType=VARCHAR},0.0,0.0,0.0,
 		#{amount,jdbcType=VARCHAR},#{number,jdbcType=INTEGER},#{parentid,jdbcType=VARCHAR}
 		)
 	</insert>
@@ -174,6 +176,7 @@
 			<if test="award != null">
 			   
 				award = #{award,jdbcType=VARCHAR},
+				finalaward = #{finalaward,jdbcType=VARCHAR},
 				parentaward = #{parentaward,jdbcType=VARCHAR}
 			</if>
 		</set>

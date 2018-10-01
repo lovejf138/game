@@ -1,7 +1,12 @@
 package com.webpos.service.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -15,6 +20,7 @@ import com.webpos.dao.RoomMapper;
 import com.webpos.dao.UserMapper;
 import com.webpos.entity.Award;
 import com.webpos.entity.Detail;
+import com.webpos.entity.SumDetail;
 import com.webpos.entity.User;
 import com.webpos.service.AwardService;
 import com.webpos.tools.CommUtil;
@@ -70,10 +76,177 @@ public class AwardServiceImpl implements AwardService {
 			
 			
 			
+			/****************取出押注的详情***********************/
+			List<Detail> ds = detailDao.selectByQiname(qiname);
+			if(ds==null||ds.size()<=0) {
+				return "SUCCESS";
+			}
+			else {
+				Map<Integer,List<Detail>> map_detail = new HashMap<Integer,List<Detail>>();
+				Double sum_all_amount=0.0;
+				//List<SumDetail> sumdetail_list = new ArrayList<SumDetail>();//存放每个号码的合计
+				for(int i=1;i<=11;i++) {
+					List<Detail> map_ds = new ArrayList<Detail>();
+					List<Detail> temp_ds = new ArrayList<Detail>();
+					for(Detail t_d:ds) {
+						
+						if(t_d.getNumber()==i) {//
+							sum_all_amount = CommUtil.add(sum_all_amount, t_d.getAmount());
+							map_ds.add(t_d);
+							temp_ds.add(t_d);
+						}else {
+							break;//数据库取出来就已经按顺序排了
+						}
+					}
+					map_detail.put(i, map_ds);
+					ds.removeAll(temp_ds);
+				}
+				
+				/*————————————————输出测试——————————————————————————*/
+//				for(int i=1;i<=11;i++) {
+//					List<Detail> out_detail = map_detail.get(i);
+//					System.out.println("number:"+i+"---------------------");
+//					for(Detail ad:out_detail) {
+//						if(ad.getAmount()>0) {
+//						System.out.println("id:"+ad.getId()+",user:"+ad.getUserid()+",amount:"+ad.getAmount());
+//						}
+//					}
+//				}
+
+					
+				List<Detail> result_details = new ArrayList<Detail>();//存放计算结果
+				
+				List<Detail> first_numberdetail = new ArrayList<Detail>();
+				int first_number=1;
+				/***************获取第一个******************/
+				for(int i=0;i<=10;i++) {
+					int kj_number = finals[i];
+					
+					List<Detail> out_detail = map_detail.get(kj_number);
+					if(out_detail.size()<=0) {
+						continue;
+					}else {
+						first_numberdetail = out_detail;
+						first_number = i;
+						break;
+					}
+					
+				}
+				
+				
+				
+				/***************计算第一个******************/
+				for(Detail first_detail:first_numberdetail) {
+					Double amount = first_detail.getAmount();
+					sum_all_amount = CommUtil.subtract(sum_all_amount, amount);
+					first_detail.setAward(amount);
+				}
+				
+				for(Detail first_detail:first_numberdetail) {
+					Double amount = first_detail.getAmount();
+					Double award = first_detail.getAward();
+					if(sum_all_amount<=0) {
+						
+					}
+					else if(sum_all_amount>amount) {
+						sum_all_amount = CommUtil.subtract(sum_all_amount, amount);
+						first_detail.setAward(CommUtil.add(award, amount));
+					}else {
+						sum_all_amount = CommUtil.subtract(sum_all_amount, amount);
+						first_detail.setAward(CommUtil.add(award, sum_all_amount));
+					}
+					
+					result_details.add(first_detail);
+				}
+				/***************结束第一个计算******************/
+				
+				//System.out.println("sum_d:"+sum_all_amount);
+				
+				
+				/***************计算后面******************/
+				for(int i=first_number+1;i<=10;i++) {
+					if(sum_all_amount<=0) {
+						break;
+					}
+					int kj_number = finals[i];
+					
+					//System.out.println("i:"+i+",kj_number:"+kj_number+",sum_all_amount:"+sum_all_amount);
+					
+					List<Detail> out_detail = map_detail.get(kj_number);
+					if(out_detail.size()<=0) {
+						continue;
+					}else {
+						
+						for(Detail other_detail:out_detail) {
+							
+							Double amount = other_detail.getAmount();
+							Double doubleamount = CommUtil.add(amount, amount);
+							//Double award = other_detail.getAward();
+							if(sum_all_amount<=0) {
+								break;
+							}
+							else if(sum_all_amount>doubleamount) {
+								sum_all_amount = CommUtil.subtract(sum_all_amount, doubleamount);
+								//System.out.println("sum_d:"+sum_all_amount);
+								other_detail.setAward(doubleamount);
+								result_details.add(other_detail);
+							}else {
+								
+								other_detail.setAward(sum_all_amount);
+								//System.out.println("sum_d:"+0);
+								sum_all_amount = 0.0;
+								result_details.add(other_detail);
+								break;
+							}
+						}
+					}
+					
+				}
+				/***************计算后面结束******************/
+				
+				
+				
+				/*******************写入到数据库*************************/
+				for(Detail ad:result_details) {
+//						System.out.println("id:"+ad.getId()+"number:"+ad.getNumber()+",user:"+ad.getUserid()+",amount:"+ad.getAmount()
+//						+",award:"+ad.getAward());
+						
+					
+					if(ad.getAward()<=0) {
+						continue;
+					}
+					else if(ad.getAward()<=ad.getAmount()) {
+						User u = userDao.selectByUserId(ad.getUserid());
+						u.setBalance(""+CommUtil.add(u.getBalance(),ad.getAward()));
+						u.setAward_sum(CommUtil.add(u.getAward_sum(),ad.getAward()));
+						ad.setFinalaward(ad.getAward());
+						userDao.updateByPrimaryKeySelective(u);
+					}else {
+						
+						Double yingli = CommUtil.subtract(ad.getAward(),ad.getAmount());
+						Double lirun = CommUtil.mul(yingli, 0.03);
+						Double prun = CommUtil.mul(yingli, 0.005);
+						Double final_award = CommUtil.subtract(ad.getAward(),lirun);
+						ad.setFinalaward(final_award);
+						ad.setParentaward(prun);
+						User u = userDao.selectByUserId(ad.getUserid());
+						u.setBalance(""+CommUtil.add(u.getBalance(),final_award));
+						u.setAward_sum(CommUtil.add(u.getAward_sum(),ad.getAward()));
+						userDao.updateByPrimaryKeySelective(u);
+						
+						if(u.getParent()!=null&&!u.getParent().equals("")) {
+							User up = userDao.selectByUserId(u.getParent());
+							up.setBalance(""+CommUtil.add(up.getBalance(),prun));
+							userDao.updateByPrimaryKeySelective(up);
+						}
+						
+					}
+					detailDao.updateByPrimaryKeySelective(ad);
+					
+				}		
+			}
 			/*************初始化房间********************/
-			roomDao.initRoom(null);
-			
-			
+			//roomDao.initRoom(null);
 			Detail temp = new Detail();
 			temp.setKjnumber(finals[0]+","+finals[1]+","+finals[2]+","+finals[3]+","+finals[4]+","+
 					finals[5]+","+finals[6]+","+finals[7]+","+finals[8]+","+finals[9]+","+finals[10]);
@@ -81,84 +254,8 @@ public class AwardServiceImpl implements AwardService {
 			temp.setStatus("finish");
 			detailDao.finishByname(temp);
 			
-			
-			/****************取出押注的详情***********************/
-			List<Detail> ds = detailDao.selectByQiname(qiname);
-			if(ds==null||ds.size()<=0) {
-				return "SUCCESS";
-			}
-			else {
-				List<List<Detail>> dss = CommUtil.getListByRoomid(ds);
-				//根据中奖号码将每个房间的奖都处理好
-				for(List<Detail> details:dss) {
-					//计算总奖池
-					Double sum_amount=0.0;
-					for(Detail _d:details) {
-						sum_amount = CommUtil.add(sum_amount, _d.getAmount());
-					}
-					int size = details.size();
-					//按开奖顺序发派奖金
-					for(int k:finals) {
-						
-						if(size>=k) {
-							if(sum_amount>0.0) {
-								Detail award_detail = details.get(k-1);
-								
-								Double award = award_detail.getAmount();
-								
-								Double award2 = CommUtil.mul(award,2.0);
-								if(sum_amount<=award2) {
-									//奖金池少于该得奖金
-									//用户获得剩下奖金池
-									Double f_award = CommUtil.mul(sum_amount,0.99);//0.99倍
-									Double p_award = CommUtil.mul(sum_amount,0.002);
-									User u = userDao.selectByUserId(award_detail.getUserid());
-									u.setBalance(""+CommUtil.add(u.getBalance(),f_award));
-									u.setAward_sum(CommUtil.add(u.getAward_sum(),sum_amount));
-									userDao.updateByPrimaryKeySelective(u);
-									
-									if(u.getParent()!=null&&!u.getParent().equals("")) {
-										User up = userDao.selectByUserId(u.getParent());
-										up.setBalance(""+CommUtil.add(up.getBalance(),p_award));
-										userDao.updateByPrimaryKeySelective(up);
-									}
-									
-									award_detail.setAward(sum_amount);
-									award_detail.setParentaward(p_award);
-									detailDao.updateByPrimaryKeySelective(award_detail);
-									
-									sum_amount=0.0;
-								}else {
-									Double f_award = CommUtil.mul(award2,0.99);//0.99倍
-									Double p_award = CommUtil.mul(award2,0.002);
-									User u = userDao.selectByUserId(award_detail.getUserid());
-									u.setBalance(""+CommUtil.add(u.getBalance(),f_award));
-									u.setAward_sum(CommUtil.add(u.getAward_sum(),award2));
-									userDao.updateByPrimaryKeySelective(u);
-									
-									if(u.getParent()!=null&&!u.getParent().equals("")) {
-										User up = userDao.selectByUserId(u.getParent());
-										up.setBalance(""+CommUtil.add(up.getBalance(),p_award));
-										userDao.updateByPrimaryKeySelective(up);
-									}
-									
-									award_detail.setAward(award2);
-									award_detail.setParentaward(p_award);
-									detailDao.updateByPrimaryKeySelective(award_detail);
-									
-									sum_amount=CommUtil.subtract(sum_amount, award2);
-								}
-								
-							}else {//奖金池没有了
-								break;
-							}
-						}
-					}
-				}
-			}
-			
-			
 			return "SUCCESS";
+		
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return "FAIL:"+e.getMessage().toString();
