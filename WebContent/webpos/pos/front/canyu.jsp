@@ -54,7 +54,7 @@
                      <div class="aui-order-box">
                         <a href="droom.do?roomid=${detail.roomid}&qiname=${detail.qiname}" class="aui-well-item">
                             <div class="aui-well-item-bd">
-                                <h3>房间${detail.roomid}&nbsp&nbsp${detail.qiname}期</h3>
+                                <h3>${detail.qiname}期</h3>
                             </div>
                             <span class="aui-well-item-fr" <c:if test="${detail.status =='wait'}">style="color:red"</c:if>>                    
                               <c:if test="${detail.status =='wait'}">等待开奖</c:if>
@@ -62,16 +62,36 @@
                             
                         </a>
                         <p class="aui-order-fl aui-order-time"><fmt:formatDate value="${detail.ctime}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
-                        <p class="aui-order-fl aui-order-door">幸运号码:<font style="color: #fd0086;font-size: 15px;font-weight: 600;">&nbsp&nbsp${detail.number}</font></p>
+                        <p class="aui-order-fl aui-order-door">竞技号码:<font style="color: #fd0086;font-size: 15px;font-weight: 600;">&nbsp&nbsp${detail.number}</font></p>
                         <p class="aui-order-fl aui-order-address">参与数量:<font style="font-size: 15px;font-weight: 600;">&nbsp&nbsp${detail.amount}</font>ETH</p>
+                       <c:if test="${detail.status =='finish'}">
                         <p class="aui-order-fl aui-order-door">奖金:
                                <font style="font-size: 15px;font-weight: 600;">
                         		&nbsp${detail.award}</font>&nbspETH
                 
-                        		&nbsp(实收：<font style="color: red;font-size: 15px;font-weight: 600;">
-                        		&nbsp${detail.final_award}
+                        </p>
+                       
+                        	<c:if test="${detail.ifyingkui ==1}">
+                        	 <p class="aui-order-fl aui-order-address">盈利:
+                               <font style="font-size: 15px;color: red;font-weight: 600;">
+                        		&nbsp${detail.yingkui}</font>&nbspETH
+                
+                        		&nbsp(收取盈利部分3%手续费)</p>
+                        	</c:if>
+                        	<c:if test="${detail.ifyingkui ==-1}">
+                        	 <p class="aui-order-fl aui-order-address">亏损:
+                               <font style="font-size: 15px;font-weight: 600;">
+                        		&nbsp${detail.yingkui}</font>&nbspETH
+                
+                        		</p>
+                        	</c:if>
+                       
+                         <p class="aui-order-fl aui-order-door">实收：<font style="color: red;font-size: 15px;font-weight: 600;">
+                        		&nbsp${detail.finalaward}
                         		</font>
-                        		&nbspETH)</p>
+                        		&nbspETH
+                         </p>
+                        </c:if>
                      </div>
                    </c:forEach>
                    
