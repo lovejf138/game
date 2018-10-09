@@ -11,9 +11,9 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<title>详情</title>
+		<title>竞技详情</title>
 		<link rel="stylesheet" type="text/css"
-			href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=12">
+			href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=13">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_base1.css?t=3">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_home1.css">
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/room_reset.css">
@@ -27,7 +27,7 @@
 	<a class="weizhi" href="canyu.do" style="display: block;float: left;width: 15%;height: 40px;line-height: 40px;"> 
 		<img style="width: 30px;margin-top: .26rem;margin-left: .15rem;" src="<%=request.getContextPath()%>/webpos/pos/front/img/room/return.png" alt=""></a>
 	<div class="zhongzi" style="width: 60%;text-align: center;float: left;height: 40px;line-height: 40px;font-size: 20px;color:#fff;font-weight:700">
-		参与详情
+		竞技详情
 	</div>
  
 </div>
@@ -42,7 +42,7 @@
 			<div class="in-content-box">
 				<div class="in-content-title">
 					<h2>
-						<a id="name_wait1">房间${roomid}&nbsp&nbsp币池：
+						<a id="name_wait1">币池：
 						<font style="color:#ff7400;font-size: 20px;">${_sum}</font>ETH</a>
 					</h2>
 					<div class="in-line-left">

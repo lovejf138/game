@@ -75,9 +75,10 @@ public class MyWebsocket {
 
 		String self_sign = Md5Encrypt.md5(roomid + "@" + userid + "!#@#Qsaswe@#./1!" + "@" + msg);
 		if (!sign.equals(self_sign)) {
+			System.out.println("签名错误");
 			return;
 		}
-
+		
 		if(type.equals("1")) {//聊天信息
 			send("1&&__"+msg,session,false);
 			
@@ -94,6 +95,9 @@ public class MyWebsocket {
 			}
 		}else if(type.equals("3")) {//有人下注
 			send("3&&__"+msg,session,false);
+		}
+		else if(type.equals("4")) {//控制开奖
+			send("4&&__"+msg,session,false);
 		}
 		
 	}

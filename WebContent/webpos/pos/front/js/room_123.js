@@ -406,6 +406,8 @@ websocket.onmessage = function(event){
 		$("#_sumamount"+select_number).html(""+_sumamount.toFixed(4));
 	    $("#_maxamount"+select_number).html(""+_maxamount.toFixed(4));
 		
+	}else if(ss[0]=="4"){
+		alert("开奖啦！！！");
 	}
 	
 	

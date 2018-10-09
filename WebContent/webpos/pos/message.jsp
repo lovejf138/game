@@ -150,16 +150,23 @@
 					<td colspan="4">号码5:<input id="kj_no5" style="width: 100px" />
 					</td>
 				</tr>
+				
+	
 
 				<tr>
 					<td colspan="4"><a id="button-query1" style="font-size: 1rem"
 						class="button-a button-a-primary" onclick="kj_btn()"
 						href="javascript:void(0);">确定</a></td>
+						
+					<td colspan="4"><a id="button-query1" style="font-size: 1rem"
+						class="button-a button-a-primary" onclick="kj_send_btn()"
+						href="javascript:void(0);">开奖通知</a></td>
 				</tr>
 			</table>
 		</div>
 	</div>
 </body>
+<script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/webpos/pos/js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript"
@@ -194,7 +201,17 @@ var kj = false;
 		});
 
 	}
-
+	
+	function kj_send_btn() {
+		 
+		var text=$("#kj_name").val("");
+		var x = "1@1"+"!#@#Qsaswe@#./1!"+"@"+text;
+	    var _sign = hex_md5(x);
+	    text = "1&&__"+"1&&__4&&__"+text+"&&__"+_sign;
+	    
+		send(text);
+	}
+	
 	function kj_btn() {
 	  if(!kj){
 		  kj = true;
@@ -211,7 +228,7 @@ var kj = false;
 			traditional : true,
 			success : function(data) {
 				if (data == "SUCCESS") {
-					alert('操作成功，请刷新页面!');
+					alert('操作成功，请点击通知开奖!');
 				} else {
 					kj = false;
 					alert(''+data);
@@ -219,6 +236,54 @@ var kj = false;
 			}
 		});
 		}
+	}
+	
+	
+	var websocket=null;
+	var _top=80;
+	var index=0;
+
+	var host=window.location.host;
+	//判断当前浏览器是否支持WebSocket
+	if('WebSocket' in window){
+		websocket=new WebSocket("ws://localhost:8080/_game/websocket");/*("ws://"+host+"/Danmu/websocket");*/
+		//websocket=new WebSocket("ws://128.14.153.174:8010/websocket");/*("ws://"+host+"/Danmu/websocket");*/
+	}
+	else{
+		alert("当前浏览器不支持发送弹幕!");
+	}
+
+
+	//连接发生错误的回调方法
+	websocket.onerror = function(){
+	   // setMessageInnerHTML("error");
+	};
+
+	//连接成功建立的回调方法
+	websocket.onopen = function(){
+	   // setMessageInnerHTML("open");
+	}
+
+	//接收到消息的回调方法
+	websocket.onmessage = function(event){
+		
+	}
+
+	//连接关闭的回调方法
+	websocket.onclose = function(){
+	  //  setMessageInnerHTML("close");
+	}
+
+
+	//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+	window.onbeforeunload = function(){
+	    websocket.close();
+	}
+
+
+	//发送消息
+	function send(text){
+	    websocket.send(text);
 	}
 </script>
 </html>
