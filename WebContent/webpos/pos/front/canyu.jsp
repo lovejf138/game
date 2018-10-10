@@ -52,7 +52,7 @@
 				  
     				<c:forEach items="${objs }" var="detail">            
                      <div class="aui-order-box">
-                        <a href="droom.do?roomid=${detail.roomid}&qiname=${detail.qiname}" class="aui-well-item">
+                        <a href="droom.do?roomid=${detail.roomid}&qiname=${detail.qiname}&type=_canyu" class="aui-well-item">
                             <div class="aui-well-item-bd">
                                 <h3>${detail.qiname}期</h3>
                             </div>

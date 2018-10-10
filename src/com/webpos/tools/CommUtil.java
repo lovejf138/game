@@ -2953,6 +2953,43 @@ public class CommUtil {
 	}
 	
 	/**
+	 * 获取上一期
+	 * @param qi
+	 * @return
+	 */
+	public static String getLastQi(String qi) {
+		//String nextqi="";
+		String s_shu="";
+		String r = "20";
+		r = r + qi.substring(0, 2) + "-" + qi.substring(2, 4) + "-" + qi.substring(4, 6);// 2018-09-03
+		
+		String shu = qi.substring(6, 8);
+		qi = qi.substring(0, 6);
+		int int_shu = Integer.parseInt(shu);
+		if(int_shu==1) {//时间减一天
+			int_shu=84;
+			Date d = formatDate(r, "yyyy-MM-dd");
+			Calendar cal = Calendar.getInstance();
+
+			cal.setTime(d);
+
+			cal.add(Calendar.DATE,-1);
+
+			d =cal.getTime();
+
+			qi = (new SimpleDateFormat("yyMMdd")).format(d);
+		}else
+		{
+			int_shu=int_shu-1;
+		}
+		
+		if(int_shu<10) s_shu = "0"+int_shu;
+		else s_shu=""+int_shu;
+		
+		return qi+s_shu;
+	}
+	
+	/**
 	 * 获取下一期
 	 * @param qi
 	 * @return

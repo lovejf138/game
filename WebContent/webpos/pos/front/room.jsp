@@ -16,7 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_base1.css?t=3">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_home1.css?t=2">
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/room_reset.css">
-		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/room.css?t=3">
+		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/room.css?t=4">
 
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/mdialog.css?t=3">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_style.css?t=3">
@@ -70,6 +70,12 @@
 						<i class="navIco-fatan navico"></i>
 						<span class="navText">
 							发弹幕
+						</span>
+					</div>
+					<div class="navList" onClick="window.location.href='droom.do?qiname=${nextname}&type=_last'">
+						<i class="navIco-shang navico"></i>
+						<span class="navText">
+							上一期
 						</span>
 					</div>
 					

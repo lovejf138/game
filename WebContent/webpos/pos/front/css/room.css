@@ -114,6 +114,10 @@ iframe{
     background: url(../img/room/return.png) no-repeat;
     background-size: 100% 100%;
 }
+.navContent .navIco-shang{
+    background: url(../img/room/hist.png) no-repeat;
+    background-size: 100% 100%;
+}
 .navContent .navIco-fatan{
     background: url(../img/room/icofadan.png) no-repeat;
     background-size: 100% 100%;

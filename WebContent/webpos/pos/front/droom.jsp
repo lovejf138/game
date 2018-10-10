@@ -24,7 +24,7 @@
 	<body style="background: linear-gradient(135deg, #EA5C54 0%, #bb6dec 100%);">
 	
 <div class="" style="width: 100%;overflow: hidden;position: fixed;top: 0;height: 40px;line-height: 40px;">
-	<a class="weizhi" href="canyu.do" style="display: block;float: left;width: 15%;height: 40px;line-height: 40px;"> 
+	<a class="weizhi" href="${url}" style="display: block;float: left;width: 15%;height: 40px;line-height: 40px;"> 
 		<img style="width: 30px;margin-top: .26rem;margin-left: .15rem;" src="<%=request.getContextPath()%>/webpos/pos/front/img/room/return.png" alt=""></a>
 	<div class="zhongzi" style="width: 60%;text-align: center;float: left;height: 40px;line-height: 40px;font-size: 20px;color:#fff;font-weight:700">
 		竞技详情
