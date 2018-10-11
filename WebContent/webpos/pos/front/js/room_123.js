@@ -424,8 +424,8 @@ var index=0;
 var host=window.location.host;
 //判断当前浏览器是否支持WebSocket
 if('WebSocket' in window){
-	websocket=new WebSocket("ws://localhost:8080/_game/websocket");/*("ws://"+host+"/Danmu/websocket");*/
-	//websocket=new WebSocket("ws://128.14.153.174:8010/websocket");/*("ws://"+host+"/Danmu/websocket");*/
+	//websocket=new WebSocket("ws://localhost:8080/_game/websocket");/*("ws://"+host+"/Danmu/websocket");*/
+	websocket=new WebSocket("ws://128.14.153.174:8010/websocket");/*("ws://"+host+"/Danmu/websocket");*/
 }
 else{
 	alert("当前浏览器不支持发送弹幕!");
@@ -483,7 +483,13 @@ websocket.onmessage = function(event){
 	    $("#_maxamount"+select_number).html(""+_maxamount.toFixed(4));
 		
 	}else if(ss[0]=="4"){
-		getKaijiang();
+//		alert(""+ss[1]);
+//		alert($("#nextname").val());
+//		if(ss[1]!=$("#nextname").val()){
+		if(wait){
+			getKaijiang();
+		}
+		//}
 	}
 	
 	
