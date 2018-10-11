@@ -352,7 +352,7 @@
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/zepto.min.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/bringins.js?t=2"></script>
-		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/room_123.js?t=<%=System.currentTimeMillis()%>'></script>
+		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/m/room_123.js?t=<%=System.currentTimeMillis()%>'></script>
 		
 	</body>
 </html>
