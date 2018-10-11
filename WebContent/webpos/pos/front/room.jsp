@@ -12,6 +12,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<title>参与</title>
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/bootstrap-grid.min.css?t=1">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=5">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_base1.css?t=3">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_home1.css?t=2">
@@ -207,15 +208,150 @@
 						
 				</div>
 			</div>
-			<!--end send-->
+			<!--end </div>send-->
+	
+		<div id="sampledata3" class="bringins-content" style="color: white;">
+			
+		  <section id="content" >
+			<div class="in-content">
+			<div class="in-content-line"></div>
+			<div class="in-content-box">
+			
+				<div class="in-content-title" style="display:block;text-align: center;font-weight: bold;padding: 14px 0;font-size: 16px;">
+					<div style="text-align:center">
+						<font style="color:#ff7400;font-size: 20px;">开奖啦</font>
+					</div>
+					
+					<div class="in-line-left">
+						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
+					</div>
+					<div class="in-line-right">
+						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
+					</div>
+				</div>
+				
+				<div class="in-content-links" style="color:#666;display:block;text-align: center;font-weight: bold;padding: 14px 0;font-size: 16px;">
+					 	 <div style="text-align:center;">
+						期号:
+						<font style="color:#666;font-size: 20px;" id="kj_qiname"></font>
+						</div>
+						
+						 <div style="text-align:center;margin-top:3px">
+						我的竞技数量：
+						<font style="font-size: 18px;" id="kj_join_number">0.0</font>ETH
+						</div>
+						
+						<div style="text-align:center;margin-top:3px">
+						我的奖金数量：
+						<font style="color:#ff7400;font-size: 20px;" id="kj_award_number">0.0</font>ETH
+						</div>
+					
+					
+					
+					<div class="in-line-left" style="top: 90px;">
+						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
+					</div>
+					<div class="in-line-right" style="top: 90px;">
+						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
+					</div>
+				</div>
+				
+				<div class="in-content-links" style="display:block;text-align: center;font-weight: bold;padding: 14px 0;font-size: 16px;">
+					<div class="gg-shu" style="text-align:center;width: 80%;margin: 0 auto;overflow: hidden;margin-top: .2rem;">
+						
+			<ul>
+				<li>
+					<p class="red-ball" id="kj_no1">1</p>
+				</li>
+				<li>
+					<p class="red-ball" id="kj_no2">2</p>
+				</li>
+				<li>
+					<p class="red-ball" id="kj_no3">3</p>
+				</li>
+				<li>
+					<p class="red-ball" id="kj_no4">4</p>
+				</li>
+				<li>
+					<p class="red-ball" id="kj_no5">5</p>
+				</li>
+				<li>
+					<p class="blue-ball" id="kj_no6">6</p>
+				</li>
+				<li>
+					<p class="blue-ball" id="kj_no7">7</p>
+				</li>
+				<li>
+					<p class="blue-ball" id="kj_no8">8</p>
+				</li>
+				<li>
+					<p class="blue-ball" id="kj_no9">9</p>
+				</li>
+				<li>
+					<p class="blue-ball" id="kj_no10">10</p>
+				</li>
+				<li>
+					<p class="blue-ball" id="kj_no11">11</p>
+				</li>
+			</ul>
+				
+						
+					<div style="line-height: 30px; height: 30px;">
+						<input id="btn_next" value="继续竞技" onClick="window.location.href='room.do'" type="button" class="input-login" style="float: right;width:80px;background-color: #ff5292;font-size:15px;margin: auto; max-width: 80px;"/>
+               	
+						<input id="btn_detail" value="详情" onClick="window.location.href='droom.do?type=_now&qiname=${nextname}'" type="button" class="input-login" style="float: left;width:60px;font-size:15px"/>
+          			</div>
+               		
+					</div>
+					<div class="in-line-left" style="top: 135px;">
+						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
+					</div>
+					<div class="in-line-right" style="top: 135px;">
+						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
+					</div>
+					
+				</div>
+				
+				 
+				<div class="in-content-fellow" >
+				 <div class="in-fellow-well">
+					<table class="am-table">
+   					 <thead>
+     				   <tr style="color:#666;font-size: 16px;">
+            			<th>号码</th>
+           				<th>我的数量(ETH)</th>
+           				<th>奖金数量(ETH)</th>
+           			   </tr>
+   					 </thead>
+   					 <tbody id="tbody">
+   					   
+					        <!-- <tr style="height: 30px;line-height: 30px;">
+					            <td class="td_font" style="font-size:15px;font-weight:800">1</td>
+					            
+					            <td class="td_font" >0.00001</td>
+					            <td class="td_font" >0.0004</td>
+					            
+					        </tr> -->
+					         
+					        
+					   
+   					 </tbody>
+					</table>
+					</div>
+					
+					
+					</div>
+				
+			</div>
 		</div>
-		
-		
-		
+		</section>
+		</div>
+	
 		<script src="<%=request.getContextPath()%>/webpos/pos/js/jquery-1.8.2.min.js"></script>
 		<script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/zepto.min.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/bringins.js?t=2"></script>
 		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/room_123.js?t=<%=System.currentTimeMillis()%>'></script>
 		
 	</body>

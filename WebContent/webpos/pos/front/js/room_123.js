@@ -341,6 +341,82 @@ $("#btn_ok").click(function(event){
 	});
 });
 
+var waitkaijiangdialog=null;
+//获取开奖信息
+function getKaijiang(){
+	if(waitkaijiangdialog!=null){
+		return;
+	}
+	waitkaijiangdialog = new TipBox({type:'load',str:'正在获取开奖结果',hasBtn:false});
+	$.ajax({
+		async:true,
+		type:'post',
+		url:'getResult.do',
+		data:{qiname:""+$("#nextname").val()},//$("#nextname").val()
+		dataType:'json',
+		success:function(result,textStatus){
+			
+			waitkaijiangdialog.destroy();
+			waitkaijiangdialog=null;
+			if(result.result=="SUCCESS"){
+				//new TipBox({type:'success',str:'获取成功',hasBtn:true});
+				
+				$("#kj_qiname").html(""+$("#nextname").val());
+				$("#kj_join_number").html(""+result.amount);
+				$("#kj_award_number").html(""+result.award);
+				
+				$("#kj_no1").html(""+result.awards.no1);
+				$("#kj_no2").html(""+result.awards.no2);
+				$("#kj_no3").html(""+result.awards.no3);
+				$("#kj_no4").html(""+result.awards.no4);
+				$("#kj_no5").html(""+result.awards.no5);
+				$("#kj_no6").html(""+result.awards.no6);
+				$("#kj_no7").html(""+result.awards.no7);
+				$("#kj_no8").html(""+result.awards.no8);
+				$("#kj_no9").html(""+result.awards.no9);
+				$("#kj_no10").html(""+result.awards.no10);
+				$("#kj_no11").html(""+result.awards.no11);
+				
+				 var datas = result.details;//根据K值得到一个LIST
+                 if(datas){
+                        for(var i = 0;i<datas.length;i++){  //循环LIST
+                           var veh = datas[i];//获取LIST里面的对象
+                           $("#tbody").append("<tr style='height: 30px;line-height: 30px;'>"+
+					            "<td class='td_font' style='font-size:15px;font-weight:600'>"+veh.number+"</td>"+					       
+					            "<td class='td_font' >"+veh.amount+"</td>"+
+					           "<td class='td_font' >"+veh.award+"</td>"+   
+					        "</tr>");
+                       
+                        }
+                 }
+                 
+				$('#sampledata3').bringins({
+					"position":"center",
+					"color":"black",
+					"closeButton":"white",
+					"width":"100%",
+					"z-index":"1000"
+				});
+			}else{
+				//new TipBox({type:'error',str:''+result.result,hasBtn:true});
+				if (confirm(result.result+"，重试？")) {  
+					getKaijiang();
+		        }  
+			}
+		},
+		error:function (XMLHttpRequest, textStatus, errorThrown) {
+			waitkaijiangdialog.destroy();
+			waitkaijiangdialog=null;
+			if (confirm("网络错误，重试？")) {  
+				getKaijiang();
+	        }  
+	        
+			//new TipBox({type:'error',str:'',hasBtn:true});
+			
+		}
+	});
+}
+
 var websocket=null;
 var _top=80;
 var index=0;
@@ -407,7 +483,7 @@ websocket.onmessage = function(event){
 	    $("#_maxamount"+select_number).html(""+_maxamount.toFixed(4));
 		
 	}else if(ss[0]=="4"){
-		alert("开奖啦！！！");
+		getKaijiang();
 	}
 	
 	
