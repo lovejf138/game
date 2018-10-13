@@ -257,6 +257,7 @@ $(".xuan_ball").click(function(){
 	 select_number = selfball.html();
 	 $("#select_number").html("已选号码："+selfball.html());
 	 $(this).attr("style","background-color: rgb(255, 3, 3);");
+	 $("#input_amount").val("");
 	
 });
 
@@ -383,6 +384,7 @@ function getKaijiang(){
 				$("#kj_no10").html(""+result.awards.no10);
 				$("#kj_no11").html(""+result.awards.no11);
 				
+				$("#tbody").html("");
 				 var datas = result.details;//根据K值得到一个LIST
                  if(datas){
                         for(var i = 0;i<datas.length;i++){  //循环LIST
@@ -492,6 +494,7 @@ websocket.onmessage = function(event){
 //		alert(""+ss[1]);
 //		alert($("#nextname").val());
 //		if(ss[1]!=$("#nextname").val()){
+		wait=true;
 		if(wait){
 			getKaijiang();
 		}

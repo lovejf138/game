@@ -126,7 +126,7 @@ public class AwardServiceImpl implements AwardService {
 					if(out_detail.size()<=0) {
 						continue;
 					}else {
-						first_numberdetail = out_detail;
+						first_numberdetail.addAll(out_detail);
 						first_number = i;
 						break;
 					}
@@ -145,6 +145,7 @@ public class AwardServiceImpl implements AwardService {
 				for(Detail first_detail:first_numberdetail) {
 					Integer amount = first_detail.getAmount();
 					Integer award = first_detail.getAward();
+					//System.out.println("award:"+award);
 					if(sum_all_amount<=0) {
 						
 					}
@@ -152,15 +153,15 @@ public class AwardServiceImpl implements AwardService {
 						sum_all_amount =sum_all_amount- amount;
 						first_detail.setAward(award+amount);
 					}else {
-						sum_all_amount = sum_all_amount- amount;
 						first_detail.setAward(award+ sum_all_amount);
+						sum_all_amount = sum_all_amount- amount;
 					}
 					
 					result_details.add(first_detail);
 				}
 				/***************结束第一个计算******************/
 				
-				//System.out.println("sum_d:"+sum_all_amount);
+				//System.out.println("sum_all_amount:"+sum_all_amount);
 				
 				
 				/***************计算后面******************/

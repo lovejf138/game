@@ -42,8 +42,8 @@
 			<div class="in-content-box">
 				<div class="in-content-title">
 					<h2>
-						<a id="name_wait1">币池：
-						<font style="color:#ff7400;font-size: 20px;">${_sum}</font>ETH</a>
+						<a id="name_wait1">池子：
+						<font style="color:#ff7400;font-size: 20px;">${_sum}</font>种子</a>
 					</h2>
 					<div class="in-line-left">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
@@ -55,7 +55,7 @@
 				<div class="in-content-links" style="display:block;text-align: center;font-weight: bold;padding: 14px 0;font-size: 16px;">
 					<div style="text-align:center">
 						
-						期号：<font style="color:#ff7400;font-size: 20px;">${qiname}</font>
+						季节：<font style="color:#ff7400;font-size: 20px;">${qiname}</font>
 						
 					</div>
 					
@@ -72,7 +72,7 @@
 						
 						<!-- 等待开奖-->
 				
-				<c:if test="${kj !=1}">等待开奖</c:if>
+				<c:if test="${kj !=1}">等待收获</c:if>
 				<c:if test="${kj ==1}">
 			<ul>
 				<li>
@@ -126,7 +126,7 @@
 						</div>
 						<div class="in-content-ft">
 							<p style="color:#fff;font-size: 15px;">
-								参与数量</br>(奖金)
+								播种数量</br>(收获金子)
 							</p>
 						</div>
 					</div>
@@ -140,8 +140,8 @@
 						</div>
 						<div class="in-content-ft">
 							<p style="color:#fff;">
-								<em style="font-size: 15px;font-weight: 500;">${detail.amount}</em>ETH</br>
-								(<em style="color:#ff7400;font-size: 15px;font-weight: 500;">${detail.award}</em>ETH)
+								<em style="font-size: 15px;font-weight: 500;">${detail.amount}</em></br>
+								(<em style="color:#ff7400;font-size: 15px;font-weight: 500;">${detail.award}</em>)
 							</p>
 						</div>
 					</div>

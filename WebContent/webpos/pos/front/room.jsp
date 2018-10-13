@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <!DOCTYPE html>
 <html>
@@ -20,8 +19,18 @@
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/room.css?t=4">
 
 		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/mdialog.css?t=3">
-		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_style.css?t=3">
-		
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_style.css?t=1">
+<style>
+input::-webkit-input-placeholder {
+  /* placeholder颜色  */
+        color: #fff;
+        /* placeholder字体大小  */
+         font-size: 15px;
+         font-weight:600;
+         /* placeholder位置  */
+        text-align: left;
+    }
+</style>
 		
 	</head>
 	<body style="background: linear-gradient(135deg, #EA5C54 0%, #bb6dec 100%);">
@@ -102,12 +111,12 @@
 						
 						 <div style="text-align:center;margin-top:3px">
 						我的余额：
-						<font style="font-size: 18px;" id="my_balance">${user.balance}</font>ETH
+						<font style="font-size: 18px;" id="my_balance">${user.balance}</font>种子
 						</div>
 						
 						<div style="text-align:center;margin-top:3px">
-						币池：
-						<font style="color:#ff7400;font-size: 20px;" id="sumamount">${sumamount}</font>ETH
+						池子：
+						<font style="color:#ff7400;font-size: 20px;" id="sumamount">${sumamount}</font>种子
 						</div>
 					
 					
@@ -119,7 +128,7 @@
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
 					</div>
 				</div>
-				<div class="in-content-links" style="background: #96ff96;display: block;">
+				<div class="in-content-links" style="background-image: linear-gradient(to bottom,#e4e4e4,#ffffff);display: block;">
 				
 					<div class="kj-p5 qi_name_div" style="height: 190px; line-height: 190px;">
 						<p class="red-ball2 xuan_ball" style="background-color: rgb(255, 3, 3);" id="select_ball1">1</p>
@@ -133,14 +142,16 @@
 						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball9">9</p>
 						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball10">10</p>
 						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball11">11</p>
-						<p style="line-height: 40px;float: left;margin-top: 15px;margin-left: 15px;color: #f10909;width: 150px; font-size: 15px; font-weight: 900;" id="select_number">已选号码：1</p>
+						<p style="line-height: 40px;float: left;margin-top: 15px;margin-left: 15px;color: #5d5959;width: 150px; font-size: 15px; font-weight: 600;" id="select_number">已选号码：1</p>
 						
 					</div>
 						
 					<div style="line-height: 30px; height: 30px;">
-						<input type="text" class="input-address" id="input_amount" maxlength="12" placeholder="输入参与数量"/>
+		
+						<input type="text" class="input-address" id="input_amount" maxlength="12" placeholder="输入播种数量"
+						      style="font-size: 15px;font-weight: 800;color: #ff0000 !important;"/>
 					
-          				<input id="btn_ok" value="提交" type="button" class="input-login" style="width:60px"/>
+          				<input id="btn_ok" value="确定" type="button" class="input-login" style="width:60px"/>
                		</div>
 					
 					<div class="in-line-left in-content-left" style="top: 230px;">
@@ -171,11 +182,11 @@
 					<table class="am-table">
    					 <thead>
      				   <tr style="color:white">
-            			<th>号码</th>
-            			<th>人数</th>
-           				<th>总数量(ETH)</th>
-           				<th>最大数量(ETH)</th>
-           				<th>我的(ETH)</th>
+            			<th>号码&nbsp&nbsp</th>
+            			<th>人数&nbsp&nbsp</th>
+           				<th>总数量&nbsp</th>
+           				<th>最大数量&nbsp</th>
+           				<th>我的种子</th>
            			   </tr>
    					 </thead>
    					 <tbody>
@@ -203,7 +214,7 @@
 	<!-- content end -->
 	</div>
 		
-			<div class="send">
+			<div class="send" style="z-index: 100;">
 				<div class="s_fiter">
 					
 						<input type="text" class="s_txt" maxlength="12" placeholder="发送弹幕，最多可写12字"/>
@@ -235,18 +246,18 @@
 				
 				<div class="in-content-links" style="color:#666;display:block;text-align: center;font-weight: bold;padding: 14px 0;font-size: 16px;">
 					 	 <div style="text-align:center;">
-						期号:
+						季节:
 						<font style="color:#666;font-size: 20px;" id="kj_qiname"></font>
 						</div>
 						
 						 <div style="text-align:center;margin-top:3px">
-						我的竞技数量：
-						<font style="font-size: 18px;" id="kj_join_number">0.0</font>ETH
+						播种数量：
+						<font style="font-size: 18px;" id="kj_join_number">0</font>种子
 						</div>
 						
 						<div style="text-align:center;margin-top:3px">
-						我的奖金数量：
-						<font style="color:#ff7400;font-size: 20px;" id="kj_award_number">0.0</font>ETH
+						获得金子：
+						<font style="color:#ff7400;font-size: 20px;" id="kj_award_number">0</font>金子
 						</div>
 					
 					
@@ -300,7 +311,7 @@
 				
 						
 					<div style="line-height: 30px; height: 30px;">
-						<input id="btn_next" value="继续竞技" onClick="window.location.href='room.do'" type="button" class="input-login" style="float: right;width:80px;background-color: #ff5292;font-size:15px;margin: auto; max-width: 80px;"/>
+						<input id="btn_next" value="继续播种" onClick="window.location.href='room.do'" type="button" class="input-login" style="float: right;width:80px;background-color: #ff5292;font-size:15px;margin: auto; max-width: 80px;"/>
                	
 						<input id="btn_detail" value="详情" onClick="window.location.href='droom.do?type=_now&qiname=${nextname}'" type="button" class="input-login" style="float: left;width:60px;font-size:15px"/>
           			</div>
@@ -322,21 +333,12 @@
    					 <thead>
      				   <tr style="color:#666;font-size: 16px;">
             			<th>号码</th>
-           				<th>我的数量(ETH)</th>
-           				<th>奖金数量(ETH)</th>
+           				<th>播种数量(种子)</th>
+           				<th>获得数量(金子)</th>
            			   </tr>
    					 </thead>
    					 <tbody id="tbody">
    					   
-					        <!-- <tr style="height: 30px;line-height: 30px;">
-					            <td class="td_font" style="font-size:15px;font-weight:800">1</td>
-					            
-					            <td class="td_font" >0.00001</td>
-					            <td class="td_font" >0.0004</td>
-					            
-					        </tr> -->
-					         
-					        
 					   
    					 </tbody>
 					</table>
@@ -354,8 +356,8 @@
 		<script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/zepto.min.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
-		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/bringins.js?t=2"></script>
-		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/room_123.js?t=<%=System.currentTimeMillis()%>'></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/bringins.js?t=3"></script>
+		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/m/room_123.js?t=1'></script>
 		
 	</body>
 </html>
