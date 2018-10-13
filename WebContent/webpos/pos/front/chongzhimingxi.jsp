@@ -32,7 +32,7 @@
 	
 		<c:forEach items="${objs }" var="withdraw">
 		<li style="height: 100px;line-height: 100px;">
-			<p><fmt:formatDate value="${withdraw.ctime}" pattern="yyyy-MM-dd HH:mm:ss"/><span>${withdraw.amount}ETH</span></p>
+			<p><fmt:formatDate value="${withdraw.ctime}" pattern="yyyy-MM-dd HH:mm:ss"/><span>${withdraw.amount}种子</span></p>
 		</li>
 		</c:forEach>
 		

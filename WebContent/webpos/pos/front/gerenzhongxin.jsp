@@ -74,7 +74,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 <div class="gr-zh">
 	<div class="gr-zh-zuo">
 		<p><span>${user.balance}</span></p>
-		<p>ETH</p>
+		<p>种子</p>
 	</div>
 
 	<div class="gr-zh-you">
@@ -83,13 +83,13 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 			<li>
 				<a data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 250}">
 					<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/k4.png">
-					<p>充值</p>
+					<p>买种子</p>
 				</a>
 			</li>
 			<li>
 				<a data-am-modal="{target: '#doc-modal-2', closeViaDimmer: 0, width: 400, height: 200}">
 					<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/k3.png">
-					<p>提现</p>
+					<p>提金子</p>
 				</a>
 			</li>
 		</ul>
@@ -101,21 +101,21 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 		<li>
 			<a href="canyu.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/ge1.png">
-				<p>我的参与记录</p>
+				<p>我的竞技记录</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
 			</a>
 		</li>
 		<li>
 			<a href="tixianmingxi.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/ge2.png">
-				<p>提现记录</p>
+				<p>提金记录</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
 			</a>
 		</li>
 		<li>
 			<a href="chongzhimingxi.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/ge3.png">
-				<p>充值记录</p>
+				<p>买种记录</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
 			</a>
 		</li>
@@ -144,20 +144,6 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 			</a>
 		</li>
 		
-		<%-- <li>
-			<a href="guize.do">
-				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/question.png">
-				<p>中奖及玩法说明</p>
-				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
-			</a>
-		</li> --%>
-		<%-- <li>
-			<a>
-				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/kefu.png">
-				<p>客服QQ：1092888743</p>
-			</a>
-		</li> --%>
-		
 		<li>
 			<a style="text-align: center;font-size: 20px;">
 				官方邮箱<font style="color: #cc9090;">eth.club@mail.com</font>
@@ -175,7 +161,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 			</a></li>
 			<li><a href="kj.do"> <img
 					src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s4.png">
-					<p>开奖</p>
+					<p>历史</p>
 			</a></li>
 			<li><a href="paihang.do"> <img
 					src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s6.png">
@@ -191,11 +177,11 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 
 <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1" style="top:auto;">
   <div class="am-modal-dialog">
-    <div class="am-modal-hd" style="line-height: 20px;font-size: 25px;">充值
+    <div class="am-modal-hd" style="line-height: 20px;font-size: 25px;">买种子
       <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
     </div>
     <div class="am-modal-bd" style="line-height: 20px;font-size:15px">
-      请将以太坊转入以下地址完成充值
+      1以太坊=1000种子。请将以太坊转入以下地址完成充值
    
      <p><a style="user-select:auto; -webkit-user-select:auto; -moz-user-select:auto; -ms-user-select:auto; user-select:auto;">0x9EEa8Bd7317c0233fCd4E1846368f6eBfC9F06B7</a>
      </p>
@@ -207,7 +193,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 
 <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-spread" style="top:auto;">
   <div class="am-modal-dialog">
-    <div class="am-modal-hd" style="line-height: 20px;font-size: 20px;">分享给好友，永享好友奖金的0.2%收益
+    <div class="am-modal-hd" style="line-height: 20px;font-size: 20px;">分享给好友，永享好友盈利的0.5%收益
       <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
     </div>
     
@@ -221,19 +207,20 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 
 <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2" style="top:auto;">
   <div class="am-modal-dialog">
-    <div class="am-modal-hd" style="line-height:20px;font-size: 20px;">提现
+    <div class="am-modal-hd" style="line-height:20px;font-size: 20px;">提金子
       <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
     </div>
     
     <div class="am-modal-bd" style="margin-top: 10px;">
-      <input class="input_class" name="eth_withdraw" id="eth_withdraw" placeholder="请输入提现数量" type="number"/>   
+      <input class="input_class" name="eth_withdraw" id="eth_withdraw" placeholder="请输入金子数量" type="number"/>   
       <input id="btn_withdraw" value="提交" type="button" class="sumbit_login"/>
     
       <p id="withdraw_tip" style="margin-top:10px;float: left;font-size: 15px;font-align:left;color:red"></p>
      
-      <p style="margin-top:10px;float: left;font-size: 15px;font-align:left">1.至少0.01个以太坊起提，半个小时内到账</p>
+      <p style="margin-top:10px;float: left;font-size: 15px;font-align:left">1.至少100个起提，半个小时内到账</p>
       
-      <p style="margin-top:10px;float: left;font-size: 15px;font-align:left">2.每次提现，收取1%的网络矿工费(至少0.001ETH)</p>
+      <p style="margin-top:10px;float: left;font-size: 15px;font-align:left">2.每次提金子，收取1%的网络矿工费</p>
+      <p style="margin-top:10px;float: left;font-size: 15px;font-align:left">3.1000个种子＝1000个金子＝1个以太坊</p>
    
    	 
     
@@ -246,6 +233,6 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 <script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/index_fontsize.js"></script>
 <script src="<%=request.getContextPath()%>/webpos/pos/assets/js/amazeui.min.js"></script>
 <script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/m/geren_123.js?t=2"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/m/geren_123.js?t=3"></script>
 
 </html>

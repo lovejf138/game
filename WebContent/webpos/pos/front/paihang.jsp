@@ -17,8 +17,8 @@
 <body>
 <div id="wrap">
 	<div id="tit">
-		<span class="select">参与榜</span>
-		<span>奖金榜</span>
+		<span class="select">播种榜</span>
+		<span>收获榜</span>
 	</div>
 	<div id="login">
 		<div class="login show">
@@ -26,7 +26,7 @@
 				<div class="ph-sh1">
 					<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/tou.jpeg">
 					<p>${play1.short6}</p>
-					<p><span>${play1.play_sum}</span>ETH</p>
+					<p><span>${play1.play_sum}</span>种子</p>
 					<div class="ph-dy">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/p1.png">
 					</div>
@@ -34,7 +34,7 @@
 				<div class="ph-sh1">
 					<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/tou.jpeg">
 					<p>${play2.short6}</p>
-					<p><span>${play2.play_sum}</span>ETH</p>
+					<p><span>${play2.play_sum}</span>种子</p>
 					<div class="ph-dy">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/p2.png">
 					</div>
@@ -42,7 +42,7 @@
 				<div class="ph-sh1 ph-sh2">
 					<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/tou.jpeg">
 					<p>${play3.short6}</p>
-					<p><span>${play3.play_sum}</span>ETH</p>
+					<p><span>${play3.play_sum}</span>种子</p>
 					<div class="ph-dy">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/p3.png">
 					</div>
@@ -54,7 +54,7 @@
 					<c:forEach items="${plays }" var="play">
 					<li>
 						<p>${play.id_short}</p>
-						<p style="float: right;">已参与<span>${play.play_sum}</span>ETH</p>
+						<p style="float: right;">已播<span>${play.play_sum}</span>种子</p>
 					</li>
 					</c:forEach>
 				</ul>
@@ -66,7 +66,7 @@
 				<div class="ph-sh1">
 					<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/tou.jpeg">
 					<p>${award1.short6}</p>
-					<p><span>${award1.award_sum}</span>ETH</p>
+					<p><span>${award1.award_sum}</span>金子</p>
 					<div class="ph-dy">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/p1.png">
 					</div>
@@ -74,7 +74,7 @@
 				<div class="ph-sh1">
 					<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/tou.jpeg">
 					<p>${award2.short6}</p>
-					<p><span>${award2.award_sum}</span>ETH</p>
+					<p><span>${award2.award_sum}</span>金子</p>
 					<div class="ph-dy">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/p2.png">
 					</div>
@@ -82,7 +82,7 @@
 				<div class="ph-sh1 ph-sh2">
 					<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/tou.jpeg">
 					<p>${award3.short6}</p>
-					<p><span>${award3.award_sum}</span>ETH</p>
+					<p><span>${award3.award_sum}</span>金子</p>
 					<div class="ph-dy">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/p3.png">
 					</div>
@@ -94,7 +94,7 @@
 				   <c:forEach items="${awards }" var="award">
 					<li>
 						<p>${award.id_short}</p>
-						<p style="float: right;">已获得<span>${award.award_sum}</span>ETH</p>
+						<p style="float: right;">已收获<span>${award.award_sum}</span>金子</p>
 					</li>
 					</c:forEach>
 				</ul>
@@ -117,7 +117,7 @@
 		<li>
 			<a href="kj.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s4.png">
-				<p>开奖</p>
+				<p>历史</p>
 			</a>
 		</li>
 		<li>

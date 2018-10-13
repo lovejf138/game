@@ -117,7 +117,7 @@ public class CommUtil {
 
 	public static boolean ifClose() {
 		int starttime = 1;
-		int endtime = 6;
+		int endtime = 8;
 
 		Calendar cal = Calendar.getInstance();
 		int hour = cal.get(11);

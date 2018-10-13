@@ -10,17 +10,23 @@ $(".pothook").click(function(){
 
 
 var intDiff = parseInt($("#nextsecond").val());
+
 var wait = false;//等待开奖
 if (intDiff < 0) {
 	intDiff = intDiff * -1;
 	wait = true;
-	$("#name_wait1").html("待" + $("#nextname").val() + "期开奖：");
+	$("#name_wait1").html("待" + $("#nextname").val() + "季收获：");
 } else {
-	$("#name_wait1").html("离" + $("#nextname").val() + "期结束：");
+	$("#name_wait1").html("离" + $("#nextname").val() + "季结束：");
 }
 /* var intDiff = parseInt(120);//倒计时总秒数量 */
 function timer(intDiff) {
 	window.setInterval(function() {
+		if(intDiff==0){
+			$("#name_wait1").html("待" + $("#nextname").val() + "季收获：");
+			wait=true;
+		}
+		
 		var second = 0;//时间默认值
 		if (intDiff > 0) {
 			second = intDiff;
@@ -261,12 +267,12 @@ $("#btn_ok").click(function(event){
 	if(is_op)return;
 	var _amount=0;
 	try{
-		_amount = parseFloat($("#input_amount").val());
+		_amount = parseInt($("#input_amount").val());
 	}catch(e) {
 		_amount = 0;
 	}
-	if(_amount<0.005){
-		new TipBox({type:'error',str:'最少参与数量0.005',hasBtn:true});
+	if(_amount<10){
+		new TipBox({type:'error',str:'最少播10个种子',hasBtn:true});
 		return ;
 	}
 	
@@ -292,15 +298,15 @@ $("#btn_ok").click(function(event){
 			    
 				//更新相关数据
 				$("#my_balance").html(""+result.desc);
-				var sumamount = parseFloat($("#sumamount").html());
+				var sumamount = parseInt($("#sumamount").html());
 				sumamount = sumamount+_amount;
-				sumamount = sumamount.toFixed(4);
+				//sumamount = sumamount.toFixed(4);
 				$("#sumamount").html(""+sumamount);
 				
 				var _count=parseInt($("#_count"+select_number).html());
-				var _sumamount=parseFloat($("#_sumamount"+select_number).html());
-				var _maxamount=parseFloat($("#_maxamount"+select_number).html());
-				var _myamount=parseFloat($("#_myamount"+select_number).html());
+				var _sumamount=parseInt($("#_sumamount"+select_number).html());
+				var _maxamount=parseInt($("#_maxamount"+select_number).html());
+				var _myamount=parseInt($("#_myamount"+select_number).html());
 				
 				if(_myamount<=0){//不是加注
 					is_first_join=1;
@@ -310,16 +316,16 @@ $("#btn_ok").click(function(event){
 					is_first_join=0;
 				}
 				_myamount = _myamount+_amount;
-				$("#_myamount"+select_number).html(""+_myamount.toFixed(4));
+				$("#_myamount"+select_number).html(""+_myamount);
 				
 				_sumamount = _sumamount+_amount;
-				$("#_sumamount"+select_number).html(""+_sumamount.toFixed(4));
+				$("#_sumamount"+select_number).html(""+_sumamount);
 				
 				
 				if(_myamount>_maxamount){
 					_maxamount = _myamount;
 				}
-				$("#_maxamount"+select_number).html(""+_maxamount.toFixed(4));
+				$("#_maxamount"+select_number).html(""+_maxamount);
 				
 				//通知其他伙伴
 				var text=is_first_join+"****"+_amount+"****"+select_number+"****"+_maxamount;
@@ -347,7 +353,7 @@ function getKaijiang(){
 	if(waitkaijiangdialog!=null){
 		return;
 	}
-	waitkaijiangdialog = new TipBox({type:'load',str:'正在获取开奖结果',hasBtn:false});
+	waitkaijiangdialog = new TipBox({type:'load',str:'正在获取收获结果',hasBtn:false});
 	$.ajax({
 		async:true,
 		type:'post',
@@ -459,17 +465,17 @@ websocket.onmessage = function(event){
 		var msg = ss[1].split("****");
 	
 		var is_first_join = parseInt(msg[0]);
-		var _amount = parseFloat(msg[1]);
+		var _amount = parseInt(msg[1]);
 		var select_number = parseInt(msg[2]);
-		var _maxamount = parseFloat(msg[3]);
+		var _maxamount = parseInt(msg[3]);
 		
 		//更新相关数据
-		var sumamount = parseFloat($("#sumamount").html());
+		var sumamount = parseInt($("#sumamount").html());
 		sumamount = sumamount+_amount;
-		$("#sumamount").html(""+sumamount.toFixed(4));
+		$("#sumamount").html(""+sumamount);
 		
 		var _count=parseInt($("#_count"+select_number).html());
-		var _sumamount=parseFloat($("#_sumamount"+select_number).html());
+		var _sumamount=parseInt($("#_sumamount"+select_number).html());
 		//var _maxamount=parseFloat($("#_maxamount"+select_number).html());
 		//var _myamount=parseFloat($("#_myamount"+select_number).html());
 		
@@ -479,8 +485,8 @@ websocket.onmessage = function(event){
 		}
 		
 		_sumamount = _sumamount+_amount;
-		$("#_sumamount"+select_number).html(""+_sumamount.toFixed(4));
-	    $("#_maxamount"+select_number).html(""+_maxamount.toFixed(4));
+		$("#_sumamount"+select_number).html(""+_sumamount);
+	    $("#_maxamount"+select_number).html(""+_maxamount);
 		
 	}else if(ss[0]=="4"){
 //		alert(""+ss[1]);

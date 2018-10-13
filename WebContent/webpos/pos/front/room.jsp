@@ -11,7 +11,7 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<title>参与</title>
+		<title>竞技</title>
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/bootstrap-grid.min.css?t=1">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=5">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_base1.css?t=3">
@@ -36,7 +36,7 @@
 			<nav class="navbox navbox_class2">
 				<div class="navContent1">
 					<c:forEach items="${awards }" var="aw">
-					<p class="qi_name_class">${aw.name}期</p>
+					<p class="qi_name_class">${aw.name}季</p>
 						<div class="kj-p5 qi_name_div">
 						<p class="red-ball2 qi_ball" >${aw.no1}</p>
 						<p class="red-ball2 qi_ball" >${aw.no2}</p>
@@ -76,7 +76,7 @@
 					<div class="navList" onClick="window.location.href='droom.do?qiname=${nextname}&type=_last'">
 						<i class="navIco-shang navico"></i>
 						<span class="navText">
-							上一期
+							上一季
 						</span>
 					</div>
 					
@@ -93,18 +93,8 @@
 		<div class="in-content" style="background: linear-gradient(135deg, #EA5C54 0%, #bb6dec 100%);padding-bottom: 20px;">
 			<div class="in-content-line"></div>
 			<div class="in-content-box">
-				<div class="in-content-title">
-					<h2>
-						<a id="name_wait1">离${nextname}期结束：</a><a id="name_wait2" style="color:#ff7400">0</a>秒
-					</h2>
-					<div class="in-line-left">
-						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
-					</div>
-					<div class="in-line-right">
-						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
-					</div>
-				</div>
-				<div class="in-content-links" style="display:block;text-align: center;font-weight: bold;padding: 14px 0;font-size: 16px;">
+			
+				<div class="in-content-title" style="display:block;text-align: center;font-weight: bold;padding: 14px 0;font-size: 16px;">
 					  <div style="text-align:center">
 						在线人数
 						<font style="color:#ff7400;font-size: 20px;" id="online_number">0</font>
@@ -122,10 +112,10 @@
 					
 					
 					
-					<div class="in-line-left" style="top: 90px;">
+					<div class="in-line-left" style="top: 85px;">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
 					</div>
-					<div class="in-line-right" style="top: 90px;">
+					<div class="in-line-right" style="top: 85px;">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
 					</div>
 				</div>
@@ -161,6 +151,19 @@
 					</div>
 					
 				</div>
+				
+				<div class="in-content-title">
+					<h2>
+						<a id="name_wait1">离${nextname}期结束：</a><a id="name_wait2" style="color:#ff7400">0</a>秒
+					</h2>
+					<div class="in-line-left">
+						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
+					</div>
+					<div class="in-line-right">
+						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
+					</div>
+				</div>
+				
 				
 				 
 				<div class="in-content-fellow" style="background: #111;">
@@ -352,7 +355,7 @@
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/zepto.min.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/bringins.js?t=2"></script>
-		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/m/room_123.js?t=<%=System.currentTimeMillis()%>'></script>
+		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/room_123.js?t=<%=System.currentTimeMillis()%>'></script>
 		
 	</body>
 </html>

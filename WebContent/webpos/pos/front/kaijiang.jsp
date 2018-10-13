@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>开奖</title>
+<title>历史</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -23,7 +23,7 @@
 	<div class="kj-zh-nei">
 		<div class="kj-zh-nei1">
 			<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/k6.png">
-			<p id="p_time_show">离${nextname}期结束：</p>
+			<p id="p_time_show">离${nextname}季结束：</p>
 		</div>
 		<div class="time-item">
 			<strong id="hour_show">0时</strong>
@@ -35,9 +35,9 @@
 	
 <div class="kj-xia">
 	<div class="kj-xia-b" style="color: #777;font-size: 16px;">
-		<div class="kj-p1" style="width:90px;float:left">期号</div>
+		<div class="kj-p1" style="width:90px;float:left">季节</div>
 		<div class="kj-p3" style="float: right;width:140px">时间</div>
-		<div class="kj-p2" style="margin-left: 90px;margin-right:140px">开奖号码</div>
+		<div class="kj-p2" style="margin-left: 90px;margin-right:140px">竞技号码</div>
 		
 	</div>
 	<ul>
@@ -80,7 +80,7 @@
 		<li>
 			<a href="kj.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s3.png">
-				<p style="color: #e01222;">开奖</p>
+				<p style="color: #e01222;">历史</p>
 			</a>
 		</li>
 		<li>
@@ -105,17 +105,24 @@
 <script type="text/javascript">
 
 var intDiff = parseInt($("#nextsecond").val());
+
 var wait=false;//等待开奖
 if(intDiff<0){
 	intDiff = intDiff*-1;
 	wait=true;
-	$("#p_time_show").html("待"+$("#nextname").val()+"期开奖：");
+	$("#p_time_show").html("待"+$("#nextname").val()+"季收获：");
 }else{
-	$("#p_time_show").html("离"+$("#nextname").val()+"期结束：");
+	$("#p_time_show").html("离"+$("#nextname").val()+"季结束：");
 }
 
 function timer(intDiff){
 	window.setInterval(function(){
+		
+		if(intDiff==0){
+			$("#p_time_show").html("待" + $("#nextname").val() + "季收获：");
+			wait=true;
+		}
+		
 	var day=0,
 		hour=0,
 		minute=0,

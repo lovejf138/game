@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>天注定－登录</title>
+	<title>播种子－登录</title>
 	
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/login_default.css">
 	<!--必要样式-->
@@ -19,7 +19,7 @@
 	<input id="error_time" value="${localtime}" style="display:none"/>
 	<div class='login'>
 	  <div class='login_title'>
-	    <span>天注定</span>
+	    <span>播种子，得金子</br>---- 种子一袋子，金子一屋子</span>
 	  </div>
 	  <div class='login_fields'>
 	    <div class='login_fields__user'>
@@ -67,7 +67,7 @@
 	    <p>正在跳转到首页...</p>
 	  </div>
 	  <div class='disclaimer'>
-	    <p>无需注册，以太坊地址直接登录。首次登录，输入的密码为您下一次登录密码，忘记密码请联系客服QQ:1092888743</p>
+	    <p>无需注册，以太坊地址直接登录。首次登录，输入的密码为您下一次登录密码</p>
 	  </div>
 	</div>
 	<div class='authent'>

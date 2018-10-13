@@ -37,16 +37,23 @@ body, button, input, select, textarea {
 			<img
 				src="<%=request.getContextPath()%>/webpos/pos/front/img/index/gonggao.png">
 		</div>
-		<div class="gd-g">
+		
+		<div class="gg-z-f" style="width: 60px;font-size: 30px;float: right;">
+			
+			<a href="http://caipiao.163.com/award/gd11xuan5/" style="color: red;font-size: 22px;float: right;">公开</a>
+		</div>
+		
+		<div class="gd-g" style="width:auto">
 			<marquee direction="left" scrollamount="3" onmouseover="this.stop()"
 				onmouseout="this.start()">
-				<a href="">粤11选5，每天09:00～23:00期间10分钟开奖一次，可前往网易官网"http://caipiao.163.com/award/gd11xuan5"对照数据，最公平、公正、公开的以太坊赚钱平台！</a>
+				<a href="">播种子收金子竞技游戏，每天09:00～23:00每十分钟一个收获季。基于公平、公正、不可更改的实时数据。区块链思维设计，去中心化，人为不可控！</a>
 			</marquee>
 		</div>
+		
 	</div>
 	<div class="gg-zhong"
 		style="background: linear-gradient(135deg, #EA5C54 0%, #bb6dec 100%);">
-		<p>第${award.name}期</p>
+		<p>第${award.name}季</p>
 		<div class="gg-shu">
 			<ul>
 				<li>
@@ -91,7 +98,7 @@ body, button, input, select, textarea {
 			<div class="kj-zh-nei1">
 				<img
 					src="<%=request.getContextPath()%>/webpos/pos/front/img/index/k6.png">
-				<p id="p_time_show">离${nextname}期结束：</p>
+				<p id="p_time_show">离${nextname}季结束：</p>
 			</div>
 			<div class="time-item">
 				<strong id="hour_show">0时</strong> <strong id="minute_show">0分</strong>
@@ -573,7 +580,7 @@ body, button, input, select, textarea {
 			</a></li>
 			<li><a href="kj.do"> <img
 					src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s4.png">
-					<p>开奖</p>
+					<p>历史</p>
 			</a></li>
 			<li><a href="paihang.do"> <img
 					src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s6.png">
@@ -620,13 +627,17 @@ var _hmt = _hmt || [];
 		if (intDiff < 0) {
 			intDiff = intDiff * -1;
 			wait = true;
-			$("#p_time_show").html("待" + $("#nextname").val() + "期开奖：");
+			$("#p_time_show").html("待" + $("#nextname").val() + "季收获：");
 		} else {
-			$("#p_time_show").html("离" + $("#nextname").val() + "期结束：");
+			$("#p_time_show").html("离" + $("#nextname").val() + "季结束：");
 		}
 		/* var intDiff = parseInt(120);//倒计时总秒数量 */
 		function timer(intDiff) {
 			window.setInterval(function() {
+				if(intDiff==0){
+					$("#p_time_show").html("待" + $("#nextname").val() + "季收获：");
+					wait=true;
+				}
 				var day = 0, hour = 0, minute = 0, second = 0;//时间默认值
 				if (intDiff > 0) {
 					day = Math.floor(intDiff / (60 * 60 * 24));

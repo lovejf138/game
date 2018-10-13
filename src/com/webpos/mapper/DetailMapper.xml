@@ -8,10 +8,10 @@
 		<result column="roomid" property="roomid" jdbcType="INTEGER" />
 		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
 		<result column="qiname" property="qiname" jdbcType="VARCHAR" />
-		<result column="amount" property="amount" jdbcType="VARCHAR" />
-		<result column="award" property="award" jdbcType="VARCHAR" />
-		<result column="finalaward" property="finalaward" jdbcType="VARCHAR" />
-		<result column="parentaward" property="parentaward" jdbcType="VARCHAR" />
+		<result column="amount" property="amount" jdbcType="INTEGER" />
+		<result column="award" property="award" jdbcType="INTEGER" />
+		<result column="finalaward" property="finalaward" jdbcType="INTEGER" />
+		<result column="parentaward" property="parentaward" jdbcType="INTEGER" />
 		<result column="number" property="number" jdbcType="INTEGER" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
 		<result column="kjnumber" property="kjnumber" jdbcType="VARCHAR" />
@@ -122,8 +122,8 @@
 		values ( #{userid,jdbcType=VARCHAR},#{roomid,jdbcType=INTEGER},
 		#{status,jdbcType=VARCHAR},
 		
-		#{ctime,jdbcType=TIMESTAMP},#{qiname,jdbcType=VARCHAR},0.0,0.0,0.0,
-		#{amount,jdbcType=VARCHAR},#{number,jdbcType=INTEGER},#{parentid,jdbcType=VARCHAR}
+		#{ctime,jdbcType=TIMESTAMP},#{qiname,jdbcType=VARCHAR},0,0,0,
+		#{amount,jdbcType=INTEGER},#{number,jdbcType=INTEGER},#{parentid,jdbcType=VARCHAR}
 		)
 	</insert>
 	
@@ -171,13 +171,13 @@
 		update _detail
 		<set>
 			<if test="amount != null">
-			    amount = #{amount,jdbcType=VARCHAR},
+			    amount = #{amount,jdbcType=INTEGER},
 			</if>
 			<if test="award != null">
 			   
-				award = #{award,jdbcType=VARCHAR},
-				finalaward = #{finalaward,jdbcType=VARCHAR},
-				parentaward = #{parentaward,jdbcType=VARCHAR}
+				award = #{award,jdbcType=INTEGER},
+				finalaward = #{finalaward,jdbcType=INTEGER},
+				parentaward = #{parentaward,jdbcType=INTEGER}
 			</if>
 		</set>
 		where id = #{id,jdbcType=BIGINT}

@@ -19,7 +19,7 @@ var tixian=false;
 		var _amount=0;
 		
 		try{
-			_amount = parseFloat(txt_withdraw);
+			_amount = parseInt(txt_withdraw);
 		}catch(e) {
 			_amount = 0;
 		}
@@ -29,8 +29,8 @@ var tixian=false;
 			_amount=0;
 		}
 		
-		if(_amount<0.01){
-			$("#withdraw_tip").html("至少0.01个ETH");
+		if(_amount<100){
+			$("#withdraw_tip").html("至少100个种子起提");
 			return ;
 		}
 		
@@ -43,7 +43,7 @@ var tixian=false;
 			_balance=0;
 		}
 		try{
-			_balance = parseFloat(txt_balance);
+			_balance = parseInt(txt_balance);
 		}catch(e) {
 			_balance = 0;
 		}

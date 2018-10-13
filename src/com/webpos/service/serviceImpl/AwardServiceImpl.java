@@ -83,7 +83,7 @@ public class AwardServiceImpl implements AwardService {
 			}
 			else {
 				Map<Integer,List<Detail>> map_detail = new HashMap<Integer,List<Detail>>();
-				Double sum_all_amount=0.0;
+				Integer sum_all_amount=0;
 				//List<SumDetail> sumdetail_list = new ArrayList<SumDetail>();//存放每个号码的合计
 				for(int i=1;i<=11;i++) {
 					List<Detail> map_ds = new ArrayList<Detail>();
@@ -91,7 +91,7 @@ public class AwardServiceImpl implements AwardService {
 					for(Detail t_d:ds) {
 						
 						if(t_d.getNumber()==i) {//
-							sum_all_amount = CommUtil.add(sum_all_amount, t_d.getAmount());
+							sum_all_amount = sum_all_amount+t_d.getAmount();
 							map_ds.add(t_d);
 							temp_ds.add(t_d);
 						}else {
@@ -137,23 +137,23 @@ public class AwardServiceImpl implements AwardService {
 				
 				/***************计算第一个******************/
 				for(Detail first_detail:first_numberdetail) {
-					Double amount = first_detail.getAmount();
-					sum_all_amount = CommUtil.subtract(sum_all_amount, amount);
+					Integer amount = first_detail.getAmount();
+					sum_all_amount = sum_all_amount-amount;
 					first_detail.setAward(amount);
 				}
 				
 				for(Detail first_detail:first_numberdetail) {
-					Double amount = first_detail.getAmount();
-					Double award = first_detail.getAward();
+					Integer amount = first_detail.getAmount();
+					Integer award = first_detail.getAward();
 					if(sum_all_amount<=0) {
 						
 					}
 					else if(sum_all_amount>amount) {
-						sum_all_amount = CommUtil.subtract(sum_all_amount, amount);
-						first_detail.setAward(CommUtil.add(award, amount));
+						sum_all_amount =sum_all_amount- amount;
+						first_detail.setAward(award+amount);
 					}else {
-						sum_all_amount = CommUtil.subtract(sum_all_amount, amount);
-						first_detail.setAward(CommUtil.add(award, sum_all_amount));
+						sum_all_amount = sum_all_amount- amount;
+						first_detail.setAward(award+ sum_all_amount);
 					}
 					
 					result_details.add(first_detail);
@@ -179,14 +179,14 @@ public class AwardServiceImpl implements AwardService {
 						
 						for(Detail other_detail:out_detail) {
 							
-							Double amount = other_detail.getAmount();
-							Double doubleamount = CommUtil.add(amount, amount);
+							Integer amount = other_detail.getAmount();
+							Integer doubleamount = amount+amount;
 							//Double award = other_detail.getAward();
 							if(sum_all_amount<=0) {
 								break;
 							}
 							else if(sum_all_amount>doubleamount) {
-								sum_all_amount = CommUtil.subtract(sum_all_amount, doubleamount);
+								sum_all_amount = sum_all_amount-doubleamount;
 								//System.out.println("sum_d:"+sum_all_amount);
 								other_detail.setAward(doubleamount);
 								result_details.add(other_detail);
@@ -194,7 +194,7 @@ public class AwardServiceImpl implements AwardService {
 								
 								other_detail.setAward(sum_all_amount);
 								//System.out.println("sum_d:"+0);
-								sum_all_amount = 0.0;
+								sum_all_amount = 0;
 								result_details.add(other_detail);
 								break;
 							}
@@ -217,26 +217,26 @@ public class AwardServiceImpl implements AwardService {
 					}
 					else if(ad.getAward()<=ad.getAmount()) {
 						User u = userDao.selectByUserId(ad.getUserid());
-						u.setBalance(""+CommUtil.add(u.getBalance(),ad.getAward()));
-						u.setAward_sum(CommUtil.add(u.getAward_sum(),ad.getAward()));
+						u.setBalance(u.getBalance()+ad.getAward());
+						u.setAward_sum(u.getAward_sum()+ad.getAward());
 						ad.setFinalaward(ad.getAward());
 						userDao.updateByPrimaryKeySelective(u);
 					}else {
 						
-						Double yingli = CommUtil.subtract(ad.getAward(),ad.getAmount());
-						Double lirun = CommUtil.mul(yingli, 0.03);
-						Double prun = CommUtil.mul(yingli, 0.005);
-						Double final_award = CommUtil.subtract(ad.getAward(),lirun);
+						Integer yingli = ad.getAward()-ad.getAmount();
+						Integer lirun = (new Double(CommUtil.mul(yingli, 0.03))).intValue();
+						Integer prun = (new Double(CommUtil.mul(yingli, 0.005))).intValue();
+						Integer final_award = ad.getAward()-lirun;
 						ad.setFinalaward(final_award);
 						ad.setParentaward(prun);
 						User u = userDao.selectByUserId(ad.getUserid());
-						u.setBalance(""+CommUtil.add(u.getBalance(),final_award));
-						u.setAward_sum(CommUtil.add(u.getAward_sum(),ad.getAward()));
+						u.setBalance(u.getBalance()+final_award);
+						u.setAward_sum(u.getAward_sum()-ad.getAward());
 						userDao.updateByPrimaryKeySelective(u);
 						
 						if(u.getParent()!=null&&!u.getParent().equals("")) {
 							User up = userDao.selectByUserId(u.getParent());
-							up.setBalance(""+CommUtil.add(up.getBalance(),prun));
+							up.setBalance(up.getBalance()+prun);
 							userDao.updateByPrimaryKeySelective(up);
 						}
 						
