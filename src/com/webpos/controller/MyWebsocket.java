@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import javax.servlet.http.HttpSession;
+import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -18,7 +20,7 @@ import com.webpos.entity.Message;
 import com.webpos.service.MessageService;
 import com.webpos.tools.Md5Encrypt;
 
-@ServerEndpoint(value = "/websocket", configurator = SpringConfigurator.class)
+@ServerEndpoint(value = "/websocket", configurator = GetHttpSessionConfigurator.class)
 public class MyWebsocket {
 
 	private static CopyOnWriteArraySet<MyWebsocket> websocketPools = new CopyOnWriteArraySet<MyWebsocket>();
@@ -36,14 +38,56 @@ public class MyWebsocket {
 	 * @param session 可选的参数。session为与某个客户端的连接会话，需要通过它来给客户端发送数据
 	 */
 	@OnOpen
-	public void onOpen(Session session) throws Exception {
-		this.session = session;
-		websocketPools.add(this);
+	public void onOpen(Session session,EndpointConfig config) throws Exception {
 		
-		send("2&&__"+websocketPools.size(),session,true);
+		HttpSession httpSession= (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
+		
+		if(httpSession==null) {
+			//System.out.println("close");
+			session.close();
+			return;
+		}
+		
+		if(httpSession.getAttribute("user")!=null||httpSession.getAttribute("admin")!=null){
+			this.session = session;
+			websocketPools.add(this);
+			
+			send("2&&__"+websocketPools.size(),session,true);
+			return ;
+		}
+		session.close();
+		return;
+		
 		// index = true;
 		// onMessage("&&open&&", this.session);
 	}
+
+//@ServerEndpoint(value = "/websocket", configurator = SpringConfigurator.class)
+//public class MyWebsocket {
+//
+//	private static CopyOnWriteArraySet<MyWebsocket> websocketPools = new CopyOnWriteArraySet<MyWebsocket>();
+//
+//	private Session session;
+//	//type;1、聊天信息 2、登录信息  3、下注   4、开奖
+//
+//	@Autowired
+//	private MessageService messageService;
+//	// boolean index = false;
+//
+//	/**
+//	 * 连接建立成功调用的方法
+//	 * 
+//	 * @param session 可选的参数。session为与某个客户端的连接会话，需要通过它来给客户端发送数据
+//	 */
+//	@OnOpen
+//	public void onOpen(Session session) throws Exception {
+//		this.session = session;
+//		websocketPools.add(this);
+//		
+//		send("2&&__"+websocketPools.size(),session,true);
+//		// index = true;
+//		// onMessage("&&open&&", this.session);
+//	}
 
 	/**
 	 * 连接关闭调用的方法
