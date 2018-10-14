@@ -34,6 +34,8 @@ input::-webkit-input-placeholder {
 		
 	</head>
 	<body style="background: linear-gradient(135deg, #EA5C54 0%, #bb6dec 100%);">
+	
+	
 		<div id="wrap">	
 			<input id="baseurl" value="<%=request.getContextPath()%>" style="display:none"/>
 			<input id="error_time" value="${localtime}" style="display:none"/>
@@ -52,12 +54,12 @@ input::-webkit-input-placeholder {
 						<p class="red-ball2 qi_ball" >${aw.no3}</p>
 						<p class="red-ball2 qi_ball" >${aw.no4}</p>
 						<p class="red-ball2 qi_ball" >${aw.no5}</p>
-						<p class="blue-ball2 qi_ball">${aw.no6}</p>
-						<p class="blue-ball2 qi_ball">${aw.no7}</p>
-						<p class="blue-ball2 qi_ball">${aw.no8}</p>
-						<p class="blue-ball2 qi_ball">${aw.no9}</p>
-						<p class="blue-ball2 qi_ball">${aw.no10}</p>
-						<p class="blue-ball2 qi_ball">${aw.no11}</p>
+						<p class="red-ball2 qi_ball">${aw.no6}</p>
+						<p class="red-ball2 qi_ball">${aw.no7}</p>
+						<p class="red-ball2 qi_ball">${aw.no8}</p>
+						<p class="red-ball2 qi_ball">${aw.no9}</p>
+						<p class="red-ball2 qi_ball">${aw.no10}</p>
+						<p class="red-ball2 qi_ball">${aw.no11}</p>
 					</div>
 					</c:forEach>
 				</div>
@@ -115,7 +117,7 @@ input::-webkit-input-placeholder {
 						</div>
 						
 						<div style="text-align:center;margin-top:3px">
-						池子：
+						仓库：
 						<font style="color:#ff7400;font-size: 20px;" id="sumamount">${sumamount}</font>种子
 						</div>
 					
@@ -131,17 +133,17 @@ input::-webkit-input-placeholder {
 				<div class="in-content-links" style="background-image: linear-gradient(to bottom,#e4e4e4,#ffffff);display: block;">
 				
 					<div class="kj-p5 qi_name_div" style="height: 190px; line-height: 190px;">
-						<p class="red-ball2 xuan_ball" style="background-color: rgb(255, 3, 3);" id="select_ball1">1</p>
-						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball2">2</p>
-						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball3">3</p>
-						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball4" >4</p>
-						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball5" >5</p>
-						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball6">6</p>
-						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball7">7</p>
-						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball8">8</p>
-						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball9">9</p>
-						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball10">10</p>
-						<p class="red-ball2 xuan_ball" style="background-color: rgb(29, 12, 12);" id="select_ball11">11</p>
+						<p class="red-ball2 xuan_ball _myamount1_ball"  id="select_ball1">1</p>
+						<p class="red-ball2 xuan_ball _myamount2_ball"  id="select_ball2">2</p>
+						<p class="red-ball2 xuan_ball _myamount3_ball"  id="select_ball3">3</p>
+						<p class="red-ball2 xuan_ball _myamount4_ball"  id="select_ball4" >4</p>
+						<p class="red-ball2 xuan_ball _myamount5_ball"  id="select_ball5" >5</p>
+						<p class="red-ball2 xuan_ball _myamount6_ball"  id="select_ball6">6</p>
+						<p class="red-ball2 xuan_ball _myamount7_ball" id="select_ball7">7</p>
+						<p class="red-ball2 xuan_ball _myamount8_ball"  id="select_ball8">8</p>
+						<p class="red-ball2 xuan_ball _myamount9_ball" id="select_ball9">9</p>
+						<p class="red-ball2 xuan_ball _myamount10_ball"  id="select_ball10">10</p>
+						<p class="red-ball2 xuan_ball _myamount11_ball"  id="select_ball11">11</p>
 						<p style="line-height: 40px;float: left;margin-top: 15px;margin-left: 15px;color: #5d5959;width: 150px; font-size: 15px; font-weight: 600;" id="select_number">已选号码：1</p>
 						
 					</div>
@@ -196,7 +198,7 @@ input::-webkit-input-placeholder {
 					            <td class="td_font" id="_count${sd.number}">${sd.count}</td>
 					            <td class="td_font" id="_sumamount${sd.number}">${sd.sumamount}</td>
 					            <td class="td_font" id="_maxamount${sd.number}">${sd.maxamount}</td>
-					            <td class="td_font" id="_myamount${sd.number}" style="color: #ff7400;">${sd.myamount}</td>
+					            <td class="td_font myamount" id="_myamount${sd.number}" style="color: #ff7400;">${sd.myamount}</td>
 					        </tr>
 					     </c:forEach>
 					       
@@ -233,7 +235,7 @@ input::-webkit-input-placeholder {
 			
 				<div class="in-content-title" style="display:block;text-align: center;font-weight: bold;padding: 14px 0;font-size: 16px;">
 					<div style="text-align:center">
-						<font style="color:#ff7400;font-size: 20px;">开奖啦</font>
+						<font style="color:#ff7400;font-size: 20px;">收金子啦</font>
 					</div>
 					
 					<div class="in-line-left">
@@ -290,22 +292,22 @@ input::-webkit-input-placeholder {
 					<p class="red-ball" id="kj_no5">5</p>
 				</li>
 				<li>
-					<p class="blue-ball" id="kj_no6">6</p>
+					<p class="red-ball" id="kj_no6">6</p>
 				</li>
 				<li>
-					<p class="blue-ball" id="kj_no7">7</p>
+					<p class="red-ball" id="kj_no7">7</p>
 				</li>
 				<li>
-					<p class="blue-ball" id="kj_no8">8</p>
+					<p class="red-ball" id="kj_no8">8</p>
 				</li>
 				<li>
-					<p class="blue-ball" id="kj_no9">9</p>
+					<p class="red-ball" id="kj_no9">9</p>
 				</li>
 				<li>
-					<p class="blue-ball" id="kj_no10">10</p>
+					<p class="red-ball" id="kj_no10">10</p>
 				</li>
 				<li>
-					<p class="blue-ball" id="kj_no11">11</p>
+					<p class="red-ball" id="kj_no11">11</p>
 				</li>
 			</ul>
 				
@@ -352,12 +354,14 @@ input::-webkit-input-placeholder {
 		</section>
 		</div>
 	
+	    <audio src="<%=request.getContextPath()%>/webpos/pos/front/gold.mp3" id="gold_audio" style="display:none"></audio>
+	
 		<script src="<%=request.getContextPath()%>/webpos/pos/js/jquery-1.8.2.min.js"></script>
 		<script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/zepto.min.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/bringins.js?t=3"></script>
-		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/m/room_123.js?t=1'></script>
+		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/m/room_123.js?t=3'></script>
 		
 	</body>
 </html>

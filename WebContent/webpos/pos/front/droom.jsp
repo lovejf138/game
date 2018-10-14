@@ -42,7 +42,7 @@
 			<div class="in-content-box">
 				<div class="in-content-title">
 					<h2>
-						<a id="name_wait1">池子：
+						<a id="name_wait1">仓库：
 						<font style="color:#ff7400;font-size: 20px;">${_sum}</font>种子</a>
 					</h2>
 					<div class="in-line-left">
@@ -91,22 +91,22 @@
 					<p class="red-ball">${award.no5}</p>
 				</li>
 				<li>
-					<p class="blue-ball">${award.no6}</p>
+					<p class="red-ball">${award.no6}</p>
 				</li>
 				<li>
-					<p class="blue-ball">${award.no7}</p>
+					<p class="red-ball">${award.no7}</p>
 				</li>
 				<li>
-					<p class="blue-ball">${award.no8}</p>
+					<p class="red-ball">${award.no8}</p>
 				</li>
 				<li>
-					<p class="blue-ball">${award.no9}</p>
+					<p class="red-ball">${award.no9}</p>
 				</li>
 				<li>
-					<p class="blue-ball">${award.no10}</p>
+					<p class="red-ball">${award.no10}</p>
 				</li>
 				<li>
-					<p class="blue-ball">${award.no11}</p>
+					<p class="red-ball">${award.no11}</p>
 				</li>
 			</ul>
 					</c:if>

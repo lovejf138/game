@@ -1,4 +1,3 @@
-
 var baseurl=$("#baseurl").val();
 var onoff1 = true;//这是导航状态
 var tanonoff = true;//弹幕的状态
@@ -247,16 +246,36 @@ $(".c-fatan")[0].onclick = function(){//发弹幕
 	
 }
 
+setSeclectBall();
+$('._myamount1_ball').attr("style","background-color: #ff962c;");	  
+
+//设置已下注过的号码
+function setSeclectBall(){
+	$(".myamount").each(function(){
+		var my=$(this).html();
+		var aid=$(this).attr('id');
+		if(my!='0'){
+			
+			$('.'+aid+"_ball").attr("style","background-color:rgb(167, 165, 165);");	  
+		}else{
+			$('.'+aid+"_ball").attr("style","background-color: rgb(29, 12, 12);");
+		}
+		
+    });
+}
+
 var select_number=1;
 $(".xuan_ball").click(function(){
-	$(".xuan_ball").each(function(){
-		$(this).attr("style","background-color: rgb(29, 12, 12);");	  
-    });
+//	$(".xuan_ball").each(function(){
+//		$(this).attr("style","background-color: rgb(29, 12, 12);");	  
+//    });
+	
+	setSeclectBall();
 	
 	 var selfball = $(this);
 	 select_number = selfball.html();
 	 $("#select_number").html("已选号码："+selfball.html());
-	 $(this).attr("style","background-color: rgb(255, 3, 3);");
+	 $(this).attr("style","background-color: #ff962c;");
 	 $("#input_amount").val("");
 	
 });
@@ -398,6 +417,8 @@ function getKaijiang(){
                         }
                  }
                  
+                 document.getElementById("gold_audio").play();
+                 
 				$('#sampledata3').bringins({
 					"position":"center",
 					"color":"black",
@@ -494,7 +515,7 @@ websocket.onmessage = function(event){
 //		alert(""+ss[1]);
 //		alert($("#nextname").val());
 //		if(ss[1]!=$("#nextname").val()){
-		wait=true;
+		//wait=true;
 		if(wait){
 			getKaijiang();
 		}

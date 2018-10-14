@@ -38,15 +38,15 @@ body, button, input, select, textarea {
 				src="<%=request.getContextPath()%>/webpos/pos/front/img/index/gonggao.png">
 		</div>
 		
-		<div class="gg-z-f" style="width: 60px;font-size: 30px;float: right;">
+		<div class="gg-z-f" style="margin-top: 2px;width: 60px;font-size: 30px;float: right;text-align: center;height: 30px;line-height: 30px;">
 			
-			<a href="http://caipiao.163.com/award/gd11xuan5/" style="color: red;font-size: 22px;float: right;">公开</a>
+			<a href="http://caipiao.163.com/award/gd11xuan5/" style="color: red;font-size: 20px;float: right;width: 60px;height: 30px;border-radius: 100px; border: 1px solid #da0707;">公开</a>
 		</div>
 		
 		<div class="gd-g" style="width:auto">
 			<marquee direction="left" scrollamount="3" onmouseover="this.stop()"
 				onmouseout="this.start()">
-				<a href="">播种子收金子竞技游戏，每天09:00～23:00每十分钟一个收获季。基于公平、公正、不可更改的实时数据。区块链思维设计，去中心化，人为不可控！</a>
+				<a href="">每天09:00～23:00每十分钟一个收获季。基于公平、公正、不可更改的实时数据。区块链思维设计，去中心化，人为不可控！</a>
 			</marquee>
 		</div>
 		
@@ -57,37 +57,37 @@ body, button, input, select, textarea {
 		<div class="gg-shu">
 			<ul>
 				<li>
-					<p class="red-ball">${award.no1}</p>
+					<p class="red-ball red_back_color1">${award.no1}</p>
 				</li>
 				<li>
-					<p class="red-ball">${award.no2}</p>
+					<p class="red-ball red_back_color2">${award.no2}</p>
 				</li>
 				<li>
-					<p class="red-ball">${award.no3}</p>
+					<p class="red-ball red_back_color3">${award.no3}</p>
 				</li>
 				<li>
-					<p class="red-ball">${award.no4}</p>
+					<p class="red-ball red_back_color4">${award.no4}</p>
 				</li>
 				<li>
-					<p class="red-ball">${award.no5}</p>
+					<p class="red-ball red_back_color5">${award.no5}</p>
 				</li>
 				<li>
-					<p class="blue-ball">${award.no6}</p>
+					<p class="red-ball red_back_color6">${award.no6}</p>
 				</li>
 				<li>
-					<p class="blue-ball">${award.no7}</p>
+					<p class="red-ball red_back_color7">${award.no7}</p>
 				</li>
 				<li>
-					<p class="blue-ball">${award.no8}</p>
+					<p class="red-ball red_back_color8">${award.no8}</p>
 				</li>
 				<li>
-					<p class="blue-ball">${award.no9}</p>
+					<p class="red-ball red_back_color9">${award.no9}</p>
 				</li>
 				<li>
-					<p class="blue-ball">${award.no10}</p>
+					<p class="red-ball red_back_color10">${award.no10}</p>
 				</li>
 				<li>
-					<p class="blue-ball">${award.no11}</p>
+					<p class="red-ball red_back_color11">${award.no11}</p>
 				</li>
 			</ul>
 		</div>

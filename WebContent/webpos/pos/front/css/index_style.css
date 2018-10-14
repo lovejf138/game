@@ -1029,7 +1029,7 @@ input.check:checked{background:url(../img/index/icon_radio4.png) no-repeat cente
 .wuliu p{font-size: .36rem; color: #333;}
 
 .red-ball{
-	    border-radius: 50px;
+	border-radius: 50px;
     height: 30px;
     width: 30px;
     line-height: 30px;
@@ -1342,4 +1342,38 @@ input.check:checked{background:url(../img/index/icon_radio4.png) no-repeat cente
 .todo__state:checked ~ .todo__icon .todo__circle {
   -webkit-animation-name: explode;
           animation-name: explode;
+}
+
+.red_back_color1{
+	background-color: red;
+}
+.red_back_color2{
+	background-color: red;
+}
+.red_back_color3{
+	background-color: red;
+}
+.red_back_color4{
+	background-color: red;
+}
+.red_back_color5{
+	background-color: red;
+}
+.red_back_color6{
+	background-color: red;
+}
+.red_back_color7{
+	background-color: red;
+}
+.red_back_color8{
+	background-color: red;
+}
+.red_back_color9{
+	background-color: red;
+}
+.red_back_color10{
+	background-color: red;
+}
+.red_back_color11{
+	background-color: red;
 }

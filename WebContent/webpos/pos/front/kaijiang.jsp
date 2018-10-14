@@ -13,7 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=5">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=1">
 
 </head>
 <body>
@@ -48,17 +48,17 @@
 			<fmt:formatDate value="${aw.ctime}" pattern="yyyy-MM-dd HH:mm"/>
 			</div>
 			<div class="kj-p5" style="width: 100%;padding-top: 10px;text-align:left;height:90px;line-height:90px;margin-left: 90px; margin-right: 140px;">
-				<p class="red-ball2" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no1}</p>
-				<p class="red-ball2" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no2}</p>
-				<p class="red-ball2" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no3}</p>
-				<p class="red-ball2" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no4}</p>
-				<p class="red-ball2" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no5}</p>
-				<p class="blue-ball2" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no6}</p>
-				<p class="blue-ball2" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no7}</p>
-				<p class="blue-ball2" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no8}</p>
-				<p class="blue-ball2" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no9}</p>
-				<p class="blue-ball2" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no10}</p>
-				<p class="blue-ball2" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no11}</p>
+				<p class="red-ball2 red_back_color1" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no1}</p>
+				<p class="red-ball2 red_back_color2" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no2}</p>
+				<p class="red-ball2 red_back_color3" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no3}</p>
+				<p class="red-ball2 red_back_color4" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no4}</p>
+				<p class="red-ball2 red_back_color5" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no5}</p>
+				<p class="red-ball2 red_back_color6" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no6}</p>
+				<p class="red-ball2 red_back_color7" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no7}</p>
+				<p class="red-ball2 red_back_color8" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no8}</p>
+				<p class="red-ball2 red_back_color9" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no9}</p>
+				<p class="red-ball2 red_back_color10" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no10}</p>
+				<p class="red-ball2 red_back_color11" style="font-size:13px;margin-top: 5px;margin-left: 2px;">${aw.no11}</p>
 				<%-- <span>${aw.no1},${aw.no2},${aw.no3},${aw.no4},${aw.no5}</span>
 				<span>${aw.no6},${aw.no7},${aw.no8},${aw.no9},${aw.no10},${aw.no11}</span> --%>
 			</div>
