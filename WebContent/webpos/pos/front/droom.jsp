@@ -132,7 +132,7 @@
 					</div>
 					
 					<div style="height: 200px;overflow: auto;">
-					<c:forEach items="${objs }" var="detail">
+					<c:forEach items="${ds }" var="detail">
 					<div class="in-fellow-well">
 						
 						<div class="in-content-bd red">

@@ -351,4 +351,15 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userDao.getPaihangaward();
 	}
+
+	@Override
+	public int insertWithId(User paramUser) {
+		
+		return userDao.insertWithId(paramUser);
+	}
+
+	@Override
+	public User selectById(long id) {
+		return this.userDao.selectById(id);
+	}
 }

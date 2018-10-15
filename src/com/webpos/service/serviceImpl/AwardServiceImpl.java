@@ -232,7 +232,7 @@ public class AwardServiceImpl implements AwardService {
 						ad.setParentaward(prun);
 						User u = userDao.selectByUserId(ad.getUserid());
 						u.setBalance(u.getBalance()+final_award);
-						u.setAward_sum(u.getAward_sum()-ad.getAward());
+						u.setAward_sum(u.getAward_sum()+ad.getAward());
 						userDao.updateByPrimaryKeySelective(u);
 						
 						if(u.getParent()!=null&&!u.getParent().equals("")) {

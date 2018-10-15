@@ -73,8 +73,12 @@
 
 
 						<!--  <a class="am-btn  am-btn-sm am-btn-primary am-fr" onclick="sys()">系统设置</a>	-->
+						
+						<a	class="am-btn  am-btn-sm am-btn-fail am-fr" onclick="_jq()">弄点机器人</a>
+							
 						<a class="am-btn  am-btn-sm am-btn-success am-fr"
-							href="<%=request.getContextPath()%>/users.do">用户列表</a> <a
+							href="<%=request.getContextPath()%>/users.do">用户列表</a> 
+						<a
 							class="am-btn  am-btn-sm am-btn-fail am-fr" onclick="_kj()">开奖</a>
 
 						<button class="am-btn  am-btn-sm am-btn-primary am-fr _query">查询</button>
@@ -164,6 +168,47 @@
 				</tr>
 			</table>
 		</div>
+		
+		
+		<!-- 二维码弹窗 -->
+		<div id="qrCode-jq" class="hide" style="height: 100%; padding: 15px;">
+			<table style="text-align: center; width: 100%; height: 100%">
+				<tr height="30%">
+					<td colspan="4">期数:<input id="jq_name" style="width: 350px"
+						style="text" placeholder="18090834" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">机器人数:<input id="jq_number" style="width: 100px" value="1"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">id最小:<input id="jq_minid" style="width: 100px" value="1"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">id最大:<input id="jq_maxid" style="width: 100px" value="3000" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">下注最小:<input id="jq_minamount" style="width: 100px" value="10"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">下注最大:<input id="jq_maxamount" style="width: 100px"  value="100"/>
+					</td>
+				</tr>
+				
+	
+
+				<tr>
+					<td colspan="4"><a id="button-query1" style="font-size: 1rem"
+						class="button-a button-a-primary" onclick="jq_btn()"
+						href="javascript:void(0);">确定</a></td>
+
+				</tr>
+			</table>
+		</div>
 	</div>
 </body>
 <script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
@@ -182,6 +227,8 @@
 <script type="text/javascript">
 
 var kj = false;
+var jq = false;
+
 	function _kj() {
 
 		$("#kj_name").val("");
@@ -201,6 +248,68 @@ var kj = false;
 		});
 
 	}
+	
+	function _jq() {
+
+		layer.open({
+			title : "搞点机器人（都是钱呀！）",
+			type : 1, //page层
+			area : [ '400px', '400px' ],
+			shade : 0.6, //遮罩透明度
+			moveType : 1, //拖拽风格，0是默认，1是传统拖动
+			shift : 1, //0-6的动画形式，-1不开启
+			content : $('#qrCode-jq')
+		});
+
+	}
+	
+	function jq_btn() {
+	  if(!jq){
+			 
+		  var number= $("#jq_number").val();
+		  var _num=0;
+		  try{
+			  _num = parseInt(number);
+		  }catch(e){_num=0;}
+		  
+		  if(_num<=0||_num>100){
+			  alert("人数有误，最大100");
+		  }
+		  
+		  jq = true;
+		  
+		  var con = true;
+		  for(var i=0;i<_num;i++){
+			 // alert(i);
+			 if(con){
+			  $.ajax({
+					url : 'macjoin.do',
+					data : "jq_name=" + $("#jq_name").val() + "&jq_minid="
+							+ $("#jq_minid").val()+ "&jq_maxid="
+							+ $("#jq_maxid").val()+ "&jq_minamount="
+							+ $("#jq_minamount").val()+ "&jq_maxamount="
+							+ $("#jq_maxamount").val(),
+					type : 'post',
+					dataType : 'json',
+					traditional : true,
+					success : function(data) {
+						if (data == "SUCCESS") {
+							
+						} else {
+							jq = false;
+							con = false;
+							alert(''+data);
+						}
+					}
+				});
+			 }
+		  }
+		  
+		  alert("操作成功");
+			
+	  }
+	}
+	
 	
 	function kj_send_btn() {
 		 

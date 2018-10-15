@@ -102,12 +102,32 @@
 		from _user
 		where id_md5 = #{parent,jdbcType=VARCHAR}
 	</select>
+	
+	<select id="selectById" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from _user
+		where id = #{id,jdbcType=BIGINT}
+	</select>
 
 	<insert id="insert" parameterType="com.webpos.entity.User"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into _user (user_id,parent,balance,ctime,id_md5,all_eth,play_sum,recharge_sum,withdraw_sum,child_sum,is_machine,pass,award_sum)
 
 		values ( #{user_id,jdbcType=VARCHAR},
+		#{parent,jdbcType=VARCHAR},
+		#{balance,jdbcType=INTEGER},
+		#{ctime,jdbcType=TIMESTAMP},#{id_md5,jdbcType=VARCHAR},#{all_eth,jdbcType=VARCHAR},
+		#{play_sum,jdbcType=INTEGER},#{recharge_sum,jdbcType=INTEGER},#{withdraw_sum,jdbcType=INTEGER},#{child_sum,jdbcType=INTEGER},0,#{pass,jdbcType=VARCHAR},0
+		)
+	</insert>
+	
+	<insert id="insertWithId" parameterType="com.webpos.entity.User"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into _user (id,user_id,parent,balance,ctime,id_md5,all_eth,play_sum,recharge_sum,withdraw_sum,child_sum,is_machine,pass,award_sum)
+
+		values (#{id,jdbcType=INTEGER}, #{user_id,jdbcType=VARCHAR},
 		#{parent,jdbcType=VARCHAR},
 		#{balance,jdbcType=INTEGER},
 		#{ctime,jdbcType=TIMESTAMP},#{id_md5,jdbcType=VARCHAR},#{all_eth,jdbcType=VARCHAR},
