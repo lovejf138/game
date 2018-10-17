@@ -108,8 +108,14 @@ body, button, input, select, textarea {
 	</div>
 
    <div class="shou-zhong" style="height: 1rem;">
-		  <a  id="how_to_play" style="padding-top: 25px; color: #868686; float: left; font-size: 15px;">怎么玩？</a>
+		 <!-- target="_blank" -->  <a  id="how_to_play" style="padding-top: 25px; color: #868686; float: left; font-size: 15px;"
+		  	onclick="openVideo('<%=request.getContextPath()%>/webpos/pos/front/how.mp4')">怎么播种？</a>
+		   <a  id="how_to_get" style="margin-left: 30px;padding-top: 25px; color: #868686; float: left; font-size: 15px;"
+		    onclick="openVideo('<%=request.getContextPath()%>/webpos/pos/front/get.mp4')">怎么收金子？</a>
 		  <a  id="how_to_create"  style="padding-top: 25px; color: #868686; float: right; font-size: 15px;">号码怎么产生？</a>
+   
+  
+   
    </div>
    
    <ul class="cd-tour-wrapper">
@@ -542,7 +548,7 @@ body, button, input, select, textarea {
 	
 	<div class="fenge"></div>
 	<div class="shou-shp" style="margin-bottom: 1.2rem;">
-			<button id="room_button" onclick="window.location.href='room.do'">参与竞技</button>
+			<button id="room_button" onclick="window.location.href='room.do'">播种子，收金子</button>
 
 			<canvas id="room_myCanvas" width="100%" height="100%"></canvas>
 			
@@ -617,6 +623,15 @@ var _hmt = _hmt || [];
 </script>
 	<script type="text/javascript">
 	
+		function openVideo(src) {
+			var page = window.open();
+			var html="<body style='background:black'>"+
+				"<div style='width:80%;margin:auto;'>"+
+				"<video controls width='100%' autoplay> <source src='"+src+ "' type='video/mp4'></video></div></body>";
+			page.document.write(html);
+		}
+		
+		
 		$('#tit2 span').click(function() {
 			var i = $(this).index();//下标第一种写法
 			$(this).addClass('select2').siblings().removeClass('select2');
