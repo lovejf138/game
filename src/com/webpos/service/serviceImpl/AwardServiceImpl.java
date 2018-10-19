@@ -52,8 +52,15 @@ public class AwardServiceImpl implements AwardService {
 		return this.awardDao.getByName(name);
 	}
 
+	/**
+	 * 
+	 * @param finals
+	 * @param qiname
+	 * @param ifJiesuan 是否结算
+	 * @return
+	 */
 	@Transactional
-	public String kaijiang(int[] finals, String qiname) {
+	public String kaijiang(int[] finals, String qiname,boolean ifJiesuan) {
 		try {
 			/************ 添加开奖记录 ***************/
 			Award a = new Award();
@@ -73,7 +80,9 @@ public class AwardServiceImpl implements AwardService {
 			a.setNo10(finals[9]);
 			a.setNo11(finals[10]);
 			awardDao.insert(a);
-			
+			if(!ifJiesuan) {
+				return "SUCCESS";
+			}
 			
 			
 			/****************取出押注的详情***********************/
