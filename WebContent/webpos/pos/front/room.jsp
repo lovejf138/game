@@ -361,7 +361,15 @@ input::-webkit-input-placeholder {
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/zepto.min.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/bringins.js?t=3"></script>
-		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/room_123.js?t=2'></script>
-		
+		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/m/room_123.js?t=1'></script>
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d08321caa4ded9e8f406743dac85e273";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 	</body>
 </html>

@@ -74,6 +74,8 @@
 
 						<!--  <a class="am-btn  am-btn-sm am-btn-primary am-fr" onclick="sys()">系统设置</a>	-->
 						
+						<a	class="am-btn  am-btn-sm am-btn-fail am-fr" onclick="_get()">获取往期开奖</a>
+						
 						<a	class="am-btn  am-btn-sm am-btn-fail am-fr" onclick="_jq()">弄点机器人</a>
 							
 						<a class="am-btn  am-btn-sm am-btn-success am-fr"
@@ -171,6 +173,28 @@
 		
 		
 		<!-- 二维码弹窗 -->
+		<div id="qrCode-get" class="hide" style="height: 100%; padding: 15px;">
+			<table style="text-align: center; width: 100%; height: 100%">
+				<tr height="30%">
+					<td colspan="4">日期:<input id="get_time" style="width: 350px"
+						style="text" value="2018-10-19" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">最大期数:<input id="get_maxqi" style="width: 100px" value="84" />
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="4"><a id="button-query1" style="font-size: 1rem"
+						class="button-a button-a-primary" onclick="get_btn()"
+						href="javascript:void(0);">确定</a></td>
+						
+				</tr>
+			</table>
+		</div>
+		
+		<!-- 二维码弹窗 -->
 		<div id="qrCode-jq" class="hide" style="height: 100%; padding: 15px;">
 			<table style="text-align: center; width: 100%; height: 100%">
 				<tr height="30%">
@@ -249,6 +273,20 @@ var jq = false;
 
 	}
 	
+	function _get() {
+
+		layer.open({
+			title : "获取往期号码（慎重）",
+			type : 1, //page层
+			area : [ '400px', '400px' ],
+			shade : 0.6, //遮罩透明度
+			moveType : 1, //拖拽风格，0是默认，1是传统拖动
+			shift : 1, //0-6的动画形式，-1不开启
+			content : $('#qrCode-get')
+		});
+
+	}
+	
 	function _jq() {
 
 		layer.open({
@@ -320,6 +358,29 @@ var jq = false;
 	    
 		send(text);
 	}
+	
+	
+	function get_btn() {
+		  if(!kj){
+			  kj = true;
+			$.ajax({
+				url : 'getkaijiang.do',
+				data : "time=" + $("#get_time").val() + "&maxqi="
+						+ $("#get_maxqi").val(),
+				type : 'post',
+				dataType : 'json',
+				traditional : true,
+				success : function(data) {
+					if (data == "SUCCESS") {
+						alert('操作成功!');
+					} else {
+						kj = false;
+						alert(''+data);
+					}
+				}
+			});
+			}
+		}
 	
 	function kj_btn() {
 	  if(!kj){

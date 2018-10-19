@@ -543,6 +543,11 @@ body, button, input, select, textarea {
 
 <!-- <div class="cd-app-screen"></div> -->
 
+        <!-- 二维码弹窗 -->
+		<div id="qrCode-jq"  style="display:none;height: 100%; padding: 15px;">
+			
+		</div>
+		
 <div class="cd-cover-layer"></div>
 
 	
@@ -551,31 +556,7 @@ body, button, input, select, textarea {
 			<button id="room_button" onclick="window.location.href='room.do'">播种子，收金子</button>
 
 			<canvas id="room_myCanvas" width="100%" height="100%"></canvas>
-			
-			<%--<ul id="creditLoan" class="credit-loan-list credit clearfix" style="list-style: none;">
-			
-						<li  onclick="javascript:document.getElementById('aroom_${room.id}').click();"
-						>
-						<a  id="aroom_${room.id}" style="display:none" href="room.do"></a>
-							<p class="p1" style="margin:0px">房间${room.name}</p>
-							<!-- <img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/room.png" style="width: 30%;height: 40%;"/> -->
-							<div >
-								 <p style="margin:0px;height: 20px;line-height: 20px;font-size:12px;    margin-top: 10px;">
-									<span style="color: #999999;font-size:20px">进度：</span>
-									<span class="monthly" style="color:#ff7400;font-size:20px">${room.progress}/11</span>
-								</p>
-								
-								<p style="margin:0px;height: 20px;line-height: 20px;font-size:12px;    margin-top: 10px;">
-									<span style="color: #999999;font-size:20px">币池：</span>
-									<span class="monthly" style="color:#ff7400;font-size:20px">${room.amount}ETH</span>
-								</p>
-								
-							</div>
-						</li>
-			
-					</ul> --%>
-
-		
+	
 	</div>
 
 	<div class="daohang">
@@ -612,6 +593,8 @@ body, button, input, select, textarea {
 		src="<%=request.getContextPath()%>/webpos/pos/front/js/index_lizi.js"></script>
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/webpos/pos/front/js/index_123.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/webpos/pos/js/layer/layer.js"></script>
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -623,12 +606,26 @@ var _hmt = _hmt || [];
 </script>
 	<script type="text/javascript">
 	
+	
 		function openVideo(src) {
-			var page = window.open();
+			/* var page = window.open();
 			var html="<body style='background:black'>"+
 				"<div style='width:80%;margin:auto;'>"+
 				"<video controls width='100%' autoplay> <source src='"+src+ "' type='video/mp4'></video></div></body>";
-			page.document.write(html);
+			page.document.write(html); */
+			
+			$("#qrCode-jq").html("<video controls width='100%' autoplay> <source src='"+src+ "' type='video/mp4'></video>");
+			
+			layer.open({
+				title : "",
+				type : 1, //page层
+				area : [ '80%', 'auto' ],
+				shade : 0.6, //遮罩透明度
+				moveType : 1, //拖拽风格，0是默认，1是传统拖动
+				shift : 1, //0-6的动画形式，-1不开启
+				content : $('#qrCode-jq')
+			});
+
 		}
 		
 		
