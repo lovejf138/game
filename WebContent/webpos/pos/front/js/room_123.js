@@ -9,6 +9,8 @@ $(".pothook").click(function(){
 
 
 var intDiff = parseInt($("#nextsecond").val());
+var sourceDiff = intDiff;
+var serverTime = new Date().getTime();
 
 var wait = false;//等待开奖
 if (intDiff < 0) {
@@ -18,12 +20,37 @@ if (intDiff < 0) {
 } else {
 	$("#name_wait1").html("离" + $("#nextname").val() + "季结束：");
 }
+var hasGetKaijiang = false;
 /* var intDiff = parseInt(120);//倒计时总秒数量 */
 function timer(intDiff) {
 	window.setInterval(function() {
-		if(intDiff==0){
+		var nowTime = new Date().getTime();
+		var duoyu = parseInt((nowTime-serverTime)/1000);
+		
+		if(wait){
 			$("#name_wait1").html("待" + $("#nextname").val() + "季收获：");
-			wait=true;
+			if(sourceDiff<0){
+				intDiff =(sourceDiff*-1)+duoyu;
+			}else{
+				intDiff = (sourceDiff-duoyu)*-1;
+			}
+			if(intDiff>=180){//最多等待180秒
+				if(hasGetKaijiang==false){
+					getKaijiang();
+				}
+			}
+		}else{
+			if(sourceDiff<=0){
+				intDiff = (sourceDiff*-1)-duoyu;
+			}else{
+				intDiff = sourceDiff-duoyu;
+			}
+			
+			if(intDiff<0){
+				intDiff = intDiff*-1;
+				
+				wait=true;
+			}
 		}
 		
 		var second = 0;//时间默认值
@@ -34,11 +61,11 @@ function timer(intDiff) {
 		if (second <= 9)
 			second = '0' + second;
 		$('#name_wait2').html(''+second );
-		if (wait) {
-			intDiff++;
-		} else {
-			intDiff--;
-		}
+//		if (wait) {
+//			intDiff++;
+//		} else {
+//			intDiff--;
+//		}
 
 	}, 1000);
 }
@@ -307,7 +334,7 @@ $("#btn_ok").click(function(event){
 		async:true,
 		type:'post',
 		url:'join.do',
-		data:{amount:""+$("#input_amount").val(),sign:""+_sign,roomid:""+$("#roomid").val(),number:""+select_number},
+		data:{amount:""+$("#input_amount").val(),sign:""+_sign,roomid:""+$("#roomid").val(),number:""+select_number,nextname:""+$("#nextname").val()},
 		dataType:'json',
 		success:function(result,textStatus){
 			
@@ -370,6 +397,7 @@ $("#btn_ok").click(function(event){
 var waitkaijiangdialog=null;
 //获取开奖信息
 function getKaijiang(){
+	hasGetKaijiang= true;
 	if(waitkaijiangdialog!=null){
 		return;
 	}
@@ -450,91 +478,204 @@ var websocket=null;
 var _top=80;
 var index=0;
 
+var lockReconnect = false;  //避免ws重复连接
+createWebSocket();   //连接ws
+
 var host=window.location.host;
-//判断当前浏览器是否支持WebSocket
-if('WebSocket' in window){
-	//websocket=new WebSocket("ws://localhost:8080/_game/websocket");/*("ws://"+host+"/Danmu/websocket");*/
-	websocket=new WebSocket("ws://eth-game.club/websocket");/*("ws://"+host+"/Danmu/websocket");*/
-}
-else{
-	alert("当前浏览器不支持发送弹幕!");
-}
-
-
-//连接发生错误的回调方法
-websocket.onerror = function(){
-   // setMessageInnerHTML("error");
-};
-
-//连接成功建立的回调方法
-websocket.onopen = function(){
-   // setMessageInnerHTML("open");
-}
-
-//接收到消息的回调方法
-websocket.onmessage = function(event){
-	
-	var data_str = event.data;
-
-	var ss = data_str.split("&&__");
-	if(ss[0]=="1"){//聊天信息
-		if(tanonoff){
-			setMessageInnerHTML(ss[1]);
-		}
+function createWebSocket(){
+	//判断当前浏览器是否支持WebSocket
+	if('WebSocket' in window){
+		//websocket=new WebSocket("ws://localhost:8080/_game/websocket");/*("ws://"+host+"/Danmu/websocket");*/
+		websocket=new WebSocket("ws://eth-game.club/websocket");
+		initEventHandle();
 	}
-	else if(ss[0]=="2"){//有人登录
-		$("#online_number").html(""+ss[1]);
-	}else if(ss[0]=="3"){//有人下注
-		var msg = ss[1].split("****");
-	
-		var is_first_join = parseInt(msg[0]);
-		var _amount = parseInt(msg[1]);
-		var select_number = parseInt(msg[2]);
-		var _maxamount = parseInt(msg[3]);
-		
-		//更新相关数据
-		var sumamount = parseInt($("#sumamount").html());
-		sumamount = sumamount+_amount;
-		$("#sumamount").html(""+sumamount);
-		
-		var _count=parseInt($("#_count"+select_number).html());
-		var _sumamount=parseInt($("#_sumamount"+select_number).html());
-		//var _maxamount=parseFloat($("#_maxamount"+select_number).html());
-		//var _myamount=parseFloat($("#_myamount"+select_number).html());
-		
-		if(is_first_join==1){//不是加注
-			_count = _count+1;
-			$("#_count"+select_number).html(""+_count);
-		}
-		
-		_sumamount = _sumamount+_amount;
-		$("#_sumamount"+select_number).html(""+_sumamount);
-	    $("#_maxamount"+select_number).html(""+_maxamount);
-		
-	}else if(ss[0]=="4"){
-//		alert(""+ss[1]);
-//		alert($("#nextname").val());
-//		if(ss[1]!=$("#nextname").val()){
-		//wait=true;
-		if(wait){
-			getKaijiang();
-		}
-		//}
+	else{
+		alert("当前浏览器不支持发送弹幕!");
 	}
-	
-	
-}
-
-//连接关闭的回调方法
-websocket.onclose = function(){
-  //  setMessageInnerHTML("close");
 }
 
 
-//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
-window.onbeforeunload = function(){
-    websocket.close();
+function initEventHandle() {
+	websocket.onclose = function () {
+        console.log("llws连接关闭!" + new Date().toUTCString());
+        reconnect();
+    };
+    websocket.onerror = function () {
+        console.log("llws连接错误!");
+        reconnect();
+    };
+    websocket.onopen = function () {
+        heartCheck.reset().start();      //心跳检测重置
+        console.log("llws连接成功!" + new Date().toUTCString());
+       
+    };
+    websocket.onmessage = function (event) {    //如果获取到消息，心跳检测重置
+        heartCheck.reset().start();      //拿到任何消息都说明当前连接是正常的
+        var data_str = event.data;
+
+    	var ss = data_str.split("&&__");
+    	if(ss[0]=="1"){//聊天信息
+    		if(tanonoff){
+    			setMessageInnerHTML(ss[1]);
+    		}
+    	}
+    	else if(ss[0]=="2"){//有人登录
+    		$("#online_number").html(""+ss[1]);
+    	}else if(ss[0]=="3"){//有人下注
+    		var msg = ss[1].split("****");
+    	
+    		var is_first_join = parseInt(msg[0]);
+    		var _amount = parseInt(msg[1]);
+    		var select_number = parseInt(msg[2]);
+    		var _maxamount = parseInt(msg[3]);
+    		
+    		//更新相关数据
+    		var sumamount = parseInt($("#sumamount").html());
+    		sumamount = sumamount+_amount;
+    		$("#sumamount").html(""+sumamount);
+    		
+    		var _count=parseInt($("#_count"+select_number).html());
+    		var _sumamount=parseInt($("#_sumamount"+select_number).html());
+    		
+    		if(is_first_join==1){//不是加注
+    			_count = _count+1;
+    			$("#_count"+select_number).html(""+_count);
+    		}
+    		
+    		_sumamount = _sumamount+_amount;
+    		$("#_sumamount"+select_number).html(""+_sumamount);
+    	    $("#_maxamount"+select_number).html(""+_maxamount);
+    		
+    	}else if(ss[0]=="4"){
+
+    		if(wait){
+    			getKaijiang();
+    		}
+    		
+    	}
+    };
 }
+
+// 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+window.onbeforeunload = function () {
+	websocket.close();
+}
+
+function reconnect(url) {
+    if (lockReconnect) return;
+    lockReconnect = true;
+    setTimeout(function () {     //没连接上会一直重连，设置延迟避免请求过多
+        createWebSocket(url);
+        lockReconnect = false;
+    }, 2000);
+}
+
+//心跳检测
+var heartCheck = {
+    //timeout: 540000,        //9分钟发一次心跳
+    //timeout: 3600,        //1分钟发一次心跳
+    timeout: 10800,        //3分钟发一次心跳
+    timeoutObj: null,
+    serverTimeoutObj: null,
+    reset: function () {
+        clearTimeout(this.timeoutObj);
+        clearTimeout(this.serverTimeoutObj);
+        return this;
+    },
+    start: function () {
+        var self = this;
+        this.timeoutObj = setTimeout(function () {
+            //这里发送一个心跳，后端收到后，返回一个心跳消息，
+            //onmessage拿到返回的心跳就说明连接正常
+        	websocket.send("ping");
+            console.log("ping!")
+            self.serverTimeoutObj = setTimeout(function () {
+                //如果超过一定时间还没重置，说明后端主动断开了
+                //如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+            	websocket.close();     
+            },self.timeout)
+        },this.timeout)
+    }
+}
+//====================================================心跳包重连CODE END=========================================
+
+//
+////连接发生错误的回调方法
+//websocket.onerror = function(){
+//   // setMessageInnerHTML("error");
+//};
+//
+//
+//
+////连接成功建立的回调方法
+//websocket.onopen = function(){
+//	//setInterval(function(){  websocket.send("1"); },55000);
+//}
+//
+////接收到消息的回调方法
+//websocket.onmessage = function(event){
+//	
+//	var data_str = event.data;
+//
+//	var ss = data_str.split("&&__");
+//	if(ss[0]=="1"){//聊天信息
+//		if(tanonoff){
+//			setMessageInnerHTML(ss[1]);
+//		}
+//	}
+//	else if(ss[0]=="2"){//有人登录
+//		$("#online_number").html(""+ss[1]);
+//	}else if(ss[0]=="3"){//有人下注
+//		var msg = ss[1].split("****");
+//	
+//		var is_first_join = parseInt(msg[0]);
+//		var _amount = parseInt(msg[1]);
+//		var select_number = parseInt(msg[2]);
+//		var _maxamount = parseInt(msg[3]);
+//		
+//		//更新相关数据
+//		var sumamount = parseInt($("#sumamount").html());
+//		sumamount = sumamount+_amount;
+//		$("#sumamount").html(""+sumamount);
+//		
+//		var _count=parseInt($("#_count"+select_number).html());
+//		var _sumamount=parseInt($("#_sumamount"+select_number).html());
+//		//var _maxamount=parseFloat($("#_maxamount"+select_number).html());
+//		//var _myamount=parseFloat($("#_myamount"+select_number).html());
+//		
+//		if(is_first_join==1){//不是加注
+//			_count = _count+1;
+//			$("#_count"+select_number).html(""+_count);
+//		}
+//		
+//		_sumamount = _sumamount+_amount;
+//		$("#_sumamount"+select_number).html(""+_sumamount);
+//	    $("#_maxamount"+select_number).html(""+_maxamount);
+//		
+//	}else if(ss[0]=="4"){
+////		alert(""+ss[1]);
+////		alert($("#nextname").val());
+////		if(ss[1]!=$("#nextname").val()){
+//		//wait=true;
+//		if(wait){
+//			getKaijiang();
+//		}
+//		//}
+//	}
+//	
+//	
+//}
+//
+////连接关闭的回调方法
+//websocket.onclose = function(){
+//  //  setMessageInnerHTML("close");
+//}
+//
+//
+////监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+//window.onbeforeunload = function(){
+//    websocket.close();
+//}
 
 
 //将消息显示在网页上
@@ -558,5 +699,6 @@ function send(text){
    // var message = $(".s_text").val();
     /*alert($(".s_text").val(""));
     alert(message);*/
-    websocket.send(text);
+	//alert(text);
+   websocket.send(text);
 }

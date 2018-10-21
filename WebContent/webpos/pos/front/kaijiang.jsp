@@ -114,11 +114,14 @@ var _hmt = _hmt || [];
 <script type="text/javascript">
 
 var intDiff = parseInt($("#nextsecond").val());
+var sourceDiff = intDiff;
+var serverTime = new Date().getTime();
 
 var wait=false;//等待开奖
 if(intDiff<0){
-	intDiff = intDiff*-1;
-	wait=true;
+	intDiff = intDiff * -1;
+	
+	wait = true;
 	$("#p_time_show").html("待"+$("#nextname").val()+"季收获：");
 }else{
 	$("#p_time_show").html("离"+$("#nextname").val()+"季结束：");
@@ -126,10 +129,28 @@ if(intDiff<0){
 
 function timer(intDiff){
 	window.setInterval(function(){
+		var nowTime = new Date().getTime();
+		var duoyu = parseInt((nowTime-serverTime)/1000);
 		
-		if(intDiff==0){
+		if(wait){
 			$("#p_time_show").html("待" + $("#nextname").val() + "季收获：");
-			wait=true;
+			if(sourceDiff<0){
+				intDiff =(sourceDiff*-1)+duoyu;
+			}else{
+				intDiff = (sourceDiff-duoyu)*-1;
+			}
+		}else{
+			if(sourceDiff<=0){
+				intDiff = (sourceDiff*-1)-duoyu;
+			}else{
+				intDiff = sourceDiff-duoyu;
+			}
+			
+			if(intDiff<0){
+				intDiff = intDiff*-1;
+				
+				wait=true;
+			}
 		}
 		
 	var day=0,
@@ -152,11 +173,11 @@ function timer(intDiff){
 	$('#hour_show5').html('<s id="h"></s>'+hour+'时');
 	$('#minute_show5').html('<s></s>'+minute+'分');
 	$('#second_show5').html('<s></s>'+second+'秒');
-	if(wait){
+	/* if(wait){
 		intDiff++;
 	}else{
 		intDiff--;
-	}
+	} */
 	}, 1000);
 } 
 

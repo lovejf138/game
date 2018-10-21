@@ -605,8 +605,7 @@ var _hmt = _hmt || [];
 })();
 </script>
 	<script type="text/javascript">
-	
-	
+		
 		function openVideo(src) {
 			/* var page = window.open();
 			var html="<body style='background:black'>"+
@@ -635,6 +634,8 @@ var _hmt = _hmt || [];
 			$('.login2').eq(i).show().siblings().hide();
 		});
 		var intDiff = parseInt($("#nextsecond").val());
+		var sourceDiff = intDiff;
+		var serverTime = new Date().getTime();
 		var wait = false;//等待开奖
 		if (intDiff < 0) {
 			intDiff = intDiff * -1;
@@ -646,10 +647,31 @@ var _hmt = _hmt || [];
 		/* var intDiff = parseInt(120);//倒计时总秒数量 */
 		function timer(intDiff) {
 			window.setInterval(function() {
-				if(intDiff==0){
+				var nowTime = new Date().getTime();
+				var duoyu = parseInt((nowTime-serverTime)/1000);
+				
+				if(wait){
 					$("#p_time_show").html("待" + $("#nextname").val() + "季收获：");
-					wait=true;
+					if(sourceDiff<0){
+						intDiff =(sourceDiff*-1)+duoyu;
+					}else{
+						intDiff = (sourceDiff-duoyu)*-1;
+					}
+					
+				}else{
+					if(sourceDiff<=0){
+						intDiff = (sourceDiff*-1)-duoyu;
+					}else{
+						intDiff = sourceDiff-duoyu;
+					}
+					
+					if(intDiff<0){
+						intDiff = intDiff*-1;
+						
+						wait=true;
+					}
 				}
+				
 				var day = 0, hour = 0, minute = 0, second = 0;//时间默认值
 				if (intDiff > 0) {
 					day = Math.floor(intDiff / (60 * 60 * 24));
@@ -670,12 +692,7 @@ var _hmt = _hmt || [];
 				$('#day_show5').html(day + "天");
 				$('#hour_show5').html('<s id="h"></s>' + hour + '时');
 				$('#minute_show5').html('<s></s>' + minute + '分');
-				$('#second_show5').html('<s></s>' + second + '秒');
-				if (wait) {
-					intDiff++;
-				} else {
-					intDiff--;
-				}
+				$('#second_show5').html('<s></s>' + second + '秒');		
 
 			}, 1000);
 		}

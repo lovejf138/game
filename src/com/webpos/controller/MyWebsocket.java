@@ -1,7 +1,9 @@
 package com.webpos.controller;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import javax.servlet.http.HttpSession;
@@ -52,7 +54,25 @@ public class MyWebsocket {
 			this.session = session;
 			websocketPools.add(this);
 			
-			send("2&&__"+websocketPools.size(),session,true);
+			int id=0;
+			
+			Calendar cal = Calendar.getInstance();
+			int hour = cal.get(11);
+			if(hour>=23||hour<=8) id=0;
+			else if(hour>=9&&hour<=11) {
+				id = new Random().nextInt(100)%(100-38+1) + 38;
+			}
+			else if(hour>=12&&hour<=14) {
+				id = new Random().nextInt(250)%(250-180+1) + 180;
+			}
+			else if(hour>=15&&hour<=18) {
+				id = new Random().nextInt(150)%(150-70+1) + 70;
+			}
+			else if(hour>=19&&hour<=22) {
+				id = new Random().nextInt(400)%(400-200+1) + 200;
+			}
+			id = websocketPools.size()+id;
+			send("2&&__"+id,session,true);
 			return ;
 		}
 		session.close();
