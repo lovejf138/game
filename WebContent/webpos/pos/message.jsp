@@ -160,13 +160,17 @@
 	
 
 				<tr>
-					<td colspan="4"><a id="button-query1" style="font-size: 1rem"
+					<td colspan="2"><a id="button-query1" style="font-size: 1rem"
 						class="button-a button-a-primary" onclick="kj_btn()"
 						href="javascript:void(0);">确定</a></td>
 						
-					<td colspan="4"><a id="button-query1" style="font-size: 1rem"
+					<td colspan="2"><a id="button-query1" style="font-size: 1rem"
 						class="button-a button-a-primary" onclick="kj_send_btn()"
 						href="javascript:void(0);">开奖通知</a></td>
+						
+					<td colspan="2"><a id="button-query2" style="font-size: 1rem"
+						class="button-a button-a-primary" onclick="getkj()"
+						href="javascript:void(0);">获取开奖</a></td>
 				</tr>
 			</table>
 		</div>
@@ -381,6 +385,32 @@ var jq = false;
 			});
 			}
 		}
+	
+	function getkj(){
+		$.ajax({
+			url : 'http://e.apiplus.net/newly.do?token=td8bb600ad2eb3d7ak&code=gd11x5&rows=1&format=json',
+			data : null,
+			type : 'post',
+			dataType : 'jsonp',
+			traditional : true,
+			success : function(data) {
+				 var description = "";
+				 var datas = data.data;
+				 var expect = datas[0].expect;
+				 var opencode = datas[0].opencode;
+				//alert(expect+","+opencode);
+				$("#kj_name").val(expect.substring(2,expect.length));
+				var codes = opencode.split(",");
+				$("#kj_no1").val(""+codes[0]);
+				$("#kj_no2").val(""+codes[1]);
+				$("#kj_no3").val(""+codes[2]);
+				$("#kj_no4").val(""+codes[3]);
+				$("#kj_no5").val(""+codes[4]);
+				
+				
+			}
+		});
+	}
 	
 	function kj_btn() {
 	  if(!kj){
