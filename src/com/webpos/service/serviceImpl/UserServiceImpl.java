@@ -15,9 +15,11 @@ import com.webpos.dao.AccountMapper;
 import com.webpos.dao.DetailMapper;
 import com.webpos.dao.DetailsMapper;
 import com.webpos.dao.RoomMapper;
+import com.webpos.dao.TestDetailMapper;
 import com.webpos.dao.UserMapper;
 import com.webpos.entity.Account;
 import com.webpos.entity.Detail;
+import com.webpos.entity.TestDetail;
 import com.webpos.entity.User;
 import com.webpos.entity.UserExample;
 import com.webpos.service.UserService;
@@ -37,6 +39,8 @@ public class UserServiceImpl implements UserService {
 	private RoomMapper roomDao;
 	@Resource
 	private DetailMapper detailDao;
+	@Resource
+	private TestDetailMapper testdetailDao;
 
 	public int insert(User record) {
 		return this.userDao.insert(record);
@@ -188,7 +192,7 @@ public class UserServiceImpl implements UserService {
 			if (user_last == null) {
 				if (user_id.startsWith("vip_")) {
 					User new_user = new User();
-					double amo = CommUtil.mul(1000, amount);
+					double amo = CommUtil.mul(10, amount);
 					int num = (new Double(amo)).intValue();
 					new_user.setBalance(num);
 					new_user.setRecharge_sum(num);
@@ -222,7 +226,7 @@ public class UserServiceImpl implements UserService {
 					return "user_error";
 				}
 			} else {
-				double amo = CommUtil.mul(1000, amount);
+				double amo = CommUtil.mul(10, amount);
 				int num = (new Double(amo)).intValue();
 				int final_amount = user_last.getBalance()+num;
 			
@@ -333,6 +337,42 @@ public class UserServiceImpl implements UserService {
 			u.setPlay_sum(u.getPlay_sum()+amount);
 			u.setBalance(u.getBalance()-amount);
 			this.userDao.updateByPrimaryKeySelective(u);
+		}catch(Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return "未知错误:"+e.getMessage().toString();
+		}
+		return r;
+	}
+	
+	@Override
+	@Transactional
+	public String testjoin(Long roomid, String userid,String qiname, int amount,int number) {
+		String r = "SUCCESS";
+		try {
+
+			
+			TestDetail old_d = testdetailDao.selectByNameAndUserAndNumber(userid, qiname,""+number);
+			if(old_d==null) {
+				TestDetail d = new TestDetail();
+				d.setAmount(amount);
+				d.setAward(0);
+				d.setCtime(new Date());
+				d.setNumber(number);
+				d.setQiname(qiname);
+				d.setRoomid(roomid);
+				d.setUserid(userid);
+				
+				d.setStatus("wait");
+				testdetailDao.insert(d);
+			}else {
+				old_d.setAmount(old_d.getAmount()+amount);
+				testdetailDao.updateByPrimaryKeySelective(old_d);
+			}
+			
+//			User u = selectByUserId(userid);
+//			u.setPlay_sum(u.getPlay_sum()+amount);
+//			u.setBalance(u.getBalance()-amount);
+//			this.userDao.updateByPrimaryKeySelective(u);
 		}catch(Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return "未知错误:"+e.getMessage().toString();

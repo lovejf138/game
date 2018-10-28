@@ -159,6 +159,8 @@ public class MyWebsocket {
 			}
 		}else if(type.equals("3")) {//有人下注
 			send("3&&__"+msg,session,false);
+		}else if(type.equals("31")) {//下注测试
+			send("31&&__"+msg,session,false);
 		}
 		else if(type.equals("4")) {//控制开奖
 			send("4&&__"+msg,session,false);

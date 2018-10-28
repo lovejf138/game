@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webpos.dao.TestDetailMapper">
+	<resultMap id="BaseResultMap" type="com.webpos.entity.TestDetail">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="userid" property="userid" jdbcType="VARCHAR" />
+		<result column="parentid" property="parentid" jdbcType="VARCHAR" />
+		<result column="roomid" property="roomid" jdbcType="INTEGER" />
+		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+		<result column="qiname" property="qiname" jdbcType="VARCHAR" />
+		<result column="amount" property="amount" jdbcType="INTEGER" />
+		<result column="award" property="award" jdbcType="INTEGER" />
+		<result column="finalaward" property="finalaward" jdbcType="INTEGER" />
+		<result column="parentaward" property="parentaward" jdbcType="INTEGER" />
+		<result column="number" property="number" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="kjnumber" property="kjnumber" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id,userid,roomid,status,ctime,qiname,award,finalaward,amount,number,kjnumber,parentaward,parentid
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from _testdetail
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<select id="selectByNameAndUserAndNumber" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from _testdetail
+		where userid = #{0} and qiname=#{1} and number=#{2} limit 1
+	</select>
+	
+	<update id="finishByname" parameterType="com.webpos.entity.TestDetail">
+		update _testdetail	set	status = #{status,jdbcType=VARCHAR},kjnumber=#{kjnumber,jdbcType=VARCHAR}
+		 where qiname = #{qiname,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="selectByQiname" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from _testdetail
+		where qiname = #{qiname,jdbcType=VARCHAR} 
+		order by number asc,amount desc,ctime desc;
+	</select>
+
+	<insert id="insert" parameterType="com.webpos.entity.TestDetail"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into _testdetail (userid,roomid,status,ctime,qiname,award,finalaward,parentaward,amount,number,parentid)
+
+		values ( #{userid,jdbcType=VARCHAR},#{roomid,jdbcType=INTEGER},
+		#{status,jdbcType=VARCHAR},
+		
+		#{ctime,jdbcType=TIMESTAMP},#{qiname,jdbcType=VARCHAR},0,0,0,
+		#{amount,jdbcType=INTEGER},#{number,jdbcType=INTEGER},#{parentid,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<select id="countByExample" parameterType="com.webpos.entity.TestDetailExample" resultType="java.lang.Integer" >
+    select count(*) from _testdetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+	<select id="selectByExampleWithBLOBs" resultMap="BaseResultMap"
+		parameterType="com.webpos.entity.TestDetailExample" >
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from _testdetail
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExampleWithBLOBsAndPage" resultMap="BaseResultMap"
+		parameterType="com.webpos.entity.TestDetailExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from _testdetail
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="startRow != null">
+			limit #{startRow},#{pageSize}
+		</if>
+	</select>
+	
+	<update id="updateByPrimaryKeySelective" parameterType="com.webpos.entity.TestDetail">
+		update _testdetail
+		<set>
+			<if test="amount != null">
+			    amount = #{amount,jdbcType=INTEGER},
+			</if>
+			<if test="award != null">
+			   
+				award = #{award,jdbcType=INTEGER},
+				finalaward = #{finalaward,jdbcType=INTEGER},
+				parentaward = #{parentaward,jdbcType=INTEGER}
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<select id="summaryPlay" resultType="com.api.vo.contans.SummaryPlay"
+		parameterType="com.api.vo.contans.PlayQuery">
+		select
+		sum(amount) as amount_sum ,
+		sum(award) as award_sum 
+		from
+		_testdetail
+		where 1 = 1 
+		<if test="user_id != null and user_id != ''">
+			and userid = #{user_id} 
+		</if>
+		
+		<if test="qiname != null and qiname != ''">
+			and qiname = #{qiname} 
+		</if>
+		<if test="roomid != null and roomid != ''">
+			and roomid = #{roomid} 
+		</if>
+		
+		<if test="startDate != null and startDate != ''">
+		    and ctime >= #{startDate} 
+		</if>
+		<if test="endDate != null and endDate != ''">
+			<![CDATA[  
+				 and ctime <= #{endDate} 
+			 ]]>
+		</if>
+		
+		
+	</select>
+	
+</mapper>
