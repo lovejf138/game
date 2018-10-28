@@ -553,9 +553,11 @@ body, button, input, select, textarea {
 	
 	<div class="fenge"></div>
 	<div class="shou-shp" style="margin-bottom: 1.2rem;">
+			<button style="top: 300px;background: hsl(13, 46%, 49%);" id="room_button" onclick="window.location.href='testroom.do'">示范大厅</button>
+			
 			<button id="room_button" onclick="window.location.href='room.do'">播种子，收金子</button>
 
-			<canvas id="room_myCanvas" width="100%" height="100%"></canvas>
+			<%-- <canvas id="room_myCanvas" width="100%" height="100%"></canvas> --%>
 	
 	</div>
 

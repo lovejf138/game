@@ -7,7 +7,7 @@ function searchuser(){
 	if (eth_address.toString().indexOf("VIP") >= 0
 			|| eth_address.toString().indexOf("vip") >= 0) {
 	}else if (el <= 30) {
-		$("#error_msg").html("请输入正确的以太坊地址");
+		$("#error_msg").html("请输入正确的地址");
 		return;
 	}
 	
@@ -143,7 +143,7 @@ $("#btn_login").click(
 				return;
 			}
 			if (el <= 30) {
-				$("#error_msg").html("请输入正确的以太坊地址");
+				$("#error_msg").html("请输入正确的地址");
 				$("#address").val("");
 				return;
 			}

@@ -31,7 +31,7 @@
                  <input style="display:none" name="geetest_challenge" id="geetest_challenge" value="">
                  <input style="display:none" name="geetest_validate" id="geetest_validate" value="">
                  <input style="display:none" name="geetest_seccode" id="geetest_seccode" value="">
-	      <input placeholder='请输入以太坊地址' id="address" type='text'>
+	      <input placeholder='请输入USDT地址' id="address" type='text'>
 	        <div class='validation'>
 	          <img src='<%=request.getContextPath()%>/webpos/pos/front/img/login/tick.png'>
 	        </div>
@@ -67,7 +67,7 @@
 	    <p>正在跳转到首页...</p>
 	  </div>
 	  <div class='disclaimer'>
-	    <p>无需注册，以太坊地址直接登录。首次登录，输入的密码为您下一次登录密码</p>
+	    <p>无需注册，USDT地址直接登录。首次登录，输入的密码为您下一次登录密码</p>
 	  </div>
 	</div>
 	<div class='authent'>

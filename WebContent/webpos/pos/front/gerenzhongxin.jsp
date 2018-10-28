@@ -181,11 +181,11 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
       <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
     </div>
     <div class="am-modal-bd" style="line-height: 20px;font-size:15px">
-      1以太坊=1000种子。请将以太坊转入以下地址完成充值
+      1USDT=10种子。请将USDT转入以下地址完成充值
    
-     <p><a style="user-select:auto; -webkit-user-select:auto; -moz-user-select:auto; -ms-user-select:auto; user-select:auto;">0x9EEa8Bd7317c0233fCd4E1846368f6eBfC9F06B7</a>
+     <p><a style="user-select:auto; -webkit-user-select:auto; -moz-user-select:auto; -ms-user-select:auto; user-select:auto;">1JXaSH1WeAqcdims1k4TrRGmzQhkgpWz96</a>
      </p>
-     <img style="width:150px" src="<%=request.getContextPath()%>/webpos/pos/img/imtoken1.png"></img>
+     <img style="width:150px" src="<%=request.getContextPath()%>/webpos/pos/img/imtoken2.png"></img>
      
     </div>
   </div>
@@ -198,7 +198,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
     </div>
     
     <div class="am-modal-bd" style="margin-top: 10px;" id="spread_inpiut">
-      <a id="spread-text">http://eth-game.club/login.do?parent=${user.id_md5}</a>
+      <a id="spread-text">http://eth-game.club/index.do?parent=${user.id_md5}</a>
     </div>
     <div id="qrcode-spread" style="text-align: center;margin: auto;">
     </div>
@@ -218,9 +218,8 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
       <p id="withdraw_tip" style="margin-top:10px;float: left;font-size: 15px;font-align:left;color:red"></p>
      
       <p style="margin-top:10px;float: left;font-size: 15px;font-align:left">1.至少100个起提，半个小时内到账</p>
-      
       <p style="margin-top:10px;float: left;font-size: 15px;font-align:left">2.每次提金子，收取1%的网络矿工费</p>
-      <p style="margin-top:10px;float: left;font-size: 15px;font-align:left">3.1000个种子＝1000个金子＝1个以太坊</p>
+      <p style="margin-top:10px;float: left;font-size: 15px;font-align:left">3.10个种子＝10个金子＝1个USDT</p>
    
    	 
     
