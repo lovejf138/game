@@ -19,7 +19,7 @@ var tixian=false;
 		var _amount=0;
 		
 		try{
-			_amount = parseInt(txt_withdraw);
+			_amount = parseFloat(txt_withdraw);
 		}catch(e) {
 			_amount = 0;
 		}
@@ -29,8 +29,8 @@ var tixian=false;
 			_amount=0;
 		}
 		
-		if(_amount<100){
-			$("#withdraw_tip").html("至少100个种子起提");
+		if(_amount<0.05){
+			$("#withdraw_tip").html("至少0.05个ETH起提");
 			return ;
 		}
 		
@@ -68,12 +68,12 @@ var tixian=false;
 				if(result.result=="SUCCESS"){
 					var f_id = result.desc;
 			
-					$("#withdraw_tip").html("提现成功，正在刷新页面");
+					$("#withdraw_tip").html("转出成功，正在刷新页面");
 					window.location.reload();
 				}else if (result.result=="FAIL"){
 					var f_id = result.desc;
 					tixian = false;
-					$("#withdraw_tip").html("提现失败"+f_id);
+					$("#withdraw_tip").html("转出失败"+f_id);
 					
 				}
 				

@@ -52,8 +52,8 @@
 				
 				<div class="hj-z4" style="width: 100%;">
 					
-					<p><span>${withdraw.amount}</span>金子</p>
-					<p>实际到账：<span>${withdraw.fianl_amount}</span>以太坊</p>
+					<p><span>${withdraw.amount}</span>ETH</p>
+					<p>实际到账：<span>${withdraw.fianl_amount}</span>ETH</p>
 				</div>
 			</div>
 		</li>

@@ -10,7 +10,7 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<title>示范大厅</title>
+		<title>猜猜猜</title>
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/bootstrap-grid.min.css?t=1">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=5">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/room_base1.css?t=3">
@@ -72,10 +72,10 @@ input::-webkit-input-placeholder {
 						</span>
 					</div>
 					
-					<div class="navList" onClick="window.location.href='dtroom.do?qiname=${nextname}&type=_last'">
+					<div class="navList" onClick="window.location.href='onecanyu.do'">
 						<i class="navIco-shang navico"></i>
 						<span class="navText">
-							上一季
+							历史
 						</span>
 					</div>
 					
@@ -94,24 +94,53 @@ input::-webkit-input-placeholder {
 			<div class="in-content-box">
 			
 				<div class="in-content-title" style="display:block;text-align: center;font-weight: bold;padding: 14px 0;font-size: 16px;">
-					  <div style="text-align:center">
-						本大厅仅供测试，不记录结果
-						</div>
-						
+					  	
 						<div style="text-align:center;margin-top:3px">
-						仓库：
-						<font style="color:#ff7400;font-size: 20px;" id="sumamount">${sumamount}</font>种子
+						余额：
+						<font style="color:#ff7400;font-size: 20px;" id="my_balance">${user.balance}</font>ETH
 						</div>
 					
-					
-					
-					<div class="in-line-left" style="top: 60px;">
+					<div class="in-line-left" style="top: 45px;">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
 					</div>
-					<div class="in-line-right" style="top: 60px;">
+					<div class="in-line-right" style="top: 45px;">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
 					</div>
 				</div>
+				
+				<div class="in-content-title">
+					<h2>
+						<a id="name_wait1">离${nextname}期结束：</a><a id="name_wait2" style="color:#ff7400">0</a>秒
+					</h2>
+					<div class="in-line-left">
+						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
+					</div>
+					<div class="in-line-right">
+						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
+					</div>
+				</div>
+				
+				<div class="in-content-title">
+					<div style="text-align:center;padding-top: 10px;">
+						<a style="font-weight: bold;font-size:16px;color: #6d542a;">猜猜什么号码会出现在
+						<font style="font-weight:800;font-size:13px;padding-left: 10px;padding-right: 10px;padding-top: 2px;padding-bottom: 2px;background-color: rgb(35, 29, 29); border-radius: 50px; height: 20px; width: 20px; color: #fff; line-height: 20px; text-align: center;">${systemnum}</font>
+						之前？</a>
+						</div>
+					<div style="text-align:center;padding-top: 10px;">
+						<a style="font-weight: bold;font-size:16px">猜中就获得一倍收益</a>
+						</div>
+						 <div style="text-align:center; font-size: 12px; color: #757272;padding-top: 5px;font-weight: bold;">
+						(每季只能选一个号码)
+						</div>
+						
+						<div class="in-line-left" style="top: 65px;">
+						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
+					</div>
+					<div class="in-line-right" style="top: 65px;">
+						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
+					</div>
+				</div>
+				
 				<div class="in-content-links" style="background-image: linear-gradient(to bottom,#e4e4e4,#ffffff);display: block;">
 				
 					<div class="kj-p5 qi_name_div" style="height: 190px; line-height: 190px;">
@@ -132,7 +161,7 @@ input::-webkit-input-placeholder {
 						
 					<div style="line-height: 30px; height: 30px;">
 		
-						<input type="text" class="input-address" id="input_amount" maxlength="12" placeholder="输入播种数量"
+						<input type="text" class="input-address" id="input_amount" maxlength="12" placeholder="输入ETH数量"
 						      style="font-size: 15px;font-weight: 800;color: #ff0000 !important;"/>
 					
           				<input id="btn_ok" value="确定" type="button" class="input-login" style="width:60px"/>
@@ -147,49 +176,21 @@ input::-webkit-input-placeholder {
 					
 				</div>
 				
-				<div class="in-content-title">
-					<h2>
-						<a id="name_wait1">离${nextname}期结束：</a><a id="name_wait2" style="color:#ff7400">0</a>秒
-					</h2>
-					<div class="in-line-left">
-						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
-					</div>
-					<div class="in-line-right">
-						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
-					</div>
+				<div class="in-content-fellow">
+						
+						<div style="text-align:center;margin-top:3px">
+						已选号码：
+						<font style="color:#ff7400;font-size: 20px;" id="has_haoma">${has_haoma}</font>
+						</div>	
+						
+					<div style="text-align:center;margin-top:3px">
+						数量：
+						<font style="color:#ff7400;font-size: 20px;" id="has_number">${has_number}</font>ETH
+						</div>	
+					
 				</div>
 				
 				
-				 
-				<div class="in-content-fellow" style="background: #111;">
-				 <div class="in-fellow-well">
-					<table class="am-table">
-   					 <thead>
-     				   <tr style="color:white">
-            			<th>号码&nbsp&nbsp</th>
-            			<th>人数&nbsp&nbsp</th>
-           				<th>总数量&nbsp</th>
-           				<th>最大数量&nbsp</th>
-           				<th>我的种子</th>
-           			   </tr>
-   					 </thead>
-   					 <tbody>
-   					    <c:forEach items="${details }" var="sd">
-					        <tr style="height: 30px;line-height: 30px;">
-					            <td class="td_font" style="font-size:15px;font-weight:800">${sd.number}</td>
-					            <td class="td_font" id="_count${sd.number}">${sd.count}</td>
-					            <td class="td_font" id="_sumamount${sd.number}">${sd.sumamount}</td>
-					            <td class="td_font" id="_maxamount${sd.number}">${sd.maxamount}</td>
-					            <td class="td_font myamount" id="_myamount${sd.number}" style="color: #ff7400;">${sd.myamount}</td>
-					        </tr>
-					     </c:forEach>
-					       
-   					 </tbody>
-					</table>
-					</div>
-					
-					
-					</div>
 				</div>
 				
 			</div>
@@ -225,13 +226,13 @@ input::-webkit-input-placeholder {
 						</div>
 						
 						 <div style="text-align:center;margin-top:3px">
-						播种数量：
-						<font style="font-size: 18px;" id="kj_join_number">0</font>种子
+						参与数量：
+						<font style="font-size: 18px;" id="kj_join_number">0</font>ETH
 						</div>
 						
 						<div style="text-align:center;margin-top:3px">
-						获得金子：
-						<font style="color:#ff7400;font-size: 20px;" id="kj_award_number">0</font>金子
+						获得：
+						<font style="color:#ff7400;font-size: 20px;" id="kj_award_number">0</font>ETH
 						</div>
 					
 					
@@ -285,7 +286,7 @@ input::-webkit-input-placeholder {
 				
 						
 					<div style="line-height: 30px; height: 30px;">
-						<input id="btn_next" value="继续播种" onClick="window.location.href='testroom.do'" type="button" class="input-login" style="float: right;width:80px;background-color: #ff5292;font-size:15px;margin: auto; max-width: 80px;"/>
+						<input id="btn_next" value="继续" onClick="window.location.href='testroom.do'" type="button" class="input-login" style="float: right;width:80px;background-color: #ff5292;font-size:15px;margin: auto; max-width: 80px;"/>
                	
 						<input id="btn_detail" value="详情" onClick="window.location.href='dtroom.do?type=_now&qiname=${nextname}'" type="button" class="input-login" style="float: left;width:60px;font-size:15px"/>
           			</div>
@@ -333,7 +334,7 @@ input::-webkit-input-placeholder {
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/zepto.min.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/bringins.js?t=3"></script>
-		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/m/testroom_123.js?t=1'></script>
+		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/oneroom_123.js?t=1'></script>
 		<script>
 var _hmt = _hmt || [];
 (function() {

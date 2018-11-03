@@ -108,10 +108,11 @@ body, button, input, select, textarea {
 	</div>
 
    <div class="shou-zhong" style="height: 1rem;">
-		 <!-- target="_blank" -->  <a  id="how_to_play" style="padding-top: 25px; color: #868686; float: left; font-size: 15px;"
+		
+		 <!--  <a  id="how_to_play" style="padding-top: 25px; color: #868686; float: left; font-size: 15px;"
 		  	onclick="openVideo('<%=request.getContextPath()%>/webpos/pos/front/how.mp4')">怎么播种？</a>
 		   <a  id="how_to_get" style="margin-left: 30px;padding-top: 25px; color: #868686; float: left; font-size: 15px;"
-		    onclick="openVideo('<%=request.getContextPath()%>/webpos/pos/front/get.mp4')">怎么收金子？</a>
+		    onclick="openVideo('<%=request.getContextPath()%>/webpos/pos/front/get.mp4')">怎么收金子？</a>-->
 		  <a  id="how_to_create"  style="padding-top: 25px; color: #868686; float: right; font-size: 15px;">号码怎么产生？</a>
    
   
@@ -553,9 +554,11 @@ body, button, input, select, textarea {
 	
 	<div class="fenge"></div>
 	<div class="shou-shp" style="margin-bottom: 1.2rem;">
-			<button style="top: 300px;background: hsl(13, 46%, 49%);" id="room_button" onclick="window.location.href='testroom.do'">示范大厅</button>
+			<!-- <button style="top: 300px;background: hsl(13, 46%, 49%);" id="room_button" onclick="window.location.href='testroom.do'">示范大厅</button>
 			
-			<button id="room_button" onclick="window.location.href='room.do'">播种子，收金子</button>
+			<button id="room_button" onclick="window.location.href='room.do'">播种子，收金子</button> -->
+			
+			<button id="room_button" onclick="window.location.href='oneroom.do'">猜中翻倍</button>
 
 			<%-- <canvas id="room_myCanvas" width="100%" height="100%"></canvas> --%>
 	

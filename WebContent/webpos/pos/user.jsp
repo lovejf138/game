@@ -206,7 +206,7 @@
     		</tr>
     		<tr >
     			<td colspan="4">
-    				数量:<input id="cz_input_number" style="width:100px"/>个USDT
+    				数量:<input id="cz_input_number" style="width:100px"/>个ETH
     			</td>
     		</tr>
     		

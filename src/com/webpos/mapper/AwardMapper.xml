@@ -127,5 +127,9 @@
 	</insert>
 	
 	
+	<select id="jiesuanOnedetail" resultType="java.lang.Integer"
+		parameterType="java.lang.String">
+		{call jiesuanOnedetail(#{0},#{1})}
+	</select>
 	
 </mapper>

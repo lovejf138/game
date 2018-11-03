@@ -73,6 +73,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.xml.sax.InputSource;
 
+import com.alibaba.fastjson.JSON;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -1594,7 +1595,7 @@ public class CommUtil {
 			if (null2Double(f) > 0.0D)
 				ret = e.divide(f, 3, 1).doubleValue();
 		}
-		DecimalFormat df = new DecimalFormat("0.0000");
+		DecimalFormat df = new DecimalFormat("0.00");
 		return Double.valueOf(df.format(ret)).doubleValue();
 	}
 
@@ -1614,7 +1615,7 @@ public class CommUtil {
 		BigDecimal e = new BigDecimal(null2Double(a));
 		BigDecimal f = new BigDecimal(null2Double(b));
 		ret = e.subtract(f).doubleValue();
-		DecimalFormat df = new DecimalFormat("0.0000");
+		DecimalFormat df = new DecimalFormat("0.00");
 		return Double.valueOf(df.format(ret)).doubleValue();
 	}
 
@@ -1623,7 +1624,7 @@ public class CommUtil {
 		BigDecimal e = new BigDecimal(null2Double(a));
 		BigDecimal f = new BigDecimal(null2Double(b));
 		ret = e.add(f).doubleValue();
-		DecimalFormat df = new DecimalFormat("0.0000");
+		DecimalFormat df = new DecimalFormat("0.00");
 		return Double.valueOf(df.format(ret)).doubleValue();
 	}
 
@@ -1638,12 +1639,12 @@ public class CommUtil {
 		BigDecimal e = new BigDecimal(null2Double(a));
 		BigDecimal f = new BigDecimal(null2Double(b));
 		double ret = e.multiply(f).doubleValue();
-		DecimalFormat df = new DecimalFormat("0.0000");
+		DecimalFormat df = new DecimalFormat("0.00");
 		return Double.valueOf(df.format(ret)).doubleValue();
 	}
 
 	public static double formatMoney(Object money) {
-		DecimalFormat df = new DecimalFormat("0.0000");
+		DecimalFormat df = new DecimalFormat("0.00");
 		return Double.valueOf(df.format(money)).doubleValue();
 	}
 
@@ -2667,7 +2668,7 @@ public class CommUtil {
 	 * （人民币单位转换）元转分
 	 */
 	public static String yuanChangeFen(String amount){
-		BigDecimal money = new BigDecimal("0.0000");
+		BigDecimal money = new BigDecimal("0.00");
 		money = money.add(new BigDecimal(amount));
 		Double doubleMoney = money.doubleValue();
 		Integer integerMoney = (int) (doubleMoney * 100);
@@ -2790,7 +2791,7 @@ public class CommUtil {
 		try {
 			Double douAmount = Double.parseDouble(strAmount);
 
-			DecimalFormat df = new DecimalFormat("0.0000");
+			DecimalFormat df = new DecimalFormat("0.00");
 			return df.format(douAmount);
 		} catch (Exception e) {
 			logger.error("转换金额格式失败");
@@ -3122,6 +3123,84 @@ public class CommUtil {
         return result;
     }
 	
+	public static void sendVerifyMessage(String phone,String code) {
+		//变量短信发送的URL 请登录zz.253.com 获取完整的URL接口信息
+		String smsVariableRequestUrl = "http://smssh1.253.com/msg/variable/json";
+		//设置您要发送的内容：其中“【】”中括号为运营商签名符号，多签名内容前置添加提交
+		String msg = "【玉腾翔】{$var}终于等到你，您的动态验证码为{$var}，请在页面输入完成验证。";
+		//参数组																
+		String params = phone+","+"U社区,"+code+"";
+		//状态报告
+		String report= "false";
+		
+		SmsVariableRequest smsVariableRequest=new SmsVariableRequest("N0663436", "u1iZwtNIHBd271", msg, params, report);
+		
+        String requestJson = JSON.toJSONString(smsVariableRequest);
+		
+		//System.out.println("before request string is: " + requestJson);
+		
+		String response = ChuangLanSmsUtil.sendSmsByPost(smsVariableRequestUrl, requestJson);
+		
+		//System.out.println("response after request result is : " + response);
+		
+		SmsVariableResponse smsVariableResponse = JSON.parseObject(response, SmsVariableResponse.class);
+		
+		//System.out.println("response  toString is : " + smsVariableResponse);
+	}
+	
+	/**
+	 * 通过期号和用户名获取1～11随机号
+	 * @param args
+	 */
+	public static int getNumberFromUseridAndqiname(String userid,String qiname) {
+		int number=1;
+		String x = userid+qiname;
+		String y = Md5Encrypt.md5(x);
+		y = y.toLowerCase();
+		int sum=0;
+		for(int i=0;i<y.length();i++) {
+			if(i>=16) break;
+			
+			String yi = y.substring(i, i+1);
+			if(yi.equals("1")) {
+				sum+=1;
+			}else if(yi.equals("2")) {
+				sum+=2;
+			}else if(yi.equals("3")) {
+				sum+=3;
+			}else if(yi.equals("4")) {
+				sum+=4;
+			}else if(yi.equals("5")) {
+				sum+=5;
+			}else if(yi.equals("6")) {
+				sum+=6;
+			}else if(yi.equals("7")) {
+				sum+=7;
+			}else if(yi.equals("8")) {
+				sum+=8;
+			}else if(yi.equals("9")) {
+				sum+=9;
+			}else if(yi.equals("a")) {
+				sum+=10;
+			}else if(yi.equals("b")) {
+				sum+=11;
+			}else if(yi.equals("c")) {
+				sum+=12;
+			}else if(yi.equals("d")) {
+				sum+=13;
+			}else if(yi.equals("e")) {
+				sum+=14;
+			}else if(yi.equals("f")) {
+				sum+=15;
+			}
+		}
+		
+		int f = sum%11;
+		number=f+1;
+		return number;
+	}
+	
+	
 	public static void main(String[] args) {
 		
 		int[] r = getFinalNumberFrom5(9,4,11,8,5);
@@ -3161,4 +3240,6 @@ public class CommUtil {
 
 	}
 
+	
+	
 }

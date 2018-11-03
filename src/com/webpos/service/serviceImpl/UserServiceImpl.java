@@ -14,11 +14,13 @@ import com.api.vo.contans.UserQuery;
 import com.webpos.dao.AccountMapper;
 import com.webpos.dao.DetailMapper;
 import com.webpos.dao.DetailsMapper;
+import com.webpos.dao.OneDetailMapper;
 import com.webpos.dao.RoomMapper;
 import com.webpos.dao.TestDetailMapper;
 import com.webpos.dao.UserMapper;
 import com.webpos.entity.Account;
 import com.webpos.entity.Detail;
+import com.webpos.entity.OneDetail;
 import com.webpos.entity.TestDetail;
 import com.webpos.entity.User;
 import com.webpos.entity.UserExample;
@@ -40,6 +42,8 @@ public class UserServiceImpl implements UserService {
 	@Resource
 	private DetailMapper detailDao;
 	@Resource
+	private OneDetailMapper onedetailDao;
+	@Resource
 	private TestDetailMapper testdetailDao;
 
 	public int insert(User record) {
@@ -50,6 +54,10 @@ public class UserServiceImpl implements UserService {
 		return this.userDao.updateByPrimaryKeySelective(record);
 	}
 
+	public User selectByPhone(String phone) {
+		return this.userDao.selectByPhone(phone);//
+	}
+	
 	public User selectByUserId(String user_id) {
 		return this.userDao.selectByUserId(user_id);
 	}
@@ -117,13 +125,13 @@ public class UserServiceImpl implements UserService {
 //	}
 
 	@Transactional
-	public boolean withdraw(String user_id, Integer amount) {
+	public boolean withdraw(String user_id, double amount) {
 		try {
 			User u = this.userDao.selectByUserId(user_id);
 
-			Integer final_amount = u.getBalance()-amount;
+			double final_amount = CommUtil.subtract(u.getBalance(), amount);;
 			u.setBalance(final_amount);
-			u.setWithdraw_sum(u.getWithdraw_sum()+amount);
+			u.setWithdraw_sum(CommUtil.add(u.getWithdraw_sum(),amount));
 
 			this.userDao.updateByPrimaryKeySelective(u);
 
@@ -185,20 +193,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Transactional(rollbackFor = { Exception.class })
-	public String recharge(String user_id, String amount) {
+	public String recharge(String user_id, double amount) {
 		String r = "SUCCESS";
 		try {
 			User user_last = this.userDao.selectByUserId(user_id);
 			if (user_last == null) {
 				if (user_id.startsWith("vip_")) {
 					User new_user = new User();
-					double amo = CommUtil.mul(10, amount);
-					int num = (new Double(amo)).intValue();
-					new_user.setBalance(num);
-					new_user.setRecharge_sum(num);
-					new_user.setPlay_sum(0);
+					//double amo = CommUtil.mul(10, amount);
+					
+					new_user.setBalance(amount);
+					new_user.setRecharge_sum(amount);
+					new_user.setPlay_sum(0.0);
 					new_user.setChild_sum(Integer.valueOf(0));
-					new_user.setWithdraw_sum(0);
+					new_user.setWithdraw_sum(0.0);
 
 					new_user.setCtime(new Date());
 					new_user.setId_md5(Md5Encrypt.md5(user_id));
@@ -220,18 +228,18 @@ public class UserServiceImpl implements UserService {
 					d.setRecharge_sum(new_user.getRecharge_sum());
 					d.setStatus("success");
 					d.setIs_machine(new_user.getIs_machine());
-					d.setAmount(num);
+					d.setAmount(amount);
 					this.accountDao.insert(d);
 				} else {
 					return "user_error";
 				}
 			} else {
-				double amo = CommUtil.mul(10, amount);
-				int num = (new Double(amo)).intValue();
-				int final_amount = user_last.getBalance()+num;
+//				double amo = CommUtil.mul(10, amount);
+//				int num = (new Double(amo)).intValue();
+				double final_amount =CommUtil.add(user_last.getBalance(),amount);
 			
 				user_last.setBalance(final_amount);
-				user_last.setRecharge_sum(user_last.getRecharge_sum()+num);
+				user_last.setRecharge_sum(CommUtil.add(user_last.getRecharge_sum(),amount));
 				this.userDao.updateByPrimaryKeySelective(user_last);
 
 				Account d = new Account();
@@ -246,7 +254,7 @@ public class UserServiceImpl implements UserService {
 				d.setRecharge_sum(user_last.getRecharge_sum());
 				d.setIs_machine(user_last.getIs_machine());
 				d.setStatus("success");
-				d.setAmount(num);
+				d.setAmount(amount);
 				this.accountDao.insert(d);
 			}
 		} catch (Exception e) {
@@ -257,42 +265,33 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Transactional
-	public User register(String loginname,String pass, String parent, String remark) {
+	public User register(String loginname,String pass, String parent) {
 		User new_user = new User();
 		try {
 			String rp = "";
 			if (parent != null) {
 				User u_p = this.userDao.selectByParent(parent);
 				if (u_p != null) {
-					rp = u_p.getUser_id();
+					rp = u_p.getPhone();
 					u_p.setChild_sum(Integer.valueOf(u_p.getChild_sum().intValue() + 1));
 					this.userDao.updateByPrimaryKeySelective(u_p);
 				}
 			}
-			new_user.setBalance(0);
-			new_user.setPlay_sum(0);
+			new_user.setBalance(0.0);
+			new_user.setPlay_sum(0.0);
 			new_user.setChild_sum(Integer.valueOf(0));
-			new_user.setRecharge_sum(0);
-			new_user.setWithdraw_sum(0);
+			new_user.setRecharge_sum(0.0);
+			new_user.setAward_sum(0.0);
+			new_user.setWithdraw_sum(0.0);
 			new_user.setPass(pass);
 			new_user.setCtime(new Date());
 			new_user.setId_md5(Md5Encrypt.md5(loginname));
 			new_user.setId_short(loginname.substring(0, 8) + "*****"
 					+ loginname.substring(loginname.length() - 4, loginname.length()));
-			new_user.setUser_id(loginname);
+			new_user.setPhone(loginname);
 			new_user.setParent(rp);
-			if ((remark != null) && (remark != "")) {
-				new_user.setAll_eth(Double.valueOf(CommUtil.subtract(remark, "0")));
-			}
+			
 			this.userDao.insert(new_user);
-
-//			Details d = new Details();
-//			d.setCtime(new Date());
-//			d.setRemark("new user");
-//			d.setResult("0.01");
-//			d.setUser_id(loginname);
-//			d.setType("gift");
-//			this.detailsDao.insert(d);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return null;
@@ -401,5 +400,53 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User selectById(long id) {
 		return this.userDao.selectById(id);
+	}
+
+	@Override
+	public String onejoin(String userid, String parentid, String qiname, double amount, int number) {
+		String r = "SUCCESS";
+		try {
+			int systemnum= CommUtil.getNumberFromUseridAndqiname(userid, qiname);
+			if(systemnum==number) {
+				return "本季不能选择号码"+systemnum;
+			}
+			OneDetail old_d = onedetailDao.selectByNameAndUser(userid, qiname);
+			if(old_d==null) {
+				OneDetail d = new OneDetail();
+				d.setAmount(amount);
+				d.setAward(0.0);
+				d.setCtime(new Date());
+				d.setNumber(number);
+				d.setQiname(qiname);
+				d.setUserid(userid);
+				d.setParentid(parentid);
+				d.setStatus("wait");
+				
+				d.setSystemnumber(systemnum);
+				onedetailDao.insert(d);
+				
+				User u = selectByUserId(userid);
+				u.setPlay_sum(u.getPlay_sum()+amount);
+				u.setBalance(u.getBalance()-amount);
+				this.userDao.updateByPrimaryKeySelective(u);
+			}else {
+				if(old_d.getNumber()==number) {
+					old_d.setAmount(old_d.getAmount()+amount);
+					onedetailDao.updateByPrimaryKeySelective(old_d);
+					
+					User u = selectByUserId(userid);
+					u.setPlay_sum(u.getPlay_sum()+amount);
+					u.setBalance(u.getBalance()-amount);
+					this.userDao.updateByPrimaryKeySelective(u);
+				}else {
+					return "抱歉，本季已猜过，只能猜一个号码！";
+				}
+			}
+			
+		}catch(Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return "未知错误:"+e.getMessage().toString();
+		}
+		return r;
 	}
 }

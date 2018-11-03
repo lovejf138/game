@@ -273,7 +273,7 @@ public class AwardServiceImpl implements AwardService {
 	@Transactional
 	public String testkaijiang(int[] finals, String qiname, boolean ifJiesuan) {
 		try {
-
+			
 			/**************** 取出押注的详情 ***********************/
 			List<TestDetail> ds = testdetailDao.selectByQiname(qiname);
 			if (ds == null || ds.size() <= 0) {
@@ -417,6 +417,50 @@ public class AwardServiceImpl implements AwardService {
 //			temp.setStatus("finish");
 //			testdetailDao.finishByname(temp);
 
+			return "SUCCESS";
+
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return "FAIL:" + e.getMessage().toString();
+		}
+
+	}
+	
+	
+	/**
+	 * 
+	 * @param finals
+	 * @param qiname
+	 * @param ifJiesuan 是否结算
+	 * @return
+	 */
+	@Transactional
+	public String onekaijiang(int[] finals, String qiname) {
+		try {
+			/************ 添加开奖记录 ***************/
+			Award a = new Award();
+			String t = CommUtil.getTimeFromQishu(qiname);
+			Date d = CommUtil.formatDate(t, "yyyy-MM-dd HH:mm:ss");
+			a.setCtime(d);
+			a.setName(qiname);
+			a.setNo1(finals[0]);
+			a.setNo2(finals[1]);
+			a.setNo3(finals[2]);
+			a.setNo4(finals[3]);
+			a.setNo5(finals[4]);
+			a.setNo6(finals[5]);
+			a.setNo7(finals[6]);
+			a.setNo8(finals[7]);
+			a.setNo9(finals[8]);
+			a.setNo10(finals[9]);
+			a.setNo11(finals[10]);
+			awardDao.insert(a);
+			
+			/**************** 取出押注的详情 ***********************/
+			
+			awardDao.jiesuanOnedetail(finals[0]+","+finals[1]+","+finals[2]+","+finals[3]+","+
+					finals[4]+","+finals[5]+","+finals[6]+","+finals[7]+","
+					+finals[8]+","+finals[9]+","+finals[10]+",",qiname);
 			return "SUCCESS";
 
 		} catch (Exception e) {

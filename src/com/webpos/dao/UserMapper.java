@@ -10,6 +10,8 @@ public abstract interface UserMapper
 {
   public abstract User selectByUserId(String paramString);
   
+  public abstract User selectByPhone(String phone);
+  
   public abstract User selectById(long id);
   
   public abstract User selectByParent(String paramString);

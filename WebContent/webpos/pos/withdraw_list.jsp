@@ -176,7 +176,7 @@
     		
     		<tr >
     			<td colspan="4">
-    				数量:<a id="et_input_number" style="width:350px"></a>个USDT
+    				数量:<a id="et_input_number" style="width:350px"></a>个ETH
     				
     			</td>
     		</tr>

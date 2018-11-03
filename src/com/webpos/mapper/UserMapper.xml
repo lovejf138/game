@@ -5,15 +5,20 @@
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="user_id" property="user_id" jdbcType="VARCHAR" />
 		<result column="parent" property="parent" jdbcType="VARCHAR" />
-		<result column="balance" property="balance" jdbcType="INTEGER" />
+		<result column="balance" property="balance" jdbcType="VARCHAR" />
 		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
 		<result column="id_md5" property="id_md5" jdbcType="VARCHAR" />
 		<result column="all_eth" property="all_eth" jdbcType="VARCHAR" />
 		<result column="pass" property="pass" jdbcType="VARCHAR" />
-		<result column="play_sum" property="play_sum" jdbcType="INTEGER" />
-		<result column="award_sum" property="award_sum" jdbcType="INTEGER" />
-		<result column="recharge_sum" property="recharge_sum" jdbcType="INTEGER" />
-		<result column="withdraw_sum" property="withdraw_sum" jdbcType="INTEGER" />
+		<result column="play_sum" property="play_sum" jdbcType="VARCHAR" />
+		<result column="award_sum" property="award_sum" jdbcType="VARCHAR" />
+		<result column="recharge_sum" property="recharge_sum" jdbcType="VARCHAR" />
+		<result column="_name" property="name" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="cardno" property="cardno" jdbcType="VARCHAR" />
+		<result column="cardbank" property="cardbank" jdbcType="VARCHAR" />
+		<result column="cardaddress" property="cardaddress" jdbcType="VARCHAR" />
+		<result column="withdraw_sum" property="withdraw_sum" jdbcType="VARCHAR" />
 		<result column="child_sum" property="child_sum" jdbcType="INTEGER" />
 		<result column="is_machine" property="is_machine" jdbcType="INTEGER" />
 		
@@ -84,7 +89,7 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id,user_id,parent,balance,ctime,id_md5,all_eth,pass,play_sum,recharge_sum,withdraw_sum,child_sum,is_machine,award_sum
+		id,user_id,parent,balance,ctime,id_md5,all_eth,pass,play_sum,recharge_sum,withdraw_sum,child_sum,is_machine,award_sum,phone,_name,cardaddress,cardbank,cardno
 	</sql>
 
 	<select id="selectByUserId" resultMap="BaseResultMap"
@@ -93,6 +98,14 @@
 		<include refid="Base_Column_List" />
 		from _user
 		where user_id = #{user_id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectByPhone" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from _user
+		where phone = #{phone,jdbcType=VARCHAR}
 	</select>
 	
 	<select id="selectByParent" resultMap="BaseResultMap"
@@ -113,14 +126,14 @@
 
 	<insert id="insert" parameterType="com.webpos.entity.User"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into _user (user_id,parent,balance,ctime,id_md5,all_eth,play_sum,recharge_sum,withdraw_sum,child_sum,is_machine,pass,award_sum)
+		insert into _user (user_id,parent,balance,ctime,id_md5,all_eth,play_sum,recharge_sum,withdraw_sum,child_sum,is_machine,pass,award_sum,phone)
 
 		values ( #{user_id,jdbcType=VARCHAR},
 		#{parent,jdbcType=VARCHAR},
-		#{balance,jdbcType=INTEGER},
+		#{balance,jdbcType=VARCHAR},
 		#{ctime,jdbcType=TIMESTAMP},#{id_md5,jdbcType=VARCHAR},#{all_eth,jdbcType=VARCHAR},
-		#{play_sum,jdbcType=INTEGER},#{recharge_sum,jdbcType=INTEGER},#{withdraw_sum,jdbcType=INTEGER},#{child_sum,jdbcType=INTEGER},0,#{pass,jdbcType=VARCHAR},0
-		)
+		#{play_sum,jdbcType=VARCHAR},#{recharge_sum,jdbcType=VARCHAR},#{withdraw_sum,jdbcType=VARCHAR},#{child_sum,jdbcType=INTEGER},0,#{pass,jdbcType=VARCHAR},#{award_sum,jdbcType=VARCHAR}
+		,#{phone,jdbcType=VARCHAR})
 	</insert>
 	
 	<insert id="insertWithId" parameterType="com.webpos.entity.User"
@@ -129,9 +142,9 @@
 
 		values (#{id,jdbcType=INTEGER}, #{user_id,jdbcType=VARCHAR},
 		#{parent,jdbcType=VARCHAR},
-		#{balance,jdbcType=INTEGER},
+		#{balance,jdbcType=VARCHAR},
 		#{ctime,jdbcType=TIMESTAMP},#{id_md5,jdbcType=VARCHAR},#{all_eth,jdbcType=VARCHAR},
-		#{play_sum,jdbcType=INTEGER},#{recharge_sum,jdbcType=INTEGER},#{withdraw_sum,jdbcType=INTEGER},#{child_sum,jdbcType=INTEGER},0,#{pass,jdbcType=VARCHAR},0
+		#{play_sum,jdbcType=VARCHAR},#{recharge_sum,jdbcType=VARCHAR},#{withdraw_sum,jdbcType=VARCHAR},#{child_sum,jdbcType=INTEGER},0,#{pass,jdbcType=VARCHAR},#{award_sum,jdbcType=VARCHAR}
 		)
 	</insert>
 	
@@ -139,24 +152,24 @@
 		update _user
 		<set>
 			<if test="balance != null">
-				balance = #{balance,jdbcType=INTEGER},
+				balance = #{balance,jdbcType=VARCHAR},
 			</if>
 			<if test="all_eth != null">
 				all_eth = #{all_eth,jdbcType=VARCHAR},
 			</if>
 		
 			<if test="play_sum != null">
-				play_sum = #{play_sum,jdbcType=INTEGER},
+				play_sum = #{play_sum,jdbcType=VARCHAR},
 			</if>
 			
 			<if test="recharge_sum != null">
-				recharge_sum = #{recharge_sum,jdbcType=INTEGER},
+				recharge_sum = #{recharge_sum,jdbcType=VARCHAR},
 			</if>
 			<if test="withdraw_sum != null">
-				withdraw_sum = #{withdraw_sum,jdbcType=INTEGER},
+				withdraw_sum = #{withdraw_sum,jdbcType=VARCHAR},
 			</if>
 			<if test="award_sum != null">
-				award_sum = #{award_sum,jdbcType=INTEGER},
+				award_sum = #{award_sum,jdbcType=VARCHAR},
 			</if>
 			<if test="child_sum != null">
 				child_sum = #{child_sum,jdbcType=INTEGER},
