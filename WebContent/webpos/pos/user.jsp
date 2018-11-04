@@ -43,7 +43,7 @@
 				  <input type="hidden" id="currentPage" name="currentPage" >
 				 
 				  <div class="am-form-group">			
-		 			 <label class="am-text-sm _merchant_short" style="margin-bottom: 0px;font-size: 1.5rem;">地址</label>:
+		 			 <label class="am-text-sm _merchant_short" style="margin-bottom: 0px;font-size: 1.5rem;">手机号</label>:
 		 		  </div>
 				  <div class="am-form-group">			
 				      <input type="text" value="${jc }" name="jc" id="jc" class="am-input-sm" style="width:180px ;height: 30px"/> 
@@ -112,7 +112,7 @@
 				<table  class="am-table am-table-bordered am-table-centered am-text-sm">
 					<thead style="background-color: #f5f5f5;">
 						<tr >
-							<th class="_merchant_short" >地址</th>
+							<th class="_merchant_short" >手机号</th>
 							
 							<th class="_contact" >余额</th>
 							<th class="_contact" >充值总额</th>
@@ -130,7 +130,7 @@
 						<c:forEach items="${objs }" var="user">
 							<tr style="<c:if test='${user.is_machine==1}' >background-color: #a9a9a9;</c:if>
 							  <c:if test='${user.is_machine==0}' >background-color: #fff;</c:if>">
-								<td>${user.user_id }<br><font style="color:#e2aaaa;size:10px">${user.parent }</font></td>
+								<td>${user.phone }<br><font style="color:#e2aaaa;size:10px">${user.parent }</font></td>
 								
 								<td>${user.balance }</td>
 								

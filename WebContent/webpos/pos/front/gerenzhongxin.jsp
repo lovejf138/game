@@ -165,14 +165,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 					src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s2.png">
 					<p>首页</p>
 			</a></li>
-			<li><a href="kj.do"> <img
-					src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s4.png">
-					<p>历史</p>
-			</a></li>
-			<li><a href="paihang.do"> <img
-					src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s6.png">
-					<p>排行</p>
-			</a></li>
+			
 			<li><a href="gerenzhongxin.do"> <img
 					src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s7.png">
 					<p style="color: #e01222;">我的</p>
