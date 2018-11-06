@@ -23,6 +23,7 @@ import com.webpos.entity.AccountExample;
 import com.webpos.entity.Award;
 import com.webpos.entity.Detail;
 import com.webpos.entity.DetailExample;
+import com.webpos.entity.GoodsExample;
 import com.webpos.entity.OneDetail;
 import com.webpos.entity.OneDetailExample;
 import com.webpos.entity.Room;
@@ -33,6 +34,7 @@ import com.webpos.entity.User;
 import com.webpos.service.AccountService;
 import com.webpos.service.AwardService;
 import com.webpos.service.DetailService;
+import com.webpos.service.GoodsService;
 import com.webpos.service.OneDetailService;
 import com.webpos.service.RoomService;
 import com.webpos.service.TestDetailService;
@@ -50,6 +52,8 @@ public class FrontController extends ApiWebABaseController {
 	@Autowired
 	private RoomService roomService;
 	@Autowired
+	private GoodsService  goodsService;
+	@Autowired
 	private UserService userService;
 	@Autowired
 	private DetailService detailService;
@@ -63,7 +67,7 @@ public class FrontController extends ApiWebABaseController {
 	private SystemMapper systemDao;
 
 	private Integer sumAmount = 0;
-
+	
 	@RequestMapping({ "/login.do" })
 	public ModelAndView login(HttpServletRequest request, HttpSession httpSession, Model model,
 			HttpServletResponse response) {

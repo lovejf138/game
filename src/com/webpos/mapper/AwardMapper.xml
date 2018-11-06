@@ -16,6 +16,7 @@
 		<result column="no9" property="no9" jdbcType="INTEGER" />
 		<result column="no10" property="no10" jdbcType="INTEGER" />
 		<result column="no11" property="no11" jdbcType="INTEGER" />
+		<result column="result1" property="result1" jdbcType="INTEGER" />
 		
 		
 	</resultMap>
@@ -85,7 +86,7 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id,_name,ctime,no1,no2,no3,no4,no5,no6,no7,no8,no9,no10,no11
+		id,_name,ctime,no1,no2,no3,no4,no5,no6,no7,no8,no9,no10,no11,result1
 	</sql>
 	
 	<select id="getByName" resultMap="BaseResultMap"
@@ -116,13 +117,13 @@
  
 	<insert id="insert" parameterType="com.webpos.entity.Award"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into award (_name,ctime,no1,no2,no3,no4,no5,no6,no7,no8,no9,no10,no11)
+		insert into award (_name,ctime,no1,no2,no3,no4,no5,no6,no7,no8,no9,no10,no11,result1)
 
 		values ( #{name,jdbcType=VARCHAR},
 		#{ctime,jdbcType=TIMESTAMP},#{no1,jdbcType=INTEGER},#{no2,jdbcType=INTEGER},#{no3,jdbcType=INTEGER},
 		#{no4,jdbcType=INTEGER},#{no5,jdbcType=INTEGER},#{no6,jdbcType=INTEGER},
 		#{no7,jdbcType=INTEGER},#{no8,jdbcType=INTEGER},#{no9,jdbcType=INTEGER},
-		#{no10,jdbcType=INTEGER},#{no11,jdbcType=INTEGER}
+		#{no10,jdbcType=INTEGER},#{no11,jdbcType=INTEGER},#{result1,jdbcType=INTEGER}
 		)
 	</insert>
 	

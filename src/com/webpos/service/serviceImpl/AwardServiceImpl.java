@@ -448,12 +448,15 @@ public class AwardServiceImpl implements AwardService {
 			a.setNo3(finals[2]);
 			a.setNo4(finals[3]);
 			a.setNo5(finals[4]);
-			a.setNo6(finals[5]);
-			a.setNo7(finals[6]);
-			a.setNo8(finals[7]);
-			a.setNo9(finals[8]);
-			a.setNo10(finals[9]);
-			a.setNo11(finals[10]);
+//			a.setNo6(finals[5]);
+//			a.setNo7(finals[6]);
+//			a.setNo8(finals[7]);
+//			a.setNo9(finals[8]);
+//			a.setNo10(finals[9]);
+//			a.setNo11(finals[10]);
+			Integer r1 = 0;
+			if(finals[0]>finals[1]) r1=1;
+			a.setResult1(r1);
 			awardDao.insert(a);
 			
 			/**************** 取出押注的详情 ***********************/
