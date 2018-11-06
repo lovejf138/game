@@ -735,8 +735,9 @@ public class AdminController extends ApiWebABaseController {
 		int[] finals = CommUtil.getFinalNumberFrom5(int_no1, int_no2, int_no3, int_no4, int_no5);
 
 		// String re = awardService.kaijiang(finals, name,true);
-		String re = awardService.onekaijiang(finals, name);
+		//String re = awardService.onekaijiang(finals, name);
 		// awardService.testkaijiang(finals, name,true);
+		String re = awardService.kaijiang2(finals, name);
 		return re;
 	}
 
