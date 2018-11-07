@@ -62,7 +62,7 @@
 					<div class="navList" onClick="window.location.href='orders.do'">
 						<i class="navIco-shang navico"></i>
 						<span class="navText">
-							购买列表
+							我的订单
 						</span>
 					</div>
 					

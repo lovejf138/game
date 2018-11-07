@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.webpos.entity.Award;
+import com.webpos.entity.Detail2Example;
+import com.webpos.entity.DetailExample;
 import com.webpos.entity.Goods;
 import com.webpos.entity.GoodsExample;
 import com.webpos.entity.User;
 import com.webpos.service.AwardService;
+import com.webpos.service.Detail2Service;
 import com.webpos.service.GoodsService;
 import com.webpos.service.UserService;
 import com.webpos.tools.CommUtil;
@@ -35,10 +38,48 @@ public class GoodsController extends ApiWebABaseController {
 	@Autowired
 	private GoodsService goodsService;
 	@Autowired
+	private Detail2Service detail2Service;
+	@Autowired
 	private AwardService awardService;
 	@Autowired
 	private UserService userService;
 
+	/**
+	 * 我的订单
+	 * @param request
+	 * @param httpSession
+	 * @param model
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping({ "/orders.do" })
+	public ModelAndView canyu(HttpServletRequest request, HttpSession httpSession, Model model,
+			HttpServletResponse response) {
+
+		String currentPage = request.getParameter("currentPage");
+
+		if (!super.isLogin()) {
+			return new ModelAndView("redirect:/login.do");
+		}
+		User user = super.getLoginUser();
+
+		ModelAndView mv = new JModelAndView("pos/front/orders", 0, request, response);
+
+		Detail2Example meExamplee = new Detail2Example();
+		meExamplee.clear();
+		meExamplee.setPageSize(10);
+		meExamplee.setOrderByClause("ctime desc");
+		meExamplee.setPageNo(Pagination.cpn(Integer.valueOf(CommUtil.null2Int(currentPage))));
+
+		Detail2Example.Criteria criteria = meExamplee.createCriteria();
+		criteria.andUserIdEqual(user.getPhone());
+		Pagination pList = this.detail2Service.getObjectListWithPage(meExamplee);
+
+		CommUtil.addIPageList2ModelAndView1("", "", "", pList, mv);
+
+		return mv;
+	}
+	
 	@RequestMapping({ "/goodsbuy.do" })
 	@ResponseBody
 	public BuyReturnData goodsbuy(HttpServletRequest request, HttpSession httpSession, Model model) {

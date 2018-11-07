@@ -145,7 +145,7 @@
 								
 								<td class="merchant-m">
 									
-									<a class="operate _detail" id="_in" onclick="cz('${user.user_id}')">充值</a>	|					
+									<a class="operate _detail" id="_in" onclick="cz('${user.phone}')">充值</a>	|					
 									<a class="operate _interface" id="_winrate" onclick="et('${user.user_id}','0','${user.all_eth}')">胜率修改</a>
 									<c:if test="${user.is_machine==0}" >
 									|					
@@ -206,7 +206,7 @@
     		</tr>
     		<tr >
     			<td colspan="4">
-    				数量:<input id="cz_input_number" style="width:100px"/>个ETH
+    				数量:<input id="cz_input_number" style="width:100px"/>元
     			</td>
     		</tr>
     		

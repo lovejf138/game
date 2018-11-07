@@ -73,8 +73,8 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 
 <div class="gr-zh">
 	<div class="gr-zh-zuo">
-		<p><span>${user.balance}</span></p>
-		<p>ETH</p>
+		<p><span>¥${user.balance}</span></p>
+		<!-- <p>ETH</p> -->
 	</div>
 
 	<div class="gr-zh-you">
@@ -83,13 +83,13 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 			<li>
 				<a data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 250}">
 					<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/k4.png">
-					<p>转入</p>
+					<p>充值</p>
 				</a>
 			</li>
 			<li>
 				<a data-am-modal="{target: '#doc-modal-2', closeViaDimmer: 0, width: 400, height: 200}">
 					<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/k3.png">
-					<p>转出</p>
+					<p>提现</p>
 				</a>
 			</li>
 		</ul>
@@ -99,28 +99,28 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 <div class="gr-xia">
 	<ul>
 		<li>
-			<a href="canyu.do">
+			<a href="orders.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/ge1.png">
-				<p>我的参与记录</p>
+				<p>我的订单</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
 			</a>
 		</li>
 		<li>
 			<a href="tixianmingxi.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/ge2.png">
-				<p>转出记录</p>
+				<p>提现记录</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
 			</a>
 		</li>
 		<li>
 			<a href="chongzhimingxi.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/ge3.png">
-				<p>转入记录</p>
+				<p>充值记录</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
 			</a>
 		</li>
 		
-		<%-- <li>
+		<li>
 			<a href="childs.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/child.png">
 				<p>推广用户列表</p>
@@ -142,19 +142,19 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 				<p>邀请好友永享收益</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
 			</a>
-		</li> --%>
+		</li> 
 		<li>
 			<a style="text-align: center;font-size: 20px;">
 				客服QQ:<font style="color: #cc9090;">1206480043</font>
 			</a>
 		</li>
 		
-		<li>
+		<!-- <li>
 			<a style="text-align: center;font-size: 20px;">
 				官方邮箱<font style="color: #cc9090;">eth.club@mail.com</font></br>
-				<!-- 客服QQ:<font style="color: #cc9090;">1206480043</font> -->
+				 客服QQ:<font style="color: #cc9090;">1206480043</font>
 			</a>
-		</li>
+		</li> -->
 	</ul>
 </div>
 

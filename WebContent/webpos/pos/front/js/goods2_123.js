@@ -36,9 +36,10 @@ function timer(intDiff) {
 				intDiff = (sourceDiff-duoyu)*-1;
 			}
 			if(intDiff>=120){//最多等待180秒
-				//if(hasGetKaijiang==false){
+				if(hasGetKaijiang==false){
+					hasGetKaijiang = true;
 					getKaijiang();
-				//}
+				}
 			}
 		}else{
 			if(sourceDiff<=0){

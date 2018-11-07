@@ -65,7 +65,7 @@
 					<div class="navList" onClick="window.location.href='orders.do'">
 						<i class="navIco-shang navico"></i>
 						<span class="navText">
-							购买列表
+							我的订单
 						</span>
 					</div>
 					
@@ -191,7 +191,7 @@
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/zepto.min.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/bringins.js?t=3"></script>
-		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/goods2_123.js?t=3'></script>
+		<script src='<%=request.getContextPath()%>/webpos/pos/front/js/goods2_123.js?t=4'></script>
 		<script>
 var _hmt = _hmt || [];
 (function() {

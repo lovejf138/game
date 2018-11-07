@@ -196,44 +196,44 @@ public class UserServiceImpl implements UserService {
 	public String recharge(String user_id, double amount) {
 		String r = "SUCCESS";
 		try {
-			User user_last = this.userDao.selectByUserId(user_id);
-			if (user_last == null) {
-				if (user_id.startsWith("vip_")) {
-					User new_user = new User();
-					//double amo = CommUtil.mul(10, amount);
-					
-					new_user.setBalance(amount);
-					new_user.setRecharge_sum(amount);
-					new_user.setPlay_sum(0.0);
-					new_user.setChild_sum(Integer.valueOf(0));
-					new_user.setWithdraw_sum(0.0);
-
-					new_user.setCtime(new Date());
-					new_user.setId_md5(Md5Encrypt.md5(user_id));
-					new_user.setId_short(user_id.substring(0, 3) + "*****"
-							+ user_id.substring(user_id.length() - 4, user_id.length()));
-					new_user.setUser_id(user_id);
-					new_user.setParent("");
-					new_user.setAll_eth(Double.valueOf(CommUtil.add("0", "0")));
-					this.userDao.insert(new_user);
-
-					Account d = new Account();
-					d.setCtime(new Date());
-					d.setUser_id(user_id);
-					d.setType("in");
-					d.setBalance(new_user.getBalance());
-					d.setChild_sum(new_user.getChild_sum());
-					d.setPlay_sum(new_user.getPlay_sum());
-					d.setWithdraw_sum(new_user.getWithdraw_sum());
-					d.setRecharge_sum(new_user.getRecharge_sum());
-					d.setStatus("success");
-					d.setIs_machine(new_user.getIs_machine());
-					d.setAmount(amount);
-					this.accountDao.insert(d);
-				} else {
-					return "user_error";
-				}
-			} else {
+			User user_last = this.userDao.selectByPhone(user_id);
+//			if (user_last == null) {
+//				if (user_id.startsWith("vip_")) {
+//					User new_user = new User();
+//					//double amo = CommUtil.mul(10, amount);
+//					
+//					new_user.setBalance(amount);
+//					new_user.setRecharge_sum(amount);
+//					new_user.setPlay_sum(0.0);
+//					new_user.setChild_sum(Integer.valueOf(0));
+//					new_user.setWithdraw_sum(0.0);
+//
+//					new_user.setCtime(new Date());
+//					new_user.setId_md5(Md5Encrypt.md5(user_id));
+//					new_user.setId_short(user_id.substring(0, 3) + "*****"
+//							+ user_id.substring(user_id.length() - 4, user_id.length()));
+//					new_user.setUser_id(user_id);
+//					new_user.setParent("");
+//					new_user.setAll_eth(Double.valueOf(CommUtil.add("0", "0")));
+//					this.userDao.insert(new_user);
+//
+//					Account d = new Account();
+//					d.setCtime(new Date());
+//					d.setUser_id(user_id);
+//					d.setType("in");
+//					d.setBalance(new_user.getBalance());
+//					d.setChild_sum(new_user.getChild_sum());
+//					d.setPlay_sum(new_user.getPlay_sum());
+//					d.setWithdraw_sum(new_user.getWithdraw_sum());
+//					d.setRecharge_sum(new_user.getRecharge_sum());
+//					d.setStatus("success");
+//					d.setIs_machine(new_user.getIs_machine());
+//					d.setAmount(amount);
+//					this.accountDao.insert(d);
+//				} else {
+//					return "user_error";
+//				}
+//			} else {
 //				double amo = CommUtil.mul(10, amount);
 //				int num = (new Double(amo)).intValue();
 				double final_amount =CommUtil.add(user_last.getBalance(),amount);
@@ -256,7 +256,7 @@ public class UserServiceImpl implements UserService {
 				d.setStatus("success");
 				d.setAmount(amount);
 				this.accountDao.insert(d);
-			}
+			//}
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			r = "fail";
