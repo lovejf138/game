@@ -63,6 +63,8 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 		<div class="gr-sh-you1">
 			
 			<p>${user.id_short}</p>
+			
+			<p style="float:right"><a href="personal.do" style="display: block; width: 100px;text-align: center;height: 32px;line-height: 32px;border: 1px solid #c52600;color: #c52600;border-radius: 45px;">个人信息</a></p>
 		</div>
 		
 	</div>

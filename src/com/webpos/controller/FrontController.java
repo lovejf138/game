@@ -3,6 +3,7 @@ package com.webpos.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -24,6 +25,7 @@ import com.webpos.entity.Award;
 import com.webpos.entity.Detail;
 import com.webpos.entity.DetailExample;
 import com.webpos.entity.GoodsExample;
+import com.webpos.entity.Info;
 import com.webpos.entity.OneDetail;
 import com.webpos.entity.OneDetailExample;
 import com.webpos.entity.Room;
@@ -35,6 +37,7 @@ import com.webpos.service.AccountService;
 import com.webpos.service.AwardService;
 import com.webpos.service.DetailService;
 import com.webpos.service.GoodsService;
+import com.webpos.service.InfoService;
 import com.webpos.service.OneDetailService;
 import com.webpos.service.RoomService;
 import com.webpos.service.TestDetailService;
@@ -63,10 +66,120 @@ public class FrontController extends ApiWebABaseController {
 	private OneDetailService onedetailService;
 	@Autowired
 	private AwardService awardService;
+	@Autowired
+	private InfoService infoService;
 	@Resource
 	private SystemMapper systemDao;
 
 	private Integer sumAmount = 0;
+	
+	@RequestMapping({ "/savepersonal.do" })
+	@ResponseBody
+	public BuyReturnData savepersonal(HttpServletRequest request, HttpSession httpSession, Model model,
+			HttpServletResponse response) {
+		BuyReturnData result = new BuyReturnData();
+		if (!super.isLogin()) {
+			if (!super.isLogin()) {
+				result.setResult("FAIL");
+				result.setDesc("请登录");
+				return result;
+			}
+		}
+		User user = super.getLoginUser();
+		
+		String name = request.getParameter("name");
+		String address = request.getParameter("address");
+		String cardname = request.getParameter("cardname");
+		String cardno = request.getParameter("cardno");
+		String cardbank = request.getParameter("cardbank");
+
+		if(name==null||name.length()<=0) {
+			result.setResult("FAIL");
+			result.setDesc("姓名不能为空");
+			return result;
+		}
+		
+		if(address==null||address.length()<=0) {
+			result.setResult("FAIL");
+			result.setDesc("收货地址不能为空");
+			return result;
+		}
+		
+		if(cardname==null||cardname.length()<=0) {
+			result.setResult("FAIL");
+			result.setDesc("银行卡开户名不能为空");
+			return result;
+		}
+		
+		if(cardno==null||cardno.length()<=0) {
+			result.setResult("FAIL");
+			result.setDesc("银行卡账号不能为空");
+			return result;
+		}
+		
+		if(cardbank==null||cardbank.length()<=0) {
+			result.setResult("FAIL");
+			result.setDesc("银行卡支行不能为空");
+			return result;
+		}
+		
+		try {
+			
+		
+		Info info = infoService.selectByUserid(user.getId());
+		if(info==null) {
+			info = new Info();
+			info.setUserid(user.getId());
+			info.setAddress(address);
+			info.setCardbank(cardbank);
+			info.setCardname(cardname);
+			info.setCardno(cardno);
+			info.setCtime(new Date());
+			info.setPhone(user.getPhone());
+			info.setName(name);
+			infoService.insert(info);
+		}else {
+			info.setUserid(user.getId());
+			info.setAddress(address);
+			info.setCardbank(cardbank);
+			info.setCardname(cardname);
+			info.setCardno(cardno);
+			info.setCtime(new Date());
+			info.setPhone(user.getPhone());
+			info.setName(name);
+			infoService.update(info);
+		}
+	
+		result.setResult("success");
+		}catch(Exception e) {
+			result.setDesc("error:"+e.getMessage().toString());
+			result.setResult("fail");
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping({ "/personal.do" })
+	public ModelAndView personal(HttpServletRequest request, HttpSession httpSession, Model model,
+			HttpServletResponse response) {
+
+		if (!super.isLogin()) {
+			return new ModelAndView("redirect:/login.do");
+		}
+		User user = super.getLoginUser();
+		Info info = infoService.selectByUserid(user.getId());
+		if(info==null) {
+			info = new Info();
+		}
+
+		ModelAndView mv = new JModelAndView("pos/front/personal", 0, request, response);
+
+		mv.addObject("info", info);
+		mv.addObject("user", user);
+		CommUtil.addIPageList2ModelAndView1("", "", "", null, mv);
+
+		return mv;
+	}
 	
 	@RequestMapping({ "/login.do" })
 	public ModelAndView login(HttpServletRequest request, HttpSession httpSession, Model model,

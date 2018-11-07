@@ -1,0 +1,1 @@
+package com.webpos.service;import com.webpos.entity.Info;public abstract interface InfoService{  public abstract Info selectByPrimaryKey(Long paramLong);  public abstract Info selectByUserid(Long paramLong);    public abstract int insert(Info info);  public abstract int update(Info info);  }
