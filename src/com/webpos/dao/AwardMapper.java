@@ -29,7 +29,7 @@ public abstract interface AwardMapper {
 	 * @param qiname
 	 * @return
 	 */
-	public abstract int jiesuandetail2(int no1,int no2,int no3,int no4,int no5,String ctime,String haoma,int kjjg1,String kjjg2,String kjjg3,String qiname);
+	public abstract void jiesuandetail2(String no1,String no2,String no3,String no4,String no5,String ctime,String haoma,String kjjg1,String kjjg2,String qiname);
 	  
 
 }

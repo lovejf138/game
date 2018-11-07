@@ -133,9 +133,9 @@
 		{call jiesuanOnedetail(#{0},#{1})}
 	</select>
 	
-	<select id="jiesuanOnedetail" resultType="java.lang.Integer"
+	<select id="jiesuandetail2" 
 		parameterType="java.lang.String">
-		{call jiesuandetail2(#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7},#{8},#{9},#{10})}
+		{call jiesuandetail2(#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7},#{8},#{9})}
 	</select>
 	
 </mapper>

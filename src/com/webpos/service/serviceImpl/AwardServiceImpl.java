@@ -476,7 +476,7 @@ public class AwardServiceImpl implements AwardService {
 
 	@Override
 	public String kaijiang2(int[] numbers, String qiname) {
-		try {
+		//try {
 			/************ 添加开奖记录 ***************/
 			//Award a = new Award();
 			String t = CommUtil.getTimeFromQishu(qiname);
@@ -486,21 +486,19 @@ public class AwardServiceImpl implements AwardService {
 			
 			 int[] a={numbers[0],numbers[1],numbers[2],numbers[3],numbers[4]};
 			 Arrays.sort(a);
-			awardDao.jiesuandetail2(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], 
-					t,
+			awardDao.jiesuandetail2(""+numbers[0], ""+numbers[1], ""+numbers[2], ""+numbers[3], ""+numbers[4], 
+					""+t,
 					numbers[0]+","+numbers[1]+","+numbers[2]+","+numbers[3]+","+
-							numbers[4], r1, ""+numbers[0], 
-							a[0]+","+a[1]+","+a[2]+","+a[3]+","+
-									a[4]+",", qiname);
+							numbers[4], ""+r1, ""+numbers[0], qiname);
 //			awardDao.jiesuanOnedetail(finals[0]+","+finals[1]+","+finals[2]+","+finals[3]+","+
 //					finals[4]+","+finals[5]+","+finals[6]+","+finals[7]+","
 //					+finals[8]+","+finals[9]+","+finals[10]+",",qiname);
 			return "SUCCESS";
 
-		} catch (Exception e) {
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			return "FAIL:" + e.getMessage().toString();
-		}
+//		} catch (Exception e) {
+//			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+//			return "FAIL:" + e.getMessage().toString();
+//		}
 	}
 
 }
