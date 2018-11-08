@@ -73,6 +73,42 @@ public class FrontController extends ApiWebABaseController {
 
 	private Integer sumAmount = 0;
 	
+	@RequestMapping({ "/chongzhi.do" })
+	public ModelAndView chongzhi(HttpServletRequest request, HttpSession httpSession, Model model,
+			HttpServletResponse response) {
+
+		if (!super.isLogin()) {
+			return new ModelAndView("redirect:/login.do");
+		}
+		//User user = super.getLoginUser();
+		
+		ModelAndView mv = new JModelAndView("pos/front/chongzhi", 0, request, response);
+
+		//mv.addObject("user", user);
+		CommUtil.addIPageList2ModelAndView1("", "", "", null, mv);
+
+		return mv;
+	}
+	@RequestMapping({ "/tixian.do" })
+	public ModelAndView tixian(HttpServletRequest request, HttpSession httpSession, Model model,
+			HttpServletResponse response) {
+
+		if (!super.isLogin()) {
+			return new ModelAndView("redirect:/login.do");
+		}
+		User user = super.getLoginUser();
+		User user_last = userService.selectByPhone(user.getPhone());
+		Info info = infoService.selectByUserid(user.getId());
+		ModelAndView mv = new JModelAndView("pos/front/tixian", 0, request, response);
+
+		mv.addObject("user", user_last);
+		mv.addObject("info",info);
+		CommUtil.addIPageList2ModelAndView1("", "", "", null, mv);
+
+		return mv;
+	}
+	
+	
 	@RequestMapping({ "/savepersonal.do" })
 	@ResponseBody
 	public BuyReturnData savepersonal(HttpServletRequest request, HttpSession httpSession, Model model,
@@ -383,8 +419,8 @@ public class FrontController extends ApiWebABaseController {
 
 		AccountExample.Criteria criteria = meExamplee.createCriteria();
 
-		criteria.andUserEqualTo(super.getLoginUser().getUser_id());
-		criteria.andTypeEqualTo("in");
+		criteria.andUserEqualTo(super.getLoginUser().getPhone());
+		criteria.andTypeNotEqualTo("withdraw");
 
 		Pagination pList = this.accountService.getObjectListWithPage(meExamplee);
 
@@ -412,7 +448,7 @@ public class FrontController extends ApiWebABaseController {
 
 		AccountExample.Criteria criteria = meExamplee.createCriteria();
 
-		criteria.andUserEqualTo(super.getLoginUser().getUser_id());
+		criteria.andUserEqualTo(super.getLoginUser().getPhone());
 		criteria.andTypeEqualTo("withdraw");
 
 		Pagination pList = this.accountService.getObjectListWithPage(meExamplee);

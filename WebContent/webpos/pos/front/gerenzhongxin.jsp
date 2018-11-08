@@ -82,14 +82,14 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 	<div class="gr-zh-you">
 		<ul>
 			
-			<li>
-				<a data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 250}">
+			<li onclick="javascript:window.location.href='chongzhi.do'">
+				<a>
 					<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/k4.png">
 					<p>充值</p>
 				</a>
 			</li>
-			<li>
-				<a data-am-modal="{target: '#doc-modal-2', closeViaDimmer: 0, width: 400, height: 200}">
+			<li onclick="javascript:window.location.href='tixian.do'">
+				<a >
 					<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/k3.png">
 					<p>提现</p>
 				</a>
@@ -148,6 +148,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 		<li>
 			<a style="text-align: center;font-size: 20px;">
 				客服QQ:<font style="color: #cc9090;">1206480043</font>
+				客服微信:<font style="color: #cc9090;">17159332040</font>
 			</a>
 		</li>
 		
