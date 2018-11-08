@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webpos.dao.GoodsdealMapper">
+	<resultMap id="BaseResultMap" type="com.webpos.entity.Goodsdeal">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="goodsname" property="goodsname" jdbcType="VARCHAR" />
+		<result column="detailid" property="detailid" jdbcType="BIGINT" />
+		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+		<result column="userid" property="userid" jdbcType="BIGINT" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="_name" property="name" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id,goodsname,_name,ctime,userid,phone,address,status,detailid
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from goodsdeal
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<select id="selectByUserid" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from goodsdeal
+		where userid = #{userid,jdbcType=BIGINT}
+	</select>
+	
+	
+	<insert id="insert" parameterType="com.webpos.entity.Goodsdeal"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into goodsdeal (_name,ctime,userid,phone,address,goodsname,status,detailid)
+		values ( #{name,jdbcType=VARCHAR},#{ctime,jdbcType=TIMESTAMP},#{userid,jdbcType=BIGINT},#{phone,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},
+		#{goodsname,jdbcType=VARCHAR},'request',#{detailid,jdbcType=BIGINT})
+	</insert>
+	
+	<update id="updateByPrimaryKeySelective" parameterType="com.webpos.entity.Goodsdeal">
+		update goodsdeal
+		<set>
+			<if test="status != null">
+			    status = #{status,jdbcType=VARCHAR},
+			</if>
+		
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<select id="countByExample" parameterType="com.webpos.entity.GoodsdealExample" resultType="java.lang.Integer" >
+    select count(*) from goodsdeal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+	<select id="selectByExampleWithBLOBs" resultMap="BaseResultMap"
+		parameterType="com.webpos.entity.GoodsdealExample" >
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from goodsdeal
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExampleWithBLOBsAndPage" resultMap="BaseResultMap"
+		parameterType="com.webpos.entity.GoodsdealExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from goodsdeal
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="startRow != null">
+			limit #{startRow},#{pageSize}
+		</if>
+	</select>
+	
+</mapper>

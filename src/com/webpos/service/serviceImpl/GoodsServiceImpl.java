@@ -10,12 +10,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import com.webpos.dao.AccountMapper;
 import com.webpos.dao.Detail2Mapper;
 import com.webpos.dao.GoodsMapper;
+import com.webpos.dao.GoodsdealMapper;
 import com.webpos.dao.UserMapper;
+import com.webpos.entity.Account;
 import com.webpos.entity.Detail2;
 import com.webpos.entity.Goods;
 import com.webpos.entity.GoodsExample;
+import com.webpos.entity.Goodsdeal;
 import com.webpos.entity.User;
 import com.webpos.service.GoodsService;
 import com.webpos.tools.CommUtil;
@@ -28,7 +32,11 @@ public class GoodsServiceImpl implements GoodsService {
 	@Resource
 	private UserMapper userDao;
 	@Resource
+	private AccountMapper accountDao;
+	@Resource
 	private Detail2Mapper detailDao;
+	@Resource
+	private GoodsdealMapper goodsdealMapper;
 
 	public Goods selectByPrimaryKey(Long id) {
 		return this.goodsDao.selectByPrimaryKey(id);
@@ -194,5 +202,67 @@ public class GoodsServiceImpl implements GoodsService {
 		}
 		return r;
 	}
+	
+	/**
+	 *退至余额
+	 * @return
+	 */
+	@Transactional
+	public String backtobalance(Detail2 detail, User user) {
+		try {
+			detail.setStatus("balance");
+			detailDao.updateByPrimaryKeySelective(detail);
+			
+			Double price = CommUtil.mul(detail.getPrice(), 0.97);
+			User user_last = userDao.selectById(user.getId());
+			Double balance = CommUtil.add(user_last.getBalance(), price);
+			user_last.setBalance(balance);
+			userDao.updateByPrimaryKeySelective(user_last);
+			
+			Account account = new Account();
+			account.setUser_id(user.getPhone());
+			account.setAmount(price);
+			account.setType("back");
+			account.setCtime(new Date());
+			account.setAll_eth(0.0);
+			account.setChild_sum(0);
+			account.setFianl_amount("");
+			account.setIs_machine(0);
+			account.setPlay_sum(0.0);
+			account.setRecharge_sum(0.0);
+			account.setStatus("success");
+			account.setWithdraw_sum(0.0);
+			accountDao.insert(account);
+			
+			return "SUCCESS";
+
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return "FAIL:" + e.getMessage().toString();
+		}
+
+	}
+	
+	/**
+	 * 领取商品
+	 * @return
+	 */
+	@Transactional
+	public String lingqugoods(Detail2 detail,Goodsdeal gd, User user) {
+		try {
+			detail.setStatus("waitsend");
+			detailDao.updateByPrimaryKeySelective(detail);
+			
+			goodsdealMapper.insert(gd);
+			
+			return "SUCCESS";
+
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return "FAIL:" + e.getMessage().toString();
+		}
+
+	}
+
 
 }

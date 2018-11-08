@@ -2,6 +2,7 @@
 package com.webpos.controller;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +18,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.webpos.entity.Award;
+import com.webpos.entity.Detail2;
 import com.webpos.entity.Detail2Example;
-import com.webpos.entity.DetailExample;
 import com.webpos.entity.Goods;
 import com.webpos.entity.GoodsExample;
+import com.webpos.entity.Goodsdeal;
+import com.webpos.entity.Info;
 import com.webpos.entity.User;
 import com.webpos.service.AwardService;
 import com.webpos.service.Detail2Service;
 import com.webpos.service.GoodsService;
+import com.webpos.service.InfoService;
 import com.webpos.service.UserService;
 import com.webpos.tools.CommUtil;
 import com.webpos.tools.JModelAndView;
@@ -42,8 +46,190 @@ public class GoodsController extends ApiWebABaseController {
 	@Autowired
 	private AwardService awardService;
 	@Autowired
+	private InfoService  infoService;
+	@Autowired
 	private UserService userService;
 
+	/**
+	 * 领取商品
+	 * @param request
+	 * @param httpSession
+	 * @param model
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping({ "/linggoodsdeal.do" })
+	@ResponseBody
+	public BuyReturnData  linggoodsdeal(HttpServletRequest request, HttpSession httpSession, Model model,
+			HttpServletResponse response) {
+		BuyReturnData result = new BuyReturnData();
+		String orderid = request.getParameter("orderid");
+
+		if (!super.isLogin()) {
+			result.setResult("FAIL");
+			result.setDesc("请登录");
+			return result;
+		}
+		
+		User user = super.getLoginUser();
+
+		long oid = 0;
+		try {
+			oid = Long.parseLong(orderid);
+		}catch(Exception e) {oid=0;}
+		Detail2 detail = detail2Service.selectByPrimaryKey(oid);
+		if(detail==null) {
+			result.setResult("FAIL");
+			result.setDesc("订单不存在");
+			return result;
+		}else if(!detail.getStatus().equals("waitling")) {
+			result.setResult("FAIL");
+			result.setDesc("该订单已领奖过！");
+			return result;
+		}
+		if(!user.getPhone().equals(detail.getUserid())){
+			result.setResult("FAIL");
+			result.setDesc("不要乱动别人的订单！");
+			return result;
+		}
+		
+		String name = request.getParameter("name");
+		String address = request.getParameter("address");
+		String phone = request.getParameter("phone");
+		
+		if(name==null||name.length()<=0) {
+			result.setResult("FAIL");
+			result.setDesc("姓名不能为空");
+			return result;
+		}
+		
+		if(address==null||address.length()<=0) {
+			result.setResult("FAIL");
+			result.setDesc("收货地址不能为空");
+			return result;
+		}
+		
+		if(phone==null||phone.length()<=0) {
+			result.setResult("FAIL");
+			result.setDesc("手机号不能为空");
+			return result;
+		}
+		
+		
+		Goodsdeal gd = new Goodsdeal();
+		gd.setAddress(address);
+		gd.setCtime(new Date());
+		gd.setGoodsname(detail.getGoodsname());
+		gd.setName(name);
+		gd.setPhone(phone);
+		gd.setStatus("request");
+		gd.setUserid(user.getId());
+		gd.setDetailid(detail.getId());
+		String r = goodsService.lingqugoods(detail, gd, user);
+		if(!r.equals("SUCCESS")) {
+			result.setResult("FAIL");
+			result.setDesc("操作失败！"+r);
+			return result;
+		}
+		result.setResult("SUCCESS");
+
+		return result;
+	}
+	
+	/**
+	 * 领取奖品页面
+	 * @param request
+	 * @param httpSession
+	 * @param model
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping({ "/lingqugoods.do" })
+	public ModelAndView lingqugoods(HttpServletRequest request, HttpSession httpSession, Model model,
+			HttpServletResponse response) {
+
+		String orderid = request.getParameter("orderid");
+
+		if (!super.isLogin()) {
+			if (!super.isLogin()) {
+				return new ModelAndView("redirect:/login.do");
+			}
+		}
+		
+		User user = super.getLoginUser();
+
+		Info info = infoService.selectByUserid(user.getId());
+		long oid = 0;
+		try {
+			oid = Long.parseLong(orderid);
+		}catch(Exception e) {oid=0;}
+		Detail2 detail = detail2Service.selectByPrimaryKey(oid);
+
+		ModelAndView mv = new JModelAndView("pos/front/lingqugoods", 0, request, response);
+
+		mv.addObject("detail",detail);
+		mv.addObject("info",info);
+		mv.addObject("orderid",orderid);
+		
+		CommUtil.addIPageList2ModelAndView1("", "", "", null, mv);
+
+		return mv;
+	}
+	
+	/**
+	 * 兑换至余额
+	 * @param request
+	 * @param httpSession
+	 * @param model
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping({ "/backtobalance.do" })
+	@ResponseBody
+	public BuyReturnData  backtobalance(HttpServletRequest request, HttpSession httpSession, Model model,
+			HttpServletResponse response) {
+		BuyReturnData result = new BuyReturnData();
+		String orderid = request.getParameter("orderid");
+
+		if (!super.isLogin()) {
+			result.setResult("FAIL");
+			result.setDesc("请登录");
+			return result;
+		}
+		
+		User user = super.getLoginUser();
+
+		long oid = 0;
+		try {
+			oid = Long.parseLong(orderid);
+		}catch(Exception e) {oid=0;}
+		Detail2 detail = detail2Service.selectByPrimaryKey(oid);
+		if(detail==null) {
+			result.setResult("FAIL");
+			result.setDesc("订单不存在");
+			return result;
+		}else if(!detail.getStatus().equals("waitling")) {
+			result.setResult("FAIL");
+			result.setDesc("该订单已领奖过！");
+			return result;
+		}
+		if(!user.getPhone().equals(detail.getUserid())){
+			result.setResult("FAIL");
+			result.setDesc("不要乱动别人的订单！");
+			return result;
+		}
+		
+		String r = goodsService.backtobalance(detail, user);
+		if(!r.equals("SUCCESS")) {
+			result.setResult("FAIL");
+			result.setDesc("操作失败！"+r);
+			return result;
+		}
+		result.setResult("SUCCESS");
+
+		return result;
+	}
+	
 	/**
 	 * 我的订单
 	 * @param request

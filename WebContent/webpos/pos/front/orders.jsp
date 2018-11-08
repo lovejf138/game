@@ -14,7 +14,9 @@
 
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=6">
+	<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/mdialog.css?t=3">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/front/css/canyu.css?t=1">
+
 <style>
 .fenye a {
     color: #fff;
@@ -112,8 +114,8 @@
         				 <c:if test="${detail.status =='waitling'}">
         				 	<p class="aui-order-fl aui-order-door">
          					
-         						<button style="background-color: #229ffd;border-radius: 20px; height: 40px; width: 120px; color: #fff; line-height: 40px; text-align: center; font-size: 18px; font-weight: 1000;">兑成余额</button>
-         						<button style="float: right;background-color: #fd2291;border-radius: 20px; height: 40px; width: 120px; color: #fff; line-height: 40px; text-align: center; font-size: 18px; font-weight: 1000;">领取商品</button>
+         						<button onclick="duihuan(${detail.id},${detail.price})" style="background-color: #229ffd;border-radius: 20px; height: 40px; width: 120px; color: #fff; line-height: 40px; text-align: center; font-size: 18px; font-weight: 1000;">兑成余额</button>
+         						<button onclick="ling(${detail.id})" style="float: right;background-color: #fd2291;border-radius: 20px; height: 40px; width: 120px; color: #fff; line-height: 40px; text-align: center; font-size: 18px; font-weight: 1000;">领取商品</button>
          				 	</p>
          				 
         				 </c:if>
@@ -134,11 +136,58 @@
 	src="<%=request.getContextPath()%>/webpos/pos/js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/webpos/pos/js/page/pageGroup.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/bringins.js?t=3"></script>
 <script type="text/javascript">
 	function gotoPage(n) {
 		//alert(n);
 		$("#currentPage").val("" + n);
 		$("#ListForm").submit();
+	}
+	
+	function duihuan(detailid,price){
+		var zhong = price*0.97;
+		zhong = zhong.toFixed(2);
+		if (confirm("您确定兑换"+zhong+"元到余额吗？（备注:商品价值"+price+"元，平台收取3%商品回收费用）")) {  
+			gotoback(detailid);
+        }else{
+        	
+        }
+
+	}
+	
+	var waitdialog=null;
+	function gotoback(detailid){
+		waitdialog = new TipBox({type:'load',str:'正在提交',hasBtn:false});
+		$.ajax({
+			async:true,
+			type:'post',
+			url:'backtobalance.do',
+			data:{orderid:""+detailid,},
+			dataType:'json',
+			success:function(result,textStatus){
+				
+				waitdialog.destroy();
+				
+				if(result.result=="SUCCESS"){
+					new TipBox({type:'success',str:'兑换成功，请刷新当前页面！',hasBtn:true});
+					window.location.reload();
+				}else{
+					new TipBox({type:'error',str:''+result.desc,hasBtn:true});
+					
+				}
+			},
+			error:function (XMLHttpRequest, textStatus, errorThrown) {
+				
+				waitdialog.destroy();
+				new TipBox({type:'error',str:'网络错误',hasBtn:true});
+				
+			}
+		});
+	}
+	
+	function ling(detailid){
+		window.location.href='lingqugoods.do?orderid='+detailid;
 	}
 </script>
 

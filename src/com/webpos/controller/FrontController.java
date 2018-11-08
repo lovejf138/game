@@ -352,7 +352,7 @@ public class FrontController extends ApiWebABaseController {
 			return new ModelAndView("redirect:/login.do");
 		}
 
-		User user = userService.selectByUserId(super.getLoginUser().getUser_id());
+		User user = userService.selectByPhone(super.getLoginUser().getPhone());
 
 		ModelAndView mv = new JModelAndView("pos/front/gerenzhongxin", 0, request, response);
 
