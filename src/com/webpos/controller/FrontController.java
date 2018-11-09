@@ -23,6 +23,7 @@ import com.webpos.dao.SystemMapper;
 import com.webpos.entity.AccountExample;
 import com.webpos.entity.Award;
 import com.webpos.entity.Detail;
+import com.webpos.entity.Detail2Example;
 import com.webpos.entity.DetailExample;
 import com.webpos.entity.GoodsExample;
 import com.webpos.entity.Info;
@@ -35,6 +36,7 @@ import com.webpos.entity.TestDetailExample;
 import com.webpos.entity.User;
 import com.webpos.service.AccountService;
 import com.webpos.service.AwardService;
+import com.webpos.service.Detail2Service;
 import com.webpos.service.DetailService;
 import com.webpos.service.GoodsService;
 import com.webpos.service.InfoService;
@@ -60,6 +62,8 @@ public class FrontController extends ApiWebABaseController {
 	private UserService userService;
 	@Autowired
 	private DetailService detailService;
+	@Autowired
+	private Detail2Service detail2Service;
 	@Autowired
 	private TestDetailService testdetailService;
 	@Autowired
@@ -266,7 +270,35 @@ public class FrontController extends ApiWebABaseController {
 
 		return mv;
 	}
+	
+	@RequestMapping({ "/childcanyu2.do" })
+	public ModelAndView childcanyu2(HttpServletRequest request, HttpSession httpSession, Model model,
+			HttpServletResponse response) {
 
+		String currentPage = request.getParameter("currentPage");
+
+		if (!super.isLogin()) {
+			return new ModelAndView("redirect:/login.do");
+		}
+		User user = super.getLoginUser();
+
+		ModelAndView mv = new JModelAndView("pos/front/childcanyumingxi", 0, request, response);
+
+		Detail2Example meExamplee = new Detail2Example();
+		meExamplee.clear();
+		meExamplee.setPageSize(30);
+		meExamplee.setOrderByClause("ctime desc");
+		meExamplee.setPageNo(Pagination.cpn(Integer.valueOf(CommUtil.null2Int(currentPage))));
+
+		Detail2Example.Criteria criteria = meExamplee.createCriteria();
+		criteria.andParentIdEqual(user.getPhone());
+		Pagination pList = this.detail2Service.getObjectListWithPage(meExamplee);
+
+		CommUtil.addIPageList2ModelAndView1("", "", "", pList, mv);
+
+		return mv;
+	}
+	
 	@RequestMapping({ "/childcanyu.do" })
 	public ModelAndView childcanyu(HttpServletRequest request, HttpSession httpSession, Model model,
 			HttpServletResponse response) {

@@ -30,7 +30,7 @@
 	    	<div class="tx_form">
 	    	<form>
 		    	<ul class="sm_list">
-		    	  <li><p>手机号：</p><input type="text" value="${info.phone}" placeholder="请输入手机号码" id="phone" name="phone" /></li>
+		    	  <li><p>手机号：</p><input type="text" value="${user.phone}" placeholder="请输入手机号码" id="phone" name="phone" /></li>
 		    	  <li><p>收货人：</p><input type="text" value="${info.name}" placeholder="请输入收货人" id="name" name="name"/></li>
 		    	  <li><p>收货地址：</p><input type="text" value="${info.address}" placeholder="请输入收货地址" id="address" name="address"/></li>
 		    	 

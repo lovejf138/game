@@ -167,6 +167,7 @@ public class GoodsController extends ApiWebABaseController {
 
 		ModelAndView mv = new JModelAndView("pos/front/lingqugoods", 0, request, response);
 
+		mv.addObject("user",user);
 		mv.addObject("detail",detail);
 		mv.addObject("info",info);
 		mv.addObject("orderid",orderid);
