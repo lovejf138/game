@@ -21,7 +21,7 @@
 	   	<!-- 通知信息 -->
 	   	<div class="tzxx" style="margin-top: 0px;">
 	   		<i class="icons">&#xea61;</i>
-	   		<p><marquee>通知公告信息通知公告信息通知公告信息通知公告信息</marquee></p>
+	   		<p><marquee style="font-size: 18px;font-weight: 500;">所有商品均可兑换成余额提现哟！</marquee></p>
 	   	</div>
         
 		<!--实物商品-->	
@@ -50,10 +50,10 @@
 		<!--导航栏-->
 	    <div class="footer">
 	      	<ul>
-				<li class="active"><a href="index.html"><p><i class="icons">&#xe66b;</i></p><h4>首页</h4></a></li>
-				<li><a href="pm.html"><p><i class="icons">&#xe68f;</i></p><h4>排行</h4></a></li>
-				<li><a href="help.html"><p><i class="icons">&#xe608;</i></p><h4>客服</h4></a></li>
-				<li><a href="my.html"><p><i class="icons">&#xe607;</i></p><h4>我的</h4></a></li>
+				<li <c:if test="${beishu ==2}"> class="active" </c:if>><a href="goods.do?beishu=2"><p><i class="icons">&#xe66b;</i></p><h4>2倍区</h4></a></li>
+				<li <c:if test="${beishu ==6}"> class="active" </c:if>><a href="goods.do?beishu=6"><p><i class="icons">&#xe66b;</i></p><h4>6倍区</h4></a></li>
+				<li <c:if test="${beishu ==250}"> class="active" </c:if>><a href="goods.do?beishu=250"><p><i class="icons">&#xe66b;</i></p><h4>高倍区</h4></a></li>
+				<li><a href="gerenzhongxin.do"><p><i class="icons">&#xe607;</i></p><h4>我的</h4></a></li>
 			</ul>
        </div>
        
@@ -128,7 +128,7 @@ function gotobuy(_goodsid){
 				new TipBox({type:'error',str:'商品已下架，请刷新页面',hasBtn:true});
 			}else if(result.result=="balance_not_enough"){
 				//提示余额不足
-				new TipBox({type:'error',str:'余额不足',hasBtn:true});
+				new TipBox({type:'error',str:'余额不足,请前往个人中心进行充值',hasBtn:true});
 			}
 		},
 		error:function (XMLHttpRequest, textStatus, errorThrown) {

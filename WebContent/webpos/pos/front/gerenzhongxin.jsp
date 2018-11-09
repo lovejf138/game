@@ -11,6 +11,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
+ <link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/front/css/goodsbase.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/front/css/goodsstyle.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/assets/css/amazeui.min.css">
  <link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/assets/css/app.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=6">
@@ -130,13 +132,13 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 			</a>
 		</li>
 		
-		<li>
+		<%-- <li>
 			<a href="childcanyu.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/childpro.png">
 				<p>推广用户收益列表</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
 			</a>
-		</li>
+		</li> --%>
 		
 		<li id="div_gift">
 			<a>
@@ -162,7 +164,15 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 </div>
 
 <div class="kong"></div>
-<div class="daohang">
+ <div class="footer">
+	      	<ul>
+				<li <c:if test="${beishu ==2}"> class="active" </c:if>><a href="goods.do?beishu=2"><p><i class="icons">&#xe66b;</i></p><h4>2倍区</h4></a></li>
+				<li <c:if test="${beishu ==6}"> class="active" </c:if>><a href="goods.do?beishu=6"><p><i class="icons">&#xe66b;</i></p><h4>6倍区</h4></a></li>
+				<li <c:if test="${beishu ==250}"> class="active" </c:if>><a href="goods.do?beishu=250"><p><i class="icons">&#xe66b;</i></p><h4>高倍区</h4></a></li>
+				<li class="active"><a  href="gerenzhongxin.do"><p><i class="icons">&#xe607;</i></p><h4>我的</h4></a></li>
+			</ul>
+ </div>
+<%-- <div class="daohang">
 		<ul>
 			<li><a href="index.do"> <img
 					src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s2.png">
@@ -174,7 +184,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 					<p style="color: #e01222;">我的</p>
 			</a></li>
 		</ul>
-</div>
+</div> --%>
 
 
 <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1" style="top:auto;">
@@ -195,7 +205,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 
 <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-spread" style="top:auto;">
   <div class="am-modal-dialog">
-    <div class="am-modal-hd" style="line-height: 20px;font-size: 20px;">分享给好友，永享好友盈利的0.5%收益
+    <div class="am-modal-hd" style="line-height: 20px;font-size: 20px;">分享给好友，永享好友购买金额的1%收益
       <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
     </div>
     

@@ -512,6 +512,7 @@ public class GoodsController extends ApiWebABaseController {
 		criteria.andStatusEqual("normal");
 		Pagination pList = this.goodsService.getObjectListWithPage(meExamplee);
 
+		mv.addObject("beishu",_beishu);
 		CommUtil.addIPageList2ModelAndView1("", "", "", pList, mv);
 		return mv;
 	}
