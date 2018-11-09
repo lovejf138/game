@@ -43,7 +43,7 @@
 				  <input type="hidden" id="currentPage" name="currentPage" >
 				 
 				  <div class="am-form-group">			
-		 			 <label class="am-text-sm _merchant_short" style="margin-bottom: 0px;font-size: 1.5rem;">地址</label>:
+		 			 <label class="am-text-sm _merchant_short" style="margin-bottom: 0px;font-size: 1.5rem;">手机</label>:
 		 		  </div>
 		 		   <div class="am-form-group">			
 				      <input type="text" value="${jc }" name="jc"id="jc" class="am-input-sm" style="width:180px ;height: 30px"/> 
@@ -111,7 +111,7 @@
 				<table  class="am-table am-table-bordered am-table-centered am-text-sm">
 					<thead style="background-color: #f5f5f5;">
 						<tr >
-							<th class="_merchant_short">地址</th>
+							<th class="_merchant_short">手机</th>
 							
 							<th class="_contact">金额</th>
 							
@@ -147,7 +147,7 @@
 								<td class="merchant-m">
 									
 									<c:if test="${status eq 'request'}">
-									<a class="operate _detail" id="_in" onclick="deal('${user.id}','${user.fianl_amount}','${user.user_id}')">处理</a>	|					
+									<a class="operate _detail" id="_in" onclick="deal('${user.id}','${user.amount}','${user.user_id}','${user.remark}')">处理</a>	|					
 									</c:if>
 								</td>									
 							</tr>
@@ -169,14 +169,14 @@
     		<tr height="30%">
     			<td colspan="4">
     			<input id="et_input_id" style="width:350px;display:none"/>
-    				提现地址:<a id="et_input_address" style="width:350px"></a>
+    				提现信息:<a id="et_input_address" style="width:350px"></a>
     			</td>
     		</tr>
     		
     		
     		<tr >
     			<td colspan="4">
-    				数量:<a id="et_input_number" style="width:350px"></a>个ETH
+    				金额:<a id="et_input_number" style="width:350px"></a>个元
     				
     			</td>
     		</tr>
@@ -259,11 +259,12 @@ function summaryDetails(){
     }); 
 }
 
-function deal(id,amount,user_id){
+function deal(id,amount,user_id,remark){
 	
-	$('#qrcode-ti').html("");
+	var s  = remark.split(",");
+	//$('#qrcode-ti').html("");
 	//var qrcode = new QRCode("qrcode-ti");
-	
+	/* 
 	var qrcode = new QRCode('qrcode-ti', {
 		  text: user_id,
 		  width: 100,
@@ -271,11 +272,11 @@ function deal(id,amount,user_id){
 		  colorDark : '#000000',
 		  colorLight : '#ffffff',
 		  correctLevel : QRCode.CorrectLevel.H
-		});
+		}); */
 	
 	//qrcode.makeCode(user_id);
 	
-	$("#et_input_address").html(user_id);
+	$("#et_input_address").html(s[0]+"<br>"+s[1]+"<br>"+s[2]+"<br>"+s[3]);
 	$("#et_input_id").attr("value",id);
 	$("#et_input_number").html(amount);
 	layer.open({

@@ -125,9 +125,9 @@ public class UserServiceImpl implements UserService {
 //	}
 
 	@Transactional
-	public boolean withdraw(String user_id, double amount) {
+	public boolean withdraw(String phone, double amount,String remark) {
 		try {
-			User u = this.userDao.selectByUserId(user_id);
+			User u = this.userDao.selectByPhone(phone);
 
 			double final_amount = CommUtil.subtract(u.getBalance(), amount);;
 			u.setBalance(final_amount);
@@ -137,7 +137,7 @@ public class UserServiceImpl implements UserService {
 
 			Account d = new Account();
 			d.setCtime(new Date());
-			d.setUser_id(user_id);
+			d.setUser_id(phone);
 			d.setType("withdraw");
 			d.setAll_eth(u.getAll_eth());
 			d.setStatus("request");
@@ -148,6 +148,7 @@ public class UserServiceImpl implements UserService {
 			d.setPlay_sum(u.getPlay_sum());
 			d.setWithdraw_sum(u.getWithdraw_sum());
 			d.setRecharge_sum(u.getRecharge_sum());
+			d.setRemark(remark);
 
 			this.accountDao.insert(d);
 		} catch (Exception e) {

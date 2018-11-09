@@ -215,7 +215,7 @@ public class AdminController extends ApiWebABaseController {
 		mv.addObject("endDate", endDate);
 		if ((jc != null) && (!jc.equals(""))) {
 			jc = jc.toLowerCase();
-			criteria.andUserlikeTo(jc);
+			criteria.andUserEqualTo(jc);
 			mv.addObject("jc", jc);
 		}
 		if ((startDate != null) && (!startDate.equals(""))) {

@@ -14,6 +14,7 @@
 		<result column="withdraw_sum" property="withdraw_sum" jdbcType="VARCHAR" />
 		<result column="child_sum" property="child_sum" jdbcType="INTEGER" />
 		<result column="balance" property="balance" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
 		<result column="is_machine" property="is_machine" jdbcType="INTEGER" />
 		
 	</resultMap>
@@ -83,7 +84,7 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id,user_id,amount,type,ctime,status,all_eth,play_sum,recharge_sum,withdraw_sum,child_sum,balance,is_machine
+		id,user_id,amount,type,ctime,status,all_eth,play_sum,recharge_sum,withdraw_sum,child_sum,balance,is_machine,remark
 	</sql>
 	
 	<select id="getById" resultMap="BaseResultMap"
@@ -136,14 +137,14 @@
 
 	<insert id="insert" parameterType="com.webpos.entity.Account"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into _account (user_id,amount,type,ctime,status,all_eth,play_sum,recharge_sum,withdraw_sum,child_sum,balance,is_machine)
+		insert into _account (user_id,amount,type,ctime,status,all_eth,play_sum,recharge_sum,withdraw_sum,child_sum,balance,is_machine,remark)
 
 		values ( #{user_id,jdbcType=VARCHAR},
 		#{amount,jdbcType=VARCHAR},
 		#{type,jdbcType=VARCHAR},
 		#{ctime,jdbcType=TIMESTAMP},#{status,jdbcType=VARCHAR},#{all_eth,jdbcType=VARCHAR},
 		#{play_sum,jdbcType=VARCHAR},#{recharge_sum,jdbcType=VARCHAR},#{withdraw_sum,jdbcType=VARCHAR},#{child_sum,jdbcType=INTEGER}
-		,#{balance,jdbcType=VARCHAR},#{is_machine,jdbcType=INTEGER}
+		,#{balance,jdbcType=VARCHAR},#{is_machine,jdbcType=INTEGER},#{remark,jdbcType=VARCHAR}
 		)
 	</insert>
 	
