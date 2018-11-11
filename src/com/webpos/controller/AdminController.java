@@ -42,6 +42,8 @@ import com.webpos.entity.DSystem;
 import com.webpos.entity.DetailExample;
 import com.webpos.entity.Goods;
 import com.webpos.entity.GoodsExample;
+import com.webpos.entity.Goodsdeal;
+import com.webpos.entity.GoodsdealExample;
 import com.webpos.entity.MessageExample;
 import com.webpos.entity.User;
 import com.webpos.entity.UserExample;
@@ -50,6 +52,7 @@ import com.webpos.service.AdminService;
 import com.webpos.service.AwardService;
 import com.webpos.service.DetailService;
 import com.webpos.service.GoodsService;
+import com.webpos.service.GoodsdealService;
 import com.webpos.service.MessageService;
 import com.webpos.service.SystemService;
 import com.webpos.service.UserService;
@@ -78,10 +81,75 @@ public class AdminController extends ApiWebABaseController {
 	private AwardService awardService;
 	@Autowired
 	private GoodsService goodsService;
+	@Autowired
+	private GoodsdealService goodsdealService;
 
 	@Resource
 	private SystemMapper systemDao;
 
+	/**
+	 * 商品发货
+	 * 
+	 * @param request
+	 * @param httpSession
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping({ "/goods_deal.do" })
+	@ResponseBody
+	public String goods_deal(HttpServletRequest request, HttpSession httpSession, Model model) {
+		//String r = "fail";
+		if (!super.isAdminLogin()) {
+			return "login_error";
+		}
+		
+		String id = request.getParameter("id");
+		String type = request.getParameter("type");
+		
+		Goodsdeal gd = goodsdealService.selectByPrimaryKey(Long.parseLong(id));
+		String r = goodsdealService.deal(gd, type);
+		
+		return r;
+	}
+	
+	@RequestMapping({ "/sendgoods_list.do" })
+	public ModelAndView sendgoods_list(HttpServletRequest request, HttpSession httpSession, Model model,
+			HttpServletResponse response) {
+		Admin admin = (Admin) httpSession.getAttribute("admin");
+		if (admin == null) {
+			return new ModelAndView("pos/a_login");
+		}
+		String currentPage = request.getParameter("currentPage");
+
+		ModelAndView mv = new JModelAndView("pos/sendgoods_list", 0, request, response);
+		String jc = request.getParameter("jc");
+		String status = request.getParameter("status");
+		
+		GoodsdealExample meExamplee = new GoodsdealExample();
+		meExamplee.clear();
+		meExamplee.setPageSize(15);
+		meExamplee.setOrderByClause("ctime desc");
+		meExamplee.setPageNo(Pagination.cpn(Integer.valueOf(CommUtil.null2Int(currentPage))));
+
+		GoodsdealExample.Criteria criteria = meExamplee.createCriteria();
+
+		if ((jc != null) && (!jc.equals(""))) {
+			jc = jc.toLowerCase();
+			criteria.andUserEqual(jc);
+			mv.addObject("jc", jc);
+		}
+	
+		if ((status != null) && (!status.equals(""))) {
+			criteria.andStatusEqual(status);
+			mv.addObject("status", status);
+		}
+		
+		Pagination pList = this.goodsdealService.getObjectListWithPage(meExamplee);
+		CommUtil.addIPageList2ModelAndView1("", "", "", pList, mv);
+
+		return mv;
+	}
+	
 	/**
 	 * 商品下架
 	 * 

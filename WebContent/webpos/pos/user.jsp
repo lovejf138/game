@@ -100,7 +100,7 @@
 				    </div>
 							
 				  <!--  <a class="am-btn  am-btn-sm am-btn-primary am-fr" onclick="sys()">系统设置</a>	-->
-				  <a class="am-btn  am-btn-sm am-btn-success am-fr" href="<%=request.getContextPath()%>/play_list.do">转盘列表</a>	
+				  <a class="am-btn  am-btn-sm am-btn-success am-fr" href="<%=request.getContextPath()%>/sendgoods_list.do">待发货列表</a>	
 				  <a class="am-btn  am-btn-sm am-btn-fail am-fr" href="<%=request.getContextPath()%>/messages.do">消息列表</a>	
 				  <a class="am-btn  am-btn-sm am-btn-danger am-fr" href="<%=request.getContextPath()%>/withdraw_list.do?status=request">资金出入列表</a>				 
 					<button class="am-btn  am-btn-sm am-btn-primary am-fr _query">查询</button>
