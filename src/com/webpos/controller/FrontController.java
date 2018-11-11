@@ -77,22 +77,7 @@ public class FrontController extends ApiWebABaseController {
 
 	private Integer sumAmount = 0;
 	
-	@RequestMapping({ "/chongzhi.do" })
-	public ModelAndView chongzhi(HttpServletRequest request, HttpSession httpSession, Model model,
-			HttpServletResponse response) {
-
-		if (!super.isLogin()) {
-			return new ModelAndView("redirect:/login.do");
-		}
-		//User user = super.getLoginUser();
-		
-		ModelAndView mv = new JModelAndView("pos/front/chongzhi", 0, request, response);
-
-		//mv.addObject("user", user);
-		CommUtil.addIPageList2ModelAndView1("", "", "", null, mv);
-
-		return mv;
-	}
+	
 	@RequestMapping({ "/tixian.do" })
 	public ModelAndView tixian(HttpServletRequest request, HttpSession httpSession, Model model,
 			HttpServletResponse response) {
@@ -359,6 +344,9 @@ public class FrontController extends ApiWebABaseController {
 	public ModelAndView index(HttpServletRequest request, HttpSession httpSession, Model model,
 			HttpServletResponse response) {
 
+		if (true) {
+			return new ModelAndView("redirect:/goods.do");
+		}
 //		if (!super.isLogin()) {
 //			return new ModelAndView("redirect:/login.do");
 //		}
@@ -453,6 +441,7 @@ public class FrontController extends ApiWebABaseController {
 
 		criteria.andUserEqualTo(super.getLoginUser().getPhone());
 		criteria.andTypeNotEqualTo("withdraw");
+		criteria.andStatusEqualTo("success");
 
 		Pagination pList = this.accountService.getObjectListWithPage(meExamplee);
 

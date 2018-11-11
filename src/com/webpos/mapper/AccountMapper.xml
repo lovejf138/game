@@ -95,6 +95,14 @@
 		where id = #{id,jdbcType=BIGINT}
 	</select>
 	
+	<select id="getByRemark" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from _account
+		where remark = #{remark,jdbcType=VARCHAR}
+	</select>
+	
  <select id="countByExample" parameterType="com.webpos.entity.AccountExample" resultType="java.lang.Integer" >
     select count(*) from account
     <if test="_parameter != null" >

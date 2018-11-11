@@ -10,6 +10,8 @@ public abstract interface AccountMapper
 {
   public abstract Account getById(Long paramLong);
   
+  public abstract Account getByRemark(String remark);
+  
   public abstract int insert(Account paramAccount);
   
   public abstract int countByExample(AccountExample paramAccountExample);

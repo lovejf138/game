@@ -24,71 +24,43 @@
 	    	<div class="cz">
 	    	<h3>充值金额:</h3>
 	    	<ul class="cz_list">
-	    	   <li class="on">100</li>
+	    	 
+	    	   <li class="on">10</li>
+	    	   <li>100</li>
 	    	   <li>300</li>
 	    	   <li>500</li>
 	    	   <li>1000</li>
-	    	   <li>2000</li>
 	    	   <li>3000</li>
 	    	   <li>5000</li>
 	    	   <li><input type="text" value="其他金额"/></li>
 	    	</ul>
 	    	</div>
+	    	<input id="error_time" value="${localtime}" style="display:none"/>
 	    	<div class="zf">
 	    		<h3>支付方式:</h3>
 	    		<ul class="zf_list">
 	    			<li  class="on" data-name="weixin"><i class="icons" style="color:limegreen">&#xe62f;</i>微信支付</li>
 	    			<li data-name="alipay"><i class="icons"  style="color:deepskyblue">&#xe646;</i>支付宝</li>
-	    			<li data-name="alipay"><i class="icons"  style="color:deepskyblue">&#xe646;</i>银行卡</li>
-	    			<li data-name="bank"><i class="icons"  style="color:orangered">&#xe61e;</i>客服支付</li>
+	    			<li data-name="bank"><i class="icons"  style="color:deepskyblue">&#xe61e;</i>快捷</li>
+	    			<!-- <li data-name="bank"><i class="icons"  style="color:orangered">&#xe61e;</i>客服支付</li>-->
 					
 	    		</ul>
 	    	</div>
-	    	<a href="javascript:;" class="ljzf">立即支付</a>
+	    	<p>支付宝支付请不要在微信浏览器中！！若一直充值失败，请微信联系客服：17159332040</p>
+	    	<a href="javascript:;" id="go_btn" class="ljzf">立即支付</a>
 	    </div>
 
     </div>
     
 </body>
+<script src="<%=request.getContextPath()%>/webpos/pos/js/jquery-1.8.2.min.js"></script>
+<script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/bringins.js?t=3"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/m/cz_123.js?t=3"></script>
 
  <script>
- 	$(function(){
-      $(document).on("click",".btns a",function(){
- 	     $(".zz").remove();
- 	  })
-      $(".cz_list li").click(function(){
-      	 $(this).addClass("on").siblings().removeClass();
-      }).not(".cz_list li:last").click(function(){$(".cz_list li:last input").val("其他金额").css("color","#666")})
-      $(".cz_list li input").focus(function(e){
-      	 $(this).css("color","white").val("");
-      	 e.stopPropagation()
-      }).blur(function(){
-      	 var reg=/^\d+$/;
-      	 if(reg.test($(this).val())==false){
-      	 	 zz({"info":"您所输入的信息有误","txt1":"确定","txt2":"关闭"});
-      	 	 $(this).val("其他金额");
-      	 	 $(window).on("click",".btns a",function(){$(".zz").remove()})
-      	 }else{
-      	 	 $(this).hide().parent().html($(this).val())
-      	 }
-      })
-      var that=null;
-      $(".zf_list li").click(function(){
-      	 $(this).addClass("on").siblings().removeClass(); 
-      })
-      
-      $(".ljzf").click(function(){
-      	gdata('cz',{"price":$(".cz_list .on").text()*1,"pay_type":$(".zf_list .on").attr("data-name")},function(data){
-			if(data.retInt==1){
-				var url = '/tourl.php?type=zf&id=_id_';
-				url = url.replace('_id_',data.retRes.orders_id);
-				window.location.href = url;
-			}else{
-				zz({"info":data.retErr,"txt1":"确定","txt2":"关闭"});
-				$(window).on("click",".btns a",function(){$(".zz").remove()})
-			}
-		})
-      })
- 	})
+ 
+
  </script>
 </html>
