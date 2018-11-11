@@ -492,7 +492,12 @@ public class GoodsController extends ApiWebABaseController {
 	public ModelAndView goods(HttpServletRequest request, HttpSession httpSession, Model model,
 			HttpServletResponse response) {
 		String beishu = request.getParameter("beishu");
+		String parent = request.getParameter("parent");
 
+		if (parent == null || parent.equals("")) {
+			parent = (String) httpSession.getAttribute("parent");
+		}
+		httpSession.setAttribute("parent", parent);
 		int _beishu = 2;
 		try {
 			_beishu = Integer.parseInt(beishu);
