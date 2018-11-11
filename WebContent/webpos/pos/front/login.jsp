@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>U社区－登录</title>
+	<title>惠来社区－登录</title>
 	
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/login_default.css">
 	<!--必要样式-->
@@ -19,7 +19,7 @@
 	<input id="error_time" value="${localtime}" style="display:none"/>
 	<div class='login'>
 	  <div class='login_title'>
-	    <span>U社区--登录</br></span>
+	    <span>惠来社区--登录</br></span>
 	  </div>
 	  <div class='login_fields'>
 	    <div class='login_fields__user'>

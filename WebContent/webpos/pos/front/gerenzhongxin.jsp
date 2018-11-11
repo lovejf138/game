@@ -146,11 +146,15 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 				<p>邀请好友永享收益</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
 			</a>
+		</li>
+		<li>
+			<a style="text-align: center;font-size: 20px;">
+				客服微信:<font style="color: #cc9090;">17159332040</font>
+			</a>
 		</li> 
 		<li>
 			<a style="text-align: center;font-size: 20px;">
 				客服QQ:<font style="color: #cc9090;">1206480043</font>
-				客服微信:<font style="color: #cc9090;">17159332040</font>
 			</a>
 		</li>
 		
@@ -166,9 +170,9 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 <div class="kong"></div>
  <div class="footer">
 	      	<ul>
-				<li <c:if test="${beishu ==2}"> class="active" </c:if>><a href="goods.do?beishu=2"><p><i class="icons">&#xe66b;</i></p><h4>2倍区</h4></a></li>
-				<li <c:if test="${beishu ==6}"> class="active" </c:if>><a href="goods.do?beishu=6"><p><i class="icons">&#xe66b;</i></p><h4>6倍区</h4></a></li>
-				<li <c:if test="${beishu ==250}"> class="active" </c:if>><a href="goods.do?beishu=250"><p><i class="icons">&#xe66b;</i></p><h4>高倍区</h4></a></li>
+				<li <c:if test="${beishu ==2}"> class="active" </c:if>><a href="goods.do?beishu=2"><p><i class="icons">&#xe66b;</i></p><h4>特价1</h4></a></li>
+				<li <c:if test="${beishu ==6}"> class="active" </c:if>><a href="goods.do?beishu=6"><p><i class="icons">&#xe66b;</i></p><h4>特价2</h4></a></li>
+				<li <c:if test="${beishu ==250}"> class="active" </c:if>><a href="goods.do?beishu=250"><p><i class="icons">&#xe66b;</i></p><h4>特价3</h4></a></li>
 				<li class="active"><a  href="gerenzhongxin.do"><p><i class="icons">&#xe607;</i></p><h4>我的</h4></a></li>
 			</ul>
  </div>

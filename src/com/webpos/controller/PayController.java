@@ -103,6 +103,8 @@ public class PayController extends ApiWebABaseController {
 			return;
 		}
 		if(!acount.getStatus().equals("request")) {
+			responseMsg = "success";
+			writer.write(responseMsg);
 			return;
 		}
 		

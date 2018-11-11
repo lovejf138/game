@@ -3102,7 +3102,7 @@ public class CommUtil {
 		//设置您要发送的内容：其中“【】”中括号为运营商签名符号，多签名内容前置添加提交
 		String msg = "【玉腾翔】{$var}终于等到你，您的动态验证码为{$var}，请在页面输入完成验证。";
 		//参数组																
-		String params = phone+","+"U社区,"+code+"";
+		String params = phone+","+"惠来社区,"+code+"";
 		//状态报告
 		String report= "false";
 		

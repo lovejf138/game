@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/front/css/goodsbase.css" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/front/css/goodsstyle.css" />
     <link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/mdialog.css?t=3"/>
-    <title>商品</title>  
+    <title>特价商品</title>  
 </head>
 
 <body style="background: linear-gradient(135deg, #EA5C54 0%, #bb6dec 100%);">
@@ -50,9 +50,9 @@
 		<!--导航栏-->
 	    <div class="footer">
 	      	<ul>
-				<li <c:if test="${beishu ==2}"> class="active" </c:if>><a href="goods.do?beishu=2"><p><i class="icons">&#xe66b;</i></p><h4>2倍区</h4></a></li>
-				<li <c:if test="${beishu ==6}"> class="active" </c:if>><a href="goods.do?beishu=6"><p><i class="icons">&#xe66b;</i></p><h4>6倍区</h4></a></li>
-				<li <c:if test="${beishu ==250}"> class="active" </c:if>><a href="goods.do?beishu=250"><p><i class="icons">&#xe66b;</i></p><h4>高倍区</h4></a></li>
+				<li <c:if test="${beishu ==2}"> class="active" </c:if>><a href="goods.do?beishu=2"><p><i class="icons">&#xe66b;</i></p><h4>特价1</h4></a></li>
+				<li <c:if test="${beishu ==6}"> class="active" </c:if>><a href="goods.do?beishu=6"><p><i class="icons">&#xe66b;</i></p><h4>特价2</h4></a></li>
+				<li <c:if test="${beishu ==250}"> class="active" </c:if>><a href="goods.do?beishu=250"><p><i class="icons">&#xe66b;</i></p><h4>特价3</h4></a></li>
 				<li><a href="gerenzhongxin.do"><p><i class="icons">&#xe607;</i></p><h4>我的</h4></a></li>
 			</ul>
        </div>
@@ -128,7 +128,12 @@ function gotobuy(_goodsid){
 				new TipBox({type:'error',str:'商品已下架，请刷新页面',hasBtn:true});
 			}else if(result.result=="balance_not_enough"){
 				//提示余额不足
-				new TipBox({type:'error',str:'余额不足,请前往个人中心进行充值',hasBtn:true});
+				if (confirm("余额不足，是否前往充值？")) {  
+					window.location.href='chongzhi.do';
+       			 }else{
+        	
+        		}
+			//	new TipBox({type:'error',str:'余额不足,请前往个人中心进行充值',hasBtn:true});
 			}
 		},
 		error:function (XMLHttpRequest, textStatus, errorThrown) {

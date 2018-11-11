@@ -84,11 +84,12 @@ public class AccountServiceImpl implements AccountService {
 			User user_last = userDao.selectByPhone(account.getUser_id());
 			user_last.setBalance(CommUtil.add(user_last.getBalance(), amount));
 			userDao.updateByPrimaryKeySelective(user_last);
+			return "success";
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return "fail";
 		}
 
-		return null;
+		//return null;
 	}
 }
