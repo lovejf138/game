@@ -83,6 +83,7 @@ public class AccountServiceImpl implements AccountService {
 
 			User user_last = userDao.selectByPhone(account.getUser_id());
 			user_last.setBalance(CommUtil.add(user_last.getBalance(), amount));
+			user_last.setRecharge_sum(CommUtil.add(user_last.getRecharge_sum(), amount));
 			userDao.updateByPrimaryKeySelective(user_last);
 			return "success";
 		} catch (Exception e) {

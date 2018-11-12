@@ -9,7 +9,25 @@
     <title></title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/front/css/goodsbase.css" />
   		<link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/front/css/goodsstyle.css" />
-  		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/mdialog.css?t=3">
+  		<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/mdialog.css?t=2">
+  		<style>
+  		#weixinTip{
+			position:fixed;
+			left:0;
+			top:0;
+			height:winHeight;
+			width:100%;
+			z-index:1000;
+			background-color:rgba(0,0,0,0.8);
+			filter:alpha(opacity=80);
+		}
+		#weixinTip p{
+			text-align:center;
+			margin-top:10%;
+			padding-left:5%;
+			padding-right:5%;
+		}
+  		</style>
 </head>
 <body>
 	<div class="wrap">
@@ -36,6 +54,7 @@
 	    	</ul>
 	    	</div>
 	    	<input id="error_time" value="${localtime}" style="display:none"/>
+	    	<input id="baseurl" value="<%=request.getContextPath()%>" style="display:none"/>
 	    	<div class="zf">
 	    		<h3>支付方式:</h3>
 	    		<ul class="zf_list">
@@ -57,7 +76,7 @@
 <script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/bringins.js?t=3"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/m/cz_123.js?t=3"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/m/cz_123.js?t=1"></script>
 
  <script>
  

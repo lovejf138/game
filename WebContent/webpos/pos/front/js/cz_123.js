@@ -1,9 +1,32 @@
- var waitdialog=null;
+var baseurl=$("#baseurl").val();
+var isWeixin =false;
+$(window).on("load",function(){
+    var winHeight = $(window).height();
+	function is_weixin() {
+	    var ua = navigator.userAgent.toLowerCase();
+	    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+	        return true;
+	    } else {
+	        return false;
+	    }
+	}
+	isWeixin = is_weixin();
+});
+
+
+var waitdialog=null;
 	
  $("#go_btn").click(function(){
 	 var price = $(".cz_list .on").text();
 	 var type = $(".zf_list .on").attr("data-name");
 	 
+	 if(type=="alipay"){
+		 if(isWeixin){
+			var weixinTip = $('<div id="weixinTip"><p><img src="'+baseurl+'/webpos/pos/front/img/login/live_weixin.png" alt="微信打开"/></p></div>');
+			$("body").append(weixinTip);
+			 return;
+		  } 
+	 }
 	 var x = price+type+"@"+$("#error_time").val()+"!#@#Qsaswe@#./1!";
 		var _sign = hex_md5(x);
 		

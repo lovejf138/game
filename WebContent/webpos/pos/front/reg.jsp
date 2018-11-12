@@ -83,7 +83,7 @@
 	    <p>正在跳转到首页...</p>
 	  </div>
 	  <div class='disclaimer'>
-	    <p>已注册,<a href='login.do'>立即登陆</a></p>
+	    <p style="font-size: 18px;">已注册,<a href='login.do'>立即登陆</a></p>
 	  </div>
 	</div>
 	<div class='authent'>

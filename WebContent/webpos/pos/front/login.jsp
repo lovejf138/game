@@ -57,7 +57,7 @@
 	    <p>正在跳转...</p>
 	  </div>
 	  <div class='disclaimer'>
-	    <p>没账号？<a href='reg.do'>立即注册</a></p>
+	    <p style="font-size: 18px;">没账号？<a href='reg.do'>立即注册</a></p>
 	  </div>
 	</div>
 	<div class='authent'>
