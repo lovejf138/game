@@ -79,7 +79,7 @@
 .footer ul a{display:block;height:50px;padding-top:6px}
 .footer ul h4{height:20px;line-height:20px}
 .footer ul p{height:30px;line-height:30px;text-align:center}
-.footer ul i{font-size:24px;color:#666;margin:0}
+.footer ul i{font-size:24px;color:#fff;margin:0}
 .footer ul li.active h4,.footer ul li.active i{color:#be3233}
 .footer>a{display:block;width:80%;height:40px;line-height:40px;background:#be3233;color:white;font-size:12px;text-align:center;margin:10px auto;border-radius:3px}
 

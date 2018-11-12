@@ -129,8 +129,8 @@
 	<div class="maininfo">
 		<h4>请选择抢购方案(第${nextname}期)</h4>
 		<ul>
-			<li class="active" value="1">买大</li>
-			<li value="0">买小</li>
+			<li class="active" value="1">抢大</li>
+			<li value="0">抢小</li>
 		</ul>
 		
 	</div>

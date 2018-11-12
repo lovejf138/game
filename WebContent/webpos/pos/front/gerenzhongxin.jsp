@@ -11,8 +11,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
- <link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/front/css/goodsbase.css" />
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/front/css/goodsstyle.css" />
+ <link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/front/css/goodsbase.css?t=4" />
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/front/css/goodsstyle.css?t=1" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/assets/css/amazeui.min.css">
  <link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/assets/css/app.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=6">
@@ -168,7 +168,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 </div>
 
 <div class="kong"></div>
- <div class="footer">
+ <div class="footer" style="background: #000000;">
 	      	<ul>
 				<li <c:if test="${beishu ==2}"> class="active" </c:if>><a href="goods.do?beishu=2"><p><i class="icons">&#xe66b;</i></p><h4>特价1</h4></a></li>
 				<li <c:if test="${beishu ==6}"> class="active" </c:if>><a href="goods.do?beishu=6"><p><i class="icons">&#xe66b;</i></p><h4>特价2</h4></a></li>

@@ -39,9 +39,9 @@
 	    	<div class="zf">
 	    		<h3>支付方式:</h3>
 	    		<ul class="zf_list">
-	    			<li  class="on" data-name="weixin"><i class="icons" style="color:limegreen">&#xe62f;</i>微信支付</li>
+	    			<!--<li  class="on" data-name="weixin"><i class="icons" style="color:limegreen">&#xe62f;</i>微信支付</li>  -->
 	    			<li data-name="alipay"><i class="icons"  style="color:deepskyblue">&#xe646;</i>支付宝</li>
-	    			<li data-name="bank"><i class="icons"  style="color:deepskyblue">&#xe61e;</i>快捷</li>
+	    			<li class="on" data-name="bank"><i class="icons"  style="color:deepskyblue">&#xe61e;</i>快捷</li>
 	    			<!-- <li data-name="bank"><i class="icons"  style="color:orangered">&#xe61e;</i>客服支付</li>-->
 					
 	    		</ul>

@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/webpos/pos/front/css/index_style.css?t=6">
 	<link rel='stylesheet' href="<%=request.getContextPath()%>/webpos/pos/front/css/mdialog.css?t=3">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/front/css/canyu.css?t=1">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/webpos/pos/front/css/canyu.css?t=2">
 
 <style>
 .fenye a {

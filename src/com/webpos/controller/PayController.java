@@ -212,7 +212,7 @@ public class PayController extends ApiWebABaseController {
 			desc = "微信支付通道暂时关闭，请联系客服充值";
 		}else if(type.equals("alipay")){
 			String s = IpayUtil.alipayWapPay(_amount, orderid);
-			if(s.startsWith("http:")||s.startsWith("alipays")) {//成功
+			if(s.startsWith("https:")||s.startsWith("http:")||s.startsWith("alipays")) {//成功
 				r = "SUCCESS";
 				desc = s;
 			}else {
@@ -221,7 +221,7 @@ public class PayController extends ApiWebABaseController {
 			}
 		}if(type.equals("bank")){
 			String s = IpayUtil.bankWapPay(_amount, orderid);
-			if(s.startsWith("http:")) {//成功
+			if(s.startsWith("https:")||s.startsWith("http:")) {//成功
 				r = "SUCCESS";
 				desc = s;
 			}else {

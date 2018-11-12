@@ -276,7 +276,7 @@ a {
     position: relative;
 }
 
-.aui-well-item-fr:after {
+/* .aui-well-item-fr:after {
     content: " ";
     display: inline-block;
     height: 8px;
@@ -294,7 +294,7 @@ a {
     right: 2px;
     border-radius: 2px;
 }
-
+ */
 .aui-order-fl {
     color: #666666;
     font-size: 15px;
