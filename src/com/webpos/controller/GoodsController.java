@@ -417,7 +417,7 @@ public class GoodsController extends ApiWebABaseController {
 				result.setDesc("余额不足！！！");
 				return result;
 			}
-			r = goodsService.buy250(user_last, goods, goods.getNowprice(), nextname, fangan);
+			r = goodsService.buy250(user_last, goods,ap, nextname, fangan);
 		}
 
 		if (r.equals("SUCCESS")) {

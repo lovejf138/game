@@ -89,7 +89,7 @@
 						余额：
 						<font style="color:#ff7400;font-size: 20px;" id="my_balance">￥${user.balance}</font>
 						</div>
-						<a id="name_wait1">离${nextname}期结束：</a><a id="name_wait2" style="color:#ff7400">0</a>秒
+						<a id="name_wait1" style="color: #666;">离${nextname}期结束：</a><a id="name_wait2" style="color:#ff7400">0</a>秒
 					
 					<div class="in-line-left" style="top: 60px;">
 						<img src="<%=request.getContextPath()%>/webpos/pos/front/img/room/icon-line.png" alt="">
