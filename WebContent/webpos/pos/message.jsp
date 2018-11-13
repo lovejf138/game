@@ -554,7 +554,7 @@ var jq = false;
 	    setTimeout(function () {     //没连接上会一直重连，设置延迟避免请求过多
 	        createWebSocket(url);
 	        lockReconnect = false;
-	    }, 2000);
+	    }, 10000);
 	}
 
 	//心跳检测

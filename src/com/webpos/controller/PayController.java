@@ -46,8 +46,8 @@ public class PayController extends ApiWebABaseController {
 	@RequestMapping({ "/chongzhi.do" })
 	public ModelAndView chongzhi(HttpServletRequest request, HttpSession httpSession, Model model,
 			HttpServletResponse response) {
-
-		if (!super.isLogin()) {
+		String phone = request.getParameter("phone");
+		if (phone==null||phone=="") {
 			return new ModelAndView("redirect:/login.do");
 		}
 	
@@ -55,7 +55,7 @@ public class PayController extends ApiWebABaseController {
 		httpSession.setAttribute("localtime", time);
 		
 		ModelAndView mv = new JModelAndView("pos/front/chongzhi", 0, request, response);
-
+		mv.addObject("phone",phone);
 		CommUtil.addIPageList2ModelAndView1("", "", "", null, mv);
 
 		return mv;
@@ -139,14 +139,15 @@ public class PayController extends ApiWebABaseController {
 		String amount = request.getParameter("amount");
 		String sign = request.getParameter("sign");
 		String type = request.getParameter("type");
+		String phone = request.getParameter("phone");
 
-		if (!super.isLogin()) {
+		if (phone==null||phone=="") {
 			result.setResult("FAIL");
 			result.setDesc("请登录");
 			return result;
 		}
 		
-		User user = super.getLoginUser();
+	//	User user = super.getLoginUser();
 
 		Double _amount = 0.0;
 		try {
@@ -193,7 +194,7 @@ public class PayController extends ApiWebABaseController {
 	    a.setRemark(orderid);
 	    a.setWithdraw_sum(0.0);
 	    a.setRecharge_sum(0.0);
-	    a.setUser_id(user.getPhone());
+	    a.setUser_id(phone);
 	    accountService.insert(a);
 		
 		String r = "fail";

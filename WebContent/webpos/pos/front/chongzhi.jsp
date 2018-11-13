@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+phone<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 
@@ -55,6 +55,7 @@
 	    	</div>
 	    	<input id="error_time" value="${localtime}" style="display:none"/>
 	    	<input id="baseurl" value="<%=request.getContextPath()%>" style="display:none"/>
+	    	<input id="phone" value="${phone}" style="display:none"/>
 	    	<div class="zf">
 	    		<h3>支付方式:</h3>
 	    		<ul class="zf_list">
@@ -76,7 +77,7 @@
 <script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/mdialog.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/bringins.js?t=3"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/m/cz_123.js?t=1"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/m/cz_123.js?t=2"></script>
 
  <script>
  

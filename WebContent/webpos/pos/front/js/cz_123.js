@@ -35,7 +35,7 @@ var waitdialog=null;
 			async:true,
 			type:'post',
 			url:'payrequest.do',
-			data:{amount:""+price,type:""+type,sign:""+_sign},
+			data:{amount:""+price,type:""+type,sign:""+_sign,phone:""+$("#phone").val()},
 			dataType:'json',
 			success:function(result,textStatus){
 				

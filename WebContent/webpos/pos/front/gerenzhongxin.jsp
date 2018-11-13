@@ -84,7 +84,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 	<div class="gr-zh-you">
 		<ul>
 			
-			<li onclick="javascript:window.location.href='chongzhi.do'">
+			<li onclick="javascript:window.location.href='chongzhi.do?phone=${user.phone}'">
 				<a>
 					<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/k4.png">
 					<p>充值</p>
@@ -143,7 +143,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 		<li id="div_gift">
 			<a>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/ge4.png">
-				<p>邀请好友永享收益</p>
+				<p>邀请好友永享1%收益</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
 			</a>
 		</li>
@@ -158,12 +158,6 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 			</a>
 		</li>
 		
-		<!-- <li>
-			<a style="text-align: center;font-size: 20px;">
-				官方邮箱<font style="color: #cc9090;">eth.club@mail.com</font></br>
-				 客服QQ:<font style="color: #cc9090;">1206480043</font>
-			</a>
-		</li> -->
 	</ul>
 </div>
 
@@ -176,36 +170,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 				<li class="active"><a  href="gerenzhongxin.do"><p><i class="icons">&#xe607;</i></p><h4>我的</h4></a></li>
 			</ul>
  </div>
-<%-- <div class="daohang">
-		<ul>
-			<li><a href="index.do"> <img
-					src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s2.png">
-					<p>首页</p>
-			</a></li>
-			
-			<li><a href="gerenzhongxin.do"> <img
-					src="<%=request.getContextPath()%>/webpos/pos/front/img/index/s7.png">
-					<p style="color: #e01222;">我的</p>
-			</a></li>
-		</ul>
-</div> --%>
 
-
-<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1" style="top:auto;">
-  <div class="am-modal-dialog">
-    <div class="am-modal-hd" style="line-height: 20px;font-size: 25px;">转入
-      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
-    </div>
-    <div class="am-modal-bd" style="line-height: 20px;font-size:15px">
-      请将ETH转入以下地址
-   
-     <p><a style="user-select:auto; -webkit-user-select:auto; -moz-user-select:auto; -ms-user-select:auto; user-select:auto;">0x9EEa8Bd7317c0233fCd4E1846368f6eBfC9F06B7</a>
-     </p>
-     <img style="width:150px" src="<%=request.getContextPath()%>/webpos/pos/img/imtoken1.png"></img>
-     
-    </div>
-  </div>
-</div>
 
 <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-spread" style="top:auto;">
   <div class="am-modal-dialog">
@@ -213,41 +178,23 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
       <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
     </div>
     
+    <img src="<%=request.getContextPath()%>/webpos/pos/front/img/share-bg.jpeg" style="max-width:100%"/>
+    
     <div class="am-modal-bd" style="margin-top: 10px;" id="spread_inpiut">
-      <a id="spread-text">http://eth-game.club/goods.do?parent=${user.id_md5}</a>
+      <a id="spread-text">http://out-sale.com/goods.do?parent=${user.id_md5}</a>
     </div>
     <div id="qrcode-spread" style="text-align: center;margin: auto;">
     </div>
   </div>
 </div>
 
-<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2" style="top:auto;">
-  <div class="am-modal-dialog">
-    <div class="am-modal-hd" style="line-height:20px;font-size: 20px;">转出
-      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
-    </div>
-    
-    <div class="am-modal-bd" style="margin-top: 10px;">
-      <input class="input_class" name="eth_withdraw" id="eth_withdraw" placeholder="请输入数量" type="number"/>   
-      <input id="btn_withdraw" value="提交" type="button" class="sumbit_login"/>
-    
-      <p id="withdraw_tip" style="margin-top:10px;float: left;font-size: 15px;font-align:left;color:red"></p>
-     
-      <p style="margin-top:10px;float: left;font-size: 15px;font-align:left">1.至少0.05个起提，半个小时内到账</p>
-      <p style="margin-top:10px;float: left;font-size: 15px;font-align:left">2.每次转出，收取1%的网络矿工费</p>
-      <p style="margin-top:10px;float: left;font-size: 15px;font-align:left">3.可前往首页答题，收益翻翻</p>
-   	 
-    
-    </div>
-  </div>
-</div>
 </body>
 
 <script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/index_fontsize.js"></script>
 <script src="<%=request.getContextPath()%>/webpos/pos/assets/js/amazeui.min.js"></script>
 <script src="<%=request.getContextPath()%>/webpos/pos/js/md5.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/m/geren_123.js?t=4"></script>
+<%-- <script type="text/javascript" src="<%=request.getContextPath()%>/webpos/pos/front/js/m/geren_123.js?t=4"></script> --%>
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -256,5 +203,16 @@ var _hmt = _hmt || [];
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
+
+$("#qrcode-spread").qrcode({ 
+    render: "canvas", //table方式 
+    width: 100, //宽度 
+    height:100, //高度 
+    text: $("#spread-text").html() //任意内容 
+});
+
+$("#div_gift").click(function(event){
+$("#div_btn_gift").click();
+});
 </script>
 </html>
