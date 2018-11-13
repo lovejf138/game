@@ -110,7 +110,7 @@
 		0,0,0,
 		#{ctime,jdbcType=TIMESTAMP},#{kjtime,jdbcType=TIMESTAMP},
 		#{qiname,jdbcType=VARCHAR},#{goodsid,jdbcType=INTEGER},#{goodsname,jdbcType=VARCHAR},
-		#{type,jdbcType=INTEGER},'wait'
+		#{type,jdbcType=INTEGER},#{status,jdbcType=VARCHAR}
 		)
 	</insert>
 	

@@ -81,6 +81,44 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Override
 	@Transactional
+	public String buyFree(User user, Goods goods, double actualprice) {
+		String r = "SUCCESS";
+		try {
+			User u = userDao.selectByPhone(user.getPhone());
+			if(u.getPlay_sum()<0.001) {
+				Detail2 d = new Detail2();
+				d.setUserid(user.getPhone());
+				d.setQiname("");
+				d.setCtime(new Date());
+				//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		        d.setKjtime(new Date());
+				d.setPrice(goods.getPrice());
+				d.setNowprice(goods.getNowprice());
+				d.setGoodsid(Integer.parseInt(""+goods.getId()));
+				d.setGoodsname(goods.getName());
+				d.setStatus("waitling");
+				d.setType(2);
+				d.setActualprice(actualprice);
+				detailDao.insert(d);
+				
+				u.setPlay_sum(0.01);
+				this.userDao.updateByPrimaryKeySelective(u);
+			}else {
+				r = "每个账户仅限一次";
+			}
+			
+			
+			
+			
+		}catch(Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return "未知错误:"+e.getMessage().toString();
+		}
+		return r;
+	}
+	
+	@Override
+	@Transactional
 	public String buy2(User user, Goods goods, double actualprice, String nexname, String fangan) {
 		String r = "SUCCESS";
 		try {

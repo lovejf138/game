@@ -173,7 +173,7 @@ function gotoLogin() {
 			if (data.result == "SUCCESS") {
 				//window.location.reload();//跳转到index.do
 				setTimeout(function() {
-					window.location.href='gerenzhongxin.do';
+					window.location.href='goods.do';
 				},1000);
 				
 			} 

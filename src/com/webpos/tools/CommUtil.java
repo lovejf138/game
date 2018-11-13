@@ -15,6 +15,8 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,6 +45,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +60,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -79,6 +83,7 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.webpos.entity.Detail;
 import com.webpos.entity.User;
 
@@ -3174,6 +3179,106 @@ public class CommUtil {
 	}
 	
 	
+//	/**
+//	 * 二维码图片的生成
+//	 * @param content			链接
+//	 * @param qrcode_width		二维码宽
+//	 * @param qrcode_height		二维码高
+//	 * @return
+//	 * @throws Exception
+//	 */
+//    public static BufferedImage createQrcodeImage(String content, int qrcode_width, int qrcode_height) throws Exception {
+//        Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
+//        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+//        hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+//        hints.put(EncodeHintType.MARGIN, 1);
+//        BitMatrix bitMatrix = new MultiFormatWriter().encode(content,
+//                BarcodeFormat.QR_CODE, qrcode_width, qrcode_height, hints);
+//        int width = bitMatrix.getWidth();
+//        int height = bitMatrix.getHeight();
+//        BufferedImage image = new BufferedImage(width, height,
+//                BufferedImage.TYPE_INT_RGB);
+//        for (int x = 0; x < width; x++) {
+//            for (int y = 0; y < height; y++) {
+//                image.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000
+//                        : 0xFFFFFFFF);
+//            }
+//        }
+//        return image;
+//    }
+//    
+//    /**
+//     * 图片放大
+//     * @param originalImage
+//     * @param times
+//     * @return
+//     */
+//    public static BufferedImage resizeImage(BufferedImage  originalImage, double times){
+//        int width = (int)(originalImage.getWidth()*times);
+//        int height = (int)(originalImage.getHeight()*times);
+//
+//        int tType = originalImage.getType();
+//        if(0 == tType){
+//            tType = 5;
+//        }
+//        BufferedImage newImage = new BufferedImage(width,height, tType);
+//        Graphics g = newImage.getGraphics();
+//        g.drawImage(originalImage, 0,0,width,height,null);
+//        g.dispose();
+//
+//        return newImage;
+//    }
+//
+//
+//    /**
+//	 * 合成图片
+//	 * @param url		二维码链接
+//	 * @param path		背景图片地址
+//	 * @param startX	二维码在背景图片的X轴位置
+//	 * @param startY	二维码在背景图片的Y轴位置
+//	 * @param codeWidth	二维码宽度
+//	 * @param codeHeight 二维码高度
+//	 * @return			合成的图片
+//	 */
+//	public static BufferedImage compositeImage(String url, String path, int startX, int startY, int codeWidth, int codeHeight) {
+//		try {
+//			BufferedImage image2 = createQrcodeImage(url, codeWidth, codeHeight);
+//			
+//			InputStream imagein = null;
+//	        ImageOutputStream imOut = null;
+//	        try {
+//	            imagein = new FileInputStream(path);
+//	            BufferedImage image = ImageIO.read(imagein);
+//	           
+//	            Graphics g = image.getGraphics();
+//	            // 生成的二维码设置的较小，这里等比放大了二维码。也可在zxing中设置二维码生成的大小
+//	            BufferedImage squreImage = resizeImage(image2, 2);
+//	            g.drawImage(squreImage, 40, 25,
+//	                    squreImage.getWidth(), squreImage.getHeight(), null);
+//	            ByteArrayOutputStream bs = new ByteArrayOutputStream();
+//	            imOut = ImageIO.createImageOutputStream(bs);
+//	            ImageIO.write(image, "jpg", imOut);
+//	            InputStream is = new ByteArrayInputStream(bs.toByteArray());
+//	            return is;
+//	        } catch (Exception e) {
+//	            e.printStackTrace();
+//	        } finally {
+//	            try {
+//	                imagein.close();
+//	                imOut.close();
+//	            } catch (IOException e) {
+//	                e.printStackTrace();
+//	            }
+//	        }
+//	        return null;
+//	
+// 
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
+    
 	public static void main(String[] args) {
 		
 		String x = "";

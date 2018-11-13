@@ -73,7 +73,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 </div>
 <input id="error_time" value="${localtime}" style="display:none"/>
 <input id="balance" value="${user.balance}" style="display:none" type="text">
-<button id="div_btn_gift" style="display:none"  data-am-modal="{target: '#doc-modal-spread', closeViaDimmer: 0, width: 400, height: 225}"></button>
+<button id="div_btn_gift" style="display:none"  data-am-modal="{target: '#doc-modal-spread', closeViaDimmer: 0, width: 380, height: 550}"></button>
 
 <div class="gr-zh">
 	<div class="gr-zh-zuo">
@@ -174,17 +174,21 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 
 <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-spread" style="top:auto;">
   <div class="am-modal-dialog">
-    <div class="am-modal-hd" style="line-height: 20px;font-size: 20px;">分享给好友，永享好友购买金额的1%收益
+    <div class="am-modal-hd" style="line-height: 20px;font-size: 20px;">可长按保存图片发送给好友<!-- 分享给好友，永享好友购买金额的1%收益 -->
       <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
     </div>
     
-    <img src="<%=request.getContextPath()%>/webpos/pos/front/img/share-bg.jpeg" style="max-width:100%"/>
+    <img id="bg_img" src="<%=request.getContextPath()%>/webpos/pos/front/img/share-bg.jpeg" style="display:none;max-width:100%"/>
     
-    <div class="am-modal-bd" style="margin-top: 10px;" id="spread_inpiut">
+    <div class="am-modal-bd" style="display:none;margin-top: 10px;" id="spread_inpiut">
       <a id="spread-text">http://out-sale.com/goods.do?parent=${user.id_md5}</a>
     </div>
-    <div id="qrcode-spread" style="text-align: center;margin: auto;">
+    <div id="qrcode-spread" style="display:none;text-align: center;margin: auto;">
     </div>
+   
+     <canvas id="myCanvas" style="display:none" width="" height=""></canvas>
+
+	<img id="canimg" src=""/>
   </div>
 </div>
 
@@ -211,8 +215,38 @@ $("#qrcode-spread").qrcode({
     text: $("#spread-text").html() //任意内容 
 });
 
+
+function convertCanvasToImage(canvas) {
+	var image = new Image();
+	image.src = canvas.toDataURL("image/png");
+	return image;
+}
+
+
 $("#div_gift").click(function(event){
-$("#div_btn_gift").click();
+
+	var qrcod = document.getElementById("qrcode-spread").lastChild;
+	var bgimg = new Image();
+	bgimg.src=$("#bg_img").attr("src");
+	bgimg.width=300;
+	bgimg.height=500;
+	
+	var bgcanvas = document.getElementById("myCanvas");
+	bgcanvas.width = bgimg.width;
+	bgcanvas.height = bgimg.height;
+	
+	var ctx = bgcanvas.getContext("2d");
+	bgimg.crossOrigin="*";
+	
+	bgimg.onload = function(){
+		ctx.drawImage(bgimg,0,0,bgimg.width,bgimg.height);
+		ctx.drawImage(qrcod,30,bgimg.height-100,qrcod.width,qrcod.height);
+		var srcImg = bgcanvas.toDataURL('image/png');
+		document.getElementById("canimg").setAttribute('src',srcImg);
+		$("#div_btn_gift").click();
+	}
+	
+	
 });
 </script>
 </html>

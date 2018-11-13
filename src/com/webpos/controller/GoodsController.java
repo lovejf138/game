@@ -97,22 +97,35 @@ public class GoodsController extends ApiWebABaseController {
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
 		
+		
 		if(name==null||name.length()<=0) {
 			result.setResult("FAIL");
 			result.setDesc("姓名不能为空");
 			return result;
 		}
 		
-		if(address==null||address.length()<=0) {
-			result.setResult("FAIL");
-			result.setDesc("收货地址不能为空");
-			return result;
-		}
-		
-		if(phone==null||phone.length()<=0) {
-			result.setResult("FAIL");
-			result.setDesc("手机号不能为空");
-			return result;
+		if(detail.getGoodsid()==1) {
+			
+			if(address==null||address.length()<=0) {
+				result.setResult("FAIL");
+				result.setDesc("支付宝账号不能为空");
+				return result;
+			}
+			
+			phone = user.getPhone();
+		}else if(detail.getGoodsid()!=1) {
+			
+			if(address==null||address.length()<=0) {
+				result.setResult("FAIL");
+				result.setDesc("收货地址不能为空");
+				return result;
+			}
+			if(phone==null||phone.length()<=0) {
+				result.setResult("FAIL");
+				result.setDesc("手机号不能为空");
+				return result;
+			}
+			
 		}
 		
 		
@@ -570,7 +583,18 @@ public class GoodsController extends ApiWebABaseController {
 			result.setDesc("余额不足，请充值");
 			return result;
 		}
+		
 		result.setResult("success");
+		if(goods.getId()==1) {//购买
+			String x = goodsService.buyFree(user_last, goods, 0.0);
+			
+			if (x.equals("SUCCESS")) {
+			} else {
+				result.setResult("FAIL");
+				result.setDesc(x);
+			}
+		}
+		
 		return result;
 	}
 

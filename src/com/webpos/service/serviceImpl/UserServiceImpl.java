@@ -1,5 +1,6 @@
 package com.webpos.service.serviceImpl;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -12,14 +13,18 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import com.api.vo.contans.SummaryUsers;
 import com.api.vo.contans.UserQuery;
 import com.webpos.dao.AccountMapper;
+import com.webpos.dao.Detail2Mapper;
 import com.webpos.dao.DetailMapper;
 import com.webpos.dao.DetailsMapper;
+import com.webpos.dao.GoodsMapper;
 import com.webpos.dao.OneDetailMapper;
 import com.webpos.dao.RoomMapper;
 import com.webpos.dao.TestDetailMapper;
 import com.webpos.dao.UserMapper;
 import com.webpos.entity.Account;
 import com.webpos.entity.Detail;
+import com.webpos.entity.Detail2;
+import com.webpos.entity.Goods;
 import com.webpos.entity.OneDetail;
 import com.webpos.entity.TestDetail;
 import com.webpos.entity.User;
@@ -36,6 +41,8 @@ public class UserServiceImpl implements UserService {
 	@Resource
 	private DetailsMapper detailsDao;
 	@Resource
+	private Detail2Mapper details2Dao;
+	@Resource
 	private AccountMapper accountDao;
 	@Resource
 	private RoomMapper roomDao;
@@ -45,6 +52,8 @@ public class UserServiceImpl implements UserService {
 	private OneDetailMapper onedetailDao;
 	@Resource
 	private TestDetailMapper testdetailDao;
+	@Resource
+	private GoodsMapper goodsDao;
 
 	public int insert(User record) {
 		return this.userDao.insert(record);
@@ -291,7 +300,6 @@ public class UserServiceImpl implements UserService {
 					+ loginname.substring(loginname.length() - 4, loginname.length()));
 			new_user.setPhone(loginname);
 			new_user.setParent(rp);
-			
 			this.userDao.insert(new_user);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

@@ -108,6 +108,7 @@ var _hmt = _hmt || [];
 var waitdialog=null;
 function gotobuy(_goodsid){
 	
+	
 	waitdialog = new TipBox({type:'load',str:'正在请求。。。',hasBtn:false});
 	$.ajax({
 		async:true,
@@ -118,11 +119,23 @@ function gotobuy(_goodsid){
 		success:function(result,textStatus){
 			waitdialog.destroy();
 			if(result.result=="success"){
-				//跳转到购买页面
-				window.location.href='goodsbuypage.do?goodsid='+_goodsid;
+				if(_goodsid=='1'){
+					if (confirm("已领取，是否前往订单中心兑换到支付宝？（每个账号只能领取一次）")) {  
+						window.location.href='orders.do';
+	       			 }else{
+	        	
+	        		}
+				}else{
+					//跳转到购买页面
+					window.location.href='goodsbuypage.do?goodsid='+_goodsid;
+				}
 			}else if(result.result=="not_login"){
+				if(_goodsid=='1'){
 				//跳转到登录页面
-				window.location.href='login.do';
+				window.location.href='reg.do';
+				}else{
+					window.location.href='login.do';
+				}
 			}else if(result.result=="goods_down"){
 				//提示商品下架
 				new TipBox({type:'error',str:'商品已下架，请刷新页面',hasBtn:true});
@@ -134,6 +147,8 @@ function gotobuy(_goodsid){
         	
         		}
 			//	new TipBox({type:'error',str:'余额不足,请前往个人中心进行充值',hasBtn:true});
+			}else{
+				new TipBox({type:'error',str:''+result.desc,hasBtn:true});
 			}
 		},
 		error:function (XMLHttpRequest, textStatus, errorThrown) {

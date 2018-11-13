@@ -52,7 +52,47 @@
 							<input style="display: none" id="currentPage" name="currentPage" />
 				 	 </form>
 				  
-    				<c:forEach items="${objs }" var="detail">            
+    				<c:forEach items="${objs }" var="detail">
+    				 <c:if test="${detail.goodsid =='1'}">
+    				<div class="aui-order-box">
+                        <a   class="aui-well-item">
+                            <div class="aui-well-item-bd">
+                                <h3></h3>
+                            </div>
+                            <span class="aui-well-item-fr" <c:if test="${detail.status =='wait'}">style="color:yellowgreen"</c:if>
+                               <c:if test="${detail.status =='waitling'}">style="color:red"</c:if>>                    
+                              <c:if test="${detail.status =='wait'}">等待开奖</c:if>
+                              <c:if test="${detail.status =='finish'}">已完成</c:if>
+                               <c:if test="${detail.status =='waitling'}">等待领奖</c:if>
+                                <c:if test="${detail.status =='notjiang'}">未中奖</c:if>
+                                 <c:if test="${detail.status =='waitsend'}">待发货</c:if>
+                                  <c:if test="${detail.status =='balance'}">已退至余额</c:if>
+                                   <c:if test="${detail.status =='hassend'}">已发货</c:if>
+                           </span>
+                           
+                           
+                        </a>
+                        <p class="aui-order-fl aui-order-time">时间<fmt:formatDate value="${detail.ctime}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
+                       
+                        <p class="aui-order-fl aui-order-door">商品:<font style="color: #fd0086;font-size: 15px;font-weight: 600;">&nbsp&nbsp${detail.goodsname}</font></p>
+                        <p class="aui-order-fl aui-order-address">价格:<font >¥${detail.price}</font>
+                        </p> 
+                           <p class="aui-order-fl aui-order-door">实付款:
+                        		<font style="font-size: 15px;font-weight: 600;">&nbsp&nbsp¥${detail.actualprice}</font>
+                        	</p>	
+        				 <c:if test="${detail.status =='waitling'}">
+        				 	<p class="aui-order-fl aui-order-door">
+         						<button onclick="ling(${detail.id})" style="float: right;background-color: #fd2291;border-radius: 20px; height: 40px; width: 120px; color: #fff; line-height: 40px; text-align: center; font-size: 18px; font-weight: 1000;">领取商品</button>
+         				 	</p>
+         				 
+        				 </c:if>
+         
+                     </div>
+                     
+                     </c:if>
+                     <!--  -->
+    				 <c:if test="${detail.goodsid !='1'}">
+    				            
                      <div class="aui-order-box">
                         <a   class="aui-well-item">
                             <div class="aui-well-item-bd">
@@ -121,6 +161,8 @@
         				 </c:if>
          
                      </div>
+                     
+                     </c:if>
                    </c:forEach>
                    
                    <div style="padding-top: 20px;right: 20px;color:#fff;text-align: left;float: bottom;height: 20px;min-width: 600px;bottom:-10px" class="fenye">${gotoPageFormHTML1}</div>

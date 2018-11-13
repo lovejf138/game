@@ -30,9 +30,19 @@
 	    	<div class="tx_form">
 	    	<form>
 		    	<ul class="sm_list">
-		    	  <li><p>手机号：</p><input type="text" value="${user.phone}" placeholder="请输入手机号码" id="phone" name="phone" /></li>
-		    	  <li><p>收货人：</p><input type="text" value="${info.name}" placeholder="请输入收货人" id="name" name="name"/></li>
-		    	  <li><p>收货地址：</p><input type="text" value="${info.address}" placeholder="请输入收货地址" id="address" name="address"/></li>
+		    	 
+		    	  <c:if test="${detail.goodsid !='1'}">
+		    	   <li><p>手机号：</p><input type="text" value="${user.phone}" placeholder="请输入手机号码" id="phone" name="phone" /></li>
+		    	    <li><p>收货人：</p><input type="text" value="${info.name}" placeholder="请输入收货人" id="name" name="name"/></li>
+		    	    <li><p>收货地址：</p><input type="text" value="${info.address}" placeholder="请输入收货地址" id="address" name="address"/></li>
+		    	  </c:if>
+		    	  
+		    	  <c:if test="${detail.goodsid =='1'}">
+		    	     <li><p>姓名：</p><input type="text" value="" placeholder="请输入姓名" id="name" name="name" /></li>
+		    	   
+		    	     <li><p>支付宝：</p><input type="text" value="" placeholder="请输入支付宝账号" id="address" name="address"/></li>
+		    	   
+		    	  </c:if>
 		    	 
 		    	</ul>
 		    	<p class="warning">请保证您输入的信息正确！</p>
