@@ -3281,9 +3281,16 @@ public class CommUtil {
     
 	public static void main(String[] args) {
 		
-		String x = "";
-		String[] xs = x.split(",");
-		System.out.println("number:"+xs.length);
+		//Double tem=Math.random()*5+94;//  
+//		int Max = 1;int Min = 0;
+//		BigDecimal db = new BigDecimal(Math.random() * (Max - Min) + Min);
+//		BigDecimal setScale = db.setScale(2,BigDecimal.ROUND_HALF_DOWN);
+//      
+//		System.out.println("tem:"+setScale);
+
+//		String x = "";
+//		String[] xs = x.split(",");
+//		System.out.println("number:"+xs.length);
 //		for(int s=0;s<100;s++) {
 //			
 //			int[] numbers = new int[] {1,2,3,4,5,6,7,8,9,10,11};

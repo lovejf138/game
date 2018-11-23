@@ -144,12 +144,12 @@ public class GoodsServiceImpl implements GoodsService {
 			u.setBalance(u.getBalance()-actualprice);
 			this.userDao.updateByPrimaryKeySelective(u);
 			
-			if(u.getParent()!=null&&u.getParent().length()>5) {
-				User up = userDao.selectByPhone(user.getParent());
-				Double b = CommUtil.mul(actualprice, 0.01);
-				up.setBalance(CommUtil.add(up.getBalance(), b));
-				this.userDao.updateByPrimaryKeySelective(up);
-			}
+//			if(u.getParent()!=null&&u.getParent().length()>5) {
+//				User up = userDao.selectByPhone(user.getParent());
+//				Double b = CommUtil.mul(actualprice, 0.01);
+//				up.setBalance(CommUtil.add(up.getBalance(), b));
+//				this.userDao.updateByPrimaryKeySelective(up);
+//			}
 			
 		}catch(Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -186,12 +186,12 @@ public class GoodsServiceImpl implements GoodsService {
 			u.setBalance(u.getBalance()-actualprice);
 			this.userDao.updateByPrimaryKeySelective(u);
 			
-			if(u.getParent()!=null&&u.getParent().length()>5) {
-				User up = userDao.selectByPhone(user.getParent());
-				Double b = CommUtil.mul(actualprice, 0.01);
-				up.setBalance(CommUtil.add(up.getBalance(), b));
-				this.userDao.updateByPrimaryKeySelective(up);
-			}
+//			if(u.getParent()!=null&&u.getParent().length()>5) {
+//				User up = userDao.selectByPhone(user.getParent());
+//				Double b = CommUtil.mul(actualprice, 0.01);
+//				up.setBalance(CommUtil.add(up.getBalance(), b));
+//				this.userDao.updateByPrimaryKeySelective(up);
+//			}
 			
 		}catch(Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -227,12 +227,12 @@ public class GoodsServiceImpl implements GoodsService {
 			u.setBalance(u.getBalance()-actualprice);
 			this.userDao.updateByPrimaryKeySelective(u);
 			
-			if(u.getParent()!=null&&u.getParent().length()>5) {
-				User up = userDao.selectByPhone(user.getParent());
-				Double b = CommUtil.mul(actualprice, 0.01);
-				up.setBalance(CommUtil.add(up.getBalance(), b));
-				this.userDao.updateByPrimaryKeySelective(up);
-			}
+//			if(u.getParent()!=null&&u.getParent().length()>5) {
+//				User up = userDao.selectByPhone(user.getParent());
+//				Double b = CommUtil.mul(actualprice, 0.01);
+//				up.setBalance(CommUtil.add(up.getBalance(), b));
+//				this.userDao.updateByPrimaryKeySelective(up);
+//			}
 			
 		}catch(Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

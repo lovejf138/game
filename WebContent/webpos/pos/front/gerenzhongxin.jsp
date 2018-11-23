@@ -119,7 +119,7 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 		<li>
 			<a href="chongzhimingxi.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/ge3.png">
-				<p>充值记录</p>
+				<p>充值和奖励记录</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
 			</a>
 		</li>
@@ -132,18 +132,18 @@ background-color: #EBEBEB;border-radius: 0.438rem;color: #4F4F4F;
 			</a>
 		</li>
 		
-		<li>
+		<%-- <li>
 			<a href="childcanyu2.do">
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/childpro.png">
 				<p>推广用户收益列表</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
 			</a>
-		</li>
+		</li> --%>
 		
 		<li id="div_gift">
 			<a>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/ge4.png">
-				<p>邀请好友永享1%收益</p>
+				<p>邀请好友得随机红包</p>
 				<img src="<%=request.getContextPath()%>/webpos/pos/front/img/index/you.png">
 			</a>
 		</li>
@@ -240,7 +240,7 @@ $("#div_gift").click(function(event){
 	
 	bgimg.onload = function(){
 		ctx.drawImage(bgimg,0,0,bgimg.width,bgimg.height);
-		ctx.drawImage(qrcod,30,bgimg.height-100,qrcod.width,qrcod.height);
+		ctx.drawImage(qrcod,0,bgimg.height-100,qrcod.width,qrcod.height);
 		var srcImg = bgcanvas.toDataURL('image/png');
 		document.getElementById("canimg").setAttribute('src',srcImg);
 		$("#div_btn_gift").click();

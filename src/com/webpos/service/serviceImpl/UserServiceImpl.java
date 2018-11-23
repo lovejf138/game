@@ -1,5 +1,6 @@
 package com.webpos.service.serviceImpl;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -277,17 +278,46 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public User register(String loginname,String pass, String parent) {
 		User new_user = new User();
+		
+		
 		try {
 			String rp = "";
 			if (parent != null) {
 				User u_p = this.userDao.selectByParent(parent);
 				if (u_p != null) {
+					int Max = 1;int Min = 0;
+					BigDecimal db1 = new BigDecimal(Math.random() * (Max - Min) + Min);
+					BigDecimal setScale1 = db1.setScale(2,BigDecimal.ROUND_HALF_DOWN);
+					
 					rp = u_p.getPhone();
+					u_p.setBalance(CommUtil.add(u_p.getBalance(),setScale1.doubleValue()));
 					u_p.setChild_sum(Integer.valueOf(u_p.getChild_sum().intValue() + 1));
 					this.userDao.updateByPrimaryKeySelective(u_p);
+					
+					
+					Account d1 = new Account();
+					d1.setCtime(new Date());
+					d1.setUser_id(u_p.getPhone());
+					d1.setType("tui");
+					d1.setAll_eth(0.0);
+					d1.setStatus("success");
+					d1.setAmount(setScale1.doubleValue());
+					d1.setIs_machine(0);
+					d1.setBalance(0.0);
+					d1.setChild_sum(0);
+					d1.setPlay_sum(0.0);
+					d1.setWithdraw_sum(0.0);
+					d1.setRecharge_sum(0.0);
+					d1.setRemark("");
+					this.accountDao.insert(d1);
 				}
 			}
-			new_user.setBalance(0.0);
+			
+			int Max = 3;int Min = 1;
+			BigDecimal db = new BigDecimal(Math.random() * (Max - Min) + Min);
+			BigDecimal setScale = db.setScale(2,BigDecimal.ROUND_HALF_DOWN);
+	      
+			new_user.setBalance(setScale.doubleValue());
 			new_user.setPlay_sum(0.0);
 			new_user.setChild_sum(Integer.valueOf(0));
 			new_user.setRecharge_sum(0.0);
@@ -301,6 +331,23 @@ public class UserServiceImpl implements UserService {
 			new_user.setPhone(loginname);
 			new_user.setParent(rp);
 			this.userDao.insert(new_user);
+			
+			Account d = new Account();
+			d.setCtime(new Date());
+			d.setUser_id(loginname);
+			d.setType("_new");
+			d.setAll_eth(0.0);
+			d.setStatus("success");
+			d.setAmount(setScale.doubleValue());
+			d.setIs_machine(0);
+			d.setBalance(0.0);
+			d.setChild_sum(0);
+			d.setPlay_sum(0.0);
+			d.setWithdraw_sum(0.0);
+			d.setRecharge_sum(0.0);
+			d.setRemark("");
+			this.accountDao.insert(d);
+			
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return null;

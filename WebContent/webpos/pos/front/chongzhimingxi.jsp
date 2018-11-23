@@ -36,6 +36,8 @@
 			</span>
 			<span style="color:#000">
 				<c:if test="${withdraw.type == 'in'}">（充值）</c:if>
+				<c:if test="${withdraw.type == '_new'}">（新人红包）</c:if>
+				<c:if test="${withdraw.type == 'tui'}">（推荐奖励）</c:if>
 				<c:if test="${withdraw.type == 'back'}">（商品兑换）</c:if>
 			</span></p>
 		</li>
